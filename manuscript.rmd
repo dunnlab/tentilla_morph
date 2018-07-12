@@ -1,0 +1,18 @@
+---
+bibliography: manuscript.bib
+csl: systematic-biology.csl
+site: "bookdown::bookdown_site"
+output:
+  bookdown::pdf_document2:
+    toc: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+## References
+
+Siphonophores are... [@Mackie:1987uy].
