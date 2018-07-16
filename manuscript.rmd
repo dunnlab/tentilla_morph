@@ -109,6 +109,10 @@ library(arbutus)
 
 ## Introduction
 
+## Methods
+
+## Results
+
 0 -- PHYLOGENY
 0.0 ML ribosomal marker phylogeny constrained by transcriptome tree with BS values at the nodes.
 1 -- DESCRIPTIVE MORPHOLOGY AND EVOLUTIONARY HISTORY
@@ -340,15 +344,31 @@ write.csv(phylosignals, "PhylosignalsWSE_log.csv")
 1.3 Figure showing major categorical character shifts, gains, and losses on a simplified phylogeny.
 
 2 -- COMPARATIVE ANALYSES
-2.0 Confusion matrix table showing PIC_correlations and trait correlation R2 and p-values for each pair of continuous characters. Confusion matrix for quantitative and categorical characters GLS. pGLS estimation of regression parameters in significantly correlated pairs.
+2.0 Confusion matrix table showing PIC_correlations and trait correlation R2 and p-values for each pair of continuous characters.
+
 ```{r character_correlations, include=FALSE}
-C = sharedmatrix[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
+#PIC correlations with Rphylip
+C = sharedlogs[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
 Cspecies = C$Species %>% as.character()
 C = as.matrix(C[,-1])
 rownames(C) = Cspecies
 Ctree = drop.tip(ultram,which(!(ultram$tip.label %in% rownames(C))))
 class(Ctree) = "phylo"
-PICi = Rcontrast(Ctree, C, path="phylip-3.695/exe")
+PICi = Rcontrast(tree=Ctree, X=C, path="phylip-3.695/exe", cleanup=TRUE)
+
+#Correlation visualizations R2
+phy_corr = PICi$VarA.Correlations
+intra_corr = PICi$VarE.Correlations
+phy_corr[upper.tri(phy_corr)] <- NA
+combicorr = phy_corr
+combicorr[upper.tri(combicorr)] = intra_corr[upper.tri(intra_corr)]
+rownames(combicorr) = colnames(C)
+colnames(combicorr) = colnames(C)
+corrplot(combicorr, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs intraspecific correlations
+PICOLS = combicorr
+PICOLS[upper.tri(PICOLS)]=cor(C)[upper.tri(cor(C))]
+corrplot(PICOLS, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs regular correlations
+
 
 
 ```
@@ -356,7 +376,43 @@ PICi = Rcontrast(Ctree, C, path="phylip-3.695/exe")
 
 
 2.1 Table showing the model parameters for each significant regression.
+
+
 2.3 Verbally PCA and phylogenetic PCA/PICVarA_PCA of the characters. Phylomorphospace superimposed to the tip coordinates in PC1--PC2.
+```{r PCA}
+par(mar=rep(3,4), mfrow=c(1,1))
+raw_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(1:2,4:20,30)]
+compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:29)]
+raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix))))
+compound_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(compound_matrix))))
+
+#Regular PCA on means log
+  ##Raw characters
+PCA(raw_matrix) -> Pca_raw
+Pca_raw %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
+Pca_raw %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
+Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
+Pca_raw %>% fviz_pca_biplot(axes=c(3,4), col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
+phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
+phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,3:4], label = "horizontal", xlab = "PC3", ylab = "PC4")
+physignal(Pca_raw$ind$coord, raw_tree)
+  ##Morphometric characters
+PCA(compound_matrix) -> Pca_compound
+Pca_compound %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
+Pca_compound %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
+Pca_compound %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
+Pca_compound %>% fviz_pca_biplot(axes=c(3,4), col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
+phylomorphospace(tree=compound_tree, Pca_compound$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
+phylomorphospace(tree=compound_tree, Pca_compound$ind$coord[,3:4], label = "horizontal", xlab = "PC3", ylab = "PC4")
+physignal(Pca_compound$ind$coord, compound_tree)
+
+#PhyloPCA on means
+PPCA_raw = phyl.pca(raw_tree, raw_matrix)
+PPCA_compound = phyl.pca(compound_tree, compound_matrix)
+PPCA %>% biplot(main=paste(signif(summary(PPCA)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
+
+```
+
 2.4 Table showing normalized rates of evolution for each character BAMM.
 3 -- RELATIONSHIPS WITH DIET / FUNCTION / Hypothesis testing
 
@@ -410,14 +466,110 @@ PL_pruned_matrix = sharedmeans[which(sharedmeans$Species %in% preylength$Species
 names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
 ```
 
-
 3.0 Phylogeny with the tips mapped with the literature dietary associations, and internal nodes showing SIMMAP reconstructed states.
+
+```{r diet_regime_tree}
+regimetree = dprunedTree
+hypdiet = c("Mixed", "Mixed", "Crustacean", "Copepod", "Mixed", "Crustacean", "Crustacean", "Ostracod", "Fish", "Fish", "Crustacean", "Mixed", "Mixed", "Copepod")
+names(hypdiet) = regimetree$tip.label
+DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
+HypDietAnc = 1:nrow(DietAnc)
+for(row in 1:nrow(DietAnc)){
+  SCR = scale(DietAnc[row,])
+  print(SCR)
+  HypDietAnc[row] <- rownames(SCR)[which(SCR[,1] == max(SCR[,1]))] %>% print()
+}
+regimetree$node.label = as.factor(HypDietAnc)
+plotTree(regimetree)
+nodelabels(text=regimetree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);tiplabels(text=hypdiet, frame="none", cex=0.6, adj=c(0,2))
+```
+
+
 3.1 Table showing quantitative and categorical characters association effect size with each prey type in the diet.
+
+```{r prey-character-assoc}
+#Phylogenetic ANOVAS with prey type presence
+pANOVAs_diet = as.data.frame(matrix(ncol=ncol(dprunedmatrix_logs[,-1]), nrow=ncol(diet)))
+rownames(pANOVAs_diet) = names(diet)
+colnames(pANOVAs_diet) = names(dprunedmatrix_logs[,-1])
+for(prey in 1:ncol(diet)){
+  CH_J=diet[,prey]
+  names(CH_J) = rownames(diet)
+  for(char in 1:ncol(dprunedmatrix_logs[,-1])){
+    CH_I = dprunedmatrix_logs[,char+1]
+    names(CH_I) = dprunedmatrix_logs$Species
+    CH_I = CH_I[!is.na(CH_I)]
+    CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+    treeIJ = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(CH_I))))
+    if(length(unique(CH_I))>1 & length(unique(CH_J))>1){
+    phylANOVA(treeIJ,x=CH_J,y=CH_I) %>% .$Pf -> pANOVAs_diet[prey,char]
+  }
+  }}
+pANOVAs_diet = pANOVAs_diet[,-1]
+write.csv(pANOVAs_diet, "pANOVAS_Diet.csv")
+
+#PGLS with proportions in Diet
+pGLSp_diet = as.data.frame(matrix(nrow=ncol(Pprunedmatrix_logs[,-1]), ncol=ncol(PP)))
+colnames(pGLSp_diet) = names(PP)
+row.names(pGLSp_diet) = names(Pprunedmatrix_logs[,-1])
+pGLS_sign = pGLSp_diet
+for(i in 1:ncol(Pprunedmatrix_logs[,-1])){
+  CH_I=as.numeric(Pprunedmatrix_logs[,i+1])
+  names(CH_I) = Pprunedmatrix_logs$Species
+  for(j in 1:ncol(PP)){
+    CH_J=as.numeric(PP[,j])
+    names(CH_J) = rownames(PP)
+    pg_data = as.data.frame(cbind(CH_I,CH_J)) %>% .[which(!is.na(rowSums(.))),]
+    TTABLE <- gls(CH_I ~ CH_J, correlation =  corBrownian(phy = Pprunedtree), data = pg_data, method = "ML") %>% summary() %>% .$tTable %>% as.data.frame()
+    TTABLE %>% .$p %>% .[2] -> pGLSp_diet[i,j]
+    if(pGLSp_diet[i,j]<0.05){
+      print(paste(rownames(pGLSp_diet)[i],colnames(pGLSp_diet)[j],pGLSp_diet[(i),(j)],sep=" "))
+      ValueIJ = TTABLE %>% .$Value %>% .[2]
+      if(ValueIJ>0){pGLS_sign[i,j] = "+"}
+      else pGLS_sign[i,j] = "-"
+    }}}
+write.csv(pGLSp_diet, "PGLS_Pval_DietPP.csv")
+write.csv(pGLSp_sign, "PGLS_SIGN_DietPP.csv")
+
+```
+
 3.2 Table showing the dAICc of OU model fitting versus white_noise and BM using reconstructed diets as regimes in a 16spp tree. Evaluate model adequacy of OU fits.
+
+```{r OUwie}
+OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=nrow(dprunedmatrix_logs)))
+names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
+library(magrittr)
+for(c in 2:ncol(dprunedmatrix_logs)){  #1:ncol(sharedmeans)
+  Cdata = data.frame(dprunedmatrix_logs$Species,hypdiet,dprunedmatrix_logs[,c])
+  names(Cdata) = c("species", "regime", "trait")
+  Cdata$trait[which(Cdata$trait == "NaN")] <- NA
+  Cdata = Cdata[!is.na(Cdata$trait),]
+  Cdata$trait = as.numeric(Cdata$trait)
+  Cdata$species = as.character(Cdata$species)
+  Cdata$regime = as.character(Cdata$regime)
+  Ctree = drop.tip(regimetree,which(!(regimetree$tip.label %in% Cdata$species)))
+  BM <- OUwie(Ctree, Cdata, model="BM1")
+  OU <- OUwie(Ctree, Cdata, model="OU1")
+  OUwie_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
+  OUwie_matrix[c-1,2] = nrow(Cdata)
+  print("BM")
+  OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU$AICc))
+  print("OU")
+  OUwie_matrix[c-1,4] = OU$AICc - min(c(BM$AICc, OU$AICc))
+}
+OUwie_matrix[,3:4] <- apply(OUwie_matrix[,3:4], 2, round3)
+#write.csv(OUwie_matrix, "OU_diet_test.csv")
+```
+
 3.3 Interpret qualitatively the kinematic implications (high speed video) of the different regions of the morphospace.
+
+
 
 Story: low dimensionality, cost-driven, dynamic specialization
 
+## Discussion
+
+## Acknowledgements
 
 ## References
 
