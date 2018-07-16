@@ -111,7 +111,142 @@ library(arbutus)
 0 -- PHYLOGENY
 0.0 ML ribosomal marker phylogeny constrained by transcriptome tree with BS values at the nodes.
 1 -- DESCRIPTIVE MORPHOLOGY AND EVOLUTIONARY HISTORY
+
+```{r load_trees, include=F}
+#Load tree
+rRNA18S = read.nexus('bipartitions_root.boot10')
+transcriptome = read.tree('ultimatephylo2018.tre')
+#plot.phylo(consensus)
+#is.rooted(consensus)
+#nodelabels()
+rRNA18S = reroot(rRNA18S, 76, 0.001)
+rRNA18S$tip.label = str_replace_all(rRNA18S$tip.label,'_',' ')
+rRNA18S$tip.label[rRNA18S$tip.label=="Cordagalma cordiforme"] = "Cordagalma ordinatum"
+rRNA18S$tip.label[rRNA18S$tip.label=="Cordagalma sp "] = "Cordagalma ordinatum"
+rRNA18S$tip.label[rRNA18S$tip.label=="Clausophyes ovata"] = "Kephyes ovata"
+rRNA18S$tip.label[rRNA18S$tip.label=="Erenna sp"] = "Erenna sirena"
+rRNA18S$tip.label[rRNA18S$tip.label=="Apolemia sp"] = "Apolemia lanosa"
+rRNA18S$tip.label[rRNA18S$tip.label=="Apolemia sp "] = "Apolemia rubriversa"
+rRNA18S$tip.label[rRNA18S$tip.label=="Sphaeronectes gracilis"] = "Sphaeronectes koellikeri"
+rRNA18S$tip.label[rRNA18S$tip.label=="Prayidae D27SS7"] = "Desmophyes haematogaster"
+rRNA18S$tip.label[rRNA18S$tip.label=="Prayidae D27D2"] = "Craseoa lathetica"
+rRNA18S = drop.tip(rRNA18S, 41:42) #drop outgroups
+rRNA18S = drop.tip(rRNA18S, c(16,31,23,24)) #drop Cordagalma, Clausophyid, Nectopyramis, Nectadamas
+#plot(rRNA18S)
+
+
+transcriptome$tip.label = str_replace_all(transcriptome$tip.label,'_',' ')
+transcriptome$tip.label[transcriptome$tip.label=="Cordagalma sp"] = "Cordagalma ordinatum"
+transcriptome$tip.label[transcriptome$tip.label=="Prayidae D27SS7"] = "Desmophyes haematogaster"
+transcriptome$tip.label[transcriptome$tip.label=="Prayidae D27D2"] = "Craseoa lathetica"
+transcriptome = reroot(transcriptome, 22, 0.001)
+transcriptome = drop.tip(transcriptome, 19:26) #drop outgroups
+#plot(transcriptome)
+
+multitree = list(rRNA18S,transcriptome)
+class(multitree)="multiPhylo"
+STree = superTree(multitree, rooted = T, method = "MRP", start = transcriptome)
+consensus = STree[[2]]
+consensus = drop.tip(consensus, "Physonect sp ")
+consensus = drop.tip(consensus, "Erenna sirena")
+consensus$tip.label[consensus$tip.label=="Physophora gilmeri"] = "Physophora h" ### ARTIFIIAL SUBSTITUTION ###
+consensus = drop.tip(consensus, "Physophora hydrostatica")
+consensus$tip.label[consensus$tip.label=="Physophora h"] = "Physophora hydrostatica"
+consensus$tip.label[consensus$tip.label=="Vogtia pentacantha"] = "Vogtia serrata"
+consensus = drop.tip(consensus, "Rosacea flaccida")
+#plot(consensus)
+
+#Prune quant matrix to tree species
+matrix = castnumbers[which(!is.na(castnumbers$Species)),]
+matrix_logs = castlogs[which(!is.na(castlogs$Species)),]
+sharedspp = matrix$Species[which(matrix$Species %in% consensus$tip.label)]
+sharedmatrix = matrix[which(matrix$Species %in% sharedspp),]
+sharedlogs = matrix_logs[which(matrix$Species %in% sharedspp),]
+sharedmeans = castmeans[which(castmeans$Species %in% sharedspp),]
+sharedmean_logs = castmean_logs[which(castmean_logs$Species %in% sharedspp),]
+sharedvars = castvariances[which(castvariances$Species %in% sharedspp),]
+sharedvar_logs = castvariance_logs[which(castvariance_logs$Species %in% sharedspp),]
+#sharedmeans = solidSPPmeans[which(solidSPPmeans$Species %in% sharedspp),]
+#sharedvars = solidSPPvars[which(solidSPPvars$Species %in% sharedspp),]
+
+#Prune categorical matrix to tree species
+cat_rowNAs = apply(categorical[,-1], 1, function(x) sum(is.na(x)))
+catmatrix = categorical[which(cat_rowNAs<1),] %>% .[,-1]
+sharedspp_cat = rownames(catmatrix)[which(rownames(catmatrix) %in% consensus$tip.label)]
+sharedcategorical = catmatrix[which(rownames(catmatrix) %in% sharedspp_cat),]
+
+#Prune tree to quant matrix species
+nodatatipnames = consensus$tip.label[which(!(consensus$tip.label %in% sharedmatrix$Species))]
+nodatatips = c(1:length(consensus$tip.label))[which(consensus$tip.label %in% nodatatipnames)]
+prunedtree = drop.tip(consensus, nodatatips)
+prunedtree$tip.label
+plot(prunedtree)
+ultram = chronos(prunedtree)
+plot(ultram)
+
+##Make the pseudoindividuals tree
+newtree = ultram
+sharedmatrix_plied = sharedmatrix
+sharedmatrix_plied$slide_id = paste(sharedmatrix$slide_id, sharedmatrix$Species, sep = "_")
+for (i in 1:nrow(sharedmatrix_plied)) {
+  pos = which(newtree$tip.label == sharedmatrix_plied$Species[i])
+  print(pos)
+  newtree = bind.tip(newtree, sharedmatrix_plied$slide_id[i], where = pos, edge.length = 0.1)
+  print(newtree$tip.label)
+  newtree$tip.label = str_replace_all(newtree$tip.label,'_',' ')
+}
+inditree = drop.tip(newtree, which(!grepl(".[0-9].*", newtree$tip.label)))
+zerotipTree = inditree
+inditree$edge.length[inditree$edge.length==0] <- 0.0000000001
+shavedtree = inditree
+inditree = chronos(inditree)
+plot(inditree)
+sharedmatrix_plied$slide_id = str_replace_all(sharedmatrix_plied$slide_id,'_',' ')
+sharedmatrix = sharedmatrix_plied[match(sharedmatrix_plied$slide_id, inditree$tip.label),]
+rownames(sharedmatrix) <- 1:nrow(sharedmatrix)
+
+#Prune tree to categorical matrix species
+nodatatipnames_cat = consensus$tip.label[which(!(consensus$tip.label %in% sharedspp_cat))]
+nodatatips_cat = c(1:length(consensus$tip.label))[which(consensus$tip.label %in% nodatatipnames_cat)]
+cat_tree = drop.tip(consensus, nodatatips_cat)
+cat_tree$tip.label
+plot(cat_tree)
+ultram_cat = chronos(cat_tree)
+plot(ultram_cat)
+sharedcategorical = sharedcategorical[match(ultram_cat$tip.label, rownames(sharedcategorical)),]
+cprunedmatrix = sharedcategorical[which(rownames(sharedcategorical)%in%rownames(sharedmatrix)),] %>% .[which(sapply(.,function(x) length(unique(x)))>1)]
+sharedbinary = sharedcategorical
+sharedbinary$Haploneme.type = as.character(sharedbinary$Haploneme.type)
+sharedbinary[sharedbinary=="Isorhizas"] = 0
+sharedbinary[sharedbinary=="Anisorhizas"] = 1
+sharedbinary$Haploneme.type = as.numeric(sharedbinary$Haploneme.type)
+sharedbinary$Heteroneme.type = as.character(sharedbinary$Heteroneme.type)
+sharedbinary[sharedbinary=="Stenotele"] = 0
+sharedbinary[sharedbinary=="Microbasic mastigophore"] = 1
+sharedbinary[sharedbinary=="Eurytele"] = NA
+sharedbinary$Heteroneme.type = as.numeric(sharedbinary$Heteroneme.type)
+
+#purely numerics
+Q_sharedmatrix = sharedmatrix[,c(-1,-2,-3)]
+rownames(sharedmeans) = sharedmeans$Species
+Q_sharedmeans = sharedmeans[,-1]
+rownames(sharedvars) = sharedvars$Species
+Q_sharedvars = sharedvars[,-1]
+Q_sharedmean_logs = sharedmean_logs[,-1]
+rownames(Q_sharedmean_logs) = sharedmean_logs$Species
+
+```
+
+
 1.0 Table showing for each species the mean, number of individuals measured, and standard error of every character, ordered by cnidomic index / tentillum size, and/or colored by clade.
+
+```{r export_table_morph, include=FALSE}
+morphdata = cbind(castN, castmeans[,-1], castSE[,-1])
+morphdata = monrphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
+names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
+write.csv(morphdata, "characterdata.csv")
+```
+
 1.05 Plate with all the tentillum diversity.
 1.1 Table showing each character’s (illustrating the character per row)  the phylogenetic signal K with the p-value obtained by testing against 1000 simulated permutations, and the number of species included.
 1.2 Table showing the best AICc supported model generating the data for each character and its AICc score. Model adequacy.
@@ -123,6 +258,58 @@ library(arbutus)
 2.3 Verbally PCA and phylogenetic PCA/PICVarA_PCA of the characters. Phylomorphospace superimposed to the tip coordinates in PC1--PC2.
 2.4 Table showing normalized rates of evolution for each character BAMM.
 3 -- RELATIONSHIPS WITH DIET / FUNCTION / Hypothesis testing
+
+```{r diet_data, include=F}
+#Retrieve diet info from literature BINARY
+GC = read.csv("Cmerged.csv", header = T, sep=',')[,c(2,4,5)] %>% .[which(grepl("diet",.$character) & .$state==1),]
+GC$character = factor(GC$character, levels=unique(GC$character))
+GC = GC[which(GC$species %in% sharedmeans$Species),]
+GC = split(GC,GC$character)
+nrowGC = purrr::map(GC,nrow) %>% as.numeric()
+GC = GC[which(nrowGC>2)]
+GC = purrr::map(GC,unique)
+diet= matrix(ncol=length(GC),nrow=length(unique(sharedmeans$Species))) %>% as.data.frame()
+names(diet) = names(GC)
+rownames(diet) = unique(sharedmeans$Species)
+for(E in GC){
+  print(E$species)
+  for(S in E$species){
+    diet[which(rownames(diet) == S),as.character(unique(E$character))] = 1
+  }
+}
+diet[is.na(diet)] <- 0
+diet = diet[which(rowSums(diet)>0),which(colSums(diet)<nrow(diet))]
+#diet = rbind(diet, c(0,1,0,0,0,0,0,0))
+#rownames(diet)[12] = 'Erenna richardi'
+dprunedmatrix = sharedmeans[which(sharedmeans$Species%in%rownames(diet)),]
+dprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(diet)),]
+dprunedTree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(diet))))
+plot(dprunedTree)
+
+#Retrieve diet info from literature PROPORTION RELATIVE
+quantDiet = read.csv("Qmerged.csv", header = T, sep=',')[,c(2,4,6)]
+PP = quantDiet[which(grepl("Relative",quantDiet$character)),]
+PP$character = factor(PP$character, levels=unique(PP$character))
+PP = PP[which(PP$species %in% sharedmeans$Species),]
+PP = dcast(PP, species~character, value.var = "state", mean)
+PP[is.na(PP)]<-0
+rownames(PP) = PP$species
+PP=PP[,-1]
+#PP = rbind(PP, c(0,100,0,0,0,0,0,0))
+#rownames(PP)[10] = "Erenna richardi"
+Pprunedmatrix=sharedmeans[which(sharedmeans$Species%in%rownames(PP)),]
+Pprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(PP)),]
+Pprunedtree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(PP))))
+plot(Pprunedtree)
+
+#Retrieve copepod prey length from literature
+preylength = quantDiet[which(grepl("prey",quantDiet$character)),] %>% .[,c(1,3)]
+names(preylength) = c("Species","Copepod prey length (mm)")
+PL_pruned_matrix = sharedmeans[which(sharedmeans$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmeans$Species),2])
+names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
+```
+
+
 3.0 Phylogeny with the tips mapped with the literature dietary associations, and internal nodes showing SIMMAP reconstructed states.
 3.1 Table showing quantitative and categorical characters association effect size with each prey type in the diet.
 3.2 Table showing the dAICc of OU model fitting versus white_noise and BM using reconstructed diets as regimes in a 16spp tree. Evaluate model adequacy of OU fits.
