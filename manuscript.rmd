@@ -12,17 +12,16 @@ output:
 	## General
 library(knitr)
 library(tidyverse)
+library(stringr)
 library(reshape2)
-	## Graphics
-library(FactoMineR)
-library(factoextra)
-library(corrplot)
 	## Biological
+library(OUwie)
+library(Rphylip)
+library(arbutus)
 library(vegan)
 library(ape)
 library(phangorn)
 library(phytools)
-library(OUwie)
 library(picante)
 library(geiger)
 library(phylobase)
@@ -30,8 +29,10 @@ library(fields)
 library(phylosignal)
 library(geomorph)
 library(phylopath)
-library(Rphylip)
-library(arbutus)
+	## Graphics
+library(FactoMineR)
+library(factoextra)
+library(corrplot)
 
 	# Configure knitr, see http://yihui.name/knitr/options
 	opts_knit$set(
@@ -107,11 +108,53 @@ library(arbutus)
   names(castSE_logs)[1] <- "Species"
 ```
 
-## Introduction
+# The evolution of siphonophore tentilla reveals association with diet {-}
 
-## Methods
+Alejandro Damian-Serrano^1^,^‡, Steven H.D. Haddock^2^, Casey W. Dunn^1^
 
-## Results
+^1^ Department of Ecology and Evolutionary Biology, Yale University, New Haven, CT 06520, USA
+
+^2^ Monterey Bay Aquarium Research Institute, Moss Landing, CA 95039, USA
+
+\‡ Corresponding author, catriona_munro@brown.edu
+
+## Abstract {-}
+
+Siphonophores have the most complex nematocyst batteries of all Cnidaria. These structures are held on the tentacles’ side branches called tentilla. Tentilla serve as the principal organs for prey capture, making siphonophores an ideal system for the study of trophic specialization from an evolutionary approach. Modern comparative methods have been applied to study the evolution of siphonophore zooid types, but not yet to the unique morphological diversity of siphonophore tentilla. The primary objectives of this work are to describe the morphology and morphometrics of siphonophore tentilla and nematocysts, and identify patterns in the evolutionary history of siphonophore cnidoband and nematocyst morphologies. A phylogeny with XX species was reconstructed using 18S and 16S gene markers, constraining the topology with a transcriptome-based backbone. Morphological characters were measured from DIC and confocal microscopy images of fixed tentacle specimens. Diet data was extracted from published sources. The functional implications of the different morphologies during prey capture were recorded using high speed video on live specimens under a stereoscopic microscope. Evolutionary transitions in siphonophore tentilla present a very low dimensionality with a single principal component. This main axis of variation aligns with total nematocyst volume per tentillum. Most nematocyst complement (cnidome) traits appear to have evolved under simple Brownian Motion (BM) and Early Burst (EB) processes, while tentillum shape and size evolution is better represented by Ohrnstein-Uhlenbeck (OU) models. Many tentillum and cnidome traits show stronger supports towards OU models when diet is reconstructed on the tree as selective regimes. Using phylogenetic GLS we identified traits with correlated evolutionary histories, some of which are functionally coupled during prey capture. Size and abundance of nematocysts were phylogenetic correlated with prey type ratios in the diet. These patterns could represent macroevolutionary adaptive responses to prey availability leading to predatory specialization. Understanding the evolution of the prey capture apparatus of siphonophores can help us test hypotheses about the evolution of their predatory habits.
+
+## 1. Introduction {-}
+
+Siphonophores bear the most complex nematocyst batteries of all cnidarians, with up to 4 types of regionally differentiated nematocysts and a spring-release mechanism for fast discharge of the structure onto the prey. Not all siphonophores bear tentilla on their tentacles, exceptions include Apolemia spp. and Bathyphysa conifera. While Physalia physalis has been considered to have simple tentacles, it is likely that their button-like structures are homologous to reduced tentilla (Munro et al. 2018).
+Each gastrozooid bears a single tentacle. Each tentacle serially buds tentilla from the basal region (basigaster), which develop as they are displaced further with tentacle growth. During development, tentilla grow and change shape into their final configuration while mature nematocysts formed in the basigaster migrate through the tentacle epidermis into the tentillum. Nematocysts arriving into the developing tentillum then rearrange into their final position (Skaer 1991). Tentilla are a single-use ensnaring weapon which is ingested and digested together with the prey it attached to.
+The cnidoband and terminal filament bear all the active nematocysts. Cnidobands range in size from 40 microns to 8 cm, they can be coiled or straight, free hanging or enclosed in an involucrum (Mapstone 2014).
+
+## 2. Methods {-}
+
+### 3.1 Phylogeny{-}
+
+Markers accessions
+
+### 3.2 Microscopy{-}
+
+All specimens are accessioned in the Yale Peabody Museum Invertebrate Zoology Collection. Accession numbers and collection data for the specimens are available in Supplementary Table XXX. All specimens were preserved in ~4% buffered formalin in seawater.
+
+A total of 39 siphonophore species were selected based on availability and phylogenetic representativity criteria to capture intraspecific variation. Three to five specimens from each selected species were measured in order to account for intraspecific variation.
+
+Diet data from Purcell 1981, Purcell 1984.
+
+Microscopy ...
+
+### 3.3 Phylogenetic Comparative Methods{-}
+
+Phylogenetic signal (Blomberg 2003)
+fitContinuous (geiger), BM, EB, OU.
+Adams geomorph
+phytools ppca, pgls, phyl.anova
+
+### 3.4 High-Speed Video
+
+
+## 3. Results {-}
 
 0 -- PHYLOGENY
 0.0 ML ribosomal marker phylogeny constrained by transcriptome tree with BS values at the nodes.
@@ -247,7 +290,7 @@ rownames(Q_sharedmean_logs) = sharedmean_logs$Species
 
 ```{r export_table_morph, include=FALSE}
 morphdata = cbind(castN, castmeans[,-1], castSE[,-1])
-morphdata = monrphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
+morphdata = morphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
 names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
 write.csv(morphdata, "characterdata.csv")
 ```
@@ -267,6 +310,7 @@ for(i in 2:ncol(sharedmean_logs)){
   SE_I = SE_I[which(names(SE_I)%in%names(CH_I))]
   CH_I = CH_I[which(names(CH_I)%in%names(SE_I))]
   treeI = drop.tip(ultram,which(!(ultram$tip.label %in% names(CH_I))))
+  class(treeI) = "phylo"
   #print(names(sharedmeans)[i]);print(phylosig(treeI, CH_I, se = SE_I, test=T) %>% .[c("K","P")])
   rownames(phylosignals)[i-1] <- names(sharedmean_logs)[i]
   PSIG <- phylosig(treeI, CH_I, se = SE_I, test=T)
@@ -567,9 +611,13 @@ OUwie_matrix[,3:4] <- apply(OUwie_matrix[,3:4], 2, round3)
 
 Story: low dimensionality, cost-driven, dynamic specialization
 
-## Discussion
+## 4. Discussion
+
+## 5. Conclusions
 
 ## Acknowledgements
+
+Fulbright Spain. NSF Waterman Award. NSF siphweb project. Yale Institute of Biospehric Studies. Crew of R/V Western Flyer.
 
 ## References
 
