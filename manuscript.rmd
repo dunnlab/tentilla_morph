@@ -16,6 +16,7 @@ library(reshape2)
 	## Graphics
 library(FactoMineR)
 library(factoextra)
+library(corrplot)
 	## Biological
 library(vegan)
 library(ape)
@@ -249,11 +250,111 @@ write.csv(morphdata, "characterdata.csv")
 
 1.05 Plate with all the tentillum diversity.
 1.1 Table showing each character’s (illustrating the character per row)  the phylogenetic signal K with the p-value obtained by testing against 1000 simulated permutations, and the number of species included.
+```{r phylosignals}
+phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmean_logs[,-1])))
+names(phylosignals) = c("K", "P", "Ntaxa")
+for(i in 2:ncol(sharedmean_logs)){
+  CH_I=as.numeric(sharedmean_logs[,i])
+  names(CH_I) = rownames(sharedmean_logs)
+  SE_I = as.numeric(castSE[,i])
+  names(SE_I) = castSE$Species
+  CH_I= CH_I[!is.na(CH_I)]
+  SE_I= SE_I[!is.na(SE_I)]
+  SE_I = SE_I[which(names(SE_I)%in%names(CH_I))]
+  CH_I = CH_I[which(names(CH_I)%in%names(SE_I))]
+  treeI = drop.tip(ultram,which(!(ultram$tip.label %in% names(CH_I))))
+  #print(names(sharedmeans)[i]);print(phylosig(treeI, CH_I, se = SE_I, test=T) %>% .[c("K","P")])
+  rownames(phylosignals)[i-1] <- names(sharedmean_logs)[i]
+  PSIG <- phylosig(treeI, CH_I, se = SE_I, test=T)
+  phylosignals[i-1,1] <- PSIG$K
+  phylosignals[i-1,2] <- PSIG$P
+  phylosignals[i-1,3] <- length(CH_I)
+}
+write.csv(phylosignals, "PhylosignalsWSE_log.csv")
+```
+
+
 1.2 Table showing the best AICc supported model generating the data for each character and its AICc score. Model adequacy.
-1.3 Table/figures showing the reconstructed ancestral values at the internal nodes of the phylogeny of characters with a supported phylogenetic model of evolution.
-1.4 Figure showing major categorical character shifts, gains, and losses on a simplified phylogeny.
+
+```{r fitContinuous}
+#Model support
+  Q_sharedmean_logs$Heteroneme_to_CB[which(Q_sharedmean_logs$Heteroneme_to_CB > 9)] <- NA
+  AICdf = as.data.frame(matrix(ncol=6,nrow=ncol(Q_sharedmean_logs)))
+  colnames(AICdf) = c("Variable", "white_noise", "starBM", "BM", "EB", "OU")
+  for(c in 1:ncol(Q_sharedmean_logs)){
+    startree <- rescale(ultram, "lambda", 0)
+    C = Q_sharedmean_logs[,c]
+    names(C) = rownames(Q_sharedmean_logs)
+    C = C[!is.na(C)]
+    Ctree = drop.tip(ultram, which(!(ultram$tip.label %in% names(C))))
+    startree = drop.tip(startree, which(!(startree$tip.label %in% names(C))))
+    Cse = castSE[,c+1]
+    names(Cse) = castSE$Species
+    Cse = Cse[which(names(Cse) %in% names(C))]
+    model_matrix = matrix("NA", nrow = 5, ncol = 3)
+    colnames(model_matrix) = c("aicc","aicc_best","dAICc")
+    row.names(model_matrix) = c("white", "starBM", "BM", "EB", "OU")
+    for(j in 1:dim(model_matrix)[1]){
+      if(j==2){
+        temp_model = fitContinuous(startree, C, model="BM", SE = Cse)$opt
+      }
+      else{
+        temp_model = fitContinuous(Ctree, C, model=row.names(model_matrix)[j], SE = Cse)$opt
+      }
+      model_matrix = apply(model_matrix,2, as.numeric)
+      row.names(model_matrix) = c("white", "starBM", "BM", "EB", "OU")
+      model_matrix[j, "aicc"] <- temp_model$aicc
+    }
+    model_matrix[,"aicc_best"] <- min(model_matrix[,"aicc"])
+    model_matrix[,"dAICc"] <- model_matrix[, "aicc"] - model_matrix[j, "aicc_best"]
+    print(names(Q_sharedmean_logs)[c])
+    string_c <- c(names(Q_sharedmean_logs)[c], model_matrix[,3])
+    names(string_c) = colnames(AICdf)
+    AICdf[c,] <- string_c
+  }
+  AICdf[,2:6] = apply(AICdf[,2:6], 2, as.numeric) %>% apply(2, round3)
+  write.csv(AICdf, "log_model_support.csv")
+
+#Model adequacy
+  worthy_models = AICdf[which(AICdf$white_noise != 0 & AICdf$starBM != 0),]
+  MAD = as.data.frame(matrix(ncol = 6, nrow = nrow(worthy_models)))
+  names(MAD) = c("msig", "cvar", "svar", "sasr", "shgt", "dcfd")
+  rownames(MAD) = worthy_models$Variable
+  for(m in 1:nrow(worthy_models)){
+    C = Q_sharedmean_logs[,which(names(Q_sharedmean_logs) == worthy_models$Variable[m])]
+    names(C) = rownames(Q_sharedmean_logs)
+    C = C[!is.na(C)]
+    Ctree = drop.tip(ultram, which(!(ultram$tip.label %in% names(C))))
+    C = C[match(Ctree$tip.label, names(C))]
+    class(Ctree)="phylo"
+    FC <- fitContinuous(Ctree,C,model=worthy_models$Best_model[m])
+    UTC <- make_unit_tree(FC)
+    picstat_data <- calculate_pic_stat(UTC)
+    sim <- simulate_char_unit(UTC)
+    picstat_sim <- calculate_pic_stat(sim)
+    compare_pic_stat(picstat_data, picstat_sim) %>% .$p.values -> MAD[m,]
+  }
+  phy_models = data.frame(worthy_models,MAD)
+  phy_models[,8:13] = apply(phy_models[,8:13], 2,round3)
+```
+1.3 Figure showing major categorical character shifts, gains, and losses on a simplified phylogeny.
+
 2 -- COMPARATIVE ANALYSES
 2.0 Confusion matrix table showing PIC_correlations and trait correlation R2 and p-values for each pair of continuous characters. Confusion matrix for quantitative and categorical characters GLS. pGLS estimation of regression parameters in significantly correlated pairs.
+```{r character_correlations, include=FALSE}
+C = sharedmatrix[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
+Cspecies = C$Species %>% as.character()
+C = as.matrix(C[,-1])
+rownames(C) = Cspecies
+Ctree = drop.tip(ultram,which(!(ultram$tip.label %in% rownames(C))))
+class(Ctree) = "phylo"
+PICi = Rcontrast(Ctree, C, path="phylip-3.695/exe")
+
+
+```
+
+
+
 2.1 Table showing the model parameters for each significant regression.
 2.3 Verbally PCA and phylogenetic PCA/PICVarA_PCA of the characters. Phylomorphospace superimposed to the tip coordinates in PC1--PC2.
 2.4 Table showing normalized rates of evolution for each character BAMM.
