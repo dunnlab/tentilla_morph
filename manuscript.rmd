@@ -140,19 +140,25 @@ All specimens are accessioned in the Yale Peabody Museum Invertebrate Zoology Co
 
 A total of 39 siphonophore species were selected based on availability and phylogenetic representativity criteria to capture intraspecific variation. Three to five specimens from each selected species were measured in order to account for intraspecific variation.
 
+Tentacles from the studied specimens were dissected, dehydrated in a series of ethanol dilutions (25% in PBS, 50% in PBS, 75% in water, 100%), cleared in methyl salicylate or d-limonene, and mounted in plastic slides (Canada balsam, Cytoseal, or Permount). Slides were imaged using laser scanning confocal microscopy and differential interference contrast (DIC) microscopy. Images were measured using Fiji-ImageJ.
+
+The characters measured for this study are described in Supplementary Table SXX. Homology assumptions for nematocyst supertypes (heteroneme, haploneme, rhopaloneme, and desmoneme) and tentillum structures (involucrum, elastic strand, pedicle, cnidoband) were informed by positional, developmental, and morphological criteria.
+
 Diet data from Purcell 1981, Purcell 1984.
 
 Microscopy ...
 
 ### 3.3 Phylogenetic Comparative Methods{-}
 
-Phylogenetic signal (Blomberg 2003)
+All phylogenetic statistical analyses were carried out in the programming environment R (cite). Phylogenetic signal in each of the measured characters was calculated using Blomberg’s K (Blomberg 2003). 
+
 fitContinuous (geiger), BM, EB, OU.
 Adams geomorph
 phytools ppca, pgls, phyl.anova
 
 ### 3.4 High-Speed Video
 
+High speed footage (1000-3000 fps) of tentillum and nematocyst discharge was recorded on live siphonophore specimens using a Phantom Miro 320S camera mounted on a stereoscopic microscope. Specimens were collected by SCUBA divers and the remotely operated underwater vehicle Doc Ricketts during expeditions onboard the R/V Western Flyer. Tentillum and nematocyst discharge were elicited mechanically using a fine metallic pin. Video footage was analyzed using Phantom PCC software.
 
 ## 3. Results {-}
 
@@ -617,8 +623,6 @@ Story: low dimensionality, cost-driven, dynamic specialization
 
 ## Acknowledgements
 
-Fulbright Spain. NSF Waterman Award. NSF siphweb project. Yale Institute of Biospehric Studies. Crew of R/V Western Flyer.
+This work was funded by the Society of Systematic Biologists Graduate Student Award, the NSF Waterman Award, and the Yale Institute of Biospheric Studies Doctoral Pilot Grant. ADS was supported by a Fulbright Spain scholarship. We thank Philip R. Pugh for his assistance in the identification of specimens. We also wish to thank the crew of the R/V Western Flyer.
 
 ## References
-
-Siphonophores are... [@Mackie:1987uy].
