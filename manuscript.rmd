@@ -423,7 +423,8 @@ physignal(Pca_compound$ind$coord, compound_tree)
 #PhyloPCA on means
 PPCA_raw = phyl.pca(raw_tree, raw_matrix)
 PPCA_compound = phyl.pca(compound_tree, compound_matrix)
-PPCA %>% biplot(main=paste(signif(summary(PPCA)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
+PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_raw)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
+PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_compound)$importance[2,2]*100,3),"%"), cex = .6, expand =0.4)
 
 ```
 
@@ -484,7 +485,7 @@ names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
 
 ```{r diet_regime_tree}
 regimetree = dprunedTree
-hypdiet = c("Mixed", "Mixed", "Crustacean", "Copepod", "Mixed", "Crustacean", "Crustacean", "Ostracod", "Fish", "Fish", "Crustacean", "Mixed", "Mixed", "Copepod")
+hypdiet = c("Mixed", "Mixed", "Crustacean", "Copepod", "Mixed",  "Fish", "Fish", "Ostracod", "Copepod", "Copepod", "Mixed", "Copepod")
 names(hypdiet) = regimetree$tip.label
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
