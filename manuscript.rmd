@@ -166,49 +166,12 @@ High speed footage (1000-3000 fps) of tentillum and nematocyst discharge was rec
 0.0 ML ribosomal marker phylogeny constrained by transcriptome tree with BS values at the nodes.
 1 -- DESCRIPTIVE MORPHOLOGY AND EVOLUTIONARY HISTORY
 
-```{r load_trees, include=F}
+```{r load_tree, include=F}
 #Load tree
-rRNA18S = read.nexus('bipartitions_root.boot10')
-transcriptome = read.tree('ultimatephylo2018.tre')
-#plot.phylo(consensus)
-#is.rooted(consensus)
-#nodelabels()
-rRNA18S = reroot(rRNA18S, 76, 0.001)
-rRNA18S$tip.label = str_replace_all(rRNA18S$tip.label,'_',' ')
-rRNA18S$tip.label[rRNA18S$tip.label=="Cordagalma cordiforme"] = "Cordagalma ordinatum"
-rRNA18S$tip.label[rRNA18S$tip.label=="Cordagalma sp "] = "Cordagalma ordinatum"
-rRNA18S$tip.label[rRNA18S$tip.label=="Clausophyes ovata"] = "Kephyes ovata"
-rRNA18S$tip.label[rRNA18S$tip.label=="Erenna sp"] = "Erenna sirena"
-rRNA18S$tip.label[rRNA18S$tip.label=="Apolemia sp"] = "Apolemia lanosa"
-rRNA18S$tip.label[rRNA18S$tip.label=="Apolemia sp "] = "Apolemia rubriversa"
-rRNA18S$tip.label[rRNA18S$tip.label=="Sphaeronectes gracilis"] = "Sphaeronectes koellikeri"
-rRNA18S$tip.label[rRNA18S$tip.label=="Prayidae D27SS7"] = "Desmophyes haematogaster"
-rRNA18S$tip.label[rRNA18S$tip.label=="Prayidae D27D2"] = "Craseoa lathetica"
-rRNA18S = drop.tip(rRNA18S, 41:42) #drop outgroups
-rRNA18S = drop.tip(rRNA18S, c(16,31,23,24)) #drop Cordagalma, Clausophyid, Nectopyramis, Nectadamas
-#plot(rRNA18S)
-
-
-transcriptome$tip.label = str_replace_all(transcriptome$tip.label,'_',' ')
-transcriptome$tip.label[transcriptome$tip.label=="Cordagalma sp"] = "Cordagalma ordinatum"
-transcriptome$tip.label[transcriptome$tip.label=="Prayidae D27SS7"] = "Desmophyes haematogaster"
-transcriptome$tip.label[transcriptome$tip.label=="Prayidae D27D2"] = "Craseoa lathetica"
-transcriptome = reroot(transcriptome, 22, 0.001)
-transcriptome = drop.tip(transcriptome, 19:26) #drop outgroups
-#plot(transcriptome)
-
-multitree = list(rRNA18S,transcriptome)
-class(multitree)="multiPhylo"
-STree = superTree(multitree, rooted = T, method = "MRP", start = transcriptome)
-consensus = STree[[2]]
-consensus = drop.tip(consensus, "Physonect sp ")
-consensus = drop.tip(consensus, "Erenna sirena")
-consensus$tip.label[consensus$tip.label=="Physophora gilmeri"] = "Physophora h" ### ARTIFIIAL SUBSTITUTION ###
-consensus = drop.tip(consensus, "Physophora hydrostatica")
-consensus$tip.label[consensus$tip.label=="Physophora h"] = "Physophora hydrostatica"
-consensus$tip.label[consensus$tip.label=="Vogtia pentacantha"] = "Vogtia serrata"
-consensus = drop.tip(consensus, "Rosacea flaccida")
-#plot(consensus)
+consensus = ape::read.tree("concatenate.fasta.treefile")
+consensus = reroot(consensus,99)
+consensus = drop.tip(consensus, c(56:61))
+consensus$tip.label = str_replace_all(consensus$tip.label,"_"," ")
 
 #Prune quant matrix to tree species
 matrix = castnumbers[which(!is.na(castnumbers$Species)),]
@@ -308,7 +271,7 @@ phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmean_logs[,-1])))
 names(phylosignals) = c("K", "P", "Ntaxa")
 for(i in 2:ncol(sharedmean_logs)){
   CH_I=as.numeric(sharedmean_logs[,i])
-  names(CH_I) = rownames(sharedmean_logs)
+  names(CH_I) = sharedmean_logs$Species
   SE_I = as.numeric(castSE[,i])
   names(SE_I) = castSE$Species
   CH_I= CH_I[!is.na(CH_I)]
@@ -323,6 +286,7 @@ for(i in 2:ncol(sharedmean_logs)){
   phylosignals[i-1,1] <- PSIG$K
   phylosignals[i-1,2] <- PSIG$P
   phylosignals[i-1,3] <- length(CH_I)
+  phylosignals$K = round(phylosignals$K,3)
 }
 write.csv(phylosignals, "PhylosignalsWSE_log.csv")
 ```
@@ -389,7 +353,7 @@ write.csv(phylosignals, "PhylosignalsWSE_log.csv")
     compare_pic_stat(picstat_data, picstat_sim) %>% .$p.values -> MAD[m,]
   }
   phy_models = data.frame(worthy_models,MAD)
-  phy_models[,8:13] = apply(phy_models[,8:13], 2,round3)
+  phy_models[,7:12] = apply(phy_models[,7:12], 2,round3)
 ```
 1.3 Figure showing major categorical character shifts, gains, and losses on a simplified phylogeny.
 
