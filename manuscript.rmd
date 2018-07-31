@@ -210,6 +210,10 @@ nodatatips = c(1:length(consensus$tip.label))[which(consensus$tip.label %in% nod
 prunedtree = drop.tip(consensus, nodatatips)
 prunedtree$tip.label
 plot(prunedtree)
+
+#Switch nanomia_bijuga for sp
+prunedtree$tip.label[which(prunedtree$tip.label == "Nanomia bijuga")] <- "Nanomia sp"
+
 ultram = chronos(prunedtree)
 plot(ultram)
 
