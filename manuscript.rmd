@@ -52,6 +52,11 @@ library(corrplot)
   categorical <- read.csv("Homolog_Categorical.csv")[,-2]
   rownames(categorical) = categorical$Species
   
+  #Correct species spellings
+  numbers$Species[which(numbers$Species == "Agalma okeni")] <- "Agalma okenii"
+  numbers$Species[which(numbers$Species == "Forskalia edwardsi")] <- "Forskalia edwardsii"
+  numbers$Species[which(numbers$Species == "Rhizophysa eysenhardti")] <- "Rhizophysa eysenhardtii"
+  
   #Polish fields
   castnumbers = numbers
   castnumbers[castnumbers=="needDIC"] <- NA
@@ -116,7 +121,7 @@ Alejandro Damian-Serrano^1^,^‡, Steven H.D. Haddock^2^, Casey W. Dunn^1^
 
 ^2^ Monterey Bay Aquarium Research Institute, Moss Landing, CA 95039, USA
 
-\‡ Corresponding author, catriona_munro@brown.edu
+\‡ Corresponding author, alejandro.damianserrano@yale.edu
 
 ## Abstract {-}
 
@@ -133,6 +138,9 @@ The cnidoband and terminal filament bear all the active nematocysts. Cnidobands 
 ### 3.1 Phylogeny{-}
 
 Markers accessions
+
+ML phylogeny was reconstructed from 16S and 18S ribosomal rRNA genes using iqtree(). 1000 bootstraps. 
+A minimal set of nodes were constrained to be consistent with the (Munro etal 2018) transcriptome phylogeny strict consensus tree.
 
 ### 3.2 Microscopy{-}
 
@@ -168,9 +176,9 @@ High speed footage (1000-3000 fps) of tentillum and nematocyst discharge was rec
 
 ```{r load_tree, include=F}
 #Load tree
-consensus = ape::read.tree("concatenate.fasta.treefile")
-consensus = reroot(consensus,99)
-consensus = drop.tip(consensus, c(56:61))
+consensus = ape::read.tree("concatenate.fasta.contree")
+consensus = reroot(consensus,103)
+consensus = drop.tip(consensus, c(28,29,30,59:61))
 consensus$tip.label = str_replace_all(consensus$tip.label,"_"," ")
 
 #Prune quant matrix to tree species
@@ -254,6 +262,8 @@ rownames(Q_sharedmean_logs) = sharedmean_logs$Species
 
 ```
 
+Novel phylogenetic relationships:
+-Erenna spp closely related to Stephanomia
 
 1.0 Table showing for each species the mean, number of individuals measured, and standard error of every character, ordered by cnidomic index / tentillum size, and/or colored by clade.
 
@@ -268,11 +278,15 @@ write.csv(morphdata, "characterdata.csv")
 1.1 Table showing each character’s (illustrating the character per row)  the phylogenetic signal K with the p-value obtained by testing against 1000 simulated permutations, and the number of species included.
 ```{r phylosignals}
 phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmean_logs[,-1])))
+#phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmeans[,-1])))
 names(phylosignals) = c("K", "P", "Ntaxa")
 for(i in 2:ncol(sharedmean_logs)){
   CH_I=as.numeric(sharedmean_logs[,i])
+  #CH_I=as.numeric(sharedmeans[,i])
   names(CH_I) = sharedmean_logs$Species
-  SE_I = as.numeric(castSE[,i])
+  #names(CH_I) = sharedmeans$Species
+  SE_I = as.numeric(castSE[,i]) %>% log()
+  SE_I[which(SE_I==-Inf)] = 0
   names(SE_I) = castSE$Species
   CH_I= CH_I[!is.na(CH_I)]
   SE_I= SE_I[!is.na(SE_I)]
@@ -362,7 +376,8 @@ write.csv(phylosignals, "PhylosignalsWSE_log.csv")
 
 ```{r character_correlations, include=FALSE}
 #PIC correlations with Rphylip
-C = sharedlogs[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
+#C = sharedlogs[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
+C = sharedmatrix[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
 Cspecies = C$Species %>% as.character()
 C = as.matrix(C[,-1])
 rownames(C) = Cspecies
@@ -395,8 +410,8 @@ corrplot(PICOLS, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs re
 2.3 Verbally PCA and phylogenetic PCA/PICVarA_PCA of the characters. Phylomorphospace superimposed to the tip coordinates in PC1--PC2.
 ```{r PCA}
 par(mar=rep(3,4), mfrow=c(1,1))
-raw_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(1:2,4:20,30)]
-compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:29)]
+raw_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(1:2,4:20)]
+compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:30)]
 raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix))))
 compound_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(compound_matrix))))
 
@@ -410,6 +425,7 @@ Pca_raw %>% fviz_pca_biplot(axes=c(3,4), col.var="contrib", gradient.cols = c("#
 phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
 phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,3:4], label = "horizontal", xlab = "PC3", ylab = "PC4")
 physignal(Pca_raw$ind$coord, raw_tree)
+multiPhylosignal(Pca_raw$ind$coord, raw_tree)
   ##Morphometric characters
 PCA(compound_matrix) -> Pca_compound
 Pca_compound %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
@@ -419,6 +435,7 @@ Pca_compound %>% fviz_pca_biplot(axes=c(3,4), col.var="contrib", gradient.cols =
 phylomorphospace(tree=compound_tree, Pca_compound$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
 phylomorphospace(tree=compound_tree, Pca_compound$ind$coord[,3:4], label = "horizontal", xlab = "PC3", ylab = "PC4")
 physignal(Pca_compound$ind$coord, compound_tree)
+multiPhylosignal(Pca_compound$ind$coord, compound_tree)
 
 #PhyloPCA on means
 PPCA_raw = phyl.pca(raw_tree, raw_matrix)
@@ -485,7 +502,7 @@ names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
 
 ```{r diet_regime_tree}
 regimetree = dprunedTree
-hypdiet = c("Mixed", "Mixed", "Crustacean", "Copepod", "Mixed",  "Fish", "Fish", "Ostracod", "Copepod", "Copepod", "Mixed", "Copepod")
+hypdiet = c("Mixed", "Mixed", "Crustacean", "Copepod", "Mixed",  "Fish", "Fish", "Ostracod", "Copepod", "Copepod", "Mixed", "Crustacean")
 names(hypdiet) = regimetree$tip.label
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
@@ -555,7 +572,8 @@ OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=nrow(dprunedmatrix_logs)))
 names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
 library(magrittr)
 for(c in 2:ncol(dprunedmatrix_logs)){  #1:ncol(sharedmeans)
-  Cdata = data.frame(dprunedmatrix_logs$Species,hypdiet,dprunedmatrix_logs[,c])
+  #Cdata = data.frame(dprunedmatrix_logs$Species,hypdiet,dprunedmatrix_logs[,c])
+  Cdata = data.frame(dprunedmatrix$Species,hypdiet,dprunedmatrix[,c])
   names(Cdata) = c("species", "regime", "trait")
   Cdata$trait[which(Cdata$trait == "NaN")] <- NA
   Cdata = Cdata[!is.na(Cdata$trait),]
@@ -577,8 +595,6 @@ OUwie_matrix[,3:4] <- apply(OUwie_matrix[,3:4], 2, round3)
 ```
 
 3.3 Interpret qualitatively the kinematic implications (high speed video) of the different regions of the morphospace.
-
-
 
 Story: low dimensionality, cost-driven, dynamic specialization
 
