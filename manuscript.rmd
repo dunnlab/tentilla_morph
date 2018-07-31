@@ -56,6 +56,10 @@ library(corrplot)
   numbers$Species[which(numbers$Species == "Agalma okeni")] <- "Agalma okenii"
   numbers$Species[which(numbers$Species == "Forskalia edwardsi")] <- "Forskalia edwardsii"
   numbers$Species[which(numbers$Species == "Rhizophysa eysenhardti")] <- "Rhizophysa eysenhardtii"
+
+  #Merge Nanomias
+  numbers$Species[which(numbers$Species == "Nanomia cara")] <- "Nanomia sp"
+  numbers$Species[which(numbers$Species == "Nanomia bijuga")] <- "Nanomia sp"
   
   #Polish fields
   castnumbers = numbers
@@ -271,7 +275,7 @@ Novel phylogenetic relationships:
 morphdata = cbind(castN, castmeans[,-1], castSE[,-1])
 morphdata = morphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
 names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
-write.csv(morphdata, "characterdata.csv")
+#write.csv(morphdata, "characterdata.csv")
 ```
 
 1.05 Plate with all the tentillum diversity.
@@ -302,7 +306,7 @@ for(i in 2:ncol(sharedmean_logs)){
   phylosignals[i-1,3] <- length(CH_I)
   phylosignals$K = round(phylosignals$K,3)
 }
-write.csv(phylosignals, "PhylosignalsWSE_log.csv")
+#write.csv(phylosignals, "PhylosignalsWSE_log.csv")
 ```
 
 
@@ -320,7 +324,8 @@ write.csv(phylosignals, "PhylosignalsWSE_log.csv")
     C = C[!is.na(C)]
     Ctree = drop.tip(ultram, which(!(ultram$tip.label %in% names(C))))
     startree = drop.tip(startree, which(!(startree$tip.label %in% names(C))))
-    Cse = castSE[,c+1]
+    Cse = castSE[,c+1] %>% log() %>% abs()
+    Cse[which(Cse == Inf)] <- 0
     names(Cse) = castSE$Species
     Cse = Cse[which(names(Cse) %in% names(C))]
     model_matrix = matrix("NA", nrow = 5, ncol = 3)
@@ -345,7 +350,7 @@ write.csv(phylosignals, "PhylosignalsWSE_log.csv")
     AICdf[c,] <- string_c
   }
   AICdf[,2:6] = apply(AICdf[,2:6], 2, as.numeric) %>% apply(2, round3)
-  write.csv(AICdf, "log_model_support.csv")
+  #write.csv(AICdf, "log_model_support.csv")
 
 #Model adequacy
   worthy_models = AICdf[which(AICdf$white_noise != 0 & AICdf$starBM != 0),]
@@ -368,6 +373,7 @@ write.csv(phylosignals, "PhylosignalsWSE_log.csv")
   }
   phy_models = data.frame(worthy_models,MAD)
   phy_models[,7:12] = apply(phy_models[,7:12], 2,round3)
+  #write.csv(phy_models, "model_adequacy.csv")
 ```
 1.3 Figure showing major categorical character shifts, gains, and losses on a simplified phylogeny.
 
@@ -397,8 +403,6 @@ corrplot(combicorr, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs
 PICOLS = combicorr
 PICOLS[upper.tri(PICOLS)]=cor(C)[upper.tri(cor(C))]
 corrplot(PICOLS, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs regular correlations
-
-
 
 ```
 
