@@ -11,9 +11,9 @@ Amphicaryon peltifera,1,1,1,1,1,1,1,1,0,Microbasic mastigophore,Anisorhizas
 Apolemia lanosa,1,0,0,0,0,0,0,0,0,Eurytele,
 Apolemia rubriversa,1,0,0,0,0,0,0,0,0,Eurytele,
 Apolemia uvaria,1,0,0,0,0,0,0,0,0,Birrhopaloid,
-Athorybia rosacea,1,1,1,1,1,1,1,0,1,Stenotele,Anisorhizas
-Bargmannia amoena,1,1,1,0,0,0,1,0,1,Stenotele,Anisorhizas
-Bargmannia elongata,1,1,1,0,0,0,1,0,1,Stenotele,Anisorhizas
+Athorybia rosacea,1,1,1,1,1,1,0,0,1,Stenotele,Anisorhizas
+Bargmannia amoena,1,1,1,0,0,0,0,0,1,Stenotele,Anisorhizas
+Bargmannia elongata,1,1,1,0,0,0,0,0,1,Stenotele,Anisorhizas
 Bargmannia lata,1,1,1,0,0,0,1,0,1,Stenotele,Anisorhizas
 Bassia bassensis,1,1,1,1,1,1,1,1,0,Microbasic mastigophore,Anisorhizas
 Bathyphysa sibogae,1,1,0,0,0,0,0,0,0,,Anisorhizas
@@ -67,9 +67,9 @@ Lilyopsis fluoracantha,1,1,1,1,1,1,1,1,0,Microbasic mastigophore,Anisorhizas
 Lilyopsis medusa,1,1,1,1,1,1,1,1,0,Microbasic mastigophore,Anisorhizas
 Lychnagalma utricularia,1,1,1,0,0,1,1,0,1,Stenotele,Anisorhizas
 Maresearsia praeclara,,,,,,,,,,,
-Marrus orthocanna,1,1,1,1,1,1,1,0,0,Stenotele,Anisorhizas
-Marrus claudanielis,1,1,1,1,1,1,1,0,0,Stenotele,Anisorhizas
-Melophysa melo,1,1,1,1,1,1,1,,,,
+Marrus orthocanna,1,1,1,1,1,,1,0,1,Stenotele,Anisorhizas
+Marrus claudanielis,1,1,1,1,1,,1,0,1,Stenotele,Anisorhizas
+Melophysa melo,1,1,1,1,1,,1,,,,
 Mistoprayina fragosa,,,,,,,,,,,
 Muggiaea atlantica,,1,1,1,1,1,1,1,0,Microbasic mastigophore,Anisorhizas
 Muggiaea kochi,,,,,,,,,,Microbasic mastigophore,Anisorhizas
