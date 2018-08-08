@@ -33,6 +33,7 @@ library(phylopath)
 library(FactoMineR)
 library(factoextra)
 library(corrplot)
+library(BAMMtools)
 
 	# Configure knitr, see http://yihui.name/knitr/options
 	opts_knit$set(
@@ -181,18 +182,18 @@ High speed footage (1000-3000 fps) of tentillum and nematocyst discharge was rec
 ```{r load_tree, include=F}
 #Load tree
 #consensus = ape::read.tree("concatenate.fasta.contree")
-consensus = read.nexus("gene_map_ct.tre")
-read.tree("gene_ct.trees") %>% consensus() -> daconsensus
-plot(daconsensus)
+#consensus = read.nexus("gene_map_ct.tre")
+#read.tree("gene_ct.trees") %>% consensus() -> daconsensus
+#plot(daconsensus)
+consensus = read.nexus("TimeTreeCT.tre") %>% drop.tip(53:58)
 #consensus = reroot(consensus,103)
-consensus = reroot(consensus,97)
+#consensus = reroot(consensus,97)
 #consensus = drop.tip(consensus, c(28,29,30,59:61))
-consensus = drop.tip(consensus, c(56:61))
+#consensus = drop.tip(consensus, c(56:61))
 consensus$tip.label = str_replace_all(consensus$tip.label,"_"," ")
-ultra_consensus = chronos(consensus,100)
+#ultra_consensus = chronos(consensus,100)
 
-#PLOT tree figure
-plot(ultra_consensus)
+
 
 #Prune quant matrix to tree species
 matrix = castnumbers[which(!is.na(castnumbers$Species)),]
@@ -223,7 +224,8 @@ plot(prunedtree)
 #Switch nanomia_bijuga for sp
 prunedtree$tip.label[which(prunedtree$tip.label == "Nanomia bijuga")] <- "Nanomia sp"
 
-ultram = chronos(prunedtree)
+#ultram = chronos(prunedtree)
+ultram = prunedtree
 plot(ultram)
 
 ##Make the pseudoindividuals tree
@@ -608,6 +610,14 @@ PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1
 ```
 
 2.4 Table showing normalized rates of evolution for each character BAMM.
+
+```{r BAMM}
+
+
+
+```
+
+
 3 -- RELATIONSHIPS WITH DIET / FUNCTION / Hypothesis testing
 
 ```{r diet_data, include=F}
