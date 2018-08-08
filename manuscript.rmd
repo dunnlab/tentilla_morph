@@ -243,7 +243,7 @@ inditree = drop.tip(newtree, which(!grepl(".[0-9].*", newtree$tip.label)))
 zerotipTree = inditree
 inditree$edge.length[inditree$edge.length==0] <- 0.0000000001
 shavedtree = inditree
-inditree = chronos(inditree)
+#inditree = chronos(inditree)
 plot(inditree)
 sharedmatrix_plied$slide_id = str_replace_all(sharedmatrix_plied$slide_id,'_',' ')
 sharedmatrix = sharedmatrix_plied[match(sharedmatrix_plied$slide_id, inditree$tip.label),]
@@ -255,7 +255,8 @@ nodatatips_cat = c(1:length(consensus$tip.label))[which(consensus$tip.label %in%
 cat_tree = drop.tip(consensus, nodatatips_cat)
 cat_tree$tip.label
 plot(cat_tree)
-ultram_cat = chronos(cat_tree)
+#ultram_cat = chronos(cat_tree)
+ultram_cat = cat_tree
 plot(ultram_cat)
 sharedcategorical = sharedcategorical[match(ultram_cat$tip.label, rownames(sharedcategorical)),]
 cprunedmatrix = sharedcategorical[which(rownames(sharedcategorical)%in%rownames(sharedmatrix)),] %>% .[which(sapply(.,function(x) length(unique(x)))>1)]
@@ -674,7 +675,7 @@ names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
 
 ```{r diet_regime_tree}
 regimetree = dprunedTree
-hypdiet = c("Mixed", "Mixed", "Crustacean", "Copepod", "Mixed",  "Fish", "Fish", "Ostracod", "Copepod", "Copepod", "Mixed", "Crustacean")
+hypdiet = c("Mixed", "Copepod", "Crustacean", "Copepod", "Ostracod",  "Mixed", "Mixed", "Mixed", "Copepod", "Fish", "Fish")
 names(hypdiet) = regimetree$tip.label
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
