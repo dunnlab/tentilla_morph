@@ -1,0 +1,7 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Rhizophysa_filiformis,0,0.5,0
+1000,Lensia_conoidea,Rhizophysa_filiformis,0,4.25148,1.48903
+2000,Lensia_conoidea,Rhizophysa_filiformis,0,3.83058,0.995254
+2000,Lilyopsis_fluoracantha,NA,1.09212,55.6957,-0.337427
+3000,Lensia_conoidea,Rhizophysa_filiformis,0,3.04399,1.08365
+4000,Lensia_conoidea,Rhizophysa_filiformis,0,3.8365,1.53853

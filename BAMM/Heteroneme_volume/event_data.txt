@@ -1,0 +1,7 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Apolemia_lanosa,0,0.5,0
+1000,Lensia_conoidea,Apolemia_lanosa,0,2.32196,-0.0311933
+2000,Lensia_conoidea,Apolemia_lanosa,0,2.09177,-0.125157
+3000,Lensia_conoidea,Apolemia_lanosa,0,1.24428,0.475112
+3000,Physophora_hydrostatica,NA,1.24234,18.9202,-1.64955
+4000,Lensia_conoidea,Apolemia_lanosa,0,0.8845,0.68756

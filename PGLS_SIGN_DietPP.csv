@@ -1,0 +1,21 @@
+"","Relative copepod consumption","Relative fish consumption","Relative crustacean consumption","Relative decapod consumption","Relative chaetognath consumption"
+"Heteroneme.free.length..um.",NA,NA,"+","+",NA
+"Heteroneme.volume..um3.",NA,NA,NA,"+",NA
+"Heteroneme.shaft.free.length..um.",NA,NA,NA,"+",NA
+"Heteroneme.shaft.width..um.",NA,NA,NA,"+",NA
+"Heteroneme.number","-",NA,NA,NA,NA
+"Desmoneme.length..um.",NA,NA,"-","-",NA
+"Cnidoband.length..um.",NA,NA,NA,"+",NA
+"Cnidoband.free.length..um.",NA,NA,"+","+",NA
+"Haploneme.row.number..um.",NA,NA,"+","+",NA
+"Tentacle.width..um.","-",NA,NA,NA,NA
+"Elastic.strand.width..um.",NA,NA,"+","+",NA
+"Involucrum.length..um.",NA,NA,NA,"+",NA
+"coiledness",NA,NA,"+","+",NA
+"heteroneme_elongation",NA,"-","+",NA,"-"
+"haploneme_elongation",NA,"-",NA,NA,"-"
+"heteroneme_shaft_extension",NA,"-",NA,NA,"-"
+"Heteroneme_to_CB",NA,NA,NA,"-",NA
+"total_heteroneme_volume",NA,NA,NA,"+",NA
+"total_haploneme_volume",NA,NA,NA,"+",NA
+"cnidomic_index",NA,NA,NA,"+",NA

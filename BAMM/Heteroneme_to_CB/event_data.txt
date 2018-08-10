@@ -1,0 +1,11 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Apolemia_lanosa,0,0.5,0
+1000,Lensia_conoidea,Apolemia_lanosa,0,4.59432,0.140319
+2000,Lensia_conoidea,Apolemia_lanosa,0,4.15013,0.696041
+3000,Lensia_conoidea,Apolemia_lanosa,0,2.22957,1.25345
+3000,Craseoa_lathetica,NA,1.28726,47.8376,-0.877564
+3000,Resomia_ornicephala,NA,1.07406,15.868,-0.9541
+3000,Apolemia_lanosa,Apolemia_rubriversa,0.620179,56.0002,0.223478
+4000,Lensia_conoidea,Apolemia_lanosa,0,3.32269,0.34544
+4000,Sulculeolaria_quadrivalvis,NA,1.22086,29.1878,-0.0737485
+4000,Apolemia_lanosa,Apolemia_rubriversa,0.68862,41.2536,-0.12266

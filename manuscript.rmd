@@ -183,17 +183,12 @@ High speed footage (1000-3000 fps) of tentillum and nematocyst discharge was rec
 #Load tree
 #consensus = ape::read.tree("concatenate.fasta.contree")
 #consensus = read.nexus("gene_map_ct.tre")
-#read.tree("gene_ct.trees") %>% consensus() -> daconsensus
-#plot(daconsensus)
-consensus = read.nexus("TimeTreeCT.tre") %>% drop.tip(53:58)
+consensus = read.nexus("TimeTree_CT_perfect.tre") %>% drop.tip(56:61)
 #consensus = reroot(consensus,103)
 #consensus = reroot(consensus,97)
 #consensus = drop.tip(consensus, c(28,29,30,59:61))
 #consensus = drop.tip(consensus, c(56:61))
 consensus$tip.label = str_replace_all(consensus$tip.label,"_"," ")
-#ultra_consensus = chronos(consensus,100)
-
-
 
 #Prune quant matrix to tree species
 matrix = castnumbers[which(!is.na(castnumbers$Species)),]
@@ -607,14 +602,30 @@ PPCA_raw = phyl.pca(raw_tree, raw_matrix)
 PPCA_compound = phyl.pca(compound_tree, compound_matrix)
 PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_raw)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
 PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_compound)$importance[2,2]*100,3),"%"), cex = .6, expand =0.4)
-
+phylomorphospace(raw_tree, PPCA_raw$S)
 ```
 
 2.4 Table showing normalized rates of evolution for each character BAMM.
 
 ```{r BAMM}
+traitlist = list()
+for(i in 2:ncol(sharedmean_logs)){
+  traitlist[[i]] <- sharedmean_logs[,c(1,i)]
+  names(traitlist)[i] = names(sharedmean_logs)[i]
+}
 
+traitlist <- lapply(traitlist, function(x){x<-x[which(!is.nan(x[,2])),]})
 
+for(i in 2:length(traitlist)){
+  treei = drop.tip(ultram, which(!(ultram$tip.label %in% traitlist[[i]]$Species)))
+  treei$tip.label = str_replace_all(treei$tip.label, " ", "_")
+  write.tree(treei, file = paste("BAMM/",names(traitlist[[i]])[2], "_tree.tre", sep=""))
+}
+
+for(i in 2:length(traitlist)){
+  traitlist[[i]]$Species = str_replace_all(traitlist[[i]]$Species, " ", "_")
+  write.table(traitlist[[i]],file = paste("BAMM/",names(traitlist[[i]])[2], ".txt", sep=""), sep="\t", col.names = F, row.names = F, quote = F)
+}
 
 ```
 
@@ -715,17 +726,23 @@ write.csv(pANOVAs_diet, "pANOVAS_Diet.csv")
 
 #PGLS with proportions in Diet
 pGLSp_diet = as.data.frame(matrix(nrow=ncol(Pprunedmatrix_logs[,-1]), ncol=ncol(PP)))
+pGLS_sign = pGLSp_diet
 colnames(pGLSp_diet) = names(PP)
 row.names(pGLSp_diet) = names(Pprunedmatrix_logs[,-1])
 pGLS_sign = pGLSp_diet
 for(i in 1:ncol(Pprunedmatrix_logs[,-1])){
   CH_I=as.numeric(Pprunedmatrix_logs[,i+1])
   names(CH_I) = Pprunedmatrix_logs$Species
+  CH_I = CH_I[!is.na(CH_I)]
   for(j in 1:ncol(PP)){
     CH_J=as.numeric(PP[,j])
     names(CH_J) = rownames(PP)
+    CH_J = CH_J[!is.na(CH_J)]
+    CH_I = CH_I[which(names(CH_I) %in% names(CH_J))]
+    CH_J = CH_J[which(names(CH_J) %in% names(CH_I))]
+    pgls_tree = drop.tip(Pprunedtree, which(!(Pprunedtree$tip.label %in% names(CH_I))))
     pg_data = as.data.frame(cbind(CH_I,CH_J)) %>% .[which(!is.na(rowSums(.))),]
-    TTABLE <- gls(CH_I ~ CH_J, correlation =  corBrownian(phy = Pprunedtree), data = pg_data, method = "ML") %>% summary() %>% .$tTable %>% as.data.frame()
+    TTABLE <- gls(CH_I ~ CH_J, correlation =  corBrownian(phy = pgls_tree), data = pg_data, method = "ML") %>% summary() %>% .$tTable %>% as.data.frame()
     TTABLE %>% .$p %>% .[2] -> pGLSp_diet[i,j]
     if(pGLSp_diet[i,j]<0.05){
       print(paste(rownames(pGLSp_diet)[i],colnames(pGLSp_diet)[j],pGLSp_diet[(i),(j)],sep=" "))
@@ -734,7 +751,8 @@ for(i in 1:ncol(Pprunedmatrix_logs[,-1])){
       else pGLS_sign[i,j] = "-"
     }}}
 write.csv(pGLSp_diet, "PGLS_Pval_DietPP.csv")
-write.csv(pGLSp_sign, "PGLS_SIGN_DietPP.csv")
+pGLS_sign <- pGLS_sign[which(rowSums(is.na(pGLS_sign))!=ncol(pGLS_sign)),which(colSums(is.na(pGLS_sign))!=nrow(pGLS_sign))]
+write.csv(pGLS_sign, "PGLS_SIGN_DietPP.csv")
 
 ```
 

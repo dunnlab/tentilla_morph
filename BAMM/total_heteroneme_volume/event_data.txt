@@ -1,0 +1,14 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Bargmannia_amoena,0,0.5,0
+1000,Lensia_conoidea,Bargmannia_amoena,0,2.09333,0.859358
+1000,Kephyes_ovata,NA,1.03025,6.70591,-2.35805
+1000,Erenna_richardi,Erenna_sirena,1.31464,92.2183,0.188267
+1000,Agalma_clausi,Erenna_richardi,0.248723,3.20367,2.00594
+2000,Lensia_conoidea,Bargmannia_amoena,0,4.23554,0.42428
+2000,Erenna_richardi,NA,1.34585,107.574,-0.639007
+3000,Lensia_conoidea,Bargmannia_amoena,0,5.70821,0.118085
+3000,Cordagalma_ordinatum,NA,0.940572,49.8684,0.119417
+3000,Erenna_richardi,NA,1.33503,130.842,1.32961
+4000,Lensia_conoidea,Bargmannia_amoena,0,4.0315,0.432066
+4000,Chuniphyes_multidentata,NA,1.20938,0.500267,0.551664
+4000,Erenna_richardi,NA,1.36611,118.679,-1.58357
