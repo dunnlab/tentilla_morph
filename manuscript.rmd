@@ -224,25 +224,25 @@ ultram = prunedtree
 plot(ultram)
 
 ##Make the pseudoindividuals tree
-newtree = ultram
-sharedmatrix_plied = sharedmatrix
-sharedmatrix_plied$slide_id = paste(sharedmatrix$slide_id, sharedmatrix$Species, sep = "_")
-for (i in 1:nrow(sharedmatrix_plied)) {
-  pos = which(newtree$tip.label == sharedmatrix_plied$Species[i])
-  print(pos)
-  newtree = bind.tip(newtree, sharedmatrix_plied$slide_id[i], where = pos, edge.length = 0.1)
-  print(newtree$tip.label)
-  newtree$tip.label = str_replace_all(newtree$tip.label,'_',' ')
-}
-inditree = drop.tip(newtree, which(!grepl(".[0-9].*", newtree$tip.label)))
-zerotipTree = inditree
-inditree$edge.length[inditree$edge.length==0] <- 0.0000000001
-shavedtree = inditree
-#inditree = chronos(inditree)
-plot(inditree)
-sharedmatrix_plied$slide_id = str_replace_all(sharedmatrix_plied$slide_id,'_',' ')
-sharedmatrix = sharedmatrix_plied[match(sharedmatrix_plied$slide_id, inditree$tip.label),]
-rownames(sharedmatrix) <- 1:nrow(sharedmatrix)
+# newtree = ultram
+# sharedmatrix_plied = sharedmatrix
+# sharedmatrix_plied$slide_id = paste(sharedmatrix$slide_id, sharedmatrix$Species, sep = "_")
+# for (i in 1:nrow(sharedmatrix_plied)) {
+#   pos = which(newtree$tip.label == sharedmatrix_plied$Species[i])
+#   print(pos)
+#   newtree = bind.tip(newtree, sharedmatrix_plied$slide_id[i], where = pos, edge.length = 0.1)
+#   print(newtree$tip.label)
+#   newtree$tip.label = str_replace_all(newtree$tip.label,'_',' ')
+# }
+# inditree = drop.tip(newtree, which(!grepl(".[0-9].*", newtree$tip.label)))
+# zerotipTree = inditree
+# inditree$edge.length[inditree$edge.length==0] <- 0.0000000001
+# shavedtree = inditree
+# #inditree = chronos(inditree)
+# plot(inditree)
+# sharedmatrix_plied$slide_id = str_replace_all(sharedmatrix_plied$slide_id,'_',' ')
+# sharedmatrix = sharedmatrix_plied[match(sharedmatrix_plied$slide_id, inditree$tip.label),]
+# rownames(sharedmatrix) <- 1:nrow(sharedmatrix)
 
 #Prune tree to categorical matrix species
 nodatatipnames_cat = consensus$tip.label[which(!(consensus$tip.label %in% sharedspp_cat))]
@@ -652,7 +652,10 @@ for(E in GC){
 }
 diet[is.na(diet)] <- 0
 diet = diet[which(rowSums(diet)>0),which(colSums(diet)<nrow(diet))]
-#diet = rbind(diet, c(0,1,0,0,0,0,0,0))
+cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0),4),nrow=9, ncol = 4) %>% t() %>% as.data.frame()
+names(cladeB) = names(diet)
+rownames(cladeB) = c("Erenna richardi", "Erenna laciniata", "Erenna sirena", "Stephanomia amphytridis")
+diet = rbind(diet, cladeB)
 #rownames(diet)[12] = 'Erenna richardi'
 dprunedmatrix = sharedmeans[which(sharedmeans$Species%in%rownames(diet)),]
 dprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(diet)),]
@@ -686,7 +689,7 @@ names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
 
 ```{r diet_regime_tree}
 regimetree = dprunedTree
-hypdiet = c("Mixed", "Copepod", "Crustacean", "Copepod", "Ostracod",  "Mixed", "Mixed", "Mixed", "Copepod", "Fish", "Fish")
+hypdiet = c("Mixed", "Copepod", "Crustacean", "Copepod", "Ostracod",  "Mixed", "Mixed", "Mixed", "Copepod", "Fish", "Fish", "Fish", "Fish", "Fish", "Fish")
 names(hypdiet) = regimetree$tip.label
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
@@ -722,6 +725,7 @@ for(prey in 1:ncol(diet)){
   }
   }}
 pANOVAs_diet = pANOVAs_diet[,-1]
+pANOVAs_diet[pANOVAs_diet>0.05] <- NA
 write.csv(pANOVAs_diet, "pANOVAS_Diet.csv")
 
 #PGLS with proportions in Diet
@@ -762,9 +766,8 @@ write.csv(pGLS_sign, "PGLS_SIGN_DietPP.csv")
 OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=nrow(dprunedmatrix_logs)))
 names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
 library(magrittr)
-for(c in 2:ncol(dprunedmatrix_logs)){  #1:ncol(sharedmeans)
-  #Cdata = data.frame(dprunedmatrix_logs$Species,hypdiet,dprunedmatrix_logs[,c])
-  Cdata = data.frame(dprunedmatrix$Species,hypdiet,dprunedmatrix[,c])
+for(c in 2:ncol(dprunedmatrix_logs)){
+  Cdata = data.frame(dprunedmatrix$Species,hypdiet,dprunedmatrix_logs[,c])
   names(Cdata) = c("species", "regime", "trait")
   Cdata$trait[which(Cdata$trait == "NaN")] <- NA
   Cdata = Cdata[!is.na(Cdata$trait),]
@@ -776,9 +779,7 @@ for(c in 2:ncol(dprunedmatrix_logs)){  #1:ncol(sharedmeans)
   OU <- OUwie(Ctree, Cdata, model="OU1")
   OUwie_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
   OUwie_matrix[c-1,2] = nrow(Cdata)
-  print("BM")
   OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU$AICc))
-  print("OU")
   OUwie_matrix[c-1,4] = OU$AICc - min(c(BM$AICc, OU$AICc))
 }
 OUwie_matrix[,3:4] <- apply(OUwie_matrix[,3:4], 2, round3)

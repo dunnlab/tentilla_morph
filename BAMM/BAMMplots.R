@@ -4,7 +4,7 @@ library(geiger)
 library(coda)
 setwd("~/tentilla_morph/BAMM")
 # load tree
-tree <- read.tree("Elastic.strand.width..um._tree.tre")
+tree <- read.tree("Desmoneme.length..um._tree.tre")
 
 # ESS after 20% burnin
 mcmcout <- read.csv("mcmc_out.txt")

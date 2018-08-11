@@ -16,9 +16,9 @@
 modeltype = trait
 # Specify "speciationextinction" or "trait" analysis
 
-traitfile = Elastic.strand.width..um..txt
+traitfile = Desmoneme.length..um..txt
 
-treefile = Elastic.strand.width..um._tree.tre
+treefile = Desmoneme.length..um._tree.tre
 # File name of the phylogenetic tree to be analyzed
 
 runInfoFilename = run_info.txt
@@ -200,7 +200,7 @@ useObservedMinMaxAsTraitPriors = 1
 
 expectedNumberOfShifts = 1.0
 
-betaInitPrior = 0.191179387263656
+betaInitPrior = 0.481810065343
 
-betaShiftPrior = 0.839031159060599
+betaShiftPrior = 1.32443759813938
 
