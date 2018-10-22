@@ -16,9 +16,9 @@
 modeltype = trait
 # Specify "speciationextinction" or "trait" analysis
 
-traitfile = Desmoneme.length..um..txt
+traitfile = Involucrum.length..um..txt
 
-treefile = Desmoneme.length..um._tree.tre
+treefile = Involucrum.length..um._tree.tre
 # File name of the phylogenetic tree to be analyzed
 
 runInfoFilename = run_info.txt
@@ -200,7 +200,7 @@ useObservedMinMaxAsTraitPriors = 1
 
 expectedNumberOfShifts = 1.0
 
-betaInitPrior = 0.481810065343
+betaInitPrior = 0.087621851036136
 
-betaShiftPrior = 1.32443759813938
+betaShiftPrior = 1.31334785120507
 

@@ -1,0 +1,11 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Bargmannia_amoena,0,0.5,0
+1000,Lensia_conoidea,Bargmannia_amoena,0,1.16195,1.93653
+2000,Lensia_conoidea,Bargmannia_amoena,0,0.703099,1.22005
+2000,Athorybia_rosacea,NA,0.876003,14.0099,-0.396751
+2000,Athorybia_rosacea,Frillagalma_vityazi,0.28572,21.9857,-0.525376
+3000,Lensia_conoidea,Bargmannia_amoena,0,1.19175,-1.93708
+3000,Athorybia_rosacea,Frillagalma_vityazi,0.228209,12.9589,-1.44096
+4000,Lensia_conoidea,Bargmannia_amoena,0,1.32289,-0.354163
+4000,Diphyes_dispar,NA,0.570257,0.162771,-0.835347
+4000,Athorybia_rosacea,Frillagalma_vityazi,0.175008,55.1945,-2.42953

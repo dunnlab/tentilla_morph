@@ -1,10 +1,10 @@
 "","Heteroneme.width..um.","Heteroneme.volume..um3.","Heteroneme.shaft.free.length..um.","Heteroneme.shaft.width..um.","Heteroneme.number","Haploneme.free.length..um.","Haploneme.width..um.","Desmoneme.length..um.","Desmoneme.width..um.","Rhopaloneme.length..um.","Rhopaloneme.width..um.","Cnidoband.length..um.","Cnidoband.free.length..um.","Cnidoband.width..um.","Haploneme.row.number..um.","Tentacle.width..um.","Pedicle.width..um.","Elastic.strand.width..um.","Involucrum.length..um.","coiledness","heteroneme_elongation","haploneme_elongation","desmoneme_elongation","rhopaloneme_elongation","heteroneme_shaft_extension","Heteroneme_to_CB","total_heteroneme_volume","total_haploneme_volume","cnidomic_index"
-"Copepod diet",NA,NA,NA,NA,0.043,NA,0.039,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Fish diet",0.04,NA,NA,0.036,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.04,NA,NA,NA
-"Amphipod diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Polychaete diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.006,NA,NA,NA,0.03,NA,NA,NA,NA
-"Mollusc diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Decapod diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Crustacean diet",NA,NA,NA,NA,0.001,NA,0.004,NA,NA,0.042,NA,0.009,0.019,0.005,0.016,0.007,0.031,0.003,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Chaetognath diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.036,NA,NA,NA,NA
-"Ostracod diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Copepod diet",0.0195710052647465,NA,NA,0.00348121728547416,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Fish diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.0400802641357176,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.0496622862271045,NA,NA,NA,NA
+"Amphipod diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.0198835187380074,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Polychaete diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.00979816733810316,NA,NA,NA,0.0234498389254827,NA,NA,NA,NA
+"Mollusc diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.0167971309839632,NA,0.012905497729623,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.0392634553983518,NA,NA
+"Decapod diet",NA,NA,NA,NA,0.0285095450632727,0.0282656573067263,NA,NA,NA,NA,NA,0.0256740776728788,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Crustacean diet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Chaetognath diet",NA,NA,NA,0.0365919649656353,0.0388112497025985,NA,NA,NA,NA,NA,NA,0.00891279645473538,0.00652502026896639,NA,0.00177633565151532,NA,NA,NA,NA,NA,NA,NA,0.0439181429730815,NA,NA,NA,0.0146657309041736,NA,0.0420963706743145
+"Ostracod diet",NA,NA,NA,NA,NA,NA,NA,NA,0.0466281529340079,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

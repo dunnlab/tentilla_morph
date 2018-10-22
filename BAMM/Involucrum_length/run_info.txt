@@ -1,19 +1,19 @@
 Command line: ./bamm -c BAMM_configuration.txt
 Git commit id: 462bc39af9d4c4b4dd81a481f32c953e93a076e7
-Random seed: 1534233265
-Start time: Tue Aug 14 09:54:25 2018
+Random seed: 1534408252
+Start time: Thu Aug 16 10:30:52 2018
 
 Current parameter settings:
        acceptanceInfoFileName    acceptance_info.txt
           acceptanceResetFreq    1000
                      autotune    0
                      betaInit    0.5
-                betaInitPrior    0.0427880361035688
+                betaInitPrior    0.087621851036136
             betaInitRootPrior    -1.0
       betaIsTimeVariablePrior    1
                   betaOutfile    beta_rates.txt
                 betaShiftInit    0
-               betaShiftPrior    1.17755556833766
+               betaShiftPrior    1.31334785120507
            betaShiftRootPrior    -1.0
          branchRatesWriteFreq    0
             chainSwapFileName    chain_swap.txt
@@ -58,8 +58,8 @@ fastSimulatePrior_Generations    5000000
                    swapPeriod    1000
                 traitPriorMax    0.0
                 traitPriorMin    0.0
-                    traitfile    coiledness.txt
-                     treefile    coiledness_tree.tre
+                    traitfile    Involucrum.length..um..txt
+                     treefile    Involucrum.length..um._tree.tre
           updateBetaInitScale    1
          updateBetaShiftScale    1
      updateEventLocationScale    0.05
@@ -78,5 +78,5 @@ updateRateEventNumberForBranch    0.0
 useObservedMinMaxAsTraitPriors    1
    validateEventConfiguration    0
    writeMeanBranchLengthTrees    0
-End time: Tue Aug 14 09:54:25 2018
+End time: Thu Aug 16 10:30:52 2018
 

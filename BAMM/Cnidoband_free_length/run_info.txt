@@ -1,7 +1,7 @@
 Command line: ./bamm -c BAMM_configuration.txt
 Git commit id: 462bc39af9d4c4b4dd81a481f32c953e93a076e7
-Random seed: 1534233265
-Start time: Tue Aug 14 09:54:25 2018
+Random seed: 1534153825
+Start time: Mon Aug 13 11:50:25 2018
 
 Current parameter settings:
        acceptanceInfoFileName    acceptance_info.txt
@@ -58,8 +58,8 @@ fastSimulatePrior_Generations    5000000
                    swapPeriod    1000
                 traitPriorMax    0.0
                 traitPriorMin    0.0
-                    traitfile    coiledness.txt
-                     treefile    coiledness_tree.tre
+                    traitfile    Cnidoband.free.length..um..txt
+                     treefile    Cnidoband.free.length..um._tree.tre
           updateBetaInitScale    1
          updateBetaShiftScale    1
      updateEventLocationScale    0.05
@@ -78,5 +78,5 @@ updateRateEventNumberForBranch    0.0
 useObservedMinMaxAsTraitPriors    1
    validateEventConfiguration    0
    writeMeanBranchLengthTrees    0
-End time: Tue Aug 14 09:54:25 2018
+End time: Mon Aug 13 11:50:25 2018
 

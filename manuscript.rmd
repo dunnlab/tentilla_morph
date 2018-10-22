@@ -50,6 +50,7 @@ library(BAMMtools)
 	
 	#Load raw data
   read.csv("byslide.csv") -> numbers
+  numbers$Species = as.character(numbers$Species)
   categorical <- read.csv("Homolog_Categorical.csv")[,-2]
   rownames(categorical) = categorical$Species
   
@@ -130,65 +131,93 @@ Alejandro Damian-Serrano^1^,^‡, Steven H.D. Haddock^2^, Casey W. Dunn^1^
 
 ## Abstract {-}
 
-Siphonophores have the most complex nematocyst batteries of all Cnidaria. These structures are held on the tentacles’ side branches called tentilla. Tentilla serve as the principal organs for prey capture, making siphonophores an ideal system for the study of trophic specialization from an evolutionary approach. Modern comparative methods have been applied to study the evolution of siphonophore zooid types, but not yet to the unique morphological diversity of siphonophore tentilla. The primary objectives of this work are to describe the morphology and morphometrics of siphonophore tentilla and nematocysts, and identify patterns in the evolutionary history of siphonophore cnidoband and nematocyst morphologies. A phylogeny with XX species was reconstructed using 18S and 16S gene markers, constraining the topology with a transcriptome-based backbone. Morphological characters were measured from DIC and confocal microscopy images of fixed tentacle specimens. Diet data was extracted from published sources. The functional implications of the different morphologies during prey capture were recorded using high speed video on live specimens under a stereoscopic microscope. Evolutionary transitions in siphonophore tentilla present a very low dimensionality with a single principal component. This main axis of variation aligns with total nematocyst volume per tentillum. Most nematocyst complement (cnidome) traits appear to have evolved under simple Brownian Motion (BM) and Early Burst (EB) processes, while tentillum shape and size evolution is better represented by Ohrnstein-Uhlenbeck (OU) models. Many tentillum and cnidome traits show stronger supports towards OU models when diet is reconstructed on the tree as selective regimes. Using phylogenetic GLS we identified traits with correlated evolutionary histories, some of which are functionally coupled during prey capture. Size and abundance of nematocysts were phylogenetic correlated with prey type ratios in the diet. These patterns could represent macroevolutionary adaptive responses to prey availability leading to predatory specialization. Understanding the evolution of the prey capture apparatus of siphonophores can help us test hypotheses about the evolution of their predatory habits.
+Siphonophores have the most complex nematocyst batteries of all Cnidaria. These structures are held on the tentacles’ side branches called tentilla. Tentilla serve as the principal organs for prey capture, making siphonophores an ideal system for the study of trophic specialization from an evolutionary approach. Modern comparative methods have been applied to study the evolution of siphonophore zooid types, but not yet to the unique morphological diversity of siphonophore tentilla. The primary objectives of this work are to describe the morphology and morphometrics of siphonophore tentilla and nematocysts, and identify patterns in the evolutionary history of siphonophore cnidoband and nematocyst morphologies. A phylogeny with 55 species was reconstructed using 18S and 16S gene markers, constraining the topology to be congruent with a transcriptome-based tree. Morphological characters were measured from DIC and confocal microscopy images of fixed tentacle specimens. Diet data was extracted from published sources. The functional implications of the different morphologies during prey capture were recorded using high speed video on live specimens under a stereoscopic microscope. Evolutionary transitions in siphonophore tentilla present a very low dimensionality with a single principal component. This main axis of variation aligns with total nematocyst volume per tentillum. Most nematocyst complement (cnidome) traits appear to have evolved under simple Brownian Motion (BM) and Early Burst (EB) processes, while tentillum shape and size evolution is better represented by Ohrnstein-Uhlenbeck (OU) models. Many tentillum and cnidome traits show stronger supports towards OU models when diet is reconstructed on the tree as selective regimes. Using phylogenetic GLS we identified traits with correlated evolutionary histories, some of which are functionally coupled during prey capture. Size and abundance of nematocysts were phylogenetic correlated with prey type ratios in the diet. These patterns could represent macroevolutionary adaptive responses to prey availability leading to predatory specialization. Understanding the evolution of the prey capture apparatus of siphonophores can help us test hypotheses about the evolution of their predatory habits.
 
 ## 1. Introduction {-}
 
-Siphonophores bear the most complex nematocyst batteries of all cnidarians, with up to 4 types of regionally differentiated nematocysts and a spring-release mechanism for fast discharge of the structure onto the prey. Not all siphonophores bear tentilla on their tentacles, exceptions include Apolemia spp. and Bathyphysa conifera. While Physalia physalis has been considered to have simple tentacles, it is likely that their button-like structures are homologous to reduced tentilla (Munro et al. 2018).
-Each gastrozooid bears a single tentacle. Each tentacle serially buds tentilla from the basal region (basigaster), which develop as they are displaced further with tentacle growth. During development, tentilla grow and change shape into their final configuration while mature nematocysts formed in the basigaster migrate through the tentacle epidermis into the tentillum. Nematocysts arriving into the developing tentillum then rearrange into their final position (Skaer 1991). Tentilla are a single-use ensnaring weapon which is ingested and digested together with the prey it attached to.
-The cnidoband and terminal filament bear all the active nematocysts. Cnidobands range in size from 40 microns to 8 cm, they can be coiled or straight, free hanging or enclosed in an involucrum (Mapstone 2014).
+Siphonophores are colonial planktonic predators present in all oceans of the world. 
+
+Siphonophores bear the most complex nematocyst batteries of all cnidarians, with up to 4 types of positionally and morphologically differentiated nematocysts, combined with a spring-release mechanism for fast discharge of the structure onto the prey. Not all siphonophores bear tentilla on their tentacles, exceptions include *Apolemia* spp. and *Bathyphysa conifera*. While *Physalia physalis* has been considered to have simple tentacles, it is likely that their button-like structures are homologous to reduced tentilla [@munro2018improved]. All tentilla are unilateral side branches of the tentacle, with epidermis, mesoglea, gastrodermis, and gastrovascular cavity.
+Each gastrozooid bears a single tentacle. Each tentacle serially buds tentilla from the basal region (basigaster), which develop as they are displaced further with tentacle growth. During development, tentilla grow and change shape into their final configuration while mature nematocysts formed in the basigaster migrate through the tentacle epidermis into the tentillum. Nematocysts arriving into the developing tentillum then rearrange into their final position [@skaer1991remodelling]. Tentilla are a single-use ensnaring weapon which is ingested and digested together with the prey it attached to.
+The cnidoband and terminal filament bear all the active nematocysts. Cnidobands range in size from 40 microns to 8 cm, they can be coiled or straight, free hanging or enclosed in an involucrum [@mapstone2014global].
+Most tentilla bear a pair of elastic strands (Totton cite) derived from the wall of the gastrovascular cavity.
+
+While zooid type evolution has been addressed in a phylogenetic framework, tentillum and nematocyst morphology has not. Since tentilla are used exclusively for prey capture, we expect their morphological diversity to have evolved in adaptive response to the evolution of different diets and prey type specializations. Earlier work by Purcell @[purcell1984functions] has shown clear associations between nematocyst morphology, size, and number with prey type and copepod prey length. However, this pioneer study did not take phylogenetic relationships into account beyond grouping species by taxonomic suborder, and eas limited to a few epipelagic species. 
 
 ## 2. Methods {-}
 
 ### 3.1 Phylogeny{-}
 
-Markers accessions
+For this phylogenetic analysis we included 55 siphonophore species and 6 outgroup cnidarian species (*Clytia hemisphaerica*, *Hydra circumcincta*, *Ectopleura dumortieri*, *Porpita porpita*, *Velella velella*, *Staurocladia wellingtoni*).
+The gene sequences used in this study are available online (accession numbers in Supp. Table XX). Some of these sequences were used in @[dunn2005molecular], others were sequenced by XYZ. Sequences were aligned using MAFFT.
 
-ML phylogeny was reconstructed from 16S and 18S ribosomal rRNA genes using iqtree(). 1000 bootstraps. 
-A minimal set of nodes were constrained to be consistent with the (Munro etal 2018) transcriptome phylogeny strict consensus tree.
+A Maximum Likelihood (ML) phylogeny (Figure XX) was reconstructed from 16S and 18S ribosomal rRNA genes using IQTree (Nguyen et al., 2015) with 1000 bootstraps. We used ModelFinder (Kalyaanamoorthy et al., 2017) implemented in IQTree v1.5.5. to assess relative model fit. ModelFinder selected GTR+R4 for having the lowest Bayesian Information Criterion score. A minimal set of 5 nodes were constrained to be consistent with the [@munro2018improved] transcriptome phylogeny strict consensus tree. In addition to the ML tree, we reconstructed a Bayesian tree with each marker as an independent partition in RevBayes. The same node constraints were applied, and the tree topology recovered was identical to the ML tree.
+To obtain ultrametric branch lengths for this topology, a Bayesian strict molecular clock time-tree was constructed in Rev Bayes, using a birth-death process constrained to be fully congruent with the topology recovered in the abovementioned analyses. Scripts availabe in Suppl. Mat. XX.
 
 ### 3.2 Microscopy{-}
 
+Speciemns from the Monterey Bay and Gulf of California were collected by remotely operated underwater vehicles (ROV) or by blue-water SCUBA divers.
+
 All specimens are accessioned in the Yale Peabody Museum Invertebrate Zoology Collection. Accession numbers and collection data for the specimens are available in Supplementary Table XXX. All specimens were preserved in ~4% buffered formalin in seawater.
 
-A total of 39 siphonophore species were selected based on availability and phylogenetic representativity criteria to capture intraspecific variation. Three to five specimens from each selected species were measured in order to account for intraspecific variation.
+A total of 39 siphonophore species were selected based on availability and phylogenetic representativity criteria to capture intraspecific variation. Three to five specimens from each selected species were measured in order to account for intraspecific variation. Adittionally, 30 species with only a single specimen were also measured and reported in this work, but their data will not be used in the statistical analyses downstream.
 
 Tentacles from the studied specimens were dissected, dehydrated in a series of ethanol dilutions (25% in PBS, 50% in PBS, 75% in water, 100%), cleared in methyl salicylate or d-limonene, and mounted in plastic slides (Canada balsam, Cytoseal, or Permount). Slides were imaged using laser scanning confocal microscopy and differential interference contrast (DIC) microscopy. Images were measured using Fiji-ImageJ.
 
 The characters measured for this study are described in Supplementary Table SXX. Homology assumptions for nematocyst supertypes (heteroneme, haploneme, rhopaloneme, and desmoneme) and tentillum structures (involucrum, elastic strand, pedicle, cnidoband) were informed by positional, developmental, and morphological criteria.
 
-Diet data from Purcell 1981, Purcell 1984.
-
-Microscopy ...
+Diet data for epipelagic siphonophroes was compiled from published studies on visual gut content recognition @[purcell1981dietary], @[purcell1984functions]. Presence of taxonomic groups in the diet as well as percent individual composition was retrieved from these sources. For deep dwelling species, MBARI VARS observations were used to score presence of prey taxonomic groups in annotated predation events with different siphonophore species.
 
 ### 3.3 Phylogenetic Comparative Methods{-}
 
-All phylogenetic statistical analyses were carried out in the programming environment R (cite). Phylogenetic signal in each of the measured characters was calculated using Blomberg’s K (Blomberg 2003). 
+All phylogenetic statistical analyses were carried out in the programming environment R (cite), using the species tree, and incorporating intraspecific variation estimated from the specimen data. Phylogenetic signal in each of the measured characters was calculated using Blomberg’s K (Blomberg 2003). The phylogenetic signal of multivariate character sets was calculated using the package geomorph (Adams cite).
 
-fitContinuous (geiger), BM, EB, OU.
-Adams geomorph
-phytools ppca, pgls, phyl.anova
+Ancestral states were reconstructed using ML for continuous characters (anc.ML phytools), and stochastic character mapping (make.simmap) for categorical characters.
+
+Different models generating the observed data distribution given the phylogeny were fitted for each continuous character using the function fitContinuous (package geiger cite). The models compared were the white noise (WN) (non-phylogenetic), the Brownian Motion (BM) model of neutral divergent evolution (cite), the Early Burst (EB) model of decreasing rate of evolutionary change (cite), and the Ohnstein-Uhlenbeck (OU) model of stabilizing selection around a fitted optimum state (cite). Models were ranked in order of increasing parametric complexity (WN,BM,EB,OU). Corrected Akaika Information Criterion support scores (AICc, cite) were compared to the lowest (best) score, and a cutoff of 2 units was used to determine significantly better support. If the best fitting model is not significantly better than a less complex alternative, the least complex model is selected. The models selected for each character were evaluated in terms of model adequacy using the package arbutus (cite). Multivariate BM and OU models were also evaluated using the package mvSLOUCH (cite).
+
+In order to explore the correlational structure among continuous characters and among their evolutionary histories, we used principal component analyses (PCA) and phylogenetic PCA (phytools ppca cite). In addition, we obtained the correlations between the phylogenetic independent contratsts (Felsenstein cite) using the package rphylip (cite). We modeled the relationship between correlated characters using phylogenetic leats squares regression (PGLS) in the package phytools (Revell..cite). Evolutionary relationships between continuous and categorical characters were assessed using phylogenetic ANOVAs (phyl.anova phytools) and phylogenetic generalized linear mixed models (PGLMM).
 
 ### 3.4 High-Speed Video
 
-High speed footage (1000-3000 fps) of tentillum and nematocyst discharge was recorded on live siphonophore specimens using a Phantom Miro 320S camera mounted on a stereoscopic microscope. Specimens were collected by SCUBA divers and the remotely operated underwater vehicle Doc Ricketts during expeditions onboard the R/V Western Flyer. Tentillum and nematocyst discharge were elicited mechanically using a fine metallic pin. Video footage was analyzed using Phantom PCC software.
+High speed footage (1000-3000 fps) of tentillum and nematocyst discharge was recorded on live siphonophore specimens using a Phantom Miro 320S camera mounted on a stereoscopic microscope. Specimens were collected by SCUBA divers and the remotely operated underwater vehicle Doc Ricketts during expeditions onboard the R/V Western Flyer. Tentillum and nematocyst discharge were elicited mechanically using a fine metallic pin. Video footage was analyzed using Phantom PCC software. 
+
+Total cnidoband discharge time (ms), average cnidoband discharge speed (mm/s), maximum cnidoband discharge speed (mm/s), heteroneme discharge speed (mm/s), haploneme discharge speed (mm/s), heteroneme shaft discharge speed (mm/s), and heteroneme filament length (microns) were measured when possible for 10 species.
 
 ## 3. Results {-}
 
 0 -- PHYLOGENY
 0.0 ML ribosomal marker phylogeny constrained by transcriptome tree with BS values at the nodes.
+
+The topology of this tree is congruent with the results from @[dunn2005molecular]. In addition, we found *Erenna* and *Stephanomia* as sister genera in a monophyletic group.
+
 1 -- DESCRIPTIVE MORPHOLOGY AND EVOLUTIONARY HISTORY
+
+1.05 Plate with all the tentillum diversity.
+
+1.1 Table showing each character’s (illustrating the character per row)  the phylogenetic signal K with the p-value obtained by testing against 1000 simulated permutations, and the number of species included.
+
+Principal component analyses were carried out separately on raw log-transformed measurements and compound morphometric characters (such as volumes and ratios).
+PC1 (aligned with tentillum size and nematocyst shape) explains ~64% of the variation in the tentillum morphospace, whereas PC2 (aligned with nematocyst size characters) explained ~18%.
+
+Controlling for phylogenetic expected covariance, ~88% of the evolutionary variation is explained by shifts in size, exhibiting a low effective dimensionality. 
+
+The calycophoran morphospace is quite distinct from that of other siphonophores. A non-calycophoran (Frillagalma vityazi), has secondarily “invaded” this morphospace, which could indicate a case of convergence. 
+Most characters present a moderate yet significant phylogenetic signal, and predominantly support BM models, indicating a history of neutral constant divergence. Total nematocyst volume and cnidoband-to-heteroneme length ratio showed strongly conserved phylogenetic signals. These characters may be useful for taxonomic purposes.
+Bayesian Analysis of Macroevolutionary Mixtures [] identified evolutionary rate regime shifts in the branches leading to the euphysonects, to clade B, and to Cordagalma for several characters. These shifts could be associated with adaptive responses to dietary change.
 
 ```{r load_tree, include=F}
 #Load tree
 #consensus = ape::read.tree("concatenate.fasta.contree")
 #consensus = read.nexus("gene_map_ct.tre")
-consensus = read.nexus("TimeTree_CT_perfect.tre") %>% drop.tip(56:61)
+consensus = read.nexus("TimeTree_CT_truerho.tre") %>% drop.tip(56:61)
 #consensus = reroot(consensus,103)
 #consensus = reroot(consensus,97)
 #consensus = drop.tip(consensus, c(28,29,30,59:61))
 #consensus = drop.tip(consensus, c(56:61))
 consensus$tip.label = str_replace_all(consensus$tip.label,"_"," ")
+#Switch nanomia_bijuga for sp
+consensus$tip.label[which(consensus$tip.label == "Nanomia bijuga")] <- "Nanomia sp"
 
 #Prune quant matrix to tree species
 matrix = castnumbers[which(!is.na(castnumbers$Species)),]
@@ -215,9 +244,6 @@ nodatatips = c(1:length(consensus$tip.label))[which(consensus$tip.label %in% nod
 prunedtree = drop.tip(consensus, nodatatips)
 prunedtree$tip.label
 plot(prunedtree)
-
-#Switch nanomia_bijuga for sp
-prunedtree$tip.label[which(prunedtree$tip.label == "Nanomia bijuga")] <- "Nanomia sp"
 
 #ultram = chronos(prunedtree)
 ultram = prunedtree
@@ -289,8 +315,7 @@ names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
 #write.csv(morphdata, "characterdata.csv")
 ```
 
-1.05 Plate with all the tentillum diversity.
-1.1 Table showing each character’s (illustrating the character per row)  the phylogenetic signal K with the p-value obtained by testing against 1000 simulated permutations, and the number of species included.
+
 ```{r phylosignals}
 phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmean_logs[,-1])))
 #phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmeans[,-1])))
@@ -532,7 +557,6 @@ densityMap(haplotype_sim)
 ```
 
 
-
 2 -- COMPARATIVE ANALYSES
 2.0 Confusion matrix table showing PIC_correlations and trait correlation R2 and p-values for each pair of continuous characters.
 
@@ -560,24 +584,51 @@ PICOLS = combicorr
 PICOLS[upper.tri(PICOLS)]=cor(C)[upper.tri(cor(C))]
 corrplot(PICOLS, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs regular correlations
 
-```
+#Change directionalities
+changes = matrix(ncol=ncol(sharedmean_logs)-1, nrow=nrow(ultram$edge))
+for(ch in 2:ncol(sharedmean_logs)){
+  X=as.numeric(sharedmean_logs[,ch])
+  names(X) = sharedmean_logs$Species
+  X=X[!is.na(X)]
+  treeI = drop.tip(ultram,which(!(ultram$tip.label %in% names(X))))
+  class(treeI) = "phylo"
+  #changes = c()
+  tips = X
+  names(tips)=match(names(X), treeI$tip.label)
+  faX = c(anc.ML(treeI,X)$ace,tips)
+  edges = treeI$edge
+  for(i in 1:nrow(edges)){
+    node_old = edges[i,1]
+    node_new = edges[i,2]
+    (faX[which(names(faX) == node_new)] - faX[which(names(faX) == node_old)])-> changes[i,ch-1]
+  }
+  #hist(changes)
+  #abline(v=0,col="red")
+}
 
+```
 
 
 2.1 Table showing the model parameters for each significant regression.
 
 
 2.3 Verbally PCA and phylogenetic PCA/PICVarA_PCA of the characters. Phylomorphospace superimposed to the tip coordinates in PC1--PC2.
+
+
 ```{r PCA}
 par(mar=rep(3,4), mfrow=c(1,1))
-raw_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(1:2,4:20)]
+raw_matrix = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[which(!is.na(rowSums(.))),]
+raw_matrix_notf = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[,c(1:7,12:17)] %>% .[which(!is.na(rowSums(.))),]
+
 compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:30)]
 raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix))))
+#raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix_notf))))
 compound_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(compound_matrix))))
 
 #Regular PCA on means log
   ##Raw characters
-PCA(raw_matrix) -> Pca_raw
+#PCA(raw_matrix) -> Pca_raw
+PCA(raw_matrix_notf) -> Pca_raw
 Pca_raw %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
 Pca_raw %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
 Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
@@ -603,9 +654,36 @@ PPCA_compound = phyl.pca(compound_tree, compound_matrix)
 PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_raw)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
 PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_compound)$importance[2,2]*100,3),"%"), cex = .6, expand =0.4)
 phylomorphospace(raw_tree, PPCA_raw$S)
+
+#Plot mirror trees QUANT
+X = sharedmean_logs$coiledness
+names(X) = sharedmean_logs$Species
+X = X[!is.nan(X)]
+Y = sharedmean_logs$Involucrum.length..um.
+names(Y) = sharedmean_logs$Species
+Y = Y[!is.nan(Y)]
+Y = Y[which(names(Y) %in% names(X))]
+X = X[which(names(X) %in% names(Y))]
+XYtree = drop.tip(ultram, which(!(ultram$tip.label %in% names(X))))
+class(XYtree) = "phylo"
+layout(matrix(1:3,1,3),widths=c(0.44,0.12,0.44))
+par(cex=0.5)
+#pdf("deliverables/Hvol_copepod.pdf",width=10,height=6)
+OX = contMap(XYtree,X,sig=1,legend=1, plot = F, outline = F)
+OX$cols[1:length(OX$cols)] = colorRampPalette(c("yellow","purple"), space="Lab")(length(OX$cols))
+plot(OX,ftype="off")
+ylim<-c(1-0.12*(length(XYtree$tip.label)-1),length(XYtree$tip.label))
+plot.new(); plot.window(xlim=c(-0.1,0.1),ylim=ylim)
+text(rep(0,length(XYtree$tip.label)), 1:length(XYtree$tip.label),XYtree$tip.label)
+OY = contMap(XYtree,Y, sig=1,legend=1, plot = F,  outline = F)
+OY$cols[1:length(OY$cols)] = colorRampPalette(c("green","red"), space="Lab")(length(OY$cols))
+plot(OY, direction="leftwards", ftype = "off")
+
 ```
 
-2.4 Table showing normalized rates of evolution for each character BAMM.
+2.4 Table showing BAMM-analyzed number of regime shifts in the rates of evolution of each character.
+
+
 
 ```{r BAMM}
 traitlist = list()
@@ -627,8 +705,34 @@ for(i in 2:length(traitlist)){
   write.table(traitlist[[i]],file = paste("BAMM/",names(traitlist[[i]])[2], ".txt", sep=""), sep="\t", col.names = F, row.names = F, quote = F)
 }
 
+#PGLS with other data
+BAMMtree <- read.tree("BAMM/Cnidoband.free.length..um._tree.tre")
+# ESS after 20% burnin
+mcmcout <- read.csv("BAMM/Cnidoband_free_length/mcmc_out.txt")
+burnstart <- floor(0.2*nrow(mcmcout))
+postburn <- mcmcout[burnstart:nrow(mcmcout), ]
+effectiveSize(postburn$N_shifts)
+effectiveSize(postburn$logLik)
+
+# load BAMM main output
+edata <- getEventData(BAMMtree, eventdata = "BAMM/Cnidoband_free_length/event_data.txt", burnin=0.2, type="trait")
+summary(edata)
+
+regimes = edata$tipStates[[3]] %>% .[which(str_replace_all(BAMMtree$tip.label,"_", " ") %in% dprunedTree$tip.label)]
+names(regimes) = edata$tip.label[which(str_replace_all(BAMMtree$tip.label,"_", " ") %in% dprunedTree$tip.label)] %>% str_replace_all("_", " ")
+for(prey in 1:ncol(diet)){
+  print(names(diet)[prey])
+  food=diet[,prey]
+  names(food) = rownames(diet)
+  food = food[which(names(food)%in%names(regimes))]
+  food = food[match(names(regimes), names(food))]
+  if(length(unique(food))>1){
+    pgls.SEy(food~regimes,data=data.frame(food,regimes), tree=dprunedTree, se= rep(0, length(food)))
+  }}
+
 ```
 
+Out of 29 characters, 11 did  not significantly (delta AICc > 2) support a phylogenetic model. From the remaining 18, Brownian Motion was supported for 17 of them. Only haploneme nematocyst length had uniequivocal support for Early Burst.
 
 3 -- RELATIONSHIPS WITH DIET / FUNCTION / Hypothesis testing
 
@@ -636,6 +740,8 @@ for(i in 2:length(traitlist)){
 #Retrieve diet info from literature BINARY
 GC = read.csv("Cmerged.csv", header = T, sep=',')[,c(2,4,5)] %>% .[which(grepl("diet",.$character) & .$state==1),]
 GC$character = factor(GC$character, levels=unique(GC$character))
+GC$species = as.character(GC$species)
+GC$species[which(GC$species == "Nanomia bijuga")] <- "Nanomia sp"
 GC = GC[which(GC$species %in% sharedmeans$Species),]
 GC = split(GC,GC$character)
 nrowGC = purrr::map(GC,nrow) %>% as.numeric()
@@ -655,7 +761,10 @@ diet = diet[which(rowSums(diet)>0),which(colSums(diet)<nrow(diet))]
 cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0),4),nrow=9, ncol = 4) %>% t() %>% as.data.frame()
 names(cladeB) = names(diet)
 rownames(cladeB) = c("Erenna richardi", "Erenna laciniata", "Erenna sirena", "Stephanomia amphytridis")
-diet = rbind(diet, cladeB)
+krilleaters = matrix(rep(c(0,0,0,0,0,1,1,0,0),2),nrow=9, ncol = 2) %>% t() %>% as.data.frame()
+names(krilleaters) = names(diet)
+rownames(krilleaters) = c("Praya dubia", "Resomia ornicephala")
+diet = rbind(diet, cladeB, krilleaters)
 #rownames(diet)[12] = 'Erenna richardi'
 dprunedmatrix = sharedmeans[which(sharedmeans$Species%in%rownames(diet)),]
 dprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(diet)),]
@@ -666,6 +775,8 @@ plot(dprunedTree)
 quantDiet = read.csv("Qmerged.csv", header = T, sep=',')[,c(2,4,6)]
 PP = quantDiet[which(grepl("Relative",quantDiet$character)),]
 PP$character = factor(PP$character, levels=unique(PP$character))
+PP$species = as.character(PP$species)
+PP$species[which(PP$species == "Nanomia bijuga")] <- "Nanomia sp"
 PP = PP[which(PP$species %in% sharedmeans$Species),]
 PP = dcast(PP, species~character, value.var = "state", mean)
 PP[is.na(PP)]<-0
@@ -689,7 +800,7 @@ names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
 
 ```{r diet_regime_tree}
 regimetree = dprunedTree
-hypdiet = c("Mixed", "Copepod", "Crustacean", "Copepod", "Ostracod",  "Mixed", "Mixed", "Mixed", "Copepod", "Fish", "Fish", "Fish", "Fish", "Fish", "Fish")
+hypdiet = c("Mixed", "Copepod", "Crustacean", "Copepod", "Crustacean", "Crustacean", "Mixed", "Mixed", "Crustacean", "Mixed", "Copepod", "Crustacean", "Fish", "Fish", "Fish", "Fish", "Fish", "Fish")
 names(hypdiet) = regimetree$tip.label
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
@@ -703,8 +814,9 @@ plotTree(regimetree)
 nodelabels(text=regimetree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);tiplabels(text=hypdiet, frame="none", cex=0.6, adj=c(0,2))
 ```
 
-
 3.1 Table showing quantitative and categorical characters association effect size with each prey type in the diet.
+
+Nematocyst morphology appears to be associated to prey type presence in diet. Phylogenetic regression with frequencies of prey types (in 8 species) revealed that decapod larvae consumption is associated to many traits, while fish larvae specialization is only associated to more rounded nematocyst shapes with stubbier shafts, and copepod specialization is mainly associated to fewer nematocyst and thinner tentacles. Transitions to fish and copepod specialization correlate with regime shifts in the rates for those characters (detected with BAMM).
 
 ```{r prey-character-assoc}
 #Phylogenetic ANOVAS with prey type presence
@@ -721,7 +833,9 @@ for(prey in 1:ncol(diet)){
     CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
     treeIJ = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(CH_I))))
     if(length(unique(CH_I))>1 & length(unique(CH_J))>1){
-    phylANOVA(treeIJ,x=CH_J,y=CH_I) %>% .$Pf -> pANOVAs_diet[prey,char]
+    #phylANOVA(treeIJ,x=CH_J,y=CH_I) %>% .$Pf -> pANOVAs_diet[prey,char]
+       #phylANOVA(treeIJ,x=CH_J,y=CH_I) %>% .$Pf -> pANOVAs_diet[prey,char]
+    gls(CH_I ~ CH_J, correlation =  corBrownian(phy = treeIJ), data = as.data.frame(cbind(CH_I,CH_J)), method = "ML") %>% summary() %>% .$tTable %>% as.data.frame() %>% .$p %>% .[2] -> pANOVAs_diet[prey,char]
   }
   }}
 pANOVAs_diet = pANOVAs_diet[,-1]
@@ -734,8 +848,8 @@ pGLS_sign = pGLSp_diet
 colnames(pGLSp_diet) = names(PP)
 row.names(pGLSp_diet) = names(Pprunedmatrix_logs[,-1])
 pGLS_sign = pGLSp_diet
-for(i in 1:ncol(Pprunedmatrix_logs[,-1])){
-  CH_I=as.numeric(Pprunedmatrix_logs[,i+1])
+for(i in 2:ncol(Pprunedmatrix_logs)){
+  CH_I=as.numeric(Pprunedmatrix_logs[,i])
   names(CH_I) = Pprunedmatrix_logs$Species
   CH_I = CH_I[!is.na(CH_I)]
   for(j in 1:ncol(PP)){
@@ -744,23 +858,88 @@ for(i in 1:ncol(Pprunedmatrix_logs[,-1])){
     CH_J = CH_J[!is.na(CH_J)]
     CH_I = CH_I[which(names(CH_I) %in% names(CH_J))]
     CH_J = CH_J[which(names(CH_J) %in% names(CH_I))]
+    SE_I = castSE_logs[which(castSE$Species %in% names(CH_I)),i]
+    names(SE_I) = castSE_logs[which(castSE$Species %in% names(CH_I)),1]
+    SE_I = SE_I[match(names(CH_I), names(SE_I))]
     pgls_tree = drop.tip(Pprunedtree, which(!(Pprunedtree$tip.label %in% names(CH_I))))
     pg_data = as.data.frame(cbind(CH_I,CH_J)) %>% .[which(!is.na(rowSums(.))),]
-    TTABLE <- gls(CH_I ~ CH_J, correlation =  corBrownian(phy = pgls_tree), data = pg_data, method = "ML") %>% summary() %>% .$tTable %>% as.data.frame()
-    TTABLE %>% .$p %>% .[2] -> pGLSp_diet[i,j]
-    if(pGLSp_diet[i,j]<0.05){
-      print(paste(rownames(pGLSp_diet)[i],colnames(pGLSp_diet)[j],pGLSp_diet[(i),(j)],sep=" "))
-      ValueIJ = TTABLE %>% .$Value %>% .[2]
-      if(ValueIJ>0){pGLS_sign[i,j] = "+"}
+    pgls.SEy(CH_I~CH_J, data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE
+    pgls.SEy(CH_I~sample(CH_J, length(CH_J)), data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE_null
+    #TTABLE <- gls(CH_I ~ CH_J, correlation =  corBrownian(phy = pgls_tree), data = pg_data, method = "ML") %>% summary() %>% .$tTable %>% as.data.frame()
+    LikRat <- 2*(TTABLE$logLik[1] - TTABLE_null$logLik[1])
+    pchisq(LikRat, df=1, lower.tail = F) -> pGLSp_diet[i-1,j]
+    if(pGLSp_diet[i-1,j]<0.05){
+     print(paste(rownames(pGLSp_diet)[i-1],colnames(pGLSp_diet)[j],pGLSp_diet[(i-1),(j)],sep=" "))
+     ValueIJ = TTABLE %>% .$coefficients %>% .[2]
+     if(ValueIJ>0){pGLS_sign[i-1,j] = "+"}
       else pGLS_sign[i,j] = "-"
-    }}}
-write.csv(pGLSp_diet, "PGLS_Pval_DietPP.csv")
+   }
+  }
+}
+#write.csv(pGLSp_diet, "PGLS_Pval_DietPP.csv")
 pGLS_sign <- pGLS_sign[which(rowSums(is.na(pGLS_sign))!=ncol(pGLS_sign)),which(colSums(is.na(pGLS_sign))!=nrow(pGLS_sign))]
 write.csv(pGLS_sign, "PGLS_SIGN_DietPP.csv")
 
+dprunedmatrix[,c(2:3,5:21)] -> dprunedraw
+rownames(dprunedraw) = dprunedmatrix$Species
+dprunedraw %>% .[which(!is.na(rowSums(.))),] %>% PCA() -> dprunedPCA
+CH_I = dprunedPCA$ind$coord[,1]
+for(prey in 1:ncol(diet)){
+  CH_J=diet[,prey]
+  names(CH_J) = rownames(diet)
+  CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+  treeIJ = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(CH_I))))
+  if(length(unique(CH_I))>1 & length(unique(CH_J))>1){
+    print(names(diet)[prey])
+    #phylANOVA(treeIJ,x=CH_J,y=CH_I) %>% .$Pf -> pANOVAs_diet[prey,char]
+    phylANOVA(treeIJ,x=CH_J,y=CH_I) %>% .$Pf %>% print()
+  #gls(CH_I ~ CH_J, correlation =  corBrownian(phy = treeIJ), data = as.data.frame(cbind(CH_I,CH_J)), method = "ML") %>% summary() %>% .$tTable %>% as.data.frame() %>% .$p %>% .[2]  %>% print()
+  }
+  }
+
+#Plot mirror trees QUANT
+X = dprunedmatrix_logs$Haploneme.free.length..um.
+names(X) = dprunedmatrix_logs$Species
+Y = diet$`Decapod diet`
+names(Y) = rownames(diet)
+Y = Y[which(names(Y) %in% names(X))]
+treeXY = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(X))))
+layout(matrix(1:3,1,3),widths=c(0.44,0.12,0.44))
+par(cex=0.5)
+#pdf("deliverables/Hvol_copepod.pdf",width=10,height=6)
+OX = contMap(treeXY,X,sig=1,legend=1, plot = F, outline = F)
+OX$cols[1:length(OX$cols)] = colorRampPalette(c("blue","red"), space="Lab")(length(OX$cols))
+plot(OX,ftype="off")
+ylim<-c(1-0.12*(length(treeXY$tip.label)-1),length(treeXY$tip.label))
+plot.new(); plot.window(xlim=c(-0.1,0.1),ylim=ylim)
+text(rep(0,length(treeXY$tip.label)), 1:length(treeXY$tip.label),treeXY$tip.label)
+OY = contMap(treeXY,Y, sig=1,legend=1, plot = F,  outline = F)
+OY$cols[1:length(OY$cols)] = colorRampPalette(c("orange","green"), space="Lab")(length(OY$cols))
+plot(OY, direction="leftwards", ftype = "off")
+
+X = Pprunedmatrix_logs$Heteroneme.volume..um3.
+names(X) = Pprunedmatrix_logs$Species
+Y = PP$`Relative decapod consumption`
+names(Y) = rownames(PP)
+layout(matrix(1:3,1,3),widths=c(0.44,0.12,0.44))
+par(cex=0.5)
+#pdf("deliverables/Hvol_copepod.pdf",width=10,height=6)
+OX = contMap(Pprunedtree,X,sig=1,legend=1, plot = F, outline = F)
+OX$cols[1:length(OX$cols)] = colorRampPalette(c("blue","red"), space="Lab")(length(OX$cols))
+plot(OX,ftype="off")
+ylim<-c(1-0.12*(length(Pprunedtree$tip.label)-1),length(Pprunedtree$tip.label))
+plot.new(); plot.window(xlim=c(-0.1,0.1),ylim=ylim)
+text(rep(0,length(Pprunedtree$tip.label)), 1:length(Pprunedtree$tip.label),Pprunedtree$tip.label)
+OY = contMap(Pprunedtree,Y, sig=1,legend=1, plot = F,  outline = F)
+OY$cols[1:length(OY$cols)] = colorRampPalette(c("orange","green"), space="Lab")(length(OY$cols))
+plot(OY, direction="leftwards", ftype = "off")
+
+
 ```
 
-3.2 Table showing the dAICc of OU model fitting versus white_noise and BM using reconstructed diets as regimes in a 16spp tree. Evaluate model adequacy of OU fits.
+3.2 Table showing the dAICc of OU model fitting versus white_noise and BM using reconstructed diets as regimes in a 16 spp tree. Evaluate model adequacy of OU fits.
+
+When I mapped trait evolution onto a diet SIMMAP regime tree, OU models using the reconstructed states as regimes fitted significantly better (dAICc>2) than BM (null models) for cnidoband coiledness, heteroneme shaft shape, haploneme length, haploneme row number, desmoneme length, and desmoneme width.
 
 ```{r OUwie}
 OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=nrow(dprunedmatrix_logs)))
@@ -783,19 +962,39 @@ for(c in 2:ncol(dprunedmatrix_logs)){
   OUwie_matrix[c-1,4] = OU$AICc - min(c(BM$AICc, OU$AICc))
 }
 OUwie_matrix[,3:4] <- apply(OUwie_matrix[,3:4], 2, round3)
-#write.csv(OUwie_matrix, "OU_diet_test.csv")
+write.csv(OUwie_matrix, "OU_diet_test.csv")
+
 ```
 
 3.3 Interpret qualitatively the kinematic implications (high speed video) of the different regions of the morphospace.
 
-Story: low dimensionality, cost-driven, dynamic specialization
+High-speed video of cnidoband and nematocyst discharge revealed the roles of the different tentillum substructures in the mechanics of discharge. Moreover, it shows important differences int he discharge dynamics of species with different tentillum morphologies.
+
+Videos have shown the double role of the elastic strands in initiating and controlling cnidoband discharge. A few milliseconds before cnidoband discharge, the distal attachment of the cnidoband (at the base of the terminal filament) appears to unwind to the point of a tension-release threshold. This observation indicates there might be spring mechanism driving the discharge process. 
+
+Euphysonect tentilla discharge considerably faster than Calycophoran tentilla. Larger heteronemes discharge faster than small ones, giving Euphysonects a faster heteroneme discharge speed than most calycophorans. On the contrary, Calycophoran haploneme tubules fire faster than those of Euphysonects.
+
+The more extreme the coiledness index, the more unpredictable the trajectory of the cnidoband during discharge.
+
+Story: low dimensionality, cost-reward-driven, dynamic specialization.
 
 ## 4. Discussion
 
+A particularly interesting case is that of *Cordagalma ordinatum*, a specialized copepod eater @[purcell1981dietary], which is sister to the generalist genus *Forskalia*. Cordagalma’s tentilla strongly resemble the larval (protozooid exclusive) tentilla of Forskalia spp. This could indicate a case of paedomorphosis as a pathway to predatory specialization.
+
+The calycophoran morphospace is quite distinct from that of other siphonophores, revealing a potential reaction line in the 2 PCs (Figure XX). A non-calycophoran (*Frillagalma vityazi*), has secondarily occupied this morphospace, which could indicate a case of convergence.
+
+The new phylogeny delivered by this chapter will become a fundamental resource for subsequent studies of siphonophore evolution.  In addition, a broad and detailed characterization of tentilla morphology and its phylogenetic distribution provide complementary tools for taxonomy, identification, and morphological delimitation. 
+
+
 ## 5. Conclusions
+
+The genera *Erenna* and *Stephanomia* form a monophyletic clade characterized by bearing extremely large tentilla. 
+
+
 
 ## Acknowledgements
 
-This work was funded by the Society of Systematic Biologists Graduate Student Award, the NSF Waterman Award, and the Yale Institute of Biospheric Studies Doctoral Pilot Grant. ADS was supported by a Fulbright Spain scholarship. We thank Philip R. Pugh for his assistance in the identification of specimens. We also wish to thank the crew of the R/V Western Flyer.
+This work was funded by the Society of Systematic Biologists Graduate Student Award, the NSF Waterman Award,  the Yale Institute of Biospheric Studies Doctoral Pilot Grant, and the NSF Collaborative Research project SiphWeb. ADS was supported by a Fulbright Spain scholarship. We thank Dr. Philip R. Pugh for his assistance in the identification of specimens. We also wish to thank the crew of the R/V Western Flyer.
 
 ## References
