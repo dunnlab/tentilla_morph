@@ -139,44 +139,44 @@ Siphonophores are colonial planktonic predators present in all oceans of the wor
 
 Siphonophores bear the most complex nematocyst batteries of all cnidarians, with up to 4 types of positionally and morphologically differentiated nematocysts, combined with a spring-release mechanism for fast discharge of the structure onto the prey. Not all siphonophores bear tentilla on their tentacles, exceptions include *Apolemia* spp. and *Bathyphysa conifera*. While *Physalia physalis* has been considered to have simple tentacles, it is likely that their button-like structures are homologous to reduced tentilla [@munro2018improved]. All tentilla are unilateral side branches of the tentacle, with epidermis, mesoglea, gastrodermis, and gastrovascular cavity.
 Each gastrozooid bears a single tentacle. Each tentacle serially buds tentilla from the basal region (basigaster), which develop as they are displaced further with tentacle growth. During development, tentilla grow and change shape into their final configuration while mature nematocysts formed in the basigaster migrate through the tentacle epidermis into the tentillum. Nematocysts arriving into the developing tentillum then rearrange into their final position [@skaer1991remodelling]. Tentilla are a single-use ensnaring weapon which is ingested and digested together with the prey it attached to.
-The cnidoband and terminal filament bear all the active nematocysts. Cnidobands range in size from 40 microns to 8 cm, they can be coiled or straight, free hanging or enclosed in an involucrum [@mapstone2014global].
-Most tentilla bear a pair of elastic strands (Totton cite) derived from the wall of the gastrovascular cavity.
+The cnidoband and terminal filament bear all the active nematocysts. Cnidobands range in size from 40 microns to 8 cm, they can be coiled or straight, free hanging or enclosed in an involucrum [@mapstone2014global]. Cnidobands always carry haploneme nematocysts, which can be isorhizas or anisorhizas. In additon, many species' cnidoband can carry a row of heteroneme nematocysts along each side. These heteroneme nematocyst can be stenoteles, microbasic mastigophores, euryteles, or birhopaloids.
+In codonophorans, tentilla bear a pair of elastic strands [@totton1965synopsis] derived from the wall of the gastrovascular cavity.
 
-While zooid type evolution has been addressed in a phylogenetic framework, tentillum and nematocyst morphology has not. Since tentilla are used exclusively for prey capture, we expect their morphological diversity to have evolved in adaptive response to the evolution of different diets and prey type specializations. Earlier work by Purcell @[purcell1984functions] has shown clear associations between nematocyst morphology, size, and number with prey type and copepod prey length. However, this pioneer study did not take phylogenetic relationships into account beyond grouping species by taxonomic suborder, and eas limited to a few epipelagic species. 
+While zooid type evolution has been addressed in a phylogenetic framework, tentillum and nematocyst morphology has not. Since tentilla are used exclusively for prey capture, we expect their morphological diversity to have evolved in adaptive response to the evolution of different diets and prey type specializations. Earlier work by Purcell [@purcell1984functions] has shown clear associations between nematocyst morphology, size, and number with prey type and copepod prey length. However, this pioneer study did not take phylogenetic relationships into account beyond grouping species by taxonomic suborder, and eas limited to a few epipelagic species. 
 
 ## 2. Methods {-}
 
 ### 3.1 Phylogeny{-}
 
 For this phylogenetic analysis we included 55 siphonophore species and 6 outgroup cnidarian species (*Clytia hemisphaerica*, *Hydra circumcincta*, *Ectopleura dumortieri*, *Porpita porpita*, *Velella velella*, *Staurocladia wellingtoni*).
-The gene sequences used in this study are available online (accession numbers in Supp. Table XX). Some of these sequences were used in @[dunn2005molecular], others were sequenced by XYZ. Sequences were aligned using MAFFT.
+The gene sequences used in this study are available online (accession numbers in Supp. Table XX). Some of these sequences were used in [@dunn2005molecular], others were sequenced by XYZ. Sequences were aligned using MAFFT.
 
 A Maximum Likelihood (ML) phylogeny (Figure XX) was reconstructed from 16S and 18S ribosomal rRNA genes using IQTree (Nguyen et al., 2015) with 1000 bootstraps. We used ModelFinder (Kalyaanamoorthy et al., 2017) implemented in IQTree v1.5.5. to assess relative model fit. ModelFinder selected GTR+R4 for having the lowest Bayesian Information Criterion score. A minimal set of 5 nodes were constrained to be consistent with the [@munro2018improved] transcriptome phylogeny strict consensus tree. In addition to the ML tree, we reconstructed a Bayesian tree with each marker as an independent partition in RevBayes. The same node constraints were applied, and the tree topology recovered was identical to the ML tree.
 To obtain ultrametric branch lengths for this topology, a Bayesian strict molecular clock time-tree was constructed in Rev Bayes, using a birth-death process constrained to be fully congruent with the topology recovered in the abovementioned analyses. Scripts availabe in Suppl. Mat. XX.
 
 ### 3.2 Microscopy{-}
 
-Speciemns from the Monterey Bay and Gulf of California were collected by remotely operated underwater vehicles (ROV) or by blue-water SCUBA divers.
+Speciemns from the Monterey Bay and Gulf of California were collected by remotely operated underwater vehicles (ROV) or by blue-water SCUBA divers, following the protocols established in [@haddock2005scientific].
 
 All specimens are accessioned in the Yale Peabody Museum Invertebrate Zoology Collection. Accession numbers and collection data for the specimens are available in Supplementary Table XXX. All specimens were preserved in ~4% buffered formalin in seawater.
 
 A total of 39 siphonophore species were selected based on availability and phylogenetic representativity criteria to capture intraspecific variation. Three to five specimens from each selected species were measured in order to account for intraspecific variation. Adittionally, 30 species with only a single specimen were also measured and reported in this work, but their data will not be used in the statistical analyses downstream.
 
-Tentacles from the studied specimens were dissected, dehydrated in a series of ethanol dilutions (25% in PBS, 50% in PBS, 75% in water, 100%), cleared in methyl salicylate or d-limonene, and mounted in plastic slides (Canada balsam, Cytoseal, or Permount). Slides were imaged using laser scanning confocal microscopy and differential interference contrast (DIC) microscopy. Images were measured using Fiji-ImageJ.
+Tentacles from the studied specimens were dissected, dehydrated in a series of ethanol dilutions (25% in PBS, 50% in PBS, 75% in water, 100%), cleared in methyl salicylate or d-limonene, and mounted in plastic slides (Canada balsam, Cytoseal, or Permount). Slides were imaged using laser scanning confocal microscopy and differential interference contrast (DIC) microscopy. Images were measured using Fiji-ImageJ [@schindelin2012fiji].
 
 The characters measured for this study are described in Supplementary Table SXX. Homology assumptions for nematocyst supertypes (heteroneme, haploneme, rhopaloneme, and desmoneme) and tentillum structures (involucrum, elastic strand, pedicle, cnidoband) were informed by positional, developmental, and morphological criteria.
 
-Diet data for epipelagic siphonophroes was compiled from published studies on visual gut content recognition @[purcell1981dietary], @[purcell1984functions]. Presence of taxonomic groups in the diet as well as percent individual composition was retrieved from these sources. For deep dwelling species, MBARI VARS observations were used to score presence of prey taxonomic groups in annotated predation events with different siphonophore species.
+Diet data for epipelagic siphonophroes was compiled from published studies on visual gut content recognition [@purcell1981dietary], [@purcell1984functions]. Presence of taxonomic groups in the diet as well as percent individual composition was retrieved from these sources. For deep dwelling species, MBARI VARS [@schlining2006mbari] observations were used to score presence of prey taxonomic groups in annotated predation events with different siphonophore species.
 
 ### 3.3 Phylogenetic Comparative Methods{-}
 
-All phylogenetic statistical analyses were carried out in the programming environment R (cite), using the species tree, and incorporating intraspecific variation estimated from the specimen data. Phylogenetic signal in each of the measured characters was calculated using Blomberg’s K (Blomberg 2003). The phylogenetic signal of multivariate character sets was calculated using the package geomorph (Adams cite).
+All phylogenetic statistical analyses were carried out in the programming environment R [@team2017r], using the species tree, and incorporating intraspecific variation estimated from the specimen data. Phylogenetic signal in each of the measured characters was calculated using Blomberg’s K [@blomberg2003testing]. The phylogenetic signal of multivariate character sets was calculated using the package geomorph [@adams2016geomorph].
 
-Ancestral states were reconstructed using ML for continuous characters (anc.ML phytools), and stochastic character mapping (make.simmap) for categorical characters.
+Ancestral states were reconstructed using ML for continuous characters (anc.ML [@revell2012phytools]), and stochastic character mapping (make.simmap) for categorical characters.
 
-Different models generating the observed data distribution given the phylogeny were fitted for each continuous character using the function fitContinuous (package geiger cite). The models compared were the white noise (WN) (non-phylogenetic), the Brownian Motion (BM) model of neutral divergent evolution (cite), the Early Burst (EB) model of decreasing rate of evolutionary change (cite), and the Ohnstein-Uhlenbeck (OU) model of stabilizing selection around a fitted optimum state (cite). Models were ranked in order of increasing parametric complexity (WN,BM,EB,OU). Corrected Akaika Information Criterion support scores (AICc, cite) were compared to the lowest (best) score, and a cutoff of 2 units was used to determine significantly better support. If the best fitting model is not significantly better than a less complex alternative, the least complex model is selected. The models selected for each character were evaluated in terms of model adequacy using the package arbutus (cite). Multivariate BM and OU models were also evaluated using the package mvSLOUCH (cite).
+Different models generating the observed data distribution given the phylogeny were fitted for each continuous character using the function fitContinuous [@harmon2007geiger]. The models compared were the white noise (WN) (non-phylogenetic), the Brownian Motion (BM) model of neutral divergent evolution [@martins1996phylogenies], the Early Burst (EB) model of decreasing rate of evolutionary change [@harmon2010early], and the Ohnstein-Uhlenbeck (OU) model of stabilizing selection around a fitted optimum state [@uhlenbeck1930theory],[@butler2004phylogenetic]. Models were ranked in order of increasing parametric complexity (WN,BM,EB,OU). Corrected Akaika Information Criterion support scores [@sugiura1978further] were compared to the lowest (best) score, and a cutoff of 2 units was used to determine significantly better support. If the best fitting model is not significantly better than a less complex alternative, the least complex model is selected. The models selected for each character were evaluated in terms of model adequacy using the package arbutus [@pennell2015model]. Multivariate BM and OU models were also evaluated using the package mvSLOUCH [@bartoszek2012phylogenetic].
 
-In order to explore the correlational structure among continuous characters and among their evolutionary histories, we used principal component analyses (PCA) and phylogenetic PCA (phytools ppca cite). In addition, we obtained the correlations between the phylogenetic independent contratsts (Felsenstein cite) using the package rphylip (cite). We modeled the relationship between correlated characters using phylogenetic leats squares regression (PGLS) in the package phytools (Revell..cite). Evolutionary relationships between continuous and categorical characters were assessed using phylogenetic ANOVAs (phyl.anova phytools) and phylogenetic generalized linear mixed models (PGLMM).
+In order to explore the correlational structure among continuous characters and among their evolutionary histories, we used principal component analyses (PCA) and phylogenetic PCA [@revell2012phytools]. In addition, we obtained the correlations between the phylogenetic independent contratsts [@felsenstein1985phylogenies] using the package rphylip [@revell2014rphylip]. We modeled the relationship between correlated characters using phylogenetic leats squares regression (PGLS) in the package phytools (Revell..cite). Evolutionary relationships between continuous and categorical characters were assessed using phylogenetic ANOVAs (phyl.anova phytools) and phylogenetic generalized linear mixed models (PGLMM).
 
 ### 3.4 High-Speed Video
 
@@ -189,22 +189,23 @@ Total cnidoband discharge time (ms), average cnidoband discharge speed (mm/s), m
 0 -- PHYLOGENY
 0.0 ML ribosomal marker phylogeny constrained by transcriptome tree with BS values at the nodes.
 
-The topology of this tree is congruent with the results from @[dunn2005molecular]. In addition, we found *Erenna* and *Stephanomia* as sister genera in a monophyletic group.
+The topology of this tree is congruent with the results from [@dunn2005molecular]. In addition, we found *Erenna* and *Stephanomia* as sister genera in a monophyletic group.
 
 1 -- DESCRIPTIVE MORPHOLOGY AND EVOLUTIONARY HISTORY
 
 1.05 Plate with all the tentillum diversity.
 
-1.1 Table showing each character’s (illustrating the character per row)  the phylogenetic signal K with the p-value obtained by testing against 1000 simulated permutations, and the number of species included.
+1.1 Table showing each character’s (illustrating the character per row)  the phylogenetic signal K with the p-value obtained by testing against 1000 simulated permutations, and the number of specimens included.
 
 Principal component analyses were carried out separately on raw log-transformed measurements and compound morphometric characters (such as volumes and ratios).
 PC1 (aligned with tentillum size and nematocyst shape) explains ~64% of the variation in the tentillum morphospace, whereas PC2 (aligned with nematocyst size characters) explained ~18%.
 
 Controlling for phylogenetic expected covariance, ~88% of the evolutionary variation is explained by shifts in size, exhibiting a low effective dimensionality. 
 
-The calycophoran morphospace is quite distinct from that of other siphonophores. A non-calycophoran (Frillagalma vityazi), has secondarily “invaded” this morphospace, which could indicate a case of convergence. 
+The calycophoran morphospace is quite distinct from that of other siphonophores. A non-calycophoran (*Frillagalma vityazi*), has secondarily “invaded” this morphospace, which could indicate a case of convergence. 
+
 Most characters present a moderate yet significant phylogenetic signal, and predominantly support BM models, indicating a history of neutral constant divergence. Total nematocyst volume and cnidoband-to-heteroneme length ratio showed strongly conserved phylogenetic signals. These characters may be useful for taxonomic purposes.
-Bayesian Analysis of Macroevolutionary Mixtures [] identified evolutionary rate regime shifts in the branches leading to the euphysonects, to clade B, and to Cordagalma for several characters. These shifts could be associated with adaptive responses to dietary change.
+Bayesian Analysis of Macroevolutionary Mixtures [@rabosky2014bamm] identified evolutionary rate regime shifts in the branches leading to the euphysonects, to clade B, and to Cordagalma for several characters. These shifts could be associated with adaptive responses to dietary change.
 
 ```{r load_tree, include=F}
 #Load tree
@@ -621,8 +622,8 @@ raw_matrix = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[which(!is.na(rowSums(.))),]
 raw_matrix_notf = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[,c(1:7,12:17)] %>% .[which(!is.na(rowSums(.))),]
 
 compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:30)]
-raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix))))
-#raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix_notf))))
+#raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix))))
+raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix_notf))))
 compound_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(compound_matrix))))
 
 #Regular PCA on means log
@@ -649,6 +650,7 @@ physignal(Pca_compound$ind$coord, compound_tree)
 multiPhylosignal(Pca_compound$ind$coord, compound_tree)
 
 #PhyloPCA on means
+raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix))))
 PPCA_raw = phyl.pca(raw_tree, raw_matrix)
 PPCA_compound = phyl.pca(compound_tree, compound_matrix)
 PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_raw)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
@@ -711,24 +713,8 @@ BAMMtree <- read.tree("BAMM/Cnidoband.free.length..um._tree.tre")
 mcmcout <- read.csv("BAMM/Cnidoband_free_length/mcmc_out.txt")
 burnstart <- floor(0.2*nrow(mcmcout))
 postburn <- mcmcout[burnstart:nrow(mcmcout), ]
-effectiveSize(postburn$N_shifts)
-effectiveSize(postburn$logLik)
-
-# load BAMM main output
-edata <- getEventData(BAMMtree, eventdata = "BAMM/Cnidoband_free_length/event_data.txt", burnin=0.2, type="trait")
-summary(edata)
-
-regimes = edata$tipStates[[3]] %>% .[which(str_replace_all(BAMMtree$tip.label,"_", " ") %in% dprunedTree$tip.label)]
-names(regimes) = edata$tip.label[which(str_replace_all(BAMMtree$tip.label,"_", " ") %in% dprunedTree$tip.label)] %>% str_replace_all("_", " ")
-for(prey in 1:ncol(diet)){
-  print(names(diet)[prey])
-  food=diet[,prey]
-  names(food) = rownames(diet)
-  food = food[which(names(food)%in%names(regimes))]
-  food = food[match(names(regimes), names(food))]
-  if(length(unique(food))>1){
-    pgls.SEy(food~regimes,data=data.frame(food,regimes), tree=dprunedTree, se= rep(0, length(food)))
-  }}
+#effectiveSize(postburn$N_shifts)
+#effectiveSize(postburn$logLik)
 
 ```
 
@@ -965,10 +951,27 @@ OUwie_matrix[,3:4] <- apply(OUwie_matrix[,3:4], 2, round3)
 write.csv(OUwie_matrix, "OU_diet_test.csv")
 
 ```
+```{r, BAMM_output, echo=F}
+# load BAMM main output
+edata <- getEventData(BAMMtree, eventdata = "BAMM/Cnidoband_free_length/event_data.txt", burnin=0.2, type="trait")
+summary(edata)
+
+regimes = edata$tipStates[[3]] %>% .[which(str_replace_all(BAMMtree$tip.label,"_", " ") %in% dprunedTree$tip.label)]
+names(regimes) = edata$tip.label[which(str_replace_all(BAMMtree$tip.label,"_", " ") %in% dprunedTree$tip.label)] %>% str_replace_all("_", " ")
+for(prey in 1:ncol(diet)){
+  print(names(diet)[prey])
+  food=diet[,prey]
+  names(food) = rownames(diet)
+  food = food[which(names(food)%in%names(regimes))]
+  food = food[match(names(regimes), names(food))]
+  if(length(unique(food))>1){
+    pgls.SEy(food~regimes,data=data.frame(food,regimes), tree=dprunedTree)
+  }}
+```
 
 3.3 Interpret qualitatively the kinematic implications (high speed video) of the different regions of the morphospace.
 
-High-speed video of cnidoband and nematocyst discharge revealed the roles of the different tentillum substructures in the mechanics of discharge. Moreover, it shows important differences int he discharge dynamics of species with different tentillum morphologies.
+High-speed video of cnidoband and nematocyst discharge revealed the roles of the different tentillum substructures in the mechanics of discharge. Moreover, it shows important differences in the discharge dynamics of species with different tentillum morphologies.
 
 Videos have shown the double role of the elastic strands in initiating and controlling cnidoband discharge. A few milliseconds before cnidoband discharge, the distal attachment of the cnidoband (at the base of the terminal filament) appears to unwind to the point of a tension-release threshold. This observation indicates there might be spring mechanism driving the discharge process. 
 
@@ -980,7 +983,7 @@ Story: low dimensionality, cost-reward-driven, dynamic specialization.
 
 ## 4. Discussion
 
-A particularly interesting case is that of *Cordagalma ordinatum*, a specialized copepod eater @[purcell1981dietary], which is sister to the generalist genus *Forskalia*. Cordagalma’s tentilla strongly resemble the larval (protozooid exclusive) tentilla of Forskalia spp. This could indicate a case of paedomorphosis as a pathway to predatory specialization.
+A particularly interesting case is that of *Cordagalma ordinatum*, a specialized copepod eater [@purcell1981dietary], which is sister to the generalist genus *Forskalia*. *Cordagalma*’s tentilla strongly resemble the larval (protozooid exclusive) tentilla of *Forskalia* spp. This could indicate a case of paedomorphosis as a pathway to predatory specialization.
 
 The calycophoran morphospace is quite distinct from that of other siphonophores, revealing a potential reaction line in the 2 PCs (Figure XX). A non-calycophoran (*Frillagalma vityazi*), has secondarily occupied this morphospace, which could indicate a case of convergence.
 

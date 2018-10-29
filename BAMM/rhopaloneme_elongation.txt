@@ -1,6 +1,7 @@
 Abylopsis_tetragona	1.34307150766104
 Agalma_clausi	1.33222713984961
 Agalma_elegans	1.33751589116521
+Agalma_okenii	1.37674380564123
 Athorybia_rosacea	1.23942455681623
 Chelophyes_appendiculata	1.34582053690863
 Chuniphyes_moserae	1.44155703979494
@@ -10,6 +11,7 @@ Desmophyes_haematogaster	1.24474614757259
 Diphyes_dispar	1.19978641247319
 Erenna_sirena	1.43971952779347
 Forskalia_asymmetrica	1.07774956030108
+Forskalia_edwardsii	1.19621777621926
 Forskalia_formosa	0.824483182621032
 Forskalia_tholoides	0.939280250098854
 Frillagalma_vityazi	1.59882432377178
@@ -20,6 +22,7 @@ Kephyes_ovata	1.39407650156195
 Lensia_conoidea	1.44370858129958
 Lilyopsis_fluoracantha	1.44243538085291
 Marrus_claudanielis	1.22687130257082
+Nanomia_sp	1.34242120196118
 Physonect_sp	0.936877365482543
 Physophora_hydrostatica	1.51147293680552
 Praya_dubia	1.59288981784528

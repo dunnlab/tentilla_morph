@@ -1,6 +1,7 @@
 Abylopsis_tetragona	2.59549503917761
 Agalma_clausi	2.70136121295141
 Agalma_elegans	2.80943862682351
+Agalma_okenii	3.00234080635744
 Apolemia_lanosa	2.66961962432732
 Apolemia_rubriversa	2.28828716010337
 Athorybia_rosacea	2.70003184886111
@@ -17,6 +18,7 @@ Erenna_laciniata	3.03809812213382
 Erenna_richardi	3.34499238350222
 Erenna_sirena	2.92046615640172
 Forskalia_asymmetrica	2.8655660053623
+Forskalia_edwardsii	2.62322189678702
 Forskalia_formosa	2.82731362192903
 Forskalia_tholoides	3.08190996979504
 Frillagalma_vityazi	3.13746642080643
@@ -28,6 +30,7 @@ Lensia_conoidea	1.86108578253498
 Lilyopsis_fluoracantha	2.72817311538647
 Lychnagalma_utricularia	2.92506296651991
 Marrus_claudanielis	3.12619243531372
+Nanomia_sp	2.70950324241368
 Physonect_sp	2.96527306606928
 Physophora_hydrostatica	2.91171081221497
 Praya_dubia	2.6831513986502
