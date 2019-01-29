@@ -15,13 +15,13 @@ library(tidyverse)
 library(stringr)
 library(reshape2)
 	## Biological
-library(OUwie)
 library(Rphylip)
 library(arbutus)
 library(vegan)
 library(ape)
 library(phangorn)
 library(phytools)
+library(OUwie)
 library(picante)
 library(geiger)
 library(phylobase)
@@ -29,6 +29,7 @@ library(fields)
 library(phylosignal)
 library(geomorph)
 library(phylopath)
+library(phylolm)
 	## Graphics
 library(FactoMineR)
 library(factoextra)
@@ -158,7 +159,7 @@ To obtain ultrametric branch lengths for this topology, a Bayesian strict molecu
 
 ### 3.2 Microscopy{-}
 
-Speciemns from the Monterey Bay and Gulf of California were collected by remotely operated underwater vehicles (ROV) or by blue-water SCUBA divers, following the protocols established in [@haddock2005scientific].
+Specimens from the Monterey Bay and Gulf of California were collected by remotely operated underwater vehicles (ROV) or by blue-water SCUBA divers, following the protocols established in [@haddock2005scientific].
 
 All specimens are accessioned in the Yale Peabody Museum Invertebrate Zoology Collection. Accession numbers and collection data for the specimens are available in Supplementary Table XXX. All specimens were preserved in ~4% buffered formalin in seawater.
 
@@ -312,12 +313,20 @@ Novel phylogenetic relationships:
 1.0 Table showing for each species the mean, number of individuals measured, and standard error of every character, ordered by cnidomic index / tentillum size, and/or colored by clade.
 
 ```{r export_table_morph, include=TRUE}
-morphdata = cbind(castN, castmeans[,-1], castSE[,-1])
+Ses = castSE[,-1]
+Ses[Ses == 0] = NA
+morphdata = cbind(castN, castmeans[,-1], Ses)
 morphdata = morphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
 names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
+
 #write.csv(morphdata, "characterdata.csv")
 grid.newpage()
-grid.table(morphdata, base_size=6)
+grid.table(morphdata)
+
+#Make a heatmap
+heatdata = as.matrix(castmean_logs[,-1])
+rownames(heatdata) = castmean_logs$Species
+heatmap(heatdata, scale = "column", cexCol = 0.5, col=terrain.colors(20))
 ```
 
 
@@ -392,7 +401,7 @@ for(i in 2:ncol(sharedmean_logs)){
   }
   AICdf[,2:6] = apply(AICdf[,2:6], 2, as.numeric) %>% apply(2, round3)
   #write.csv(AICdf, "log_model_support.csv")
-
+  
 #Model adequacy
   worthy_models = AICdf[which(AICdf$white_noise != 0 & AICdf$starBM != 0),]
   MAD = as.data.frame(matrix(ncol = 6, nrow = nrow(worthy_models)))
@@ -416,6 +425,30 @@ for(i in 2:ncol(sharedmean_logs)){
   phy_models[,7:12] = apply(phy_models[,7:12], 2,round3)
   #write.csv(phy_models, "model_adequacy.csv")
 ```
+
+Testing nematocyst shape evolution questions:
+```{r elongation}
+het_el = sharedmean_logs$heteroneme_elongation
+names(het_el) = sharedmean_logs$Species
+hap_el = sharedmean_logs$haploneme_elongation
+names(hap_el) = sharedmean_logs$Species
+het_el = het_el[which(!is.na(het_el))]
+hap_el = hap_el[which(!is.na(hap_el))]
+het_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(het_el))))
+hap_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(hap_el))))
+phenogram(het_tree, het_el)
+phenogram(hap_tree, hap_el)
+
+hap_el = hap_el[which(names(hap_el) %in% names(het_el))]
+het_el = het_el[which(names(het_el) %in% names(hap_el))]
+elon_data = cbind(het_el, hap_el) %>% as.data.frame()
+names(elon_data) = c("Heteroneme elongation (log um)", "Haploneme elongation (log um)")
+elon_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(hap_el))))
+phylomorphospace(elon_tree, elon_data, label="horizontal")
+
+
+```
+
 1.3 Figure showing major categorical character shifts, gains, and losses on a simplified phylogeny.
 
 ```{r simmaps, include=F}
@@ -784,6 +817,33 @@ preylength = quantDiet[which(grepl("prey",quantDiet$character)),] %>% .[,c(1,3)]
 names(preylength) = c("Species","Copepod prey length (mm)")
 PL_pruned_matrix = sharedmeans[which(sharedmeans$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmeans$Species),2])
 names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
+
+#Retrieve VARS data from Choy et al 2017
+VARS <- read.csv("Choy2017.tsv", sep="\t")
+VARS_curated = VARS[which(VARS$Pred_lowest_tax %in% ultram$tip.label | VARS$Pred_lowest_tax=="Nanomia bijuga"),]
+VARS_cast = acast(VARS_curated, Pred_lowest_tax~Prey_order, fun.aggregate = length)
+
+#Combination of VARS and GC sources
+diet_VARS = rbind(diet, c(0,0,0,0,0,1,1,0,0))
+diet_VARS = cbind(diet_VARS, rep(0,nrow(diet_VARS)))
+rownames(diet_VARS)[nrow(diet_VARS)] <- "Lychnagalma utricularia"
+names(diet_VARS)[ncol(diet_VARS)] <- "Gelatinous diet"
+diet_VARS["Nanomia sp",] = c(1,0,0,0,0,1,1,1,0,1)
+diet_VARS["Praya dubia",] = c(1,0,0,0,0,1,1,0,0,1)
+
+#Soft vs Hard
+soft_hard = cbind((diet$`Copepod diet`+diet$`Amphipod diet`+diet$`Crustacean diet` + diet$`Decapod diet` + diet$`Ostracod diet`), (diet$`Fish diet`+diet$`Polychaete diet`+diet$`Chaetognath diet`+diet$`Mollusc diet`))
+colnames(soft_hard) = c("Hard", "Soft")
+rownames(soft_hard) = rownames(diet)
+soft_hard <- as.data.frame(soft_hard)
+soft_hard[soft_hard>0]<-1
+softORhard = as.data.frame(soft_hard$Hard+soft_hard$Soft)
+rownames(softORhard)=rownames(soft_hard)
+names(softORhard) = "Type"
+softORhard[softORhard==2]<-"Both"
+softORhard[which(soft_hard$Hard==1 & soft_hard$Soft==0),]<-"Hard"
+softORhard[which(soft_hard$Hard==0 & soft_hard$Soft==1),]<-"Soft"
+
 ```
 
 3.0 Phylogeny with the tips mapped with the literature dietary associations, and internal nodes showing SIMMAP reconstructed states.
@@ -802,6 +862,21 @@ for(row in 1:nrow(DietAnc)){
 regimetree$node.label = as.factor(HypDietAnc)
 plotTree(regimetree)
 nodelabels(text=regimetree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);tiplabels(text=hypdiet, frame="none", cex=0.6, adj=c(0,2))
+
+#SOft/Hard regime tree
+SHtree = dprunedTree
+hypSH = softORhard$Type[match(SHtree$tip.label,row.names(softORhard))]
+names(hypSH) = SHtree$tip.label
+SHAnc = ace(hypSH, SHtree, type = "discrete")$lik.anc
+HypSHAnc = 1:nrow(SHAnc)
+for(row in 1:nrow(SHAnc)){
+  SCR = scale(SHAnc[row,])
+  print(SCR)
+  HypSHAnc[row] <- rownames(SCR)[which(SCR[,1] == max(SCR[,1]))] %>% print()
+}
+SHtree$node.label = as.factor(HypSHAnc)
+plotTree(SHtree)
+nodelabels(text=SHtree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);tiplabels(text=hypSH, frame="none", cex=0.6, adj=c(0,2))
 ```
 
 3.1 Table showing quantitative and categorical characters association effect size with each prey type in the diet.
@@ -870,6 +945,7 @@ for(i in 2:ncol(Pprunedmatrix_logs)){
 pGLS_sign <- pGLS_sign[which(rowSums(is.na(pGLS_sign))!=ncol(pGLS_sign)),which(colSums(is.na(pGLS_sign))!=nrow(pGLS_sign))]
 write.csv(pGLS_sign, "PGLS_SIGN_DietPP.csv")
 
+#using PCs instead of characters
 dprunedmatrix[,c(2:3,5:21)] -> dprunedraw
 rownames(dprunedraw) = dprunedmatrix$Species
 dprunedraw %>% .[which(!is.na(rowSums(.))),] %>% PCA() -> dprunedPCA
@@ -886,6 +962,111 @@ for(prey in 1:ncol(diet)){
   #gls(CH_I ~ CH_J, correlation =  corBrownian(phy = treeIJ), data = as.data.frame(cbind(CH_I,CH_J)), method = "ML") %>% summary() %>% .$tTable %>% as.data.frame() %>% .$p %>% .[2]  %>% print()
   }
   }
+
+#LOGISTIC REGRESSION
+copepod = diet$`Copepod diet`
+names(copepod) = rownames(diet)
+heteroneme_elongation = dprunedmatrix_logs$heteroneme_elongation
+names(heteroneme_elongation) = dprunedmatrix_logs$Species
+copepod = copepod[match(dprunedTree$tip.label, names(copepod))]
+heteroneme_elongation = heteroneme_elongation[match(dprunedTree$tip.label, names(heteroneme_elongation))]
+dat = data.frame(heteroneme_elongation, copepod)
+dat = dat[which(!is.nan(dat$heteroneme_elongation)),]
+null = dat
+null$heteroneme_elongation = rep(1, nrow(dat))
+xtree = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% rownames(dat))))
+logit = phyloglm(copepod~heteroneme_elongation,phy=xtree,data=dat,boot=100)
+logit = phyloglm(copepod~,phy=xtree,data=null,boot=100)
+summary(logit)
+coef(logit)
+vcov(logit)
+nlogit = glm(copepod~heteroneme_elongation,data=dat, family="binomial")
+
+logits = data.frame(matrix(ncol = 9, nrow = 0))
+names(logits) = c("Prey type", "Character", "Ntaxa", "phyloglmAIC", "phyloglmP","phyloglm_b","glmAIC", "glmP", "glm_b")
+logit_diet = diet[,-7]
+logits[1,] = rep(1,9)
+for(prey in 1:ncol(logit_diet)){
+  for(char in 2:ncol(dprunedmatrix_logs)){
+    CH_J=logit_diet[,prey]
+    names(CH_J) = rownames(logit_diet)
+    CH_I = dprunedmatrix_logs[,char]
+    names(CH_I) = dprunedmatrix_logs$Species
+    CH_I = CH_I[!is.na(CH_I)]
+    CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+    treeIJ = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(CH_J))))
+    CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
+    CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
+    datIJ = data.frame(preytype = CH_J, character = CH_I)
+      if(length(unique(CH_I))>1 & length(unique(CH_J))>1){
+      logit = glm(preytype~character,data=datIJ, family="binomial")
+      print(logit)
+      phylogit = phyloglm(preytype~character,phy=treeIJ,data=datIJ,boot=10, btol=100)
+      print(phylogit)
+      rowIJ = c(names(logit_diet)[prey], names(dprunedmatrix_logs)[char], phylogit$n, phylogit$aic, coef(summary(phylogit))[2,6], coef(summary(phylogit))[2,1], logit$aic, coef(summary(logit))[2,4], coef(summary(logit))[2,1])
+      } else{
+      rowIJ = c(names(logit_diet)[prey], names(dprunedmatrix_logs)[char], NA, NA, NA, NA, NA, NA, NA)
+      }
+    print(rowIJ)
+    logits = rbind(logits, rowIJ)
+  }
+}
+logits = logits[-1,]
+logits[,4:9] = sapply(logits[,4:9], as.numeric)
+logits[,4:9] = sapply(logits[,4:9], function(x){round(x,3)})
+write.csv(logits, "logits.csv", row.names = F)
+
+#Soft-Hard logistic regression
+logits = data.frame(matrix(ncol = 9, nrow = 0))
+names(logits) = c("Prey type", "Character", "Ntaxa", "phyloglmAIC", "phyloglmP","phyloglm_b","glmAIC", "glmP", "glm_b")
+logit_diet = soft_hard
+logits[1,] = rep(1,9)
+for(prey in 1:ncol(logit_diet)){
+  for(char in 2:ncol(dprunedmatrix_logs)){
+    CH_J=logit_diet[,prey]
+    names(CH_J) = rownames(logit_diet)
+    CH_I = dprunedmatrix_logs[,char]
+    names(CH_I) = dprunedmatrix_logs$Species
+    CH_I = CH_I[!is.na(CH_I)]
+    CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+    treeIJ = drop.tip(ultram, which(!(ultram$tip.label %in% names(CH_J))))
+    CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
+    CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
+    datIJ = data.frame(preytype = CH_J, character = CH_I)
+    print(length(unique(CH_J)))
+    print(cbind(CH_I, CH_J))
+      if(length(unique(CH_J))>1){
+      logit = glm(preytype~character,data=datIJ, family="binomial")
+      #print(logit)
+      phylogit = phyloglm(preytype~character,phy=treeIJ,data=datIJ,boot=10, btol=20)
+      #print(phylogit)
+      rowIJ = c(names(logit_diet)[prey], names(dprunedmatrix_logs)[char], phylogit$n, phylogit$aic, coef(summary(phylogit))[2,6], coef(summary(phylogit))[2,1], logit$aic, coef(summary(logit))[2,4], coef(summary(logit))[2,1])
+      print(rowIJ)
+      } else{
+      rowIJ = c(names(logit_diet)[prey], names(dprunedmatrix_logs)[char], phylogit$n, NA, NA, NA, NA, NA, NA)
+      }
+    print(rowIJ)
+    logits = rbind(logits, rowIJ)
+  }
+}
+logits = logits[-1,]
+logits[,4:9] = sapply(logits[,4:9], as.numeric)
+logits[,4:9] = sapply(logits[,4:9], function(x){round(x,3)})
+write.csv(logits, "logits_softhard.csv", row.names = F)
+
+datcombo = dprunedmatrix_logs[,c(1,2,5,7,9)]
+rownames(datcombo) = datcombo[,1]
+datcombo = datcombo[,-1]
+datcombo = datcombo[which(!is.na(rowSums(datcombo))),]
+names(datcombo) = c("heteroneme_length","heteroneme_shaft_length","heteroneme_number", "haploneme_width")
+cop = diet$`Copepod diet`
+names(cop) = rownames(diet)
+cop = cop[which(names(cop) %in% rownames(datcombo))]
+coptree = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(cop))))
+datcombo = datcombo[match(coptree$tip.label, rownames(datcombo)),]
+cop = cop[match(coptree$tip.label, names(cop))]
+combo_phylogit = phyloglm(cop~heteroneme_length+heteroneme_shaft_length+heteroneme_number+haploneme_width,phy=coptree,data=datcombo,boot=10, btol=100)
+coef(summary(combo_phylogit))
 
 #Plot mirror trees QUANT
 X = dprunedmatrix_logs$Haploneme.free.length..um.
@@ -932,8 +1113,8 @@ plot(OY, direction="leftwards", ftype = "off")
 When I mapped trait evolution onto a diet SIMMAP regime tree, OU models using the reconstructed states as regimes fitted significantly better (dAICc>2) than BM (null models) for cnidoband coiledness, heteroneme shaft shape, haploneme length, haploneme row number, desmoneme length, and desmoneme width.
 
 ```{r OUwie}
-OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=nrow(dprunedmatrix_logs)))
-names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
+OUwie_matrix = as.data.frame(matrix(ncol=5, nrow=nrow(dprunedmatrix_logs)))
+names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU1", "dAICc_OUm")
 library(magrittr)
 for(c in 2:ncol(dprunedmatrix_logs)){
   Cdata = data.frame(dprunedmatrix$Species,hypdiet,dprunedmatrix_logs[,c])
@@ -945,16 +1126,97 @@ for(c in 2:ncol(dprunedmatrix_logs)){
   Cdata$regime = as.character(Cdata$regime)
   Ctree = drop.tip(regimetree,which(!(regimetree$tip.label %in% Cdata$species)))
   BM <- OUwie(Ctree, Cdata, model="BM1")
-  OU <- OUwie(Ctree, Cdata, model="OU1")
+  OU1 <- OUwie(Ctree, Cdata, model="OU1")
+  OUm <- OUwie(Ctree, Cdata, model="OUMV")
   OUwie_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
   OUwie_matrix[c-1,2] = nrow(Cdata)
-  OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU$AICc))
-  OUwie_matrix[c-1,4] = OU$AICc - min(c(BM$AICc, OU$AICc))
+  OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c-1,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c-1,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
 }
-OUwie_matrix[,3:4] <- apply(OUwie_matrix[,3:4], 2, round3)
+OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
 write.csv(OUwie_matrix, "OU_diet_test.csv")
 
+#SOFT-HARD OUWIE
+
+SH_matrix = as.data.frame(matrix(ncol=5, nrow=nrow(dprunedmatrix_logs)))
+names(SH_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU1", "dAICc_OUm")
+for(c in 2:ncol(dprunedmatrix_logs)){
+  Cdata = data.frame(dprunedmatrix$Species,hypSH,dprunedmatrix_logs[,c])
+  names(Cdata) = c("species", "regime", "trait")
+  Cdata$trait[which(Cdata$trait == "NaN")] <- NA
+  Cdata = Cdata[!is.na(Cdata$trait),]
+  Cdata$trait = as.numeric(Cdata$trait)
+  Cdata$species = as.character(Cdata$species)
+  Cdata$regime = as.character(Cdata$regime)
+  Ctree = drop.tip(SHtree,which(!(SHtree$tip.label %in% Cdata$species)))
+  BM <- OUwie(Ctree, Cdata, model="BM1")
+  OU1 <- OUwie(Ctree, Cdata, model="OU1")
+  OUm <- OUwie(Ctree, Cdata, model="OUMV")
+  SH_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
+  SH_matrix[c-1,2] = nrow(Cdata)
+  SH_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  SH_matrix[c-1,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  SH_matrix[c-1,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+}
+SH_matrix[,3:5] <- apply(SH_matrix[,3:5], 2, round3)
+write.csv(SH_matrix, "OU_SH_test.csv")
+
+#Using raw morphospace
+rawcoords = Pca_raw$ind$coord[,1:2]
+rawcoords = rawcoords[which(rownames(rawcoords) %in% names(hypdiet)),]
+OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=2))
+names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
+library(magrittr)
+for(c in 1:ncol(rawcoords)){
+  Cdata = data.frame(rownames(rawcoords),hypdiet[which(names(hypdiet) %in% rownames(rawcoords))],rawcoords[,c])
+  names(Cdata) = c("species", "regime", "trait")
+  Cdata$trait[which(Cdata$trait == "NaN")] <- NA
+  Cdata = Cdata[!is.na(Cdata$trait),]
+  Cdata$trait = as.numeric(Cdata$trait)
+  Cdata$species = as.character(Cdata$species)
+  Cdata$regime = as.character(Cdata$regime)
+  Ctree = drop.tip(regimetree,which(!(regimetree$tip.label %in% Cdata$species)))
+  BM <- OUwie(Ctree, Cdata, model="BM1")
+  OU1 <- OUwie(Ctree, Cdata, model="OU1")
+  OUm <- OUwie(Ctree, Cdata, model="OUMV")
+  OUwie_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
+  OUwie_matrix[c-1,2] = nrow(Cdata)
+  OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c-1,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c-1,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+}
+OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
+#write.csv(OUwie_matrix, "OU_raw_test.csv")
+
+#Using compound mosphospace
+compcoords = Pca_compound$ind$coord[,1:2]
+compcoords = compcoords[which(rownames(compcoords) %in% names(hypdiet)),]
+OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=2))
+names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
+library(magrittr)
+for(c in 1:ncol(compcoords)){
+  Cdata = data.frame(rownames(compcoords),hypdiet[which(names(hypdiet) %in% rownames(compcoords))],compcoords[,c])
+  names(Cdata) = c("species", "regime", "trait")
+  Cdata$trait[which(Cdata$trait == "NaN")] <- NA
+  Cdata = Cdata[!is.na(Cdata$trait),]
+  Cdata$trait = as.numeric(Cdata$trait)
+  Cdata$species = as.character(Cdata$species)
+  Cdata$regime = as.character(Cdata$regime)
+  Ctree = drop.tip(regimetree,which(!(regimetree$tip.label %in% Cdata$species)))
+  BM <- OUwie(Ctree, Cdata, model="BM1")
+  OU1 <- OUwie(Ctree, Cdata, model="OU1")
+  OUm <- OUwie(Ctree, Cdata, model="OUMV")
+  OUwie_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
+  OUwie_matrix[c-1,2] = nrow(Cdata)
+  OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c-1,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c-1,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+}
+OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
+#write.csv(OUwie_matrix, "OU_compound_test.csv")
 ```
+
 ```{r, BAMM_output, echo=F}
 # load BAMM main output
 edata <- getEventData(BAMMtree, eventdata = "BAMM/Cnidoband_free_length/event_data.txt", burnin=0.2, type="trait")
@@ -979,7 +1241,7 @@ High-speed video of cnidoband and nematocyst discharge revealed the roles of the
 
 Videos have shown the double role of the elastic strands in initiating and controlling cnidoband discharge. A few milliseconds before cnidoband discharge, the distal attachment of the cnidoband (at the base of the terminal filament) appears to unwind to the point of a tension-release threshold. This observation indicates there might be spring mechanism driving the discharge process. 
 
-Euphysonect tentilla discharge considerably faster than Calycophoran tentilla. Larger heteronemes discharge faster than small ones, giving Euphysonects a faster heteroneme discharge speed than most calycophorans. On the contrary, Calycophoran haploneme tubules fire faster than those of Euphysonects.
+Euphysonect tentilla discharge considerably faster than Calycophoran tentilla. Larger heteronemes discharge faster than small ones, giving Euphysonects a faster heteroneme discharge speed than most Calycophorans. On the contrary, Calycophoran haploneme tubules fire faster than those of Euphysonects.
 
 The more extreme the coiledness index, the more unpredictable the trajectory of the cnidoband during discharge.
 
