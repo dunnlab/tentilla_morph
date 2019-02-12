@@ -17,123 +17,13 @@ obs_id,species,stage,character,state,source
 ,Physalia physalis,adult,Heteroneme shape,Oval,Bardi2007_Physalia
 ,Physalia physalis,adult,Tentilla,0,Bardi2007_Physalia
 ,Physalia physalis,adult,Side branches,0,Bardi2007_Physalia
-,Rhodalia miranda,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Angelopsis euryale,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Stephalia dilata,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Stephalia bathyphysa,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Archangelopsis typica,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Angelopsis globosa,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Angelopsis globosa,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Angelopsis euryale,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
-,Stephalia corona,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
-,Stephalia corona,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
-,Stephalia corona,adult,Tentilla,1,Pugh1983_Rhodalidae
-,Stephalia corona,adult,Gastrozooid color,Orange,Pugh1983_Rhodalidae
-,Stephalia corona,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Stephalia corona,adult,Cnidoband shape,Loosely coiled,Pugh1983_Rhodalidae
-,Stephalia corona,adult,Terminal filament,1,Pugh1983_Rhodalidae
-,Stephalia bathyphysa,adult,Tentilla,0,Pugh1983_Rhodalidae
-,Stephalia bathyphysa,adult,Tentacle terminal filament,1,Pugh1983_Rhodalidae
-,Stephalia bathyphysa,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Steleophysema aurophora,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Steleophysema aurophora,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Steleophysema aurophora,adult,Tentilla,1,Pugh1983_Rhodalidae
-,Archangelopsis typica,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Archangelopsis typica,adult,Tentilla,1,Pugh1983_Rhodalidae
-,Archangelopsis typica,adult,Cnidoband shape,Loosely coiled,Pugh1983_Rhodalidae
-,Archangelopsis typica,adult,Atentaculate gastrozooids,0,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Tentilla,1,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Benthic existence,1,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Tentacle ventral ligament,1,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Cnidoband shape,Loosely coiled,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Tentacle terminal filament,1,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Heteroneme shape,Ensiform,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Haploneme shape,Elongate,Pugh1983_Rhodalidae
-,Rhodalia miranda,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Tentilla,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Tentacle ventral ligament,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Involucrum,0,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Terminal cnidoband lobes,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Gastrozooid villi,1,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Gastrozooid color,Orange,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Tentilla,1,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Gastrozooid color,Orange,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Gastrozooid villi,1,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Cnidoband shape,Coiled,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Gastrozooid color,Brownish-Orange,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Tentacle terminal filament,1,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Tentacle ventral ligament,1,Pugh1983_Rhodalidae
-,Archangelopsis jagoa,adult,Benthic existence,1,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Tentilla,1,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Tentacle annulation,1,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Cnidoband shape,Loosely coiled,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Gastrozooid color,Yellow,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Gastrozooid color,Orange,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Cnidoband color,Orange,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Tentacle color,Orange,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Tentacle ventral ligament,1,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Tentacle terminal filament,1,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Heteroneme shape,Ensiform,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Heteroneme position,Lateral,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Rhopaloneme type,Acrophores,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Atentaculate gastrozooids,0,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Fishing posture,Tethered,Hissman1995_Ajagoa
-,Archangelopsis jagoa,adult,Gastrozooids on long peduncles,1,Hissman1995_Ajagoa
-,Rhodalia miranda,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Dromalia alexandri,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Angelopsis euryale,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Stephalia dilata,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Stephalia bathyphysa,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Archangelopsis typica,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Angelopsis globosa,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Thermopalia taraxaca,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
-,Archangelopsis jagoa,adult,Feeding gonopalpons,1,Hissman1995_Ajagoa
-,Tridensa rotunda,adult,Benthic existence,1,Hissman2005_newrho
-,Tridensa sulawensis,adult,Benthic existence,1,Hissman2005_newrho
-,Arancialia captonia,adult,Benthic existence,1,Hissman2005_newrho
-,Tridensa rotunda,adult,Fishing posture,Tethered,Hissman2005_newrho
-,Tridensa sulawensis,adult,Fishing posture,Tethered,Hissman2005_newrho
-,Arancialia captonia,adult,Fishing posture,Tethered,Hissman2005_newrho
-,Tridensa sulawensis,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
-,Tridensa rotunda,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
-,Tridensa sulawensis,adult,Gastrozooid color,Orange,Hissman2005_newrho
-,Tridensa sulawensis,adult,Tentacle annulation,1,Hissman2005_newrho
-,Tridensa sulawensis,adult,Tentilla,1,Hissman2005_newrho
-,Tridensa sulawensis,adult,Tentilla shape,Loosely coiled,Hissman2005_newrho
-,Tridensa sulawensis,adult,Terminal cnidoband lobes,1,Hissman2005_newrho
-,Tridensa sulawensis,adult,Tentacle terminal filament,1,Hissman2005_newrho
-,Tridensa sulawensis,adult,Tentilla shape,Straight,Hissman2005_newrho
-,Tridensa sulawensis,adult,Heteroneme position,Lateral,Hissman2005_newrho
-,Tridensa sulawensis,adult,Heteroneme shape,Elongate,Hissman2005_newrho
-,Tridensa sulawensis,adult,Gut contents,Fish larvae,Hissman2005_newrho
-,Tridensa sulawensis,adult,Fish diet,1,Hissman2005_newrho
-,Tridensa sulawensis,adult,Gastrozooid villi,0,Hissman2005_newrho
-,Tridensa rotunda,adult,Tentilla,1,Hissman2005_newrho
-,Arancialia captonia,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
-,Arancialia captonia,adult,Tentilla,1,Hissman2005_newrho
-,Arancialia captonia,adult,Tentacle annulation,1,Hissman2005_newrho
-,Arancialia captonia,adult,Tentacle ventral ligament,1,Hissman2005_newrho_fig10
-,Arancialia captonia,adult,Gastrozooid color,Orange,Hissman2005_newrho
-,Arancialia captonia,adult,Terminal cnidoband lobes,1,Hissman2005_newrho
-,Arancialia captonia,adult,Heteroneme position,Lateral,Hissman2005_newrho
-,Arancialia captonia,adult,Heteroneme shape,Elongate,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Variable coiling,1,Hissman2005_newrho
-,Arancialia captonia,adult,Variable coiling,1,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Terminal sinker,1,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Amphipod diet,1,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Fish diet,1,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Gut contents,Fish larvae,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Gut contents,Amphipod,Hissman2005_newrho
-,Archangelopsis jagoa,adult,Gut contents,Crustacean,Hissman2005_newrho
+,Rhizophysa filiformis,adult,Gut contents,Alcyopids,Biggs1977
+,Agalma okeni,adult,Amphipod diet,1,Biggs1977
+,Agalma elegans,adult,Amphipod diet,1,Biggs1977
+,Athorybia rosacea,adult,Decapod diet,1,Biggs1977
+,Athorybia rosacea,adult,Amphipod diet,1,Biggs1977
+,Athorybia rosacea,adult,Gut contents,Amphipod,Biggs1977
+,Athorybia rosacea,adult,Gut contents,Decapod shrimps,Biggs1977
 ,Agalma okeni,adult,Fishing posture,Chandelier,Biggs1977b_Feeding
 ,Agalma elegans,adult,Fishing posture,Curtain,Biggs1977b_Feeding
 ,Rosacea cymbiformis,adult,Fishing posture,Curtain,Biggs1977b_Feeding
@@ -203,6 +93,7 @@ obs_id,species,stage,character,state,source
 ,Agalma okeni,adult,Diel feeding,Nocturnal,Biggs1977b_Feeding
 ,Bathyphysa sibogae,adult,Crustacean diet,0,Biggs1977b_Feeding
 ,Bathyphysa sibogae,adult,Copepod diet,0,Biggs1977b_Feeding
+,Agalma okeni,adult,Gut contents,Amphipod,Biggs1978
 ,Rosacea flaccida,adult,Stem contractility,Contractile,Biggs1978b_Rflaccida
 ,Rosacea flaccida,adult,Cnidoband color,Bright yellow,Biggs1978b_Rflaccida
 ,Rosacea flaccida,adult,Heteroneme type,Microbasic mastigophores,Biggs1978b_Rflaccida
@@ -211,7 +102,7 @@ obs_id,species,stage,character,state,source
 ,Rosacea flaccida,adult,Haploneme shape,Elongate,Biggs1978b_Rflaccida
 ,Rosacea flaccida,adult,Desmoneme shape,Ovoid,Biggs1978b_Rflaccida
 ,Rosacea flaccida,adult,Rhopaloneme shape,Elongate,Biggs1978b_Rflaccida
-,Rosacea flaccida,adult,Terminal filament nematocyst arrangement,"1Desmonemes,1Rhopalonemes",Biggs1978b_Rflaccida
+,Rosacea flaccida,adult,Terminal filament nematocyst arrangement,1Desmonemes,1Rhopalonemes,Biggs1978b_Rflaccida
 ,Rosacea flaccida,adult,Terminal filament,1,Biggs1978b_Rflaccida
 ,Rosacea flaccida,adult,Cnidoband shape,C,Biggs1978b_Rflaccida
 ,Rosacea cymbiformis,adult,Heteroneme type,Microbasic mastigophores,Biggs1978b_Rflaccida
@@ -256,6 +147,7 @@ obs_id,species,stage,character,state,source
 ,Athorybia lucida,adult,Involucral dendritic projections,1,Biggs1978c_Athorybia
 ,Athorybia lucida,adult,Fused terminal filaments,1,Biggs1978c_Athorybia
 ,Athorybia lucida,adult,Cnidoband pigment spot color,Red-orange,Biggs1978c_Athorybia
+,Cordagalma ordinatum,adult,Haploneme type,Isorhizas,Carre1968
 ,Cordagalma ordinatum,adult,Gastrozooid color,Colorless,Carre1968_Ccordiformis
 ,Cordagalma ordinatum,adult,Cnidoband shape,Microovoid,Carre1968_Ccordiformis
 ,Cordagalma ordinatum,adult,Encapsulated cnidoband,1,Carre1968_Ccordiformis
@@ -288,7 +180,7 @@ obs_id,species,stage,character,state,source
 ,Prayola tottoni,adult,Terminal filament,1,Carre1969c_Ptottoni
 ,Prayola tottoni,adult,Cnidoband shape,C,Carre1969c_Ptottoni
 ,Prayola tottoni,adult,Heteroneme position,Lateral proximal,Carre1969c_Ptottoni
-,Prayola tottoni,adult,Terminal filament nematocyst arrangement,"1Desmonemes,2Rhopalonemes",Carre1969c_Ptottoni
+,Prayola tottoni,adult,Terminal filament nematocyst arrangement,1Desmonemes,2Rhopalonemes,Carre1969c_Ptottoni
 ,Prayola tottoni,adult,Desmonemes in the cnidoband,1,Carre1969c_Ptottoni
 ,Prayola tottoni,adult,Desmoneme shape,Pear,Carre1969c_Ptottoni
 ,Prayola tottoni,adult,Gastrozooid color,Yellow,Carre1969c_Ptottoni
@@ -306,13 +198,24 @@ obs_id,species,stage,character,state,source
 ,Desmophyes villafrancae,adult,Cnidoband color,Pink,Carre1969d_Rvillafrancae
 ,Desmophyes villafrancae,adult,Desmonemes in the cnidoband,1,Carre1969d_Rvillafrancae
 ,Desmophyes villafrancae,adult,Cnidoband desmonemes position,Terminal,Carre1969d_Rvillafrancae
-,Desmophyes villafrancae,adult,Terminal filament nematocyst arrangement,"1Desmonemes,2Rhopalonemes",Carre1969d_Rvillafrancae
+,Desmophyes villafrancae,adult,Terminal filament nematocyst arrangement,1Desmonemes,2Rhopalonemes,Carre1969d_Rvillafrancae
 ,Desmophyes villafrancae,adult,Rhopaloneme shape,Elongate,Carre1969d_Rvillafrancae
 ,Desmophyes villafrancae,adult,Desmoneme shape,Pear,Carre1969d_Rvillafrancae
 ,Desmophyes villafrancae,adult,Haploneme shape,Banana,Carre1969d_Rvillafrancae
 ,Desmophyes villafrancae,adult,Heteroneme shape,Elongate,Carre1969d_Rvillafrancae
 ,Apolemia uvaria,adult,Heteroneme type,Macrobirhopaloids,Carre1973a
 ,Apolemia uvaria,adult,Heteroneme type,Microbirhopaloids,Carre1973a
+,Forskalia edwardsi,adult,Haploneme type,Atrichous(?) isorhizas,ClaudeCarre_pers_Comm
+,Sphaeronectes koellikeri,adult,Terminal filament,1,Claus1874
+,Sphaeronectes irregularis,adult,Heteroneme type,Microbasic mastigophores,Claus1874
+,Sphaeronectes koellikeri,adult,Desmoneme shape,Pear,Claus1874
+,Sphaeronectes irregularis,adult,Desmoneme shape,Pear,Claus1874
+,Sphaeronectes koellikeri,adult,Proximal TF desmoneme clump,1,Claus1874
+,Sphaeronectes koellikeri,adult,Distal TF desmoneme clump,1,Claus1874
+,Sphaeronectes irregularis,adult,Proximal TF desmoneme clump,1,Claus1874
+,Sphaeronectes irregularis,adult,Distal TF desmoneme clump,0,Claus1874
+,Sphaeronectes koellikeri,adult,Heteroneme shape,Cylindrical,Claus1874
+,Sphaeronectes irregularis,adult,Heteroneme shape,Cylindrical,Claus1874
 ,Marrus claudanielis,adult,Cnidoband shape,Loosely coiled,Dunn2005_claudanielis
 ,Marrus claudanielis,adult,Involucrum,0,Dunn2005_claudanielis
 ,Marrus claudanielis,adult,Gastrozooid color,Deep red,Dunn2005_claudanielis
@@ -322,7 +225,6 @@ obs_id,species,stage,character,state,source
 ,Marrus claudanielis,adult,Haploneme position,Lateral,Dunn2005_claudanielis
 ,Marrus orthocanna,adult,Involucrum,0,Dunn2005_claudanielis
 ,Marrus antarcticus,adult,Involucrum,0,Dunn2005_claudanielis
-,Marrus orthocanna,adult,Cnidoband shape,Loosely coiled,Kramp1942
 ,Marrus orthocanna,adult,Cnidoband shape,Straight,Dunn2005_claudanielis
 ,Dimophyes arctica,adult,Cnidoband shape,C,Grossman2013_thesis
 ,Dimophyes arctica,adult,Heteroneme type,Microbasic mastigophores,Grossman2013_thesis
@@ -333,6 +235,63 @@ obs_id,species,stage,character,state,source
 ,Clausophyes galeata,adult,Haploneme type,Holotrichous isorhizas,Grossman2013_thesis
 ,Clausophyes galeata,adult,Heteroneme shape,Elongate,Grossman2013_thesis
 ,Clausophyes galeata,adult,Haploneme shape,Elongate,Grossman2013_thesis
+,Archangelopsis jagoa,adult,Benthic existence,1,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Tentilla,1,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Tentacle annulation,1,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Cnidoband shape,Loosely coiled,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Gastrozooid color,Yellow,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Gastrozooid color,Orange,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Cnidoband color,Orange,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Tentacle color,Orange,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Tentacle ventral ligament,1,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Tentacle terminal filament,1,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Heteroneme shape,Ensiform,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Heteroneme position,Lateral,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Rhopaloneme type,Acrophores,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Atentaculate gastrozooids,0,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Fishing posture,Tethered,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Gastrozooids on long peduncles,1,Hissman1995_Ajagoa
+,Archangelopsis jagoa,adult,Feeding gonopalpons,1,Hissman1995_Ajagoa
+,Tridensa rotunda,adult,Benthic existence,1,Hissman2005_newrho
+,Tridensa sulawensis,adult,Benthic existence,1,Hissman2005_newrho
+,Arancialia captonia,adult,Benthic existence,1,Hissman2005_newrho
+,Tridensa rotunda,adult,Fishing posture,Tethered,Hissman2005_newrho
+,Tridensa sulawensis,adult,Fishing posture,Tethered,Hissman2005_newrho
+,Arancialia captonia,adult,Fishing posture,Tethered,Hissman2005_newrho
+,Tridensa sulawensis,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
+,Tridensa rotunda,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
+,Tridensa sulawensis,adult,Gastrozooid color,Orange,Hissman2005_newrho
+,Tridensa sulawensis,adult,Tentacle annulation,1,Hissman2005_newrho
+,Tridensa sulawensis,adult,Tentilla,1,Hissman2005_newrho
+,Tridensa sulawensis,adult,Tentilla shape,Loosely coiled,Hissman2005_newrho
+,Tridensa sulawensis,adult,Terminal cnidoband lobes,1,Hissman2005_newrho
+,Tridensa sulawensis,adult,Tentacle terminal filament,1,Hissman2005_newrho
+,Tridensa sulawensis,adult,Tentilla shape,Straight,Hissman2005_newrho
+,Tridensa sulawensis,adult,Heteroneme position,Lateral,Hissman2005_newrho
+,Tridensa sulawensis,adult,Heteroneme shape,Elongate,Hissman2005_newrho
+,Tridensa sulawensis,adult,Gut contents,Fish larvae,Hissman2005_newrho
+,Tridensa sulawensis,adult,Fish diet,1,Hissman2005_newrho
+,Tridensa sulawensis,adult,Gastrozooid villi,0,Hissman2005_newrho
+,Tridensa rotunda,adult,Tentilla,1,Hissman2005_newrho
+,Arancialia captonia,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
+,Arancialia captonia,adult,Tentilla,1,Hissman2005_newrho
+,Arancialia captonia,adult,Tentacle annulation,1,Hissman2005_newrho
+,Arancialia captonia,adult,Gastrozooid color,Orange,Hissman2005_newrho
+,Arancialia captonia,adult,Terminal cnidoband lobes,1,Hissman2005_newrho
+,Arancialia captonia,adult,Heteroneme position,Lateral,Hissman2005_newrho
+,Arancialia captonia,adult,Heteroneme shape,Elongate,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Atentaculate gastrozooids,1,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Variable coiling,1,Hissman2005_newrho
+,Arancialia captonia,adult,Variable coiling,1,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Terminal sinker,1,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Amphipod diet,1,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Fish diet,1,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Gut contents,Fish larvae,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Gut contents,Amphipod,Hissman2005_newrho
+,Archangelopsis jagoa,adult,Gut contents,Crustacean,Hissman2005_newrho
+,Arancialia captonia,adult,Tentacle ventral ligament,1,Hissman2005_newrho_fig10
+,Physophora hydrostatica,adult,Heteroneme type,Microbasic mastigophores,Iwanzoff1896
+,Marrus orthocanna,adult,Cnidoband shape,Loosely coiled,Kramp1942
 ,Hippopodius hippopus,adult,Diel vertical migration,1,Mackie1987_Siphbio
 ,Vogtia spinosa,adult,Diel vertical migration,0,Mackie1987_Siphbio
 ,Vogtia glabra,adult,Diel vertical migration,1,Mackie1987_Siphbio
@@ -362,7 +321,7 @@ obs_id,species,stage,character,state,source
 ,Apolemia uvaria,adult,Haploneme type,Isorhizas,Mackie1987_Siphbio
 ,Rhizophysa filiformis,adult,Heteroneme type,Stenoteles,Mackie1987_Siphbio
 ,Rhizophysa filiformis,adult,Haploneme type,Isorhizas,Mackie1987_Siphbio
-,Rosacea flaccida,adult,Terminal filament nematocyst arrangement,"1Desmonemes,2Rhopalonemes",Mackie1987_Siphbio
+,Rosacea flaccida,adult,Terminal filament nematocyst arrangement,1Desmonemes,2Rhopalonemes,Mackie1987_Siphbio
 ,Agalma okeni,adult,Heteroneme type,Microbasic mastigophores,Mackie1987_Siphbio
 ,Agalma elegans,adult,Heteroneme type,Microbasic mastigophores,Mackie1987_Siphbio
 ,Agalma clausi,adult,Heteroneme type,Microbasic mastigophores,Mackie1987_Siphbio
@@ -379,16 +338,77 @@ obs_id,species,stage,character,state,source
 ,Physalia physalis,adult,Gut contents,Silversides,Mackie1987_Siphbio
 ,Physalia physalis,adult,Cephalopod diet,1,Mackie1987_Siphbio
 ,Physalia physalis,adult,Chaetognath diet,1,Mackie1987_Siphbio
-,Physophora hydrostatica,adult,Tentilla lure resemblance,Copepods,Wrobel_Jellieszone
-,Physophora hydrostatica,adult,Tentacle jigging,1,Wrobel_Jellieszone
 ,Forskalia contorta,adult,Gut contents,Fish,MackieBoag1963
 ,Nanomia cara,adult,Heteroneme type,Euryteles,MackieBoag1963
+,Erenna richardi,adult,Haploneme type,Atrichous isorhizas,Margulis1977_Erenna1
 ,Cordagalma tottoni,adult,Cnidoband shape,Straight,Margulis1993_Ctottoni
 ,Cordagalma tottoni,adult,Heteroneme position,Lateral proximal,Margulis1993_Ctottoni
 ,Cordagalma tottoni,adult,Terminal filament,0,Margulis1993_Ctottoni
 ,Cordagalma ordinatum,adult,Haploneme type,Isorhizas,Margulis1993_Ctottoni
 ,Cordagalma ordinatum,adult,Heteroneme type,Stenoteles,Margulis1993_Ctottoni
 ,Cordagalma ordinatum,adult,Cnidoband shape,Microovoid,Margulis1993_Ctottoni
+,Rhodalia miranda,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Angelopsis euryale,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Stephalia dilata,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Stephalia bathyphysa,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Archangelopsis typica,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Angelopsis globosa,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Angelopsis globosa,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Angelopsis euryale,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
+,Stephalia corona,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
+,Stephalia corona,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
+,Stephalia corona,adult,Tentilla,1,Pugh1983_Rhodalidae
+,Stephalia corona,adult,Gastrozooid color,Orange,Pugh1983_Rhodalidae
+,Stephalia corona,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Stephalia corona,adult,Cnidoband shape,Loosely coiled,Pugh1983_Rhodalidae
+,Stephalia corona,adult,Terminal filament,1,Pugh1983_Rhodalidae
+,Stephalia bathyphysa,adult,Tentilla,0,Pugh1983_Rhodalidae
+,Stephalia bathyphysa,adult,Tentacle terminal filament,1,Pugh1983_Rhodalidae
+,Stephalia bathyphysa,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Steleophysema aurophora,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Steleophysema aurophora,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Steleophysema aurophora,adult,Tentilla,1,Pugh1983_Rhodalidae
+,Archangelopsis typica,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Archangelopsis typica,adult,Tentilla,1,Pugh1983_Rhodalidae
+,Archangelopsis typica,adult,Cnidoband shape,Loosely coiled,Pugh1983_Rhodalidae
+,Archangelopsis typica,adult,Atentaculate gastrozooids,0,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Tentilla,1,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Benthic existence,1,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Tentacle ventral ligament,1,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Cnidoband shape,Loosely coiled,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Tentacle terminal filament,1,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Heteroneme shape,Ensiform,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Haploneme shape,Elongate,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Tentilla,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Tentacle ventral ligament,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Involucrum,0,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Terminal cnidoband lobes,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Gastrozooid villi,1,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Gastrozooid color,Orange,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Atentaculate gastrozooids,1,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Tentilla,1,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Gastrozooid color,Orange,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Gastrozooid villi,1,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Cnidoband shape,Coiled,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Gastrozooid color,Brownish-Orange,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Tentacle terminal filament,1,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Tentacle annulation,1,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Tentacle ventral ligament,1,Pugh1983_Rhodalidae
+,Rhodalia miranda,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
+,Dromalia alexandri,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
+,Angelopsis euryale,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
+,Stephalia dilata,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
+,Stephalia bathyphysa,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
+,Archangelopsis typica,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
+,Angelopsis globosa,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
+,Thermopalia taraxaca,adult,Fishing posture,Tethered,Pugh1983_Rhodalidae
 ,Lychnagalma utricularia,adult,Cnidoband shape,Coiled,Pugh1986b_Lychnagalma
 ,Lychnagalma utricularia,adult,Central ampulla,1,Pugh1986b_Lychnagalma
 ,Lychnagalma utricularia,adult,Superimposed terminal ampullae,0,Pugh1986b_Lychnagalma
@@ -415,14 +435,14 @@ obs_id,species,stage,character,state,source
 ,Rosacea repanda,adult,Haploneme type,Anisorhizas(?),Pugh1988b_Prayidae
 ,Rosacea repanda,adult,Haploneme shape,Banana,Pugh1988b_Prayidae
 ,Rosacea repanda,adult,Desmonemes in the cnidoband,1,Pugh1988b_Prayidae
-,Rosacea repanda,adult,Terminal filament nematocyst arrangement,"1Desmoneme, 1Rhopaloneme",Pugh1988b_Prayidae
+,Rosacea repanda,adult,Terminal filament nematocyst arrangement,1Desmoneme, 1Rhopaloneme,Pugh1988b_Prayidae
 ,Rosacea repanda,adult,Gut contents,Crustacean,Pugh1988b_Prayidae
 ,Rosacea repanda,adult,Crustacean diet,1,Pugh1988b_Prayidae
 ,Rosacea limbata,adult,Heteroneme shape,Elongate,Pugh1988b_Prayidae
 ,Rosacea limbata,adult,Heteroneme type,Microbasic mastigophores(?),Pugh1988b_Prayidae
 ,Rosacea limbata,adult,Haploneme type,Anisorhizas(?),Pugh1988b_Prayidae
 ,Rosacea limbata,adult,Desmonemes in cnidoband,1,Pugh1988b_Prayidae
-,Rosacea limbata,adult,Terminal filament nematocyst arrangement,"1Desmoneme,1Rhopaloneme",Pugh1988b_Prayidae
+,Rosacea limbata,adult,Terminal filament nematocyst arrangement,1Desmoneme,1Rhopaloneme,Pugh1988b_Prayidae
 ,Rosacea limbata,adult,Crustacean diet,1,Pugh1988b_Prayidae
 ,Rosacea limbata,adult,Gut contents,Ostracod,Pugh1988b_Prayidae
 ,Rosacea limbata,adult,Gut contents,Conchoecia acuta,Pugh1988b_Prayidae
@@ -437,8 +457,6 @@ obs_id,species,stage,character,state,source
 ,Nectopyramis thetis,adult,Terminal filament,1,Pugh1992a_Nectopyramidinae
 ,Nectopyramis thetis,adult,Heteroneme position,Lateral,Pugh1992a_Nectopyramidinae
 ,Nectopyramis thetis,adult,Haploneme position,Ubiquitous,Pugh1992a_Nectopyramidinae
-,Nectopyramis thetis,adult,Rhopaloneme shape,Elongate,Pugh1992a_Nectopyramidinae_UnknownId
-,Nectopyramis thetis,adult,Desmoneme shape,Ovoid,Pugh1992a_Nectopyramidinae_UnknownId
 ,Nectopyramis thetis,adult,Desmoneme type,Unknown,Pugh1992a_Nectopyramidinae
 ,Nectopyramis natans,adult,Cnidoband shape,C,Pugh1992a_Nectopyramidinae
 ,Nectopyramis natans,adult,Involucrum,1,Pugh1992a_Nectopyramidinae
@@ -452,10 +470,8 @@ obs_id,species,stage,character,state,source
 ,Nectadamas richardi,adult,Involucrum shape,Flask,Pugh1992a_Nectopyramidinae
 ,Nectadamas richardi,adult,Cnidoband shape,C-ring,Pugh1992a_Nectopyramidinae
 ,Nectadamas richardi,adult,Terminal filament,1,Pugh1992a_Nectopyramidinae
-,Nectadamas richardi,adult,Desmoneme shape,Ovoid,Pugh1992a_Nectopyramidinae_UnknownId
-,Nectadamas richardi,adult,Rhopaloneme shape,Elongate,Pugh1992a_Nectopyramidinae_UnknownId
 ,Nectadamas richardi,adult,Desmoneme type,Unknown,Pugh1992a_Nectopyramidinae
-,Nectadamas richardi,adult,Terminal filament nematocyst arrrangement,"1Desmonemes,1Rhopalonemes",Pugh1992a_Nectopyramidinae
+,Nectadamas richardi,adult,Terminal filament nematocyst arrrangement,1Desmonemes,1Rhopalonemes,Pugh1992a_Nectopyramidinae
 ,Nectadamas diomedeae,adult,Cnidoband shape,C-ring,Pugh1992a_Nectopyramidinae
 ,Nectadamas diomedeae,adult,Involucrum,1,Pugh1992a_Nectopyramidinae
 ,Nectadamas diomedeae,adult,Involucrum shape,Flask,Pugh1992a_Nectopyramidinae
@@ -465,6 +481,10 @@ obs_id,species,stage,character,state,source
 ,Nectadamas diomedeae,adult,Heteroneme type,Unknown,Pugh1992a_Nectopyramidinae
 ,Nectadamas diomedeae,adult,Heteroneme type,Stenoteles(?),Pugh1992a_Nectopyramidinae
 ,Nectadamas diomedeae,adult,Darkly pigmented heteronemes,1,Pugh1992a_Nectopyramidinae
+,Nectopyramis thetis,adult,Rhopaloneme shape,Elongate,Pugh1992a_Nectopyramidinae_UnknownId
+,Nectopyramis thetis,adult,Desmoneme shape,Ovoid,Pugh1992a_Nectopyramidinae_UnknownId
+,Nectadamas richardi,adult,Desmoneme shape,Ovoid,Pugh1992a_Nectopyramidinae_UnknownId
+,Nectadamas richardi,adult,Rhopaloneme shape,Elongate,Pugh1992a_Nectopyramidinae_UnknownId
 ,Frillagalma vityazi,adult,Stem contractility,Rigid,Pugh1998_Frillagalma
 ,Frillagalma vityazi,adult,Central ampulla,1,Pugh1998_Frillagalma
 ,Frillagalma vityazi,adult,Superimposed terminal ampullae,1,Pugh1998_Frillagalma
@@ -557,7 +577,6 @@ obs_id,species,stage,character,state,source
 ,Erenna richardi,adult,Cnidoband lateral compression,1,Pugh2001_Erenna
 ,Erenna richardi,adult,Cnidoband color,Dark,Pugh2001_Erenna
 ,Erenna richardi,adult,Haploneme position,Lateral,Pugh2001_Erenna
-,Erenna richardi,adult,Haploneme type,Atrichous isorhizas,Margulis1977_Erenna1
 ,Erenna richardi,adult,Tentilla vibration,1,Pugh2001_Erenna
 ,Erenna richardi,adult,Tentilla lure resemblance,Chaetognaths,Pugh2001_Erenna
 ,Erenna richardi,adult,Terminal filament ocelli,1,Pugh2001_Erenna
@@ -597,9 +616,8 @@ obs_id,species,stage,character,state,source
 ,Forskalia edwardsi,adult,Heteroneme position,Lateral,Pugh2003_Forskaliidae
 ,Forskalia edwardsi,adult,Heteroneme type,Stenoteles,Pugh2003_Forskaliidae
 ,Forskalia edwardsi,adult,Haploneme type,Anisorhizas,Pugh2003_Forskaliidae
-,Forskalia edwardsi,adult,Haploneme type,Atrichous(?) isorhizas,ClaudeCarre_pers_Comm
 ,Forskalia edwardsi,adult,Rhopaloneme type,Acrophores,Pugh2003_Forskaliidae
-,Forskalia edwardsi,adult,Terminal filament nematocyst arrrangement,"2Desmonemes,4Rhopalonemes",Pugh2003_Forskaliidae
+,Forskalia edwardsi,adult,Terminal filament nematocyst arrrangement,2Desmonemes,4Rhopalonemes,Pugh2003_Forskaliidae
 ,Forskalia edwardsi,larva,Cnidoband shape,Acorn,Pugh2003_Forskaliidae
 ,Forskalia edwardsi,larva,Heteroneme position,Ring,Pugh2003_Forskaliidae
 ,Forskalia edwardsi,larva,Heteroneme type,Stenoteles,Pugh2003_Forskaliidae
@@ -666,6 +684,23 @@ obs_id,species,stage,character,state,source
 ,Physophora hydrostatica,adult,Cnidosac lateral processes,0,Pugh2005_Physophora
 ,Physophora gilmeri,adult,Cnidosac lateral processes,0,Pugh2005_Physophora
 ,Physophora gilmeri,adult,Cnidosac lateral processes,1,Pugh2005_Physophora
+,Sphaeronectes christiansonae,adult,Gastrozooid color,Orange,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Cnidoband color,White,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Tentacle lateral excrecences,1,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Pedicle contractility,High,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Heteroneme type,Microbasic mastigophores,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Heteroneme position,Lateral,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Distal cnidoband desmonemes,1,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Haploneme type,Anisorhizas(?),Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Gastrozooid color,Colorless,Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Cnidoband color,Pale yellow,Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Heteroneme type,Microbasic mastigophores,Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Desmoneme shape,Pear,Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Terminal filament,1,Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Distal cnidoband desmonemes,1,Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Tentacle lateral excrecences,1,Pugh2009_Sphaeronectidae
+,Sphaeronectes haddocki,adult,Rhopaloneme type,Anacrophores,Pugh2009_Sphaeronectidae
+,Sphaeronectes christiansonae,adult,Rhopaloneme type,Anacrophores,Pugh2009_Sphaeronectidae
 ,Resomia ornicephala,adult,Involucrum encosing,0,Pugh2009cResomiidae
 ,Resomia ornicephala,adult,Involucrum flaps,2,Pugh2009cResomiidae
 ,Resomia ornicephala,adult,Involucrum flaps symmetry,Asymmetrical,Pugh2009cResomiidae
@@ -695,7 +730,7 @@ obs_id,species,stage,character,state,source
 ,Resomia persica,adult,Haploneme type,Anisorhizas,Pugh2009cResomiidae
 ,Resomia persica,adult,Heteroneme position,Lateral,Pugh2009cResomiidae
 ,Resomia persica,adult,Rhopaloneme type,Acrophores,Pugh2009cResomiidae
-,Resomia dunni,adult,Cnidoband shape,"Coiled, Zigzag",Pugh2009cResomiidae
+,Resomia dunni,adult,Cnidoband shape,Coiled, Zigzag,Pugh2009cResomiidae
 ,Resomia dunni,adult,Cnidoband color,Orange,Pugh2009cResomiidae
 ,Resomia dunni,adult,Gastrozooid color,Orange,Pugh2009cResomiidae
 ,Resomia dunni,adult,Gastrozooid color,Red,Pugh2009cResomiidae
@@ -705,33 +740,6 @@ obs_id,species,stage,character,state,source
 ,Resomia dunni,adult,Heteroneme position,Lateral,Pugh2009cResomiidae
 ,Resomia persica,adult,Crustacean diet,1,Pugh2009cResomiidae
 ,Resomia persica,adult,Krill diet,1,Pugh2009cResomiidae
-,Sphaeronectes koellikeri,adult,Terminal filament,1,Claus1874
-,Sphaeronectes irregularis,adult,Heteroneme type,Microbasic mastigophores,Claus1874
-,Sphaeronectes koellikeri,adult,Desmoneme shape,Pear,Claus1874
-,Sphaeronectes irregularis,adult,Desmoneme shape,Pear,Claus1874
-,Sphaeronectes koellikeri,adult,Proximal TF desmoneme clump,1,Claus1874
-,Sphaeronectes koellikeri,adult,Distal TF desmoneme clump,1,Claus1874
-,Sphaeronectes irregularis,adult,Proximal TF desmoneme clump,1,Claus1874
-,Sphaeronectes irregularis,adult,Distal TF desmoneme clump,0,Claus1874
-,Sphaeronectes koellikeri,adult,Heteroneme shape,Cylindrical,Claus1874
-,Sphaeronectes irregularis,adult,Heteroneme shape,Cylindrical,Claus1874
-,Sphaeronectes christiansonae,adult,Gastrozooid color,Orange,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Cnidoband color,White,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Tentacle lateral excrecences,1,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Pedicle contractility,High,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Heteroneme type,Microbasic mastigophores,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Heteroneme position,Lateral,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Distal cnidoband desmonemes,1,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Haploneme type,Anisorhizas(?),Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Gastrozooid color,Colorless,Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Cnidoband color,Pale yellow,Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Heteroneme type,Microbasic mastigophores,Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Desmoneme shape,Pear,Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Terminal filament,1,Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Distal cnidoband desmonemes,1,Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Tentacle lateral excrecences,1,Pugh2009_Sphaeronectidae
-,Sphaeronectes haddocki,adult,Rhopaloneme type,Anacrophores,Pugh2009_Sphaeronectidae
-,Sphaeronectes christiansonae,adult,Rhopaloneme type,Anacrophores,Pugh2009_Sphaeronectidae
 ,Halistemma rubrum,adult,Gastrozooid color,Colorless,Pugh2014Halistemma
 ,Halistemma rubrum,adult,Gastrozooid color,Faint orange,Pugh2014Halistemma
 ,Halistemma rubrum,adult,Involucrum enclosing,0,Pugh2014Halistemma
@@ -955,7 +963,15 @@ obs_id,species,stage,character,state,source
 ,Erenna sirena,adult,Haploneme type,Microbasic anisorhizas,PughHaddock2016_Erenna
 ,Erenna sirena,adult,Haploneme shape,Cylindrical,PughHaddock2016_Erenna
 ,Erenna richardi,adult,Cnidoband shape,Wavy margins,PughHaddock2016_Erenna
-,Rhizophysa filiformis,adult,Gut contents,Alcyopids,Biggs1977
+,Apolemia uvaria,adult,Gut contents,Gelatinous zooplankton,Purcell1981
+,Apolemia uvaria,adult,Gelatinous diet,1,Purcell1981
+,Bathyphysa sibogae,adult,Gut contents,Fish larvae,Purcell1981
+,Rhizophysa filiformis,adult,Gut contents,Fish larvae,Purcell1981
+,Rhizophysa eyesenhardti,adult,Gut contents,Fish larvae,Purcell1981
+,Rhizophysa eyesenhardti,adult,Fish diet,1,Purcell1981
+,Physalia physalis,adult,Fish diet,1,Purcell1981
+,Bathyphysa sibogae,adult,Fish diet,1,Purcell1981
+,Rhizophysa filiformis,adult,Fish diet,1,Purcell1981
 ,Apolemia uvaria,adult,Gut contents,Cypris larvae,Purcell1981b_feeding
 ,Apolemia uvaria,adult,Gut contents,Barnacle nauplius larvae,Purcell1981b_feeding
 ,Apolemia uvaria,adult,Gut contents,Cladocera,Purcell1981b_feeding
@@ -1026,8 +1042,6 @@ obs_id,species,stage,character,state,source
 ,Agalma okeni,adult,Copepod diet,1,Purcell1981b_feeding
 ,Agalma okeni,adult,Copepod diet,0,Purcell1981b_feeding
 ,Agalma okeni,adult,Amphipod diet,0,Purcell1981b_feeding
-,Agalma okeni,adult,Amphipod diet,1,Biggs1977
-,Agalma elegans,adult,Amphipod diet,1,Biggs1977
 ,Agalma okeni,adult,Ostracod diet,0,Purcell1981b_feeding
 ,Agalma okeni,adult,Decapod diet,0,Purcell1981b_feeding
 ,Agalma okeni,adult,Decapod diet,1,Purcell1981b_feeding
@@ -1054,11 +1068,9 @@ obs_id,species,stage,character,state,source
 ,Athorybia rosacea,adult,Chaetognath diet,1,Purcell1981b_feeding
 ,Athorybia rosacea,adult,Chaetognath diet,0,Purcell1981b_feeding
 ,Athorybia rosacea,adult,Decapod diet,0,Purcell1981b_feeding
-,Athorybia rosacea,adult,Decapod diet,1,Biggs1977
 ,Athorybia rosacea,adult,Ostracod diet,0,Purcell1981b_feeding
 ,Athorybia rosacea,adult,Decapod diet,1,Purcell1981b_feeding
 ,Athorybia rosacea,adult,Amphipod diet,0,Purcell1981b_feeding
-,Athorybia rosacea,adult,Amphipod diet,1,Biggs1977
 ,Athorybia rosacea,adult,Copepod diet,1,Purcell1981b_feeding
 ,Cordagalma ordinatum,adult,Copepod diet,1,Purcell1981b_feeding
 ,Cordagalma ordinatum,adult,Ostracod diet,1,Purcell1981b_feeding
@@ -1230,10 +1242,7 @@ obs_id,species,stage,character,state,source
 ,Apolemia uvaria,adult,Gut contents,Decapod larvae,Purcell1981b_feeding
 ,Apolemia uvaria,adult,Gut contents,Chaetognaths,Purcell1981b_feeding
 ,Athorybia rosacea,adult,Gut contents,Copepod,Purcell1981b_feeding
-,Athorybia rosacea,adult,Gut contents,Amphipod,Biggs1977
-,Agalma okeni,adult,Gut contents,Amphipod,Biggs1978
 ,Athorybia rosacea,adult,Gut contents,Chaetognaths,Purcell1981b_feeding
-,Athorybia rosacea,adult,Gut contents,Decapod shrimps,Biggs1977
 ,Athorybia rosacea,adult,Gut contents,Fish larvae,Purcell1981b_feeding
 ,Cordagalma ordinatum,adult,Gut contents,Copepod,Purcell1981b_feeding
 ,Cordagalma ordinatum,adult,Gut contents,Ostracod,Purcell1981b_feeding
@@ -1277,7 +1286,6 @@ obs_id,species,stage,character,state,source
 ,Hippopodius hippopus,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
 ,Rosacea cymbiformis,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
 ,Stephanophyes superba,adult,Haploneme type,Homotrichous isorhizas(?),Purcell1984
-,Muggiaea atlantica,adult,Haploneme type,Atrichous anisorhizas,Russell1939
 ,Chelophyes appendiculata,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
 ,Sulculeolaria quadrivalvis,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
 ,Sulculeolaria monoica,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
@@ -1294,7 +1302,6 @@ obs_id,species,stage,character,state,source
 ,Agalma clausi,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
 ,Agalma elegans,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
 ,Cordagalma ordinatum,adult,Haploneme type,Holotrichous anisorhizas,Purcell1984
-,Cordagalma ordinatum,adult,Haploneme type,Isorhizas,Carre1968
 ,Athorybia rosacea,adult,Heteroneme shape,Oval,Purcell1984
 ,Cordagalma ordinatum,adult,Heteroneme shape,Oval,Purcell1984
 ,Physophora hydrostatica,adult,Heteroneme shape,Oval,Purcell1984
@@ -1303,14 +1310,10 @@ obs_id,species,stage,character,state,source
 ,Cordagalma ordinatum,adult,Heteroneme type,Stenoteles,Purcell1984
 ,Physophora hydrostatica,adult,Heteroneme type,Stenoteles,Purcell1984
 ,Nanomia bijuga,adult,Heteroneme type,Stenoteles,Purcell1984
-,Physophora hydrostatica,adult,Heteroneme type,Microbasic mastigophores,Iwanzoff1896
 ,Agalma clausi,adult,Heteroneme type,Microbasic mastigophores,Purcell1984
 ,Agalma elegans,adult,Heteroneme type,Microbasic mastigophores,Purcell1984
 ,Agalma clausi,adult,Rhopaloneme type,Acrophores,Purcell1984
 ,Agalma elegans,adult,Rhopaloneme type,Acrophores,Purcell1984
-,Agalma elegans,adult,Rhopaloneme type,Anacrophores,Russel1938
-,Apolemia uvaria,adult,Gut contents,Gelatinous zooplankton,Purcell1981
-,Apolemia uvaria,adult,Gelatinous diet,1,Purcell1981
 ,Physalia physalis,adult,Haploneme type,Atrichous isorhizas,Purcell1984
 ,Bathyphysa sibogae,adult,Haploneme type,Atrichous isorhizas,Purcell1984
 ,Rhizophysa filiformis,adult,Haploneme type,Atrichous isorhizas,Purcell1984
@@ -1320,13 +1323,6 @@ obs_id,species,stage,character,state,source
 ,Physalia physalis,adult,Gut contents,Cephalopods,Purcell1984
 ,Physalia physalis,adult,Gut contents,Chaetognaths,Purcell1984
 ,Physalia physalis,adult,Gut contents,Fish,Purcell1984
-,Bathyphysa sibogae,adult,Gut contents,Fish larvae,Purcell1981
-,Rhizophysa filiformis,adult,Gut contents,Fish larvae,Purcell1981
-,Rhizophysa eyesenhardti,adult,Gut contents,Fish larvae,Purcell1981
-,Rhizophysa eyesenhardti,adult,Fish diet,1,Purcell1981
-,Physalia physalis,adult,Fish diet,1,Purcell1981
-,Bathyphysa sibogae,adult,Fish diet,1,Purcell1981
-,Rhizophysa filiformis,adult,Fish diet,1,Purcell1981
 ,Agalma okeni,adult,Tentilla lure resemblance,Copepods,Purcell1984
 ,Athorybia rosacea,adult,Tentilla lure resemblance,Fish larvae,Purcell1984
 ,Nanomia cara,adult,Cnidoband fluorescence,1,Purcell1984
@@ -1335,6 +1331,8 @@ obs_id,species,stage,character,state,source
 ,Agalma elegans,adult,Cnidoband fluorescence,0,Purcell1984
 ,Athorybia lucida,adult,Tentilla lure resemblance,Appendicularia,Purcell1984
 ,Physophora hydrostatica,adult,Tentilla vibration,1,Purcell1984
+,Agalma elegans,adult,Rhopaloneme type,Anacrophores,Russel1938
+,Muggiaea atlantica,adult,Haploneme type,Atrichous anisorhizas,Russell1939
 ,Agalma elegans,adult,Heteroneme type,Microbasic mastigophores,Russell1940
 ,Agalma elegans,adult,Haploneme type,Homotrichous anisorhizas,Russell1940
 ,Agalma elegans,adult,Terminal nematocyst type,Microbasic euryteles,Russell1940
@@ -1363,8 +1361,8 @@ obs_id,species,stage,character,state,source
 ,Apolemia rubriversa,adult,Heteroneme type,Unknown,Siebert2013_Apolemia
 ,Apolemia lanosa,adult,Gastrozooid haploneme shape,Spherical,Siebert2013_Apolemia
 ,Apolemia uvaria,adult,Heteroneme type,Birhopaloids,Siebert2013_Apolemia
-,Chelophyes ?appendiculata,adult,Terminal filament nematocyst arrangement,"1Desmonemes,2Rhopalonemes",Skaer1988_patterns
-,Abylopsis ?tetragona,adult,Terminal filament nematocyst arrangement,"1Desmonemes,2Rhopalonemes",Skaer1988_patterns
+,Chelophyes ?appendiculata,adult,Terminal filament nematocyst arrangement,1Desmonemes,2Rhopalonemes,Skaer1988_patterns
+,Abylopsis ?tetragona,adult,Terminal filament nematocyst arrangement,1Desmonemes,2Rhopalonemes,Skaer1988_patterns
 ,Forskalia ?edwardsi,adult,Terminal filament nematocyst arrangement,2Desmonemes2Rhopalonemes,Skaer1988_patterns
 ,Hippopodius hippopus,adult,Terminal filament nematocyst arrangement,2Desmonemes2Rhopalonemes,Skaer1988_patterns
 ,Chelophyes ?appendiculata,adult,Heteroneme position,Lateral,Skaer1988_patterns
@@ -1374,3 +1372,5 @@ obs_id,species,stage,character,state,source
 ,Forskalia ?edwardsi,adult,Rhopaloneme shape,Elongate,Skaer1988_patterns
 ,Abylopsis ?tetragona,adult,Desmoneme shape,Ovoid,Skaer1988_patterns
 ,Abylopsis ?tetragona,adult,Rhopaloneme shape,Elongate,Skaer1988_patterns
+,Physophora hydrostatica,adult,Tentilla lure resemblance,Copepods,Wrobel_Jellieszone
+,Physophora hydrostatica,adult,Tentacle jigging,1,Wrobel_Jellieszone

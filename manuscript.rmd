@@ -644,6 +644,43 @@ for(ch in 2:ncol(sharedmean_logs)){
   #abline(v=0,col="red")
 }
 
+#Categorical-Continuous correlations
+catlogits = data.frame(matrix(ncol = 6, nrow = 0))
+names(catlogits) = c("Character binary", "Character continuous", "Ntaxa", "phyloglmAIC", "phyloglmP","phyloglm_b")
+catlogits[1,]=rep(1,6)
+binary=categorical[,2:9]
+for(cat in 1:ncol(binary)){
+  for(char in 2:ncol(sharedmean_logs)){
+    CH_J=binary[,cat]
+    names(CH_J) = rownames(binary)
+    CH_J = CH_J[!is.na(CH_J)]
+    CH_I = sharedmean_logs[,char]
+    names(CH_I) = sharedmean_logs$Species
+    CH_I = CH_I[!is.na(CH_I)]
+    CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+    CH_I = CH_I[which(names(CH_I)%in%names(CH_J))]
+    treeIJ = drop.tip(ultram, which(!(ultram$tip.label %in% names(CH_J))))
+    CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
+    CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
+    datIJ = data.frame(char_cat = CH_J, char_con = CH_I)
+    if(length(unique(CH_J))>1){
+      phylogit = phyloglm(char_cat~char_con,phy=treeIJ,data=datIJ,boot=10, btol=20)
+      print(phylogit)
+      rowIJ = c(names(binary)[cat], names(sharedmean_logs)[char], phylogit$n, phylogit$aic, coef(summary(phylogit))[2,6], coef(summary(phylogit))[2,1])
+      } else{
+      rowIJ = c(names(binary)[cat], names(sharedmean_logs)[char], phylogit$n, NA, NA, NA)
+      }
+    #print(rowIJ)
+    catlogits = rbind(catlogits, rowIJ)
+    print(catlogits[nrow(catlogits),])
+  }
+}
+catlogits = catlogits[-1,]
+catlogits[,4:6] = sapply(catlogits[,4:6], as.numeric)
+catlogits[,4:6] = sapply(catlogits[,4:6], function(x){round(x,3)})
+write.csv(catlogits, "catlogits.csv", row.names = F)
+
+
 ```
 
 
@@ -761,11 +798,13 @@ Out of 29 characters, 11 did  not significantly (delta AICc > 2) support a phylo
 
 ```{r diet_data, include=F}
 #Retrieve diet info from literature BINARY
-GC = read.csv("Cmerged.csv", header = T, sep=',')[,c(2,4,5)] %>% .[which(grepl("diet",.$character) & .$state==1),]
+GC = read.csv("Cmerged.csv", header = T, sep=',')[,c(2,4,5,6)] %>% .[which(grepl("diet",.$character) & .$state==1),]
 GC$character = factor(GC$character, levels=unique(GC$character))
 GC$species = as.character(GC$species)
 GC$species[which(GC$species == "Nanomia bijuga")] <- "Nanomia sp"
-GC = GC[which(GC$species %in% sharedmeans$Species),]
+GC$species[which(GC$species == "Rhizophysa eyesenhardti")] <- "Rhizophysa eysenhardtii"
+GC$species[which(GC$species == "Agalma okeni")] <- "Agalma okenii"
+GC = GC[which(GC$species %in% ultram$tip.label),]
 GC = split(GC,GC$character)
 nrowGC = purrr::map(GC,nrow) %>% as.numeric()
 GC = GC[which(nrowGC>2)]
@@ -781,13 +820,21 @@ for(E in GC){
 }
 diet[is.na(diet)] <- 0
 diet = diet[which(rowSums(diet)>0),which(colSums(diet)<nrow(diet))]
-cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0),4),nrow=9, ncol = 4) %>% t() %>% as.data.frame()
-names(cladeB) = names(diet)
-rownames(cladeB) = c("Erenna richardi", "Erenna laciniata", "Erenna sirena", "Stephanomia amphytridis")
-krilleaters = matrix(rep(c(0,0,0,0,0,1,1,0,0),2),nrow=9, ncol = 2) %>% t() %>% as.data.frame()
-names(krilleaters) = names(diet)
-rownames(krilleaters) = c("Praya dubia", "Resomia ornicephala")
-diet = rbind(diet, cladeB, krilleaters)
+#Add hypothesized diet from personal observations of the authors
+cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0,0),3),nrow=10, ncol = 3) %>% t() %>% as.data.frame()
+rownames(cladeB) = c("Erenna richardi", "Erenna sirena", "Stephanomia amphytridis")
+krilleaters = matrix(rep(c(0,0,0,1,0,0,1,0,0,0),4),nrow=10, ncol = 4) %>% t() %>% as.data.frame()
+rownames(krilleaters) = c("Praya dubia", "Resomia ornicephala", "Lychnagalma utricularia", "Bargmannia amoena")
+Gelatinous_diet = rep(0,nrow(diet))
+diet = cbind(diet, Gelatinous_diet)
+names(diet)[ncol(diet)] = "Gelatinous diet"
+gelateaters = matrix(rep(c(0,0,0,0,0,0,0,0,0,1),1),nrow=10, ncol = 1) %>% t() %>% as.data.frame()
+names(gelateaters) = names(diet)
+rownames(gelateaters) = c("Apolemia rubriversa")
+names(gelateaters)=names(diet)
+names(krilleaters)=names(diet)
+names(cladeB)=names(diet)
+diet = rbind(diet, cladeB, krilleaters, gelateaters)
 #rownames(diet)[12] = 'Erenna richardi'
 dprunedmatrix = sharedmeans[which(sharedmeans$Species%in%rownames(diet)),]
 dprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(diet)),]
@@ -800,6 +847,8 @@ PP = quantDiet[which(grepl("Relative",quantDiet$character)),]
 PP$character = factor(PP$character, levels=unique(PP$character))
 PP$species = as.character(PP$species)
 PP$species[which(PP$species == "Nanomia bijuga")] <- "Nanomia sp"
+PP$species[which(PP$species == "Rhizophysa eyesenhardti")] <- "Rhizophysa eysenhardtii"
+PP$species[which(PP$species == "Agalma okeni")] <- "Agalma okenii"
 PP = PP[which(PP$species %in% sharedmeans$Species),]
 PP = dcast(PP, species~character, value.var = "state", mean)
 PP[is.na(PP)]<-0
@@ -815,8 +864,47 @@ plot(Pprunedtree)
 #Retrieve copepod prey length from literature
 preylength = quantDiet[which(grepl("prey",quantDiet$character)),] %>% .[,c(1,3)]
 names(preylength) = c("Species","Copepod prey length (mm)")
-PL_pruned_matrix = sharedmeans[which(sharedmeans$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmeans$Species),2])
+PL_pruned_matrix = sharedmean_logs[which(sharedmean_logs$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmean_logs$Species),2])
+PL_pruned_SEs = sharedvar_logs[which(sharedvar_logs$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmean_logs$Species),2])
 names(PL_pruned_matrix)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
+names(PL_pruned_SEs)[ncol(PL_pruned_matrix)] <- "Copepod prey length (mm)"
+
+pGLSp_preylength = as.data.frame(matrix(nrow=ncol(PL_pruned_matrix[,-1]), ncol=1))
+colnames(pGLSp_preylength) = "Copepod prey length"
+row.names(pGLSp_preylength) = names(PL_pruned_matrix[,-1])
+pGLS_PL_sign = pGLSp_preylength
+pGLS_sign = pGLSp_preylength
+for(i in 2:(ncol(PL_pruned_matrix)-1)){
+  CH_I=as.numeric(PL_pruned_matrix[,i])
+  names(CH_I) = PL_pruned_matrix$Species
+  CH_I = CH_I[!is.na(CH_I)]
+  CH_J=PL_pruned_matrix[,ncol(PL_pruned_matrix)]
+  names(CH_J) = PL_pruned_matrix$Species
+  CH_I = CH_I[!is.na(CH_I)]
+  CH_I = CH_I[which(names(CH_I) %in% names(CH_J))]
+  CH_J = CH_J[which(names(CH_J) %in% names(CH_I))]
+  SE_I = PL_pruned_SEs[which(PL_pruned_SEs$Species %in% names(CH_I)),i]
+  names(SE_I) = PL_pruned_SEs[which(PL_pruned_SEs$Species %in% names(CH_I)),1]
+  SE_I = SE_I[match(names(CH_I), names(SE_I))]
+  pgls_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(CH_I))))
+  pg_data = as.data.frame(cbind(CH_I,CH_J)) %>% .[which(!is.na(rowSums(.))),]
+  pgls.SEy(CH_I~CH_J, data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE
+  pgls.SEy(CH_I~sample(CH_J, length(CH_J)), data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE_null
+  TTABLE <- gls(CH_I ~ CH_J, correlation =  corBrownian(phy = pgls_tree), data = pg_data, method = "ML") %>% summary() %>% .$tTable %>% as.data.frame()
+  TTABLE$`p-value`[2] -> pGLSp_preylength[i-1,1]
+  if(pGLSp_preylength[i-1,1]<0.05){
+     print(paste(rownames(pGLSp_preylength)[i-1],"Copepod prey length",pGLSp_preylength[(i-1),1],sep=" "))
+     ValueIJ = TTABLE %>% .$Value %>% .[2]
+     if(ValueIJ>0){pGLS_PL_sign[i-1,1] = "+"}
+      else pGLS_PL_sign[i,1] = "-"
+  }
+}
+write.csv(pGLSp_preylength, "PGLS_Pval_preylength.csv")
+pGLS_PL_sign <- pGLS_PL_sign[which(rowSums(is.na(pGLS_PL_sign))!=ncol(pGLS_PL_sign)),which(colSums(is.na(pGLS_PL_sign))!=nrow(pGLS_PL_sign))]
+write.csv(pGLS_PL_sign, "PGLS_SIGN_preylength.csv")
+for(i in 2:ncol(PL_pruned_matrix)){
+  plot(PL_pruned_matrix[,i], PL_pruned_matrix$`Copepod prey length (mm)`)
+}
 
 #Retrieve VARS data from Choy et al 2017
 VARS <- read.csv("Choy2017.tsv", sep="\t")
@@ -832,7 +920,7 @@ diet_VARS["Nanomia sp",] = c(1,0,0,0,0,1,1,1,0,1)
 diet_VARS["Praya dubia",] = c(1,0,0,0,0,1,1,0,0,1)
 
 #Soft vs Hard
-soft_hard = cbind((diet$`Copepod diet`+diet$`Amphipod diet`+diet$`Crustacean diet` + diet$`Decapod diet` + diet$`Ostracod diet`), (diet$`Fish diet`+diet$`Polychaete diet`+diet$`Chaetognath diet`+diet$`Mollusc diet`))
+soft_hard = cbind((diet$`Copepod diet`+diet$`Crustacean diet` + diet$`Decapod diet`+ diet$`Amphipod diet` + diet$`Ostracod diet`), (diet$`Fish diet`+diet$`Chaetognath diet`+diet$`Gelatinous diet`+diet$`Mollusc diet`+diet$`Polychaete diet`))
 colnames(soft_hard) = c("Hard", "Soft")
 rownames(soft_hard) = rownames(diet)
 soft_hard <- as.data.frame(soft_hard)
@@ -844,13 +932,59 @@ softORhard[softORhard==2]<-"Both"
 softORhard[which(soft_hard$Hard==1 & soft_hard$Soft==0),]<-"Hard"
 softORhard[which(soft_hard$Hard==0 & soft_hard$Soft==1),]<-"Soft"
 
+#Nematocyst type number
+nematocyst_number=as.numeric(categorical$Heteroneme.type!="")[which(!is.na(categorical$Desmonemes))]+as.numeric(categorical$Haploneme.type!="")[which(!is.na(categorical$Desmonemes))]+as.numeric(categorical$Rhopalonemes!="0")[which(!is.na(categorical$Desmonemes))]+as.numeric(categorical$Desmonemes!="0")[which(!is.na(categorical$Desmonemes))]
+names(nematocyst_number)=categorical$Species[which(!is.na(categorical$Desmonemes))]
+CH_J=softORhard[,1]
+names(CH_J) = rownames(softORhard)
+CH_J[CH_J!="Soft"]<-0
+CH_J[CH_J=="Soft"]<-1
+CH_I = nematocyst_number
+CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+CH_I = CH_I[which(names(CH_I)%in%names(CH_J))]
+treeIJ = drop.tip(ultram, which(!(ultram$tip.label %in% names(CH_J))))
+CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
+CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
+datIJ = data.frame(preytype = CH_J, character = CH_I)
+datIJ$preytype = as.numeric(as.character(datIJ$preytype))
+logit = glm(preytype~character,data=datIJ, family="binomial")
+    print(logit)
+phylogit = phyloglm(preytype~character,phy=treeIJ,data=datIJ,boot=10, btol=10)
+    print(phylogit)
+c("Soft specilization", "Number of nematocyst types", phylogit$n, phylogit$aic, coef(summary(phylogit))[2,6], coef(summary(phylogit))[2,1], logit$aic, coef(summary(logit))[2,4], coef(summary(logit))[2,1])
+
+#Desmoneme/Rhopaloneme vs crustacean
+dprunedCat = binary[which(rownames(binary)%in% rownames(diet)),]
+CH_I = dprunedCat$Rhopalonemes
+names(CH_I) = rownames(dprunedCat)
+CH_J = diet$`Crustacean diet`
+names(CH_J) = rownames(diet)
+CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+CH_I = CH_I[which(names(CH_I)%in%names(CH_J))]
+treeIJ = drop.tip(ultram, which(!(ultram$tip.label %in% names(CH_J))))
+CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
+CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
+fitPagel(treeIJ, CH_I, CH_J)
+
+#Differentiated cnidobands with heteronemes
+CH_I = dprunedCat$Proximal.heteronemes
+names(CH_I) = rownames(dprunedCat)
+CH_J = diet$`Crustacean diet`
+names(CH_J) = rownames(diet)
+CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+CH_I = CH_I[which(names(CH_I)%in%names(CH_J))]
+treeIJ = drop.tip(ultram, which(!(ultram$tip.label %in% names(CH_J))))
+CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
+CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
+fitPagel(treeIJ, CH_I, CH_J) %>% .$P
+
 ```
 
 3.0 Phylogeny with the tips mapped with the literature dietary associations, and internal nodes showing SIMMAP reconstructed states.
 
 ```{r diet_regime_tree}
 regimetree = dprunedTree
-hypdiet = c("Mixed", "Copepod", "Crustacean", "Copepod", "Crustacean", "Crustacean", "Mixed", "Mixed", "Crustacean", "Mixed", "Copepod", "Crustacean", "Fish", "Fish", "Fish", "Fish", "Fish", "Fish")
+hypdiet = c("Mixed", "Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Large crustacean", "Mixed", "Mixed", "Mixed", "Large crustacean", "Large crustacean", "Mixed", "Small crustacean", "Large crustacean", "Fish", "Fish", "Fish", "Large crustacean", "Gelatinous", "Fish", "Fish", "Fish")
 names(hypdiet) = regimetree$tip.label
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
@@ -877,6 +1011,24 @@ for(row in 1:nrow(SHAnc)){
 SHtree$node.label = as.factor(HypSHAnc)
 plotTree(SHtree)
 nodelabels(text=SHtree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);tiplabels(text=hypSH, frame="none", cex=0.6, adj=c(0,2))
+
+#Stenoteles vs large crustaceans
+stenoteles = categorical$Heteroneme.type %>% as.character()
+categorical <- read.csv("Homolog_Categorical.csv")[,-2]
+categorical$Species<-as.character(categorical$Species)
+categorical$Species[which(categorical$Species == "Agalma okeni")] <- "Agalma okenii"
+categorical$Species[which(categorical$Species == "Rhizophysa eysenhardti")] <- "Rhizophysa eysenhardtii"
+categorical$Species[which(categorical$Species == "Nanomia bijuga")] <- "Nanomia sp"
+names(stenoteles)=categorical$Species
+stenoteles[stenoteles!="Stenotele"]<-0
+stenoteles[stenoteles=="Stenotele"]<-1
+shrimp = hypdiet
+shrimp[shrimp!="Large crustacean" & shrimp!= "Mixed"]<-0
+shrimp[shrimp=="Large crustacean" | shrimp== "Mixed"]<-1
+stenoteles = stenoteles[which(names(stenoteles) %in% names(shrimp))]
+stenoteles = stenoteles[match(names(shrimp), names(stenoteles))]
+fitPagel(dprunedTree, stenoteles, shrimp) %>% .$P
+
 ```
 
 3.1 Table showing quantitative and categorical characters association effect size with each prey type in the diet.
@@ -1001,7 +1153,7 @@ for(prey in 1:ncol(logit_diet)){
       if(length(unique(CH_I))>1 & length(unique(CH_J))>1){
       logit = glm(preytype~character,data=datIJ, family="binomial")
       print(logit)
-      phylogit = phyloglm(preytype~character,phy=treeIJ,data=datIJ,boot=10, btol=100)
+      phylogit = phyloglm(preytype~character,phy=treeIJ,data=datIJ,boot=10, btol=30)
       print(phylogit)
       rowIJ = c(names(logit_diet)[prey], names(dprunedmatrix_logs)[char], phylogit$n, phylogit$aic, coef(summary(phylogit))[2,6], coef(summary(phylogit))[2,1], logit$aic, coef(summary(logit))[2,4], coef(summary(logit))[2,1])
       } else{
@@ -1071,9 +1223,19 @@ coef(summary(combo_phylogit))
 #Plot mirror trees QUANT
 X = dprunedmatrix_logs$Haploneme.free.length..um.
 names(X) = dprunedmatrix_logs$Species
+X=X[!(is.na(X))]
 Y = diet$`Decapod diet`
 names(Y) = rownames(diet)
+
+X = nematocyst_number
+Y = soft_hard$Soft
+Y=softORhard[,1]
+names(Y) = rownames(softORhard)
+Y[Y!="Soft"]<-0
+Y[Y=="Soft"]<-1
+
 Y = Y[which(names(Y) %in% names(X))]
+X = X[which(names(X) %in% names(Y))]
 treeXY = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(X))))
 layout(matrix(1:3,1,3),widths=c(0.44,0.12,0.44))
 par(cex=0.5)
@@ -1165,8 +1327,8 @@ write.csv(SH_matrix, "OU_SH_test.csv")
 #Using raw morphospace
 rawcoords = Pca_raw$ind$coord[,1:2]
 rawcoords = rawcoords[which(rownames(rawcoords) %in% names(hypdiet)),]
-OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=2))
-names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
+OUwie_matrix = as.data.frame(matrix(ncol=5, nrow=2))
+names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU1", "dAICc_OUMV")
 library(magrittr)
 for(c in 1:ncol(rawcoords)){
   Cdata = data.frame(rownames(rawcoords),hypdiet[which(names(hypdiet) %in% rownames(rawcoords))],rawcoords[,c])
@@ -1180,20 +1342,20 @@ for(c in 1:ncol(rawcoords)){
   BM <- OUwie(Ctree, Cdata, model="BM1")
   OU1 <- OUwie(Ctree, Cdata, model="OU1")
   OUm <- OUwie(Ctree, Cdata, model="OUMV")
-  OUwie_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
-  OUwie_matrix[c-1,2] = nrow(Cdata)
-  OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
-  OUwie_matrix[c-1,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
-  OUwie_matrix[c-1,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c,1] = c("PC1","PC2")[c]
+  OUwie_matrix[c,2] = nrow(Cdata)
+  OUwie_matrix[c,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
 }
 OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
-#write.csv(OUwie_matrix, "OU_raw_test.csv")
+write.csv(OUwie_matrix, "OU_raw_test.csv")
 
 #Using compound mosphospace
 compcoords = Pca_compound$ind$coord[,1:2]
 compcoords = compcoords[which(rownames(compcoords) %in% names(hypdiet)),]
 OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=2))
-names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU")
+names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU1", "dAICc_OUMV")
 library(magrittr)
 for(c in 1:ncol(compcoords)){
   Cdata = data.frame(rownames(compcoords),hypdiet[which(names(hypdiet) %in% rownames(compcoords))],compcoords[,c])
@@ -1207,14 +1369,14 @@ for(c in 1:ncol(compcoords)){
   BM <- OUwie(Ctree, Cdata, model="BM1")
   OU1 <- OUwie(Ctree, Cdata, model="OU1")
   OUm <- OUwie(Ctree, Cdata, model="OUMV")
-  OUwie_matrix[c-1,1] = names(dprunedmatrix_logs)[c]
-  OUwie_matrix[c-1,2] = nrow(Cdata)
-  OUwie_matrix[c-1,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
-  OUwie_matrix[c-1,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
-  OUwie_matrix[c-1,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c,1] = c("PC1","PC2")[c]
+  OUwie_matrix[c,2] = nrow(Cdata)
+  OUwie_matrix[c,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+  OUwie_matrix[c,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
 }
 OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
-#write.csv(OUwie_matrix, "OU_compound_test.csv")
+write.csv(OUwie_matrix, "OU_compound_test.csv")
 ```
 
 ```{r, BAMM_output, echo=F}
