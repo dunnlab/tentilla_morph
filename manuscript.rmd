@@ -37,6 +37,7 @@ library(corrplot)
 library(BAMMtools)
 library(gridExtra)
 library(xtable)
+library(colorRamps)
 
 	# Configure knitr, see http://yihui.name/knitr/options
 	opts_knit$set(
@@ -120,6 +121,25 @@ library(xtable)
   castSE_logs <- cbind(castvariance_logs$Species, sqrt(castvariance_logs[,-1])/sqrt(castN[,-1]))
   names(castSE)[1] <- "Species"
   names(castSE_logs)[1] <- "Species"
+  
+  
+#Define fx Phenogram
+Phenogram <- function(a,b,c){
+  contTrait <- a
+  names(contTrait) = rownames(b)
+  contTrait = contTrait[!is.na(contTrait)]
+  treeI = drop.tip(c,which(!(c$tip.label %in% names(contTrait))))
+  A<-fastAnc(treeI,contTrait,CI=TRUE)
+  paintree<-paintSubTree(treeI,node=length(c$tip)+1,"1")
+  trans<-as.character(floor(0:50/2))
+  trans[as.numeric(trans)<10]<- paste("0", trans[as.numeric(trans)<10],sep="")
+  for(i in 0:50){
+    p<-i/length(trans)
+    phenogram(treeI,c(contTrait,(1-p)*A$CI95[,1]+p*A$ace), colors=setNames(paste("#0000ff",trans[i+1],sep=""),1), add=i>0)
+    phenogram(treeI,c(contTrait,(1-p)*A$CI95[,2]+p*A$ace), colors=setNames(paste("#0000ff",trans[i+1],sep=""),1), add=TRUE)
+  }
+  phenogram(treeI,c(contTrait,A$ace),add=TRUE, colors=setNames("black",1))
+}
 ```
 
 # The evolution of siphonophore tentilla reveals association with diet {-}
@@ -319,14 +339,17 @@ morphdata = cbind(castN, castmeans[,-1], Ses)
 morphdata = morphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
 names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
 
-#write.csv(morphdata, "characterdata.csv")
-grid.newpage()
-grid.table(morphdata)
+write.csv(morphdata, "characterdata.csv")
 
 #Make a heatmap
 heatdata = as.matrix(castmean_logs[,-1])
 rownames(heatdata) = castmean_logs$Species
-heatmap(heatdata, scale = "column", cexCol = 0.5, col=terrain.colors(20))
+heatdata[is.nan(heatdata)]<- -1
+hcolors = white2blue(19)
+hcolors<-c(rep("#000000FF",10), hcolors)
+heatmap(heatdata, scale = "column", cexCol = 0.2, col=hcolors, keep.dendro = T)
+
+
 ```
 
 
@@ -356,7 +379,7 @@ for(i in 2:ncol(sharedmean_logs)){
   phylosignals[i-1,3] <- length(CH_I)
   phylosignals$K = round(phylosignals$K,3)
 }
-#write.csv(phylosignals, "PhylosignalsWSE_log.csv")
+write.csv(phylosignals, "PhylosignalsWSE_log.csv")
 ```
 
 
@@ -432,15 +455,22 @@ het_el = sharedmean_logs$heteroneme_elongation
 names(het_el) = sharedmean_logs$Species
 hap_el = sharedmean_logs$haploneme_elongation
 names(hap_el) = sharedmean_logs$Species
+
+###
+cysthets = c(0,0,0)
+names(cysthets) = c("Physalia physalis", "Rhizophysa eysenhardtii", "Rhizophysa filiformis")
+het_el = c(het_el, cysthets)
+###
 het_el = het_el[which(!is.na(het_el))]
 hap_el = hap_el[which(!is.na(hap_el))]
 het_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(het_el))))
 hap_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(hap_el))))
-phenogram(het_tree, het_el)
-phenogram(hap_tree, hap_el)
+Phenogram(het_tree, het_el)
+Phenogram(hap_el, as.data.frame(hap_el), hap_tree)
 
 hap_el = hap_el[which(names(hap_el) %in% names(het_el))]
 het_el = het_el[which(names(het_el) %in% names(hap_el))]
+het_el = het_el[match(names(hap_el), names(het_el))]
 elon_data = cbind(het_el, hap_el) %>% as.data.frame()
 names(elon_data) = c("Heteroneme elongation (log um)", "Haploneme elongation (log um)")
 elon_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(hap_el))))
@@ -622,6 +652,12 @@ PICOLS = combicorr
 PICOLS[upper.tri(PICOLS)]=cor(C)[upper.tri(cor(C))]
 corrplot(PICOLS, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs regular correlations
 
+cbind(as.vector(phy_corr), as.vector(cor(C))) %>% as.data.frame()->phyreg
+names(phyreg)<-c("Phylo", "Reg")
+ggplot(phyreg, aes(x=Reg, y=Phylo, color=(Phylo+Reg)/2)) + geom_point() + geom_hline(yintercept = 0)  + geom_vline(xintercept = 0) + theme_bw()
+abline(h=0)
+abline(v=0)
+
 #Change directionalities
 changes = matrix(ncol=ncol(sharedmean_logs)-1, nrow=nrow(ultram$edge))
 for(ch in 2:ncol(sharedmean_logs)){
@@ -640,8 +676,8 @@ for(ch in 2:ncol(sharedmean_logs)){
     node_new = edges[i,2]
     (faX[which(names(faX) == node_new)] - faX[which(names(faX) == node_old)])-> changes[i,ch-1]
   }
-  #hist(changes)
-  #abline(v=0,col="red")
+  hist(changes)
+  abline(v=0,col="red")
 }
 
 #Categorical-Continuous correlations
@@ -710,8 +746,9 @@ Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E
 Pca_raw %>% fviz_pca_biplot(axes=c(3,4), col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
 phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
 phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,3:4], label = "horizontal", xlab = "PC3", ylab = "PC4")
-physignal(Pca_raw$ind$coord, raw_tree)
+physignal(Pca_raw$ind$coord[,2], raw_tree)
 multiPhylosignal(Pca_raw$ind$coord, raw_tree)
+phylosignal(Pca_raw$ind$coord[,1], raw_tree)
   ##Morphometric characters
 PCA(compound_matrix) -> Pca_compound
 Pca_compound %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
@@ -1093,7 +1130,7 @@ for(i in 2:ncol(Pprunedmatrix_logs)){
    }
   }
 }
-#write.csv(pGLSp_diet, "PGLS_Pval_DietPP.csv")
+write.csv(pGLSp_diet, "PGLS_Pval_DietPP.csv")
 pGLS_sign <- pGLS_sign[which(rowSums(is.na(pGLS_sign))!=ncol(pGLS_sign)),which(colSums(is.na(pGLS_sign))!=nrow(pGLS_sign))]
 write.csv(pGLS_sign, "PGLS_SIGN_DietPP.csv")
 
@@ -1166,7 +1203,7 @@ for(prey in 1:ncol(logit_diet)){
 logits = logits[-1,]
 logits[,4:9] = sapply(logits[,4:9], as.numeric)
 logits[,4:9] = sapply(logits[,4:9], function(x){round(x,3)})
-write.csv(logits, "logits.csv", row.names = F)
+write.csv(logits, "diet_morph_logits.csv", row.names = F)
 
 #Soft-Hard logistic regression
 logits = data.frame(matrix(ncol = 9, nrow = 0))
@@ -1352,31 +1389,31 @@ OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
 write.csv(OUwie_matrix, "OU_raw_test.csv")
 
 #Using compound mosphospace
-compcoords = Pca_compound$ind$coord[,1:2]
-compcoords = compcoords[which(rownames(compcoords) %in% names(hypdiet)),]
-OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=2))
-names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU1", "dAICc_OUMV")
-library(magrittr)
-for(c in 1:ncol(compcoords)){
-  Cdata = data.frame(rownames(compcoords),hypdiet[which(names(hypdiet) %in% rownames(compcoords))],compcoords[,c])
-  names(Cdata) = c("species", "regime", "trait")
-  Cdata$trait[which(Cdata$trait == "NaN")] <- NA
-  Cdata = Cdata[!is.na(Cdata$trait),]
-  Cdata$trait = as.numeric(Cdata$trait)
-  Cdata$species = as.character(Cdata$species)
-  Cdata$regime = as.character(Cdata$regime)
-  Ctree = drop.tip(regimetree,which(!(regimetree$tip.label %in% Cdata$species)))
-  BM <- OUwie(Ctree, Cdata, model="BM1")
-  OU1 <- OUwie(Ctree, Cdata, model="OU1")
-  OUm <- OUwie(Ctree, Cdata, model="OUMV")
-  OUwie_matrix[c,1] = c("PC1","PC2")[c]
-  OUwie_matrix[c,2] = nrow(Cdata)
-  OUwie_matrix[c,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
-  OUwie_matrix[c,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
-  OUwie_matrix[c,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
-}
-OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
-write.csv(OUwie_matrix, "OU_compound_test.csv")
+# compcoords = Pca_compound$ind$coord[,1:2]
+# compcoords = compcoords[which(rownames(compcoords) %in% names(hypdiet)),]
+# OUwie_matrix = as.data.frame(matrix(ncol=4, nrow=2))
+# names(OUwie_matrix) = c("Character", "Ntips", "dAICc_BM", "dAICc_OU1", "dAICc_OUMV")
+# library(magrittr)
+# for(c in 1:ncol(compcoords)){
+#   Cdata = data.frame(rownames(compcoords),hypdiet[which(names(hypdiet) %in% rownames(compcoords))],compcoords[,c])
+#   names(Cdata) = c("species", "regime", "trait")
+#   Cdata$trait[which(Cdata$trait == "NaN")] <- NA
+#   Cdata = Cdata[!is.na(Cdata$trait),]
+#   Cdata$trait = as.numeric(Cdata$trait)
+#   Cdata$species = as.character(Cdata$species)
+#   Cdata$regime = as.character(Cdata$regime)
+#   Ctree = drop.tip(regimetree,which(!(regimetree$tip.label %in% Cdata$species)))
+#   BM <- OUwie(Ctree, Cdata, model="BM1")
+#   OU1 <- OUwie(Ctree, Cdata, model="OU1")
+#   OUm <- OUwie(Ctree, Cdata, model="OUMV")
+#   OUwie_matrix[c,1] = c("PC1","PC2")[c]
+#   OUwie_matrix[c,2] = nrow(Cdata)
+#   OUwie_matrix[c,3] = BM$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+#   OUwie_matrix[c,4] = OU1$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+#   OUwie_matrix[c,5] = OUm$AICc - min(c(BM$AICc, OU1$AICc, OUm$AICc))
+# }
+# OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
+# write.csv(OUwie_matrix, "OU_compound_test.csv")
 ```
 
 ```{r, BAMM_output, echo=F}
@@ -1398,6 +1435,38 @@ for(prey in 1:ncol(diet)){
 ```
 
 3.3 Interpret qualitatively the kinematic implications (high speed video) of the different regions of the morphospace.
+
+``` {r kine}
+kine = read.csv("Kinematics.tsv", sep='\t', header=T) #%>% .[which(apply(., 1, function(x) sum(is.na(x)))<ncol(.)-2),-2]
+kineWNA = kine[which(kine$Species %in% ultram$tip.label),]
+rownames(kineWNA)=kineWNA$Specimen
+rownames(kine)=kine$Specimen
+#kineWNA = kineWNA[,-1]
+#kine=kine[,-1]
+kinetree = drop.tip(ultram, which(!(ultram$tip.label %in% kine$Species)))
+kinetree$edge.length = 200*kinetree$edge.length
+#kine_clean = kineWNA[,which(colSums(kineWNA)>1)]
+#names(kine) = c("ADS", "MDS", "HeDS","HeMDS", "HSDS", "HFL", "HaDS")
+kine_byspp = aggregate(. ~ kine$Species, data = kine[,c(-1,-2)], mean.na, na.action = na.pass)
+names(kine_byspp)[1] <- "Species"
+kinemorph <- castmeans[which(castmeans$Species %in% kine_byspp$Species),] %>% cbind(kine_byspp[which(kine_byspp$Species %in% castmeans$Species),])
+plot(kinemorph$Cnidoband.free.length..um., kinemorph$Average.CB.discharge.speed..mm.s.)
+calys = kinemorph$Species[c(5,9,12,15,16,17,18)]
+euphys = kinemorph$Species[which(!(kinemorph$Species %in% calys))]
+relspeed = data.frame(kinemorph$Species, c(kinemorph$Average.CB.discharge.speed..mm.s./kinemorph$Cnidoband.free.length..um.))
+names(relspeed) = c("Species", "Speed/Length")
+relspeed <- relspeed[which(!(is.na(relspeed$`Speed/Length`))),]
+t.test(relspeed[which(relspeed$Species %in% calys),2], relspeed[which(relspeed$Species %in% euphys),2])
+t.test(kine$Average.CB.discharge.speed..mm.s.[which(kine$Species %in% calys)], kine$Average.CB.discharge.speed..mm.s.[which(kine$Species %in% euphys)])
+t.test(castnumbers$Cnidoband.free.length..um.[which(castnumbers$Species %in% calys)], castnumbers$Cnidoband.free.length..um.[which(castnumbers$Species %in% euphys)])
+lm(kinemorph$Average.CB.discharge.speed..mm.s.~ kinemorph$Cnidoband.free.length..um.) %>% summary()
+lm(kinemorph$Heteroneme.discharge.speed.MAX..mm.s.~ kinemorph$Heteroneme.volume..um3.) %>% summary()
+t.test(kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
+t.test(kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
+t.test(kine$Haploneme.discharge.speed.AVG..mm.s., kine$Heteroneme.discharge.speed.AVG..mm.s.)
+cor(kinemorph[,c(-1,-32)], use="pairwise.complete.obs") %>% .[c(1:30),c(31:41)] %>% corrplot(diag=F, tl.cex = 0.4, tl.col="black")
+
+```
 
 High-speed video of cnidoband and nematocyst discharge revealed the roles of the different tentillum substructures in the mechanics of discharge. Moreover, it shows important differences in the discharge dynamics of species with different tentillum morphologies.
 
