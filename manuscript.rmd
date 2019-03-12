@@ -379,7 +379,7 @@ for(i in 2:ncol(sharedmean_logs)){
   phylosignals[i-1,3] <- length(CH_I)
   phylosignals$K = round(phylosignals$K,3)
 }
-write.csv(phylosignals, "PhylosignalsWSE_log.csv")
+#write.csv(phylosignals, "PhylosignalsWSE_log.csv")
 ```
 
 
@@ -1094,7 +1094,7 @@ for(prey in 1:ncol(diet)){
   }}
 pANOVAs_diet = pANOVAs_diet[,-1]
 pANOVAs_diet[pANOVAs_diet>0.05] <- NA
-write.csv(pANOVAs_diet, "pANOVAS_Diet.csv")
+#write.csv(pANOVAs_diet, "pANOVAS_Diet.csv")
 
 #PGLS with proportions in Diet
 pGLSp_diet = as.data.frame(matrix(nrow=ncol(Pprunedmatrix_logs[,-1]), ncol=ncol(PP)))
@@ -1153,24 +1153,6 @@ for(prey in 1:ncol(diet)){
   }
 
 #LOGISTIC REGRESSION
-copepod = diet$`Copepod diet`
-names(copepod) = rownames(diet)
-heteroneme_elongation = dprunedmatrix_logs$heteroneme_elongation
-names(heteroneme_elongation) = dprunedmatrix_logs$Species
-copepod = copepod[match(dprunedTree$tip.label, names(copepod))]
-heteroneme_elongation = heteroneme_elongation[match(dprunedTree$tip.label, names(heteroneme_elongation))]
-dat = data.frame(heteroneme_elongation, copepod)
-dat = dat[which(!is.nan(dat$heteroneme_elongation)),]
-null = dat
-null$heteroneme_elongation = rep(1, nrow(dat))
-xtree = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% rownames(dat))))
-logit = phyloglm(copepod~heteroneme_elongation,phy=xtree,data=dat,boot=100)
-logit = phyloglm(copepod~,phy=xtree,data=null,boot=100)
-summary(logit)
-coef(logit)
-vcov(logit)
-nlogit = glm(copepod~heteroneme_elongation,data=dat, family="binomial")
-
 logits = data.frame(matrix(ncol = 9, nrow = 0))
 names(logits) = c("Prey type", "Character", "Ntaxa", "phyloglmAIC", "phyloglmP","phyloglm_b","glmAIC", "glmP", "glm_b")
 logit_diet = diet[,-7]
