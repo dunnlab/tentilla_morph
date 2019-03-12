@@ -387,7 +387,6 @@ for(i in 2:ncol(sharedmean_logs)){
 
 ```{r fitContinuous, include=F}
 #Model support
-  Q_sharedmean_logs$Heteroneme_to_CB[which(Q_sharedmean_logs$Heteroneme_to_CB > 9)] <- NA
   AICdf = as.data.frame(matrix(ncol=6,nrow=ncol(Q_sharedmean_logs)))
   colnames(AICdf) = c("Variable", "white_noise", "starBM", "BM", "EB", "OU")
   for(c in 1:ncol(Q_sharedmean_logs)){
@@ -891,12 +890,23 @@ PP = dcast(PP, species~character, value.var = "state", mean)
 PP[is.na(PP)]<-0
 rownames(PP) = PP$species
 PP=PP[,-1]
-#PP = rbind(PP, c(0,100,0,0,0,0,0,0))
-#rownames(PP)[10] = "Erenna richardi"
 Pprunedmatrix=sharedmeans[which(sharedmeans$Species%in%rownames(PP)),]
 Pprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(PP)),]
 Pprunedtree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(PP))))
 plot(Pprunedtree)
+
+selectivity = read.csv("PurcellSiphonophoresDiet.csv", header=T, sep=",")[,c(1,31:39)]
+selectivity$Species <- as.character(selectivity$Species)
+selectivity$Species[which(selectivity$Species == "Nanomia bijuga")] <- "Nanomia sp"
+selectivity$Species[which(selectivity$Species == "Rhizophysa eyesenhardti")] <- "Rhizophysa eysenhardtii"
+selectivity = aggregate(. ~ Species, data=selectivity, FUN=mean)
+rownames(selectivity) = selectivity$Species
+selectivity=selectivity[,-1]
+Sprunedmatrix = sharedmeans[which(sharedmeans$Species%in%rownames(selectivity)),]
+Sprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(selectivity)),]
+selectivity = selectivity[which(rownames(selectivity) %in% sharedmeans$Species),]
+Sprunedtree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(selectivity))))
+plot(Sprunedtree)
 
 #Retrieve copepod prey length from literature
 preylength = quantDiet[which(grepl("prey",quantDiet$character)),] %>% .[,c(1,3)]
@@ -1021,7 +1031,7 @@ fitPagel(treeIJ, CH_I, CH_J) %>% .$P
 
 ```{r diet_regime_tree}
 regimetree = dprunedTree
-hypdiet = c("Mixed", "Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Large crustacean", "Mixed", "Mixed", "Mixed", "Large crustacean", "Large crustacean", "Mixed", "Small crustacean", "Large crustacean", "Fish", "Fish", "Fish", "Large crustacean", "Gelatinous", "Fish", "Fish", "Fish")
+hypdiet = c("Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Large crustacean", "Mixed", "Mixed", "Mixed", "Large crustacean", "Large crustacean", "Mixed", "Small crustacean", "Large crustacean", "Fish", "Fish", "Fish", "Large crustacean", "Gelatinous", "Fish", "Fish", "Fish")
 names(hypdiet) = regimetree$tip.label
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
@@ -1065,6 +1075,11 @@ shrimp[shrimp=="Large crustacean" | shrimp== "Mixed"]<-1
 stenoteles = stenoteles[which(names(stenoteles) %in% names(shrimp))]
 stenoteles = stenoteles[match(names(shrimp), names(stenoteles))]
 fitPagel(dprunedTree, stenoteles, shrimp) %>% .$P
+
+#Diet heatmap next to regime tree
+RTorder = regimetree$tip.label
+diet[match(RTorder, rownames(diet)),] %>% as.matrix() %>% heatmap(Rowv=NA, Colv=NA, col=c("grey", "black"))
+
 
 ```
 
@@ -1132,7 +1147,47 @@ for(i in 2:ncol(Pprunedmatrix_logs)){
 }
 write.csv(pGLSp_diet, "PGLS_Pval_DietPP.csv")
 pGLS_sign <- pGLS_sign[which(rowSums(is.na(pGLS_sign))!=ncol(pGLS_sign)),which(colSums(is.na(pGLS_sign))!=nrow(pGLS_sign))]
-write.csv(pGLS_sign, "PGLS_SIGN_DietPP.csv")
+#write.csv(pGLS_sign, "PGLS_SIGN_DietPP.csv")
+
+#PGLS with Purcell Selectivity
+pGLSp_sel = as.data.frame(matrix(nrow=ncol(Sprunedmatrix_logs[,-1]), ncol=ncol(selectivity)))
+pGLS__sel_sign = pGLSp_sel
+colnames(pGLSp_sel) = names(selectivity)
+row.names(pGLSp_sel) = names(Sprunedmatrix_logs[,-1])
+pGLS_sel_sign = pGLSp_sel
+for(i in 2:ncol(Sprunedmatrix_logs)){
+  CH_I=as.numeric(Sprunedmatrix_logs[,i])
+  names(CH_I) = Sprunedmatrix_logs$Species
+  CH_I = CH_I[!is.na(CH_I)]
+  for(j in 1:ncol(selectivity)){
+    CH_J=as.numeric(selectivity[,j])
+    names(CH_J) = rownames(selectivity)
+    CH_J = CH_J[!is.na(CH_J)]
+    CH_I = CH_I[which(names(CH_I) %in% names(CH_J))]
+    CH_J = CH_J[which(names(CH_J) %in% names(CH_I))]
+    SE_I = castSE_logs[which(castSE$Species %in% names(CH_I)),i]
+    names(SE_I) = castSE_logs[which(castSE$Species %in% names(CH_I)),1]
+    SE_I = SE_I[match(names(CH_I), names(SE_I))]
+    pgls_tree = drop.tip(Sprunedtree, which(!(Sprunedtree$tip.label %in% names(CH_I))))
+    pg_data = as.data.frame(cbind(CH_I,CH_J)) %>% .[which(!is.na(rowSums(.))),]
+    if(length(unique(CH_J))>1){
+          pgls.SEy(CH_I~CH_J, data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE
+          pgls.SEy(CH_I~sample(CH_J, length(CH_J)), data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE_null
+          LikRat <- 2*(TTABLE$logLik[1] - TTABLE_null$logLik[1])
+          pchisq(LikRat, df=1, lower.tail = F) -> pGLSp_sel[i-1,j]
+          if(pGLSp_sel[i-1,j]<0.05){
+          print(paste(rownames(pGLSp_sel)[i-1],colnames(pGLSp_sel)[j],pGLSp_sel[(i-1),(j)],TTABLE$coefficients[2], sep=" "))
+          ValueIJ = TTABLE %>% .$coefficients %>% .[2]
+          if(ValueIJ>0){pGLS_sel_sign[i-1,j] = "+"}
+          else pGLS_sel_sign[i,j] = "-"
+         }
+       }
+    else TTABLE<-NA; TTABLE_null<-NA; LikRat<-NA; pGLSp_sel[i-1,j]<-NA
+  }
+}
+write.csv(pGLSp_sel, "PGLS_Pval_Selectivity.csv")
+pGLS_sel_sign <- pGLS_sel_sign[which(rowSums(is.na(pGLSp_sel))!=ncol(pGLS_sel_sign)),which(colSums(is.na(pGLS_sel_sign))!=nrow(pGLS_sel_sign))]
+write.csv(pGLS_sel_sign, "PGLS_SIGN_Selectivity.csv")
 
 #using PCs instead of characters
 dprunedmatrix[,c(2:3,5:21)] -> dprunedraw
