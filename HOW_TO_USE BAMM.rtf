@@ -1,0 +1,106 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fswiss\fcharset0 Helvetica-Oblique;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww20520\viewh12340\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 GUIDE THROUGH THE FIVE STEPS TO RUN BAMM ON A TRAIT DIVERSIFICATION RATE REGIMES\
+\
+First step
+\f1\b0  \'97 in manuscript generate the trait files and trees in the BAMM block\
+\
+traitlist = list()\
+for(i in 2:ncol(sharedmean_logs))\{\
+  traitlist[[i]] <- sharedmean_logs[,c(1,i)]\
+  names(traitlist)[i] = names(sharedmean_logs)[i]\
+\}\
+\
+traitlist <- lapply(traitlist, function(x)\{x<-x[which(!is.nan(x[,2])),]\})\
+\
+for(i in 2:length(traitlist))\{\
+  treei = drop.tip(ultram, which(!(ultram$tip.label %in% traitlist[[i]]$Species)))\
+  treei$tip.label = str_replace_all(treei$tip.label, " ", "_")\
+  write.tree(treei, file = paste("BAMM/",names(traitlist[[i]])[2], "_tree.tre", sep=""))\
+\}\
+\
+for(i in 2:length(traitlist))\{\
+  traitlist[[i]]$Species = str_replace_all(traitlist[[i]]$Species, " ", "_")\
+  write.table(traitlist[[i]],file = paste("BAMM/",names(traitlist[[i]])[2], ".txt", sep=""), sep="\\t", col.names = F, row.names = F, quote = F)\
+\}\
+\
+#########################\
+\
+
+\f0\b Second step
+\f1\b0  \'97 in BAMMsetpriors.R edit the name of the trait in the traitfile and tree input names. Then run setBAMMpriors() to generate MyPriors.txt file.\
+\
+library(BAMMtools)\
+library(stringr)\
+library(readr)\
+setwd("~/tentilla_morph/BAMM")\
+tree <- read.tree("haploneme_elongation_tree.tre")\
+traits <- read.csv("haploneme_elongation.txt", sep="\\t", header = F)\
+rownames(traits) = traits[,1]\
+traits <- traits[tree$tip.label,]\
+write_tsv(traits, "haploneme_elongation.txt", col_names = FALSE)\
+is.ultrametric(tree) # check for ultrametric\
+is.binary.tree(tree) # check if there are no polytomies\
+min(tree$edge.length) # check all branch lengths are > 0\
+setBAMMpriors(phy = tree, traits = "haploneme_elongation.txt")\
+setwd("~/tentilla_morph/")\
+#q()\
+\
+
+\f0\b Third step
+\f1\b0  \'97 Open in text editor the BAMM_configuration.txt file. Edit the name of the input traits and tree. \
+		 Copy text block in MyPriors.txt, paste in Priors block, and append at the beginning of the priors block: 
+\f2\i betaIsTimeVariablePrior = 1
+\f1\i0 \
+\
+
+\f0\b Fourth step
+\f1\b0  \'97 Go to command line in the tentilla_morph/BAMM directory\
+		   Run $ ./bamm -c BAMM_configuration.txt\
+\
+
+\f0\b Fifth step
+\f1\b0  \'97 In BAMMplots.R, change the name of the traits in the plotnames and input file, then run:\
+\
+# load libraries\
+library(BAMMtools)\
+library(geiger)\
+library(coda)\
+setwd("~/tentilla_morph/BAMM")\
+# load tree\
+tree <- read.tree("haploneme_elongation_tree.tre")\
+\
+# ESS after 20% burnin\
+mcmcout <- read.csv("mcmc_out.txt")\
+burnstart <- floor(0.2*nrow(mcmcout))\
+postburn <- mcmcout[burnstart:nrow(mcmcout), ]\
+effectiveSize(postburn$N_shifts)\
+effectiveSize(postburn$logLik)\
+\
+# load BAMM main output\
+edata <- getEventData(tree, eventdata = "event_data.txt", burnin=0.2, type="trait")\
+summary(edata)\
+\
+# the 6 most likely scenario's within the 95% credible scenarios\
+# F value is the relative probability, F values from all scenarios add up to F=1\
+pdf("BAMM_haploneme_elongation_css.pdf", width=7, height=10)\
+css <- credibleShiftSet(edata, expectedNumberOfShifts = 1, threshold=5, set.limit=0.95)\
+BAMMtools:::plot.credibleshiftset(css, plotmax = 6, pal = "temperature", legend=T)\
+dev.off()\
+\
+# net diversification graph\
+pdf("BAMM_haploneme_elongation_netdiv.pdf", width=7, height=5)\
+starttime <- max(branching.times(tree))\
+plotRateThroughTime(edata, intervalCol="darkgreen", avgCol="darkgreen", start.time=starttime, ylim=c(0,25))\
+dev.off()\
+\
+pdf("haploneme_elongation_ratesplot.pdf",width=16,height=16)\
+plot.bammdata(edata,lwd=2,legend=T,labels=T,cex=0.9,logcolor=T,breaksmethod="jenks",pal=c("#0D0887", "#CC4678", "#F0F921"))\
+dev.off()\
+}
