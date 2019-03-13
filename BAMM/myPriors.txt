@@ -4,9 +4,9 @@
 
 expectedNumberOfShifts = 1.0
 
-betaInitPrior = 0.087621851036136
+betaInitPrior = 0.419104699770286
 
-betaShiftPrior = 1.31334785120507
+betaShiftPrior = 1.17562924755057
 
 useObservedMinMaxAsTraitPriors = 1
 

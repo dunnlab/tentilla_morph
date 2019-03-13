@@ -16,12 +16,12 @@
 modeltype = trait
 # Specify "speciationextinction" or "trait" analysis
 
-traitfile = Involucrum.length..um..txt
+traitfile = haploneme_elongation.txt
 
-treefile = Involucrum.length..um._tree.tre
+treefile = haploneme_elongation_tree.tre
 # File name of the phylogenetic tree to be analyzed
 
-runInfoFilename = run_info.txt
+runInfoFilename = run_info_haploneme_elongation.txt
 # File name to output general information about this run
 
 sampleFromPriorOnly = 0
@@ -193,14 +193,11 @@ chainSwapFileName = chain_swap.txt
 # PRIORS
 ################################################################################
 
-betaIsTimeVariablePrior = 1
-# Prior (probability) of the time mode being time-variable (vs. time-constant)
-
-useObservedMinMaxAsTraitPriors = 1
-
 expectedNumberOfShifts = 1.0
 
-betaInitPrior = 0.087621851036136
+betaInitPrior = 0.419104699770286
 
-betaShiftPrior = 1.31334785120507
+betaShiftPrior = 1.17562924755057
+
+useObservedMinMaxAsTraitPriors = 1
 
