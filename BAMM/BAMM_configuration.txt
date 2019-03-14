@@ -16,12 +16,12 @@
 modeltype = trait
 # Specify "speciationextinction" or "trait" analysis
 
-traitfile = heteroneme_elongation.txt
+traitfile = desmoneme_elongation.txt
 
-treefile = heteroneme_elongation_tree.tre
+treefile = desmoneme_elongation_tree.tre
 # File name of the phylogenetic tree to be analyzed
 
-runInfoFilename = run_info_heteroneme_elongation.txt
+runInfoFilename = run_info_desmoneme_elongation.txt
 # File name to output general information about this run
 
 sampleFromPriorOnly = 0
@@ -197,8 +197,8 @@ betaIsTimeVariablePrior = 1
 
 expectedNumberOfShifts = 1.0
 
-betaInitPrior = 0.402438229758323
+betaInitPrior = 3.88580653900378
 
-betaShiftPrior = 1.28005593289922
+betaShiftPrior = 1.31590578005272
 
 useObservedMinMaxAsTraitPriors = 1
