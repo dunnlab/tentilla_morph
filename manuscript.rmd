@@ -475,6 +475,12 @@ names(elon_data) = c("Heteroneme elongation (log um)", "Haploneme elongation (lo
 elon_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(hap_el))))
 phylomorphospace(elon_tree, elon_data, label="horizontal")
 
+#Cnidoband size evolution
+cnisize = sharedmean_logs$cnidomic_index
+names(cnisize) = sharedmean_logs$Species
+treei = drop.tip(ultram, which(!(ultram$tip.label %in% names(cnisize))))
+Phenogram(cnisize, as.data.frame(cnisize), treei)
+
 
 ```
 
@@ -629,7 +635,7 @@ densityMap(haplotype_sim)
 
 ```{r character_correlations, include=FALSE}
 #PIC correlations with Rphylip
-#C = sharedlogs[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
+#C = sharedlogs[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),] ##Doesn't work
 C = sharedmatrix[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
 Cspecies = C$Species %>% as.character()
 C = as.matrix(C[,-1])
@@ -637,6 +643,32 @@ rownames(C) = Cspecies
 Ctree = drop.tip(ultram,which(!(ultram$tip.label %in% rownames(C))))
 class(Ctree) = "phylo"
 PICi = Rcontrast(tree=Ctree, X=C, path="phylip-3.695/exe", cleanup=TRUE)
+
+#PIC correlations by character, to get significance
+PICp = as.data.frame(matrix(nrow=ncol(C), ncol=ncol(C)))
+colnames(PICp) = colnames(C)
+rownames(PICp) = colnames(C)
+for(i in 2:ncol(sharedmean_logs)){
+  Ci = sharedmean_logs[,i]
+  names(Ci) = sharedmean_logs$Species
+  Ci = Ci[!is.na(Ci)]
+  for(j in 2:ncol(sharedmean_logs)){
+    Cj = sharedmean_logs[,j]
+    names(Cj) = sharedmean_logs$Species
+    Cj = Cj[!is.na(Cj)]
+    Cj = Cj[which(names(Cj) %in% names(Ci))]
+    Ci = Ci[which(names(Ci) %in% names(Cj))]
+    if(i!=j){
+      ctree = drop.tip(ultram, which(!(ultram$tip.label %in% names(Cj))))
+      class(ctree)<-"phylo"
+      pic_i = pic(Ci, ctree)
+      pic_j = pic(Cj, ctree)
+      cor.test(pic_i, pic_j)$p.value %>% round3() -> PICp[i-1,j-1]
+    }
+    else PICp[i-1,j-1]<-NA
+  }
+}
+write.csv(PICp, "PICcorrelations_pvalues.csv")
 
 #Correlation visualizations R2
 phy_corr = PICi$VarA.Correlations
@@ -947,7 +979,7 @@ for(i in 2:(ncol(PL_pruned_matrix)-1)){
   }
 }
 write.csv(pGLSp_preylength, "PGLS_Pval_preylength.csv")
-pGLS_PL_sign <- pGLS_PL_sign[which(rowSums(is.na(pGLS_PL_sign))!=ncol(pGLS_PL_sign)),which(colSums(is.na(pGLS_PL_sign))!=nrow(pGLS_PL_sign))]
+#pGLS_PL_sign <- pGLS_PL_sign[which(rowSums(is.na(pGLS_PL_sign))!=ncol(pGLS_PL_sign)),which(colSums(is.na(pGLS_PL_sign))!=nrow(pGLS_PL_sign))]
 write.csv(pGLS_PL_sign, "PGLS_SIGN_preylength.csv")
 for(i in 2:ncol(PL_pruned_matrix)){
   plot(PL_pruned_matrix[,i], PL_pruned_matrix$`Copepod prey length (mm)`)

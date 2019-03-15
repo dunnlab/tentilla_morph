@@ -1,0 +1,42 @@
+#nexus
+
+BEGIN Taxa;
+DIMENSIONS ntax=6;
+TAXLABELS
+[1] 'Lychnagalma_utricularia'
+[2] 'Bargmannia_lata___READS18S'
+[3] 'Rudjakovia_sp_D557-D12_18s_consensus'
+[4] 'Rudjakovia_sp_AGALMA_transcripts'
+[5] 'Bargmannia_amoena'
+[6] 'Bargmannia_elongata'
+;
+END; [Taxa]
+
+BEGIN Splits;
+DIMENSIONS ntax=6 nsplits=21;
+FORMAT labels=no weights=yes confidences=no intervals=no;
+MATRIX
+	100	 2,
+	100	 5,
+	100	 6,
+	99	 5 6,
+	26	 1 3 4,
+	100	 3,
+	100	 4,
+	39	 3 4,
+	100	 1,
+	48	 1 2 4,
+	62	 1 2,
+	5	 2 4,
+	10	 1 5 6,
+	8	 1 3,
+	3	 1 4,
+	0	 3 5,
+	0	 1 5,
+	0	 3 6,
+	0	 1 2 3,
+	0	 1 2 6,
+	0	 2 5,
+;
+END; [Splits]
+
