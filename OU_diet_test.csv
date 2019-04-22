@@ -18,14 +18,15 @@
 "17","Tentacle.width..um.",22,0,2.702,364.281
 "18","Pedicle.width..um.",21,0,2.458,762.599
 "19","Elastic.strand.width..um.",15,473.984,477.156,0
-"20","Involucrum.length..um.",14,224.053,225.986,0
+"20","Involucrum.length..um.",13,148.672,151.078,0
 "21","coiledness",21,2.669,0,765.733
 "22","heteroneme_elongation",19,0.217,0,620.734
 "23","haploneme_elongation",21,0,0.953,713.671
 "24","desmoneme_elongation",13,159.594,158.584,0
 "25","rhopaloneme_elongation",13,144.229,146.783,0
 "26","heteroneme_shaft_extension",19,6.17,0,613.126
-"27","Heteroneme_to_CB",19,0,2.85,583.408
+"27","Heteroneme_to_CB",18,0,0.127,Inf
 "28","total_heteroneme_volume",17,619.221,620.123,0
 "29","total_haploneme_volume",21,1.281,0,730.236
 "30","cnidomic_index",22,0.57,0,403.153
+"31","SAV_haploneme",21,0,2.282,755.345

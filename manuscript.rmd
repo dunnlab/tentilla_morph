@@ -96,7 +96,25 @@ library(colorRamps)
   cnidomic_index[which(is.na(cnidomic_index))] <- log(total_haploneme_volume[which(is.na(cnidomic_index))])
   cnidomic_index[which(is.na(cnidomic_index))] <- log(castnumbers[which(is.na(cnidomic_index)), "Heteroneme.volume..um3."])
   cnidomic_index[cnidomic_index==-Inf]<-NA
-    morphometrics = data.frame(castnumbers$slide_id, castnumbers$Species,coiledness, heteroneme_elongation, haploneme_elongation, desmoneme_elongation, rhopaloneme_elongation,heteroneme_shaft_extension, Heteroneme_to_CB, total_heteroneme_volume, total_haploneme_volume, cnidomic_index)
+  surface_ellipsoid <- function(L, W){
+  a <- L/2
+  b <- W/2
+  c = b
+  S <- 4*pi*((((a*b)^1.6)+((a*c)^1.6)+((c*b)^1.6))/3)^(1/1.6)
+  return(S)
+}
+volume_ellipsoid <- function(L, W){
+  a <- L/2
+  b <- W/2
+  c = b
+  V <- (4/3)*pi*a*b*c
+  return(V)
+}
+SAV_haploneme = surface_ellipsoid(castnumbers$Haploneme.free.length..um., castnumbers$Haploneme.width..um.)/volume_ellipsoid(castnumbers$Haploneme.free.length..um., castnumbers$Haploneme.width..um.)
+names(SAV_haploneme) = castnumbers$Species
+SAV_heteroneme = surface_ellipsoid(castnumbers$Heteroneme.free.length..um., castnumbers$Heteroneme.width..um.)/volume_ellipsoid(castnumbers$Heteroneme.free.length..um., castnumbers$Heteroneme.width..um.)
+names(SAV_heteroneme) = sharedmeans$Species
+morphometrics = data.frame(castnumbers$slide_id, castnumbers$Species,coiledness, heteroneme_elongation, haploneme_elongation, desmoneme_elongation, rhopaloneme_elongation,heteroneme_shaft_extension, Heteroneme_to_CB, total_heteroneme_volume, total_haploneme_volume, cnidomic_index, SAV_haploneme)
   names(morphometrics)[1:2] = c("slide_id"," Species")
   castnumbers = data.frame(castnumbers,morphometrics[,c(-1,-2)])
   
@@ -345,7 +363,7 @@ write.csv(morphdata, "characterdata.csv")
 heatdata = as.matrix(castmean_logs[,-1])
 rownames(heatdata) = castmean_logs$Species
 heatdata[is.nan(heatdata)]<- -1
-hcolors = white2blue(19)
+hcolors = grDevices::terrain.colors(20)
 hcolors<-c(rep("#000000FF",10), hcolors)
 heatmap(heatdata, scale = "column", cexCol = 0.2, col=hcolors, keep.dendro = T)
 
@@ -481,6 +499,16 @@ names(cnisize) = sharedmean_logs$Species
 treei = drop.tip(ultram, which(!(ultram$tip.label %in% names(cnisize))))
 Phenogram(cnisize, as.data.frame(cnisize), treei)
 
+#SURFACE AREA : VOLUME
+SAV_haploneme = surface_ellipsoid(sharedmeans$Haploneme.free.length..um., sharedmeans$Haploneme.width..um.)/volume_ellipsoid(sharedmeans$Haploneme.free.length..um., sharedmeans$Haploneme.width..um.)
+names(SAV_haploneme) = sharedmeans$Species
+SAV_heteroneme = surface_ellipsoid(sharedmeans$Heteroneme.free.length..um., sharedmeans$Heteroneme.width..um.)/volume_ellipsoid(sharedmeans$Heteroneme.free.length..um., sharedmeans$Heteroneme.width..um.)
+names(SAV_heteroneme) = sharedmeans$Species
+SAV_haploneme = SAV_haploneme[which(!is.nan(SAV_haploneme))]
+SAV_heteroneme = SAV_heteroneme[which(!is.nan(SAV_heteroneme))]
+SAVhet_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(SAV_heteroneme))))
+Phenogram(SAV_heteroneme, as.data.frame(SAV_heteroneme), SAVhet_tree)
+Phenogram(SAV_haploneme, as.data.frame(SAV_haploneme), hap_tree)
 
 ```
 
@@ -762,7 +790,7 @@ par(mar=rep(3,4), mfrow=c(1,1))
 raw_matrix = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[which(!is.na(rowSums(.))),]
 raw_matrix_notf = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[,c(1:7,12:17)] %>% .[which(!is.na(rowSums(.))),]
 
-compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:30)]
+compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:31)]
 #raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix))))
 raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix_notf))))
 compound_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(compound_matrix))))
@@ -978,7 +1006,7 @@ for(i in 2:(ncol(PL_pruned_matrix)-1)){
       else pGLS_PL_sign[i,1] = "-"
   }
 }
-write.csv(pGLSp_preylength, "PGLS_Pval_preylength.csv")
+#write.csv(pGLSp_preylength, "PGLS_Pval_preylength.csv")
 #pGLS_PL_sign <- pGLS_PL_sign[which(rowSums(is.na(pGLS_PL_sign))!=ncol(pGLS_PL_sign)),which(colSums(is.na(pGLS_PL_sign))!=nrow(pGLS_PL_sign))]
 write.csv(pGLS_PL_sign, "PGLS_SIGN_preylength.csv")
 for(i in 2:ncol(PL_pruned_matrix)){
@@ -1057,6 +1085,24 @@ CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
 CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
 fitPagel(treeIJ, CH_I, CH_J) %>% .$P
 
+#SA/V Haplonemes
+CH_J=softORhard[,1]
+names(CH_J) = rownames(softORhard)
+CH_J[CH_J!="Soft"]<-0
+CH_J[CH_J=="Soft"]<-1
+CH_I = SAV_haploneme
+CH_J = CH_J[which(names(CH_J)%in%names(CH_I))]
+CH_I = CH_I[which(names(CH_I)%in%names(CH_J))]
+treeIJ = drop.tip(ultram, which(!(ultram$tip.label %in% names(CH_J))))
+CH_I = CH_I[match(treeIJ$tip.label, names(CH_I))]
+CH_J = CH_J[match(treeIJ$tip.label, names(CH_J))]
+datIJ = data.frame(preytype = CH_J, character = CH_I)
+datIJ$preytype = as.numeric(as.character(datIJ$preytype))
+logit = glm(preytype~character,data=datIJ, family="binomial")
+    print(logit)
+phylogit = phyloglm(preytype~character,phy=treeIJ,data=datIJ,boot=10, btol=10)
+    print(phylogit)
+c("Soft specilization", "Haploneme SA:V", phylogit$n, phylogit$aic, coef(summary(phylogit))[2,6], coef(summary(phylogit))[2,1], logit$aic, coef(summary(logit))[2,4], coef(summary(logit))[2,1])
 ```
 
 3.0 Phylogeny with the tips mapped with the literature dietary associations, and internal nodes showing SIMMAP reconstructed states.
@@ -1111,7 +1157,6 @@ fitPagel(dprunedTree, stenoteles, shrimp) %>% .$P
 #Diet heatmap next to regime tree
 RTorder = regimetree$tip.label
 diet[match(RTorder, rownames(diet)),] %>% as.matrix() %>% heatmap(Rowv=NA, Colv=NA, col=c("grey", "black"))
-
 
 ```
 
@@ -1221,6 +1266,35 @@ write.csv(pGLSp_sel, "PGLS_Pval_Selectivity.csv")
 pGLS_sel_sign <- pGLS_sel_sign[which(rowSums(is.na(pGLSp_sel))!=ncol(pGLS_sel_sign)),which(colSums(is.na(pGLS_sel_sign))!=nrow(pGLS_sel_sign))]
 write.csv(pGLS_sel_sign, "PGLS_SIGN_Selectivity.csv")
 
+#Haploneme SA/V to diet
+CH_I=SAV_haploneme
+CH_I = CH_I[!is.na(CH_I)]
+for(j in 1:ncol(selectivity)){
+  CH_J=as.numeric(selectivity[,j])
+  names(CH_J) = rownames(selectivity)
+  CH_J = CH_J[!is.na(CH_J)]
+  CH_I = CH_I[which(names(CH_I) %in% names(CH_J))]
+  CH_J = CH_J[which(names(CH_J) %in% names(CH_I))]
+  SE_I = castSE_logs[which(castSE$Species %in% names(CH_I)),i]
+    names(SE_I) = castSE_logs[which(castSE$Species %in% names(CH_I)),1]
+    SE_I = SE_I[match(names(CH_I), names(SE_I))]
+    pgls_tree = drop.tip(Sprunedtree, which(!(Sprunedtree$tip.label %in% names(CH_I))))
+    pg_data = as.data.frame(cbind(CH_I,CH_J)) %>% .[which(!is.na(rowSums(.))),]
+    if(length(unique(CH_J))>1){
+          pgls.SEy(CH_I~CH_J, data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE
+          pgls.SEy(CH_I~sample(CH_J, length(CH_J)), data=pg_data, tree = pgls_tree, se = SE_I) -> TTABLE_null
+          LikRat <- 2*(TTABLE$logLik[1] - TTABLE_null$logLik[1])
+          pchisq(LikRat, df=1, lower.tail = F) -> pGLSp_sel[i-1,j]
+          if(pGLSp_sel[i-1,j]<0.05){
+          print(paste(rownames(pGLSp_sel)[i-1],colnames(pGLSp_sel)[j],pGLSp_sel[(i-1),(j)],TTABLE$coefficients[2], sep=" "))
+          ValueIJ = TTABLE %>% .$coefficients %>% .[2]
+          if(ValueIJ>0){pGLS_sel_sign[i-1,j] = "+"}
+          else pGLS_sel_sign[i,j] = "-"
+         }
+       }
+    else TTABLE<-NA; TTABLE_null<-NA; LikRat<-NA; pGLSp_sel[i-1,j]<-NA
+  }
+
 #using PCs instead of characters
 dprunedmatrix[,c(2:3,5:21)] -> dprunedraw
 rownames(dprunedraw) = dprunedmatrix$Species
@@ -1327,19 +1401,20 @@ combo_phylogit = phyloglm(cop~heteroneme_length+heteroneme_shaft_length+heterone
 coef(summary(combo_phylogit))
 
 #Plot mirror trees QUANT
-X = dprunedmatrix_logs$Haploneme.free.length..um.
+X = dprunedmatrix_logs$Haploneme.row.number
 names(X) = dprunedmatrix_logs$Species
 X=X[!(is.na(X))]
 Y = diet$`Decapod diet`
 names(Y) = rownames(diet)
 
-X = nematocyst_number
-Y = soft_hard$Soft
-Y=softORhard[,1]
-names(Y) = rownames(softORhard)
-Y[Y!="Soft"]<-0
-Y[Y=="Soft"]<-1
-
+X = dprunedmatrix_logs$coiledness
+names(X) = dprunedmatrix_logs$Species
+X<-X[!(is.nan(X))]
+Y = diet$`Decapod diet`
+#Y=softORhard[,1]
+names(Y) = rownames(diet)
+#Y[Y!="Soft"]<-0
+#Y[Y=="Soft"]<-1
 Y = Y[which(names(Y) %in% names(X))]
 X = X[which(names(X) %in% names(Y))]
 treeXY = drop.tip(dprunedTree, which(!(dprunedTree$tip.label %in% names(X))))
@@ -1356,20 +1431,20 @@ OY = contMap(treeXY,Y, sig=1,legend=1, plot = F,  outline = F)
 OY$cols[1:length(OY$cols)] = colorRampPalette(c("orange","green"), space="Lab")(length(OY$cols))
 plot(OY, direction="leftwards", ftype = "off")
 
-X = Pprunedmatrix_logs$Heteroneme.volume..um3.
-names(X) = Pprunedmatrix_logs$Species
-Y = PP$`Relative decapod consumption`
-names(Y) = rownames(PP)
+X = Sprunedmatrix_logs$Haploneme.row.number..um.
+names(X) = Sprunedmatrix_logs$Species
+Y = selectivity$Selectivity.Decapod.larvae #PP$`Relative decapod consumption`
+names(Y) = rownames(selectivity)
 layout(matrix(1:3,1,3),widths=c(0.44,0.12,0.44))
 par(cex=0.5)
 #pdf("deliverables/Hvol_copepod.pdf",width=10,height=6)
-OX = contMap(Pprunedtree,X,sig=1,legend=1, plot = F, outline = F)
+OX = contMap(Sprunedtree,X,sig=1,legend=1, plot = F, outline = F)
 OX$cols[1:length(OX$cols)] = colorRampPalette(c("blue","red"), space="Lab")(length(OX$cols))
 plot(OX,ftype="off")
-ylim<-c(1-0.12*(length(Pprunedtree$tip.label)-1),length(Pprunedtree$tip.label))
+ylim<-c(1-0.12*(length(Sprunedtree$tip.label)-1),length(Sprunedtree$tip.label))
 plot.new(); plot.window(xlim=c(-0.1,0.1),ylim=ylim)
-text(rep(0,length(Pprunedtree$tip.label)), 1:length(Pprunedtree$tip.label),Pprunedtree$tip.label)
-OY = contMap(Pprunedtree,Y, sig=1,legend=1, plot = F,  outline = F)
+text(rep(0,length(Sprunedtree$tip.label)), 1:length(Sprunedtree$tip.label),Sprunedtree$tip.label)
+OY = contMap(Sprunedtree,Y, sig=1,legend=1, plot = F,  outline = F)
 OY$cols[1:length(OY$cols)] = colorRampPalette(c("orange","green"), space="Lab")(length(OY$cols))
 plot(OY, direction="leftwards", ftype = "off")
 
@@ -1483,6 +1558,205 @@ write.csv(OUwie_matrix, "OU_raw_test.csv")
 # }
 # OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
 # write.csv(OUwie_matrix, "OU_compound_test.csv")
+
+#DAPC diet??
+library(adegenet)
+rowNAs = c(0,apply(sharedmean_logs[,-1], 1, function(x) sum(is.nan(x))))
+colNAs = c(0,apply(sharedmean_logs[,-1], 2, function(x) sum(is.nan(x))))
+ldamtrix = sharedmean_logs[,which(colNAs<6)]
+#ldamtrix = sharedmean_logs[which(rowNAs<20),]
+ldamtrix = ldamtrix[which(!is.nan(rowSums(ldamtrix[,-1]))),]
+#ldamtrix = ldamtrix[,which(!is.nan(colSums(ldamtrix[,-1])))]
+#rowNAs = apply(ldamtrix[,-1], 1, function(x) sum(is.na(x)))
+#colNAs = apply(ldamtrix[,-1], 2, function(x) sum(is.nan(x)))
+ldamtrix = ldamtrix[which(rowNAs<1),]
+#ldamtrix = ldamtrix[,which(colNAs<1)]
+ldamtrix$Species = as.character(ldamtrix$Species)
+ldamtrix = ldamtrix[which(ldamtrix$Species %in% names(hypdiet)),]
+#ldamtrix = ldamtrix[which(ldamtrix$Species %in% rownames(diet)),]
+LDAtree = drop.tip(ultram, which(!(ultram$tip.label %in% ldamtrix$Species)))
+ldamtrix = ldamtrix[match(LDAtree$tip.label, ldamtrix$Species),]
+baselda=ldamtrix
+
+#Feeding guild
+prunediets = hypdiet[which(names(hypdiet) %in% ldamtrix$Species)]
+ldamtrix = cbind(baselda, prunediets[match(baselda$Species, names(prunediets))])
+names(ldamtrix)[ncol(ldamtrix)]<-"Diet"
+#ldamtrix[,c(-1,-ncol(ldamtrix))] <- apply(ldamtrix[,c(-1,-ncol(ldamtrix))],2,exp)
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$Diet, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$Diet, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+
+prunediets = diet[which(rownames(diet) %in% ldamtrix$Species),]
+#Copepods
+ldamtrix = cbind(baselda, prunediets[match(baselda$Species, rownames(prunediets)), "Copepod diet"])
+names(ldamtrix)[ncol(ldamtrix)]<-"CopepodDiet"
+#ldamtrix[,c(-1,-ncol(ldamtrix))] <- apply(ldamtrix[,c(-1,-ncol(ldamtrix))],2,exp)
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$CopepodDiet, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$CopepodDiet, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+summary.dapc(DAPClogs)
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+copselmatrix = cbind(Sprunedmatrix, selectivity$Selectivity.Copepods)
+copselmatrix = copselmatrix[which(copselmatrix$Species %in% LDAtree$tip.label),]
+copselmatrix = copselmatrix[match(LDAtree$tip.label, copselmatrix$Species),]
+CopepodGLM <- glm(CopepodDiet~Tentacle.width..um.+Haploneme.row.number..um., data = ldamtrix)
+summary(CopepodGLM)
+1-(CopepodGLM$deviance/CopepodGLM$null.deviance) #76.2
+CopepodSelGLM <- glm(selectivity$Selectivity.Copepods~Tentacle.width..um.+Haploneme.row.number..um.+total_haploneme_volume, data = copselmatrix)
+summary(CopepodSelGLM)
+1-(CopepodSelGLM$deviance/CopepodSelGLM$null.deviance) #76.6%
+rownames(ldamtrix) = ldamtrix$Species
+CopepodPGLM <- phyloglm(CopepodDiet~Tentacle.width..um.+Haploneme.row.number..um., data = ldamtrix, phy = LDAtree, btol=100)
+summary(CopepodPGLM)
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),]
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+#Fish
+ldamtrix = cbind(baselda, prunediets[match(baselda$Species, rownames(prunediets)), "Fish diet"])
+names(ldamtrix)[ncol(ldamtrix)]<-"FishDiet"
+#ldamtrix[,c(-1,-ncol(ldamtrix))] <- apply(ldamtrix[,c(-1,-ncol(ldamtrix))],2,exp)
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$FishDiet, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$FishDiet, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+summary.dapc(DAPClogs)
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+FishGLM <- glm(FishDiet~Heteroneme.volume..um3.+total_haploneme_volume+Pedicle.width..um., data = ldamtrix)
+summary(FishGLM)
+1-(FishGLM$deviance/FishGLM$null.deviance)
+fishselmatrix = cbind(Sprunedmatrix, selectivity$Selectivity.Fish)
+fishselmatrix = fishselmatrix[which(fishselmatrix$Species %in% ldamtrix$Species),]
+fishselmatrix = fishselmatrix[match(LDAtree$tip.label, fishselmatrix$Species),]
+FishSelGLM <- glm(selectivity$Selectivity.Fish~Pedicle.width..um., data = fishselmatrix)
+summary(FishSelGLM)
+1-(FishSelGLM$deviance/FishSelGLM$null.deviance) #97.5%
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),]
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+#Decapods
+ldamtrix = cbind(baselda, prunediets[match(baselda$Species, rownames(prunediets)), "Decapod diet"])
+names(ldamtrix)[ncol(ldamtrix)]<-"DecapodDiet"
+#ldamtrix[,c(-1,-ncol(ldamtrix))] <- apply(ldamtrix[,c(-1,-ncol(ldamtrix))],2,exp)
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$DecapodDiet, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$DecapodDiet, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+summary.dapc(DAPClogs)
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+DecapodGLM <- glm(DecapodDiet~Heteroneme.volume..um3.+coiledness+Cnidoband.length..um.+haploneme_elongation+heteroneme_elongation, data = ldamtrix)
+summary(DecapodGLM)
+1-(DecapodGLM$deviance/DecapodGLM$null.deviance)
+decselmatrix = cbind(Sprunedmatrix, selectivity$Selectivity.Decapod.larvae)
+decselmatrix = decselmatrix[which(decselmatrix$Species %in% ldamtrix$Species),]
+decselmatrix = decselmatrix[match(LDAtree$tip.label,decselmatrix$Species),]
+DecapodSelGLM <- glm(selectivity$Selectivity.Decapod.larvae~Heteroneme.volume..um3.+coiledness+Cnidoband.length..um.+haploneme_elongation+heteroneme_elongation, data = decselmatrix)
+summary(DecapodSelGLM)
+1-(DecapodSelGLM$deviance/DecapodSelGLM$null.deviance) #89.1%
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),]
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+#SoftHard
+prunediets = softORhard
+ldamtrix = cbind(baselda, prunediets[match(baselda$Species, rownames(prunediets)), 1])
+names(ldamtrix)[ncol(ldamtrix)]<-"SoftHard"
+#ldamtrix[,c(-1,-ncol(ldamtrix))] <- apply(ldamtrix[,c(-1,-ncol(ldamtrix))],2,exp)
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$SoftHard, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$SoftHard, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+summary.dapc(DAPClogs)
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),]
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.9, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+#Predicitions on uncharacterized taxa transforming NAs to zeroes
+ldamtrix = sharedmean_logs
+ldamtrix[is.na(ldamtrix)]<-0
+ldamtrix$Species = as.character(ldamtrix$Species)
+ldamtrix = ldamtrix[which(ldamtrix$Species %in% names(hypdiet)),]
+prunediets = hypdiet[which(names(hypdiet) %in% ldamtrix$Species)]
+#prunediets["Hippopodius hippopus"]<-"Ostracod"
+ldamtrix = cbind(ldamtrix, prunediets[match(ldamtrix$Species, names(prunediets))])
+names(ldamtrix)[ncol(ldamtrix)]<-"Diet"
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$Diet, n.pca.max = 300, training.set = 1,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$Diet, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),]
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+prunediets = diet[which(rownames(diet) %in% ldamtrix$Species),]
+#Fish
+ldamtrix = sharedmean_logs
+ldamtrix[is.na(ldamtrix)]<-0
+ldamtrix$Species = as.character(ldamtrix$Species)
+ldamtrix = ldamtrix[which(ldamtrix$Species %in% rownames(diet)),]
+ldamtrix = cbind(ldamtrix, prunediets[match(ldamtrix$Species, rownames(prunediets)), "Fish diet"])
+names(ldamtrix)[ncol(ldamtrix)]<-"FishDiet"
+#ldamtrix[,c(-1,-ncol(ldamtrix))] <- apply(ldamtrix[,c(-1,-ncol(ldamtrix))],2,exp)
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$FishDiet, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$FishDiet, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+summary.dapc(DAPClogs)
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+
 ```
 
 ```{r, BAMM_output, echo=F}
@@ -1534,6 +1808,11 @@ t.test(kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)
 t.test(kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
 t.test(kine$Haploneme.discharge.speed.AVG..mm.s., kine$Heteroneme.discharge.speed.AVG..mm.s.)
 cor(kinemorph[,c(-1,-32)], use="pairwise.complete.obs") %>% .[c(1:30),c(31:41)] %>% corrplot(diag=F, tl.cex = 0.4, tl.col="black")
+
+#Ecology prediciton?
+kinediet = diet[which(rownames(diet) %in% kine$Species),]
+kinesel = selectivity[which(rownames(selectivity) %in% kine$Species),]
+kinehypdiet = hypdiet[which(names(hypdiet) %in% kine$Species)]
 
 ```
 
