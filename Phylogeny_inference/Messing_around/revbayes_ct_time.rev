@@ -109,7 +109,7 @@ denom := abs(1.0 - turnover)
 birth_rate := diversification / denom
 death_rate := (turnover * diversification) / denom
 
-rho <- 10/186
+rho <- n_species/186
 root_time ~ dnLognormal(0.5, 0.001, offset=1)
 timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_time, samplingStrategy="uniform", condition="nTaxa", taxa=taxa)
 

@@ -215,7 +215,7 @@ All phylogenetic statistical analyses were carried out in the programming enviro
 
 Ancestral states were reconstructed using ML for continuous characters (anc.ML [@revell2012phytools]), and stochastic character mapping (make.simmap) for categorical characters.
 
-Different models generating the observed data distribution given the phylogeny were fitted for each continuous character using the function fitContinuous [@harmon2007geiger]. The models compared were the white noise (WN) (non-phylogenetic), the Brownian Motion (BM) model of neutral divergent evolution [@martins1996phylogenies], the Early Burst (EB) model of decreasing rate of evolutionary change [@harmon2010early], and the Ohnstein-Uhlenbeck (OU) model of stabilizing selection around a fitted optimum state [@uhlenbeck1930theory],[@butler2004phylogenetic]. Models were ranked in order of increasing parametric complexity (WN,BM,EB,OU). Corrected Akaika Information Criterion support scores [@sugiura1978further] were compared to the lowest (best) score, and a cutoff of 2 units was used to determine significantly better support. If the best fitting model is not significantly better than a less complex alternative, the least complex model is selected. The models selected for each character were evaluated in terms of model adequacy using the package arbutus [@pennell2015model]. Multivariate BM and OU models were also evaluated using the package mvSLOUCH [@bartoszek2012phylogenetic].
+Different models generating the observed data distribution given the phylogeny were fitted for each continuous character using the function fitContinuous [@harmon2007geiger]. The models compared were the white noise (WN) (non-phylogenetic), the Brownian Motion (BM) model of neutral divergent evolution [@martins1996phylogenies], the Early Burst (EB) model of decreasing rate of evolutionary change [@harmon2010early], and the Ohnstein-Uhlenbeck (OU) model of stabilizing selection around a fitted optimum state [@uhlenbeck1930theory],[@butler2004phylogenetic]. Models were ranked in order of increasing parametric complexity (WN,BM,EB,OU). Corrected Akaika Information Criterion support scores [@sugiura1978further] were compared to the lowest (best) score, and a cutoff of 2 units was used to determine significantly better support. If the best fitting model is not significantly better than a less complex alternative, the least complex model is selected. The models selected for each character were evaluated in terms of model adequacy using the package arbutus [@pennell2015model].
 
 In order to explore the correlational structure among continuous characters and among their evolutionary histories, we used principal component analyses (PCA) and phylogenetic PCA [@revell2012phytools]. In addition, we obtained the correlations between the phylogenetic independent contratsts [@felsenstein1985phylogenies] using the package rphylip [@revell2014rphylip]. We modeled the relationship between correlated characters using phylogenetic leats squares regression (PGLS) in the package phytools (Revell..cite). Evolutionary relationships between continuous and categorical characters were assessed using phylogenetic ANOVAs (phyl.anova phytools) and phylogenetic generalized linear mixed models (PGLMM).
 
@@ -1019,12 +1019,12 @@ VARS_curated = VARS[which(VARS$Pred_lowest_tax %in% ultram$tip.label | VARS$Pred
 VARS_cast = acast(VARS_curated, Pred_lowest_tax~Prey_order, fun.aggregate = length)
 
 #Combination of VARS and GC sources
-diet_VARS = rbind(diet, c(0,0,0,0,0,1,1,0,0))
-diet_VARS = cbind(diet_VARS, rep(0,nrow(diet_VARS)))
-rownames(diet_VARS)[nrow(diet_VARS)] <- "Lychnagalma utricularia"
-names(diet_VARS)[ncol(diet_VARS)] <- "Gelatinous diet"
-diet_VARS["Nanomia sp",] = c(1,0,0,0,0,1,1,1,0,1)
-diet_VARS["Praya dubia",] = c(1,0,0,0,0,1,1,0,0,1)
+# diet_VARS = rbind(diet, c(0,0,0,0,0,1,1,0,0))
+# diet_VARS = cbind(diet_VARS, rep(0,nrow(diet_VARS)))
+# rownames(diet_VARS)[nrow(diet_VARS)] <- "Lychnagalma utricularia"
+# names(diet_VARS)[ncol(diet_VARS)] <- "Gelatinous diet"
+# diet_VARS["Nanomia sp",] = c(1,0,0,0,0,1,1,1,0,1)
+# diet_VARS["Praya dubia",] = c(1,0,0,0,0,1,1,0,0,1)
 
 #Soft vs Hard
 soft_hard = cbind((diet$`Copepod diet`+diet$`Crustacean diet` + diet$`Decapod diet`+ diet$`Amphipod diet` + diet$`Ostracod diet`), (diet$`Fish diet`+diet$`Chaetognath diet`+diet$`Gelatinous diet`+diet$`Mollusc diet`+diet$`Polychaete diet`))
@@ -1062,7 +1062,7 @@ c("Soft specilization", "Number of nematocyst types", phylogit$n, phylogit$aic, 
 
 #Desmoneme/Rhopaloneme vs crustacean
 dprunedCat = binary[which(rownames(binary)%in% rownames(diet)),]
-CH_I = dprunedCat$Rhopalonemes
+CH_I = dprunedCat$Rhopalonemes #same result with desmonemes
 names(CH_I) = rownames(dprunedCat)
 CH_J = diet$`Crustacean diet`
 names(CH_J) = rownames(diet)
@@ -1825,6 +1825,62 @@ Euphysonect tentilla discharge considerably faster than Calycophoran tentilla. L
 The more extreme the coiledness index, the more unpredictable the trajectory of the cnidoband during discharge.
 
 Story: low dimensionality, cost-reward-driven, dynamic specialization.
+
+```{r rphylopars_and_varpart}
+library(Rphylopars)
+combinedata = data.frame(sharedmean_logs,diet[match(sharedmean_logs$Species, rownames(diet)),])
+names(combinedata)[1]<-"species"
+is.nan.data.frame <- function(x)
+do.call(cbind, lapply(x, is.nan))
+combinedata[is.nan.data.frame(combinedata)] <- NA
+#PhyloParsALL = phylopars(combinedata[,c(1,2,4:22,24,27:42)], ultram, pheno_error = F, pheno_correlated = T)
+#PhyloParsALL = phylopars(combinedata[,c(1,32:42)], ultram, pheno_error = F, pheno_correlated = T)
+
+#How to make combined imputations
+
+###PCOA variance partitionaing method
+phylomatrix = pcoa(cophenetic(dprunedTree))$vectors
+phylomatrix = phylomatrix[match(rownames(diet), rownames(phylomatrix)),]
+nastozeroes = dprunedmatrix_logs
+nastozeroes[is.nan(dprunedmatrix_logs)]<-0
+nastozeroes = nastozeroes[,match(rownames(diet), nastozeroes$Species)]
+dietdist <- vegdist(diet, "bray") %>% as.matrix()
+varpart(nastozeroes[,-1], phylomatrix[,1:3], diet)
+glmatrix_1 = cbind(nastozeroes, phylomatrix)
+glmatrix_2 = cbind(nastozeroes, diet)
+glmatrix_3 = cbind(nastozeroes, diet, phylomatrix)
+glm(Cnidoband.length..um.~Axis.1+Axis.2+Axis.3+Axis.4+Axis.6+Axis.8+Axis.9+Axis.11+Axis.14, data=glmatrix_1[-1,]) -> GLM_1
+1-(GLM_1$deviance/GLM_1$null.deviance)
+predict.glm(GLM_1, newdata = as.data.frame(glmatrix_1[1,]), se.fit = T)
+glm(Cnidoband.length..um.~`Copepod diet`+`Fish diet`+`Amphipod diet`+`Decapod diet`+`Polychaete diet`+`Mollusc diet`+`Crustacean diet`+`Chaetognath diet`+`Ostracod diet`+`Gelatinous diet`, data=glmatrix_2[-1,]) -> GLM_2
+1-(GLM_2$deviance/GLM_2$null.deviance)
+predict.glm(GLM_2, newdata = as.data.frame(glmatrix_2[1,]), se.fit = T)
+glm(Cnidoband.length..um.~Axis.1+Axis.2+Axis.3+Axis.4+Axis.6+Axis.8+Axis.9+Axis.11+Axis.14+`Copepod diet`+`Fish diet`+`Amphipod diet`+`Decapod diet`+`Polychaete diet`+`Mollusc diet`+`Crustacean diet`+`Chaetognath diet`+`Ostracod diet`+`Gelatinous diet`, data=glmatrix_3[-1,]) -> GLM_3
+1-(GLM_2$deviance/GLM_2$null.deviance)
+predict.glm(GLM_3, newdata = as.data.frame(glmatrix_3[1,]), se.fit = T)
+
+varpart(nastozeroes$coiledness, phylomatrix[,c(1:4,6,8,9,11,14)], diet)
+rda(nastozeroes$coiledness, phylomatrix[,c(1:4,6,8,9,11,14)]) %>% summary()
+
+###Phylopars methods
+pparsmatrix = cbind(nastozeroes$Species, nastozeroes$Cnidoband.length..um., diet)
+names(pparsmatrix)[1]<-"species"
+pparsmatrix$`nastozeroes$Cnidoband.length..um.` [1]<-NA
+PhyloParsALL = phylopars(pparsmatrix, dprunedTree, pheno_error = F, pheno_correlated = T)
+PhyloParsALL$anc_recon["Agalma elegans",]
+pparscontrol = pparsmatrix[,1:2]
+PhyloPars_control = phylopars(pparscontrol, dprunedTree, pheno_error = F, pheno_correlated = T)
+PhyloPars_control$anc_recon["Agalma elegans",]
+
+###PGLS predictions do not take into account the phylogenetic position of the new taxon###
+pglsmatrix = glmatrix_2
+names(pglsmatrix) = str_replace_all(names(pglsmatrix)," ", "_")
+rownames(pglsmatrix) = pglsmatrix$Species
+pglm_1 = gls(Cnidoband.length..um. ~ Copepod_diet+Fish_diet+Amphipod_diet+Decapod_diet+Polychaete_diet+Mollusc_diet+Crustacean_diet+Chaetognath_diet+Ostracod_diet+Gelatinous_diet, data=pglsmatrix[,-1], correlation = corBrownian(phy=dprunedTree))
+pglm_control = gls(Cnidoband.length..um. ~ Copepod_diet+Fish_diet+Amphipod_diet+Decapod_diet+Polychaete_diet+Mollusc_diet+Crustacean_diet+Chaetognath_diet+Ostracod_diet+Gelatinous_diet, data=pglsmatrix[,-1], correlation = corBrownian(phy=rtree(length(dprunedTree$tip.label))))
+predict(pglm_1, newdata = pglsmatrix[1,])
+predict(pglm_control, newdata = pglsmatrix[1,])
+```
 
 ## 4. Discussion
 
