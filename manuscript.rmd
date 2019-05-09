@@ -696,7 +696,7 @@ for(i in 2:ncol(sharedmean_logs)){
     else PICp[i-1,j-1]<-NA
   }
 }
-write.csv(PICp, "PICcorrelations_pvalues.csv")
+#write.csv(PICp, "PICcorrelations_pvalues.csv")
 
 #Correlation visualizations R2
 phy_corr = PICi$VarA.Correlations
