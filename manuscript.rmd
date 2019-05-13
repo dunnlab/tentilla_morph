@@ -1122,6 +1122,15 @@ regimetree$node.label = as.factor(HypDietAnc)
 plotTree(regimetree)
 nodelabels(text=regimetree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);tiplabels(text=hypdiet, frame="none", cex=0.6, adj=c(0,2))
 
+##SIMMAP feeding guilds ##
+make.simmap(regimetree, hypdiet, nsim = 100) -> feeding_sim
+plotTree(regimetree, lwd = 4)
+feeding_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c( "black","green3","blue","cyan","red")
+names(colors) = c("Fish","Large crustacean","Mixed","Small crustacean","Gelatinous")
+nodelabels(pie=(describe.simmap(feeding_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+
 #SOft/Hard regime tree
 SHtree = dprunedTree
 hypSH = softORhard$Type[match(SHtree$tip.label,row.names(softORhard))]

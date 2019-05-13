@@ -134,7 +134,7 @@ Ses[Ses == 0] = NA
 morphdata = cbind(castN, castmeans[,-1], Ses)
 morphdata = morphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
 names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
-write.csv(morphdata, "characterdata.csv")
+#write.csv(morphdata, "characterdata.csv")
 
 heatdata = as.matrix(castmean_logs[,-1])
 rownames(heatdata) = castmean_logs$Species
@@ -533,6 +533,7 @@ GC$species = as.character(GC$species)
 GC$species[which(GC$species == "Nanomia bijuga")] <- "Nanomia sp"
 GC$species[which(GC$species == "Rhizophysa eyesenhardti")] <- "Rhizophysa eysenhardtii"
 GC$species[which(GC$species == "Agalma okeni")] <- "Agalma okenii"
+write.csv(GC, "gutcontentliteraturereview.csv")
 
 #Prune to tree species#
 GC = GC[which(GC$species %in% ultram$tip.label),]
@@ -718,6 +719,15 @@ plotTree(regimetree)
 nodelabels(text=regimetree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);tiplabels(text=hypdiet, frame="none", cex=0.6, adj=c(0,2))
 RTorder = regimetree$tip.label
 diet[match(RTorder, rownames(diet)),] %>% as.matrix() %>% heatmap(Rowv=NA, Colv=NA, col=c("grey", "black"))
+
+##SIMMAP feeding guilds ##
+make.simmap(regimetree, hypdiet, nsim = 100) -> feeding_sim
+plotTree(regimetree, lwd = 4)
+feeding_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c( "black","green3","blue","cyan","red")
+names(colors) = c("Fish","Large crustacean","Mixed","Small crustacean","Gelatinous")
+nodelabels(pie=(describe.simmap(feeding_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
 
 #PGLS of characters vs Purcell Selectivity
 pGLSp_sel = as.data.frame(matrix(nrow=ncol(Sprunedmatrix_logs[,-1]), ncol=ncol(selectivity)))
@@ -957,6 +967,31 @@ predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)
 preDIET <- predict(DAPClogs, predictionset[,-1])
 cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
 preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+#Soft bodied vs hard bodied prey
+prunediets = softORhard
+ldamtrix = sharedmean_logs
+ldamtrix[is.na(ldamtrix)]<-0
+ldamtrix$Species = as.character(ldamtrix$Species)
+ldamtrix = cbind(ldamatrix, prunediets[match(baselda$Species, rownames(prunediets)), 1])
+names(ldamtrix)[ncol(ldamtrix)]<-"SoftHard"
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$SoftHard, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$SoftHard, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+summary.dapc(DAPClogs)
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),]  #Remove taxa with many unmeasured NAs that create zero-biases
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.9, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
 
 ## SIMPLE ANALYSES OF KINEMATIC DATA ##
 
