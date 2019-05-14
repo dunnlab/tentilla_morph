@@ -1,0 +1,304 @@
+Slide,Species,Specimen,Bin,Treatment,OK?,Confocal,DIC,BF,2P,Imaging
+A1,Praya dubia,JSL I 1003-S8,1,Citrisolv Permount,Ok,1,1,1,,TRUE
+T0,Praya dubia,JSL I 1003-S8,1,Toluene Cytoseal,Ok,,,,,FALSE
+U0,Praya dubia,JSL I 1003-S8,1,Citrisolv Cytoseal,Ok,,,,,FALSE
+V0,Praya dubia,JSL I 1003-S8,1,Histoclear Cytoseal,Ok,,,,,FALSE
+Z0,Praya dubia,JSL I 1003-S8,1,Citrisolv Cytoseal,Ok,,,,,FALSE
+T6,Abylopsis tetragona,SL0303S,2,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+I6,Agalma elegans,SL0210,2,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Q2,Agalma elegans,SL0205T,2,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+K8,Bargmannia elongata,D856-D3,3,Methyl Salicylate Canada Balsam,Bad,,1,,,TRUE
+I2,Chuniphyes multidentata,SL0209-ST,2,Glutaraldehyde Citrisolv Permount,Bad,,,,,FALSE
+U2,Halistemma foliacea,SL0401ST,2,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+N3,Halistemma transliratum,SL0301T,2,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+C0,Nanomia bijuga,SL0100ST,2,Euparal - not dehydrated,Bad,,,,,FALSE
+Q1,Rhizophysa eysenhardti,SL0200ST,2,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+M3,Apolemia lanosa,D858-D6,3,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+E2,Bargmannia amoena,D861-D12,3,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+F1,Bargmannia amoena,D861-D12,3,Citrisolv Permount,Ok,,1,1,,TRUE
+P3,Chuniphyes moserae,D857-D5,3,Glutaraldehyde Citrisolv Permount,Bad,,,1,,TRUE
+K5,Erenna insidiator,T1040-SS2,37,Glutaraldehyde Citrisolv Permount,Ok,,,,,FALSE
+W0,Erenna sirena,D860-D6,3,Toluene Cytoseal,Ok,,1,1,,TRUE
+X0,Erenna sirena,D860-D6,3,Citrisolv Cytoseal,Ok,,1,1,,TRUE
+Y0,Erenna sirena,D860-D6,3,Histoclear Cytoseal,Ok,,,,,FALSE
+G1,Frillagalma vityazi,D858-SS4,3,Citrisolv Permount,Bad,,,,,FALSE
+H1,Frillagalma vityazi,D858-SS4,3,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+G3,Kephyes ovata,D856-D8,3,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+C4,Lensia hostile,D860-D3,3,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+F2,Marrus orthocanna,D858-D11,3,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+J1,Nanomia bijuga,D860-BW1-C,3,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+O5,Sphaeronectes christiansonae,D861-D2,3,Glutaraldehyde Citrisolv Permount,Ok,,,,,FALSE
+Z3,Sphaeronectes christiansonae,D861-D2,3,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+G2,Sphaeronectes haddocki,D856-D2,3,Glutaraldehyde Citrisolv Permount,Ok,,,,,FALSE
+E1,Vogtia serrata,D856-SS3,3,Citrisolv Permount,Ok,1,1,,,TRUE
+I1,Vogtia serrata,D858-SS10,3,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+T7,Vogtia serrata,D856-SS9,3,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+S8,Praya dubia,JSL II 1684-2 (9),4,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+N1,Vogtia glabra,JSL II 959-D3,5,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+R7,Vogtia serrata,D153-D6,5,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+S7,Vogtia serrata,10Dec09-Trawl,5,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+L3,Forskalia tholoides,BWP 1072-2,6,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+G7,Hippopodius hippopus,BWP 1027-12,6,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+G7B,Hippopodius hippopus,BWP 1027-12,6,Methyl Salicylate Canada Balsam,,,,,,FALSE
+H7,Hippopodius hippopus,VF#7,6,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+H7B,Hippopodius hippopus,VF#7,6,Methyl Salicylate Canada Balsam,,,,,,FALSE
+U9,Hippopodius hippopus,VF#8,6,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+R2,Rosacea cymbiformis,BWP 506,7,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+S6,Rosacea cymbiformis,BWP 735-15,7,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+S9,Rosacea cymbiformis,BWP 536-6,7,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+V3,Rosacea plicata,WF Trawl 31-07-07,7,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+A3,Diphyes dispar,RI8-27,9,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+K1,Nanomia rhody,RI8-30,9,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+Y3,Sulculeolaria quadrivalvis,RI7-24,9,Glutaraldehyde Citrisolv Permount,BLANK,,,,,FALSE
+N7,Chelophyes appendiculata,VF#4,10,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+S3,Chelophyes appendiculata,V14,10,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+W9,Chuniphyes multidentata,D107-S9,10,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+S2,Abyla bicarinata,BWP 2053-13,11,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+H2,Abyla trigona,BWP 937,11,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+C10,Stephanophyes superba,BWP 571-9,12,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+D10,Stephanophyes superba,BWP 1627-1,12,Methyl Salicylate Permount,Ok,1,,,,TRUE
+Z2,Stephanophyes superba,1345-14,12,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+W3,Bassia bassensis,BWP 1497-15+16,13,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+Z1,Ceratocymba dentata,BWP 933-2,13,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+W1,Ceratocymba leuckarti,BWP 1034-4,13,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+L2,Lilyopsis medusa,WF BWP 30-09-06,13,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+N5,Desmophyes annectens,JSL II 953-DS6,14,Glutaraldehyde Citrisolv Permount,Bad,1,,1,,TRUE
+E10,Desmophyes haematogaster,T847-D5,14,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+G10,Desmophyes haematogaster,T854-D5,14,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+J2,Desmophyes haematogaster,V2716-SS2,14,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+X3,Dromalia alexandri,No. 24398,14,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+A4,Thermopalia taraxaca,Alvin,14,Ethanol Citrisolv Permount,Ok,,1,1,,TRUE
+M2,Abylopsis tetragona,VFSS 13-04-11,15,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+R9,Abylopsis tetragona,VF#15,15,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+U6,Abylopsis tetragona,JSL I 2950-CG-7,15,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+V6,Abylopsis tetragona,JSL I 2953-CG-3,15,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+C1,Sulculeolaria biloba,Discovery St. 10379#33,16,Citrisolv Permount,Bad,,,1,,TRUE
+D2,Sulculeolaria chuni,BWP 862-3,16,Glutaraldehyde Citrisolv Permount,Bad,,,,,FALSE
+S4,Sulculeolaria chuni,BWP 779-13,16,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+V9,Sulculeolaria chuni,BWP 1557-11,16,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+O3,Sulculeolaria monoica,BWP 573-6,16,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+Q8,Sulculeolaria quadrivalvis,BWP 512 SUQ 16,16,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+R8,Sulculeolaria quadrivalvis,BWP 1061-17,16,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+X2,Sulculeolaria quadrivalvis,1349-22,16,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+H11,Sulculeolaria quadrivalvis,BWP 1051-3,16,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+W6,Diphyes dispar,BWP 567-16,17,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+K4,Bathyphysa sibogae,BWP 796-20,18,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+O2,Bathyphysa sibogae,BWP 796-20,18,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+D4,Clausophyes moserae,T749-SS1,18,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+P5,Lensia achilles,T1156-D1,18,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+A8,Lensia conoidea,JSL I 2953-SS11,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+B8,Lensia conoidea,JSL I 2941-SS11,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+C8,Lensia conoidea,JSL I 2935-DS5,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Y9,Lensia conoidea,JSL I 2941-SS12,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+L4,Rhizophysa eysenhardti,BWP 862-3,18,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+X7,Rhizophysa eysenhardti,BWP 634-6,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Y7,Rhizophysa eysenhardti,BWP 794-3,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Z7,Rhizophysa eysenhardti,BWP 814-3,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+A7,Rhizophysa filiformis,BWP 566-16,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+B7,Rhizophysa filiformis,BWP 588-21,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+M9,Rhizophysa filiformis,BWP 567-8,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+R1,Rhizophysa filiformis,BWP 566-17,18,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+Z6,Rhizophysa filiformis,BWP 1565-4,18,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+P2,Amphicaryon earnesti,Discovery St. 7856#24,19,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+Q5,Amphicaryon peltifera,Discovery St. 7824#56,19,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+T1,Ceratocymba sagitatta,Discovery St. 6662#2,19,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+U7,Craseoa lathetica,T1043-SS7,19,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Y6,Diphyes dispar,BWP 1503-2,19,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+B6,Forskalia edwardsi,BWP 542-15,19,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+F7,Hippopodius hippopus,Discovery St. 7824#56,19,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+B4,Maresearia praeclara,Discovery St. 6662#5,19,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+N2,Vogtia spinosa,Discovery St. 6662#2,19,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+D9,Agalma okeni,D724-BW3-3,20,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+H9,Agalma okeni,D723-BW3-1,20,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+N6,Athorybia rosacea,D725-BW4-7,20,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+L9,Forskalia edwardsi,D722-BW1-1,20,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+A9,Apolemia rubriversa,D558-D4,21,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+E8,Apolemia rubriversa,D551-D3,21,Methyl Salicylate Canada Balsam,Bad,,,,,FALSE
+F8,Apolemia rubriversa,D553-D10,21,Methyl Salicylate Canada Balsam,Bad,,,,,FALSE
+Q3,Apolemia rubriversa,D668-D7,21,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+O6,Athorybia rosacea,BWP 1035-18,21,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+P6,Athorybia rosacea,BWP ATR-1010,21,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Q9,Athorybia rosacea,BWP 451,21,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+T2,Athorybia rosacea,BWP 1036-10,21,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+Y5,Nanomia bijuga,BWP 1048-17,22,Clove Oil Canada Balsam,Ok,,1,,,TRUE
+A10,Nanomia cara,BWP 1420-11,22,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+P1,Nanomia cara,1445-4,22,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+P4,Nanomia cara,2138-S9,22,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+Z9,Nanomia cara,BWP 1420-10,22,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+M11,Nanomia cara,BWP 1448-3,22,Methyl Salicylate Permount,Ok,,1,,,TRUE
+V4,Agalma clausi,BWP 1092-6,23,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+B9,Agalma okeni,BWP 786-19,23,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+C9,Agalma okeni,BWP 792-36,23,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+O1,Agalma okeni,BWP 565-5,23,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,1,TRUE
+F3,Lychnagalma utricularia,JSL II 1673-6,23,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+K2,Lychnagalma utricularia,JSL II 981-CGP6,23,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+E9,Bargmannia amoena,JSL II 992-CGP3,24,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+F9,Bargmannia amoena,JSL II 995-D3,24,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+G9,Bargmannia amoena,JSL I 2658-D6,24,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+U8,Bargmannia amoena,JSL I 2657-D8,24,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Y2,Bargmannia elongata,D153-SS1,24,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+K6,Forskalia asymmetrica,JSL I 1407-D8,26,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+L6,Forskalia asymmetrica,JSL II 1684-D1,26,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+M6,Forskalia asymmetrica,JSL II 993-D2,26,Methyl Salicylate Canada Balsam,Bad,,1,,,TRUE
+P10,Forskalia asymmetrica,JSL II 1680-D4,26,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+U1,Forskalia asymmetrica,T595-SS3,26,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+G11,Forskalia asymmetrica,JSL II 987-D6,26,Methyl Salicylate Permount,Ok,,1,,,TRUE
+C6,Forskalia edwardsi,BWP 529 For39,26,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+D6,Forskalia edwardsi,BWP 599-21 For13,26,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+V1,Forskalia edwardsi,BWP 1042-6,26,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+Q6,Rosacea cymbiformis,D723-BW2-2/3,26,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+H3,Bargmannia elongata,D494-SS9,27,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+C3,Chuniphyes multidentata,D494-SS8,27,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+W8,Chuniphyes multidentata,D493-SS2,27,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+J4,Craseoa lathetica,D497-SS6,27,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+U3,Craseoa lathetica,D497-SS6,27,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+G6,Frillagalma vityazi,D457-SS3,27,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+B10,Lensia conoidea,D499-SS4,27,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+T4,Lensia conoidea,D500-D4,27,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+R6,Rosacea cymbiformis,Voucher#196 BW4,27,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+K3,Sphaeronectes koellikeri,07-11-13 BW1,27,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+J6,Agalma elegans,BWD100212MB,28,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+U4,Stephalia sp.,D423-D1,28,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+O7,Apolemia lanosa,D614-D2,30,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+V7,Craseoa lathetica,D614-D4,30,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+W7,Craseoa lathetica,D611-SS7,30,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+J8,Bargmannia elongata,D328_SS12,31,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+J8B,Bargmannia elongata,D328_SS13,31,Methyl Salicylate Canada Balsam,,,,,,FALSE
+T9,Craseoa lathetica,D330-S11,31,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+V8,Desmophyes haematogaster,V3642-SS3,31,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+L11,Erenna laciniata,D325-SS1,31,Methyl Salicylate Permount,Ok,,?,,,TRUE
+D7,Lychnagalma utricularia,D331-D8,31,Methyl Salicylate Permount,Bubbly,1,1,,,TRUE
+K7,Physalia physalis,Pp20130706WH,31,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+P9,Frillagalma vityazi,D556-D3,32,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+Q7,Apolemia lanosa,D552-SS8,33,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+D8,Apolemia rubriversa,D651-D5,33,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+H10,Apolemia rubriversa,D551-D5,33,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+W4,Bargmannia elongata,D554-SS3,33,Glutaraldehyde Citrisolv Permount,Ok,,1,,,TRUE
+A2,Bargmannia lata,D555-SS1,33,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+O8,Stephanomia amphitrydis,D555-D7,33,Methyl Salicylate Permount,Ok,,1,,,TRUE
+E3,Marrus claudanielis,D153-D7,34,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+B2,Physophora hydrostatica,1845 - 5,34,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+X4,Physophora hydrostatica,EN182 1845-5,34,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+B3,Stephanomia amphitrydis,JSL I 2888-CG6 1/2,34,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+N8,Stephanomia amphitrydis,JSL I 2688-CG6,34,Methyl Salicylate Permount,Ok,,1,,,TRUE
+O10,Apolemia rubriversa,T673-D2,35,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+L7,Chelophyes appendiculata,BWP 24052004,35,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+R5,Chuniphyes moserae,D196-D2,35,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+J3,Diphyes antarctica,BWP 1801-9,35,Glutaraldehyde Citrisolv Permount,Bad,,,1,,TRUE
+M4,Diphyes antarctica,BWP 1801-9,35,Glutaraldehyde Citrisolv Permount,Bad,,,1,,TRUE
+Y1,Diphyes bojani,BWP 1060-2,35,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+I3,Halistemma cupulifera,Discovery St. 3185,35,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+C2,Halistemma maculatum,JSL I 2646-CG3,35,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+T3,Halistemma rubrum,D339-D12,35,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+I11,Halistemma rubrum,JSL II 2656-DS6,35,Glutaraldehyde Citrisolv Permount,Ok,,1,,,TRUE
+Z8,Marrus claudanielis,T1105-D5,35,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+X1,Resomia persica,D343-D9,35,Glutaraldehyde Citrisolv Permount,Ok,1,,1,1,TRUE
+N10,Resomia similis,NIWA 3050 ST,35,Methyl Salicylate Permount,Ok,,,,,FALSE
+M8,Stephanomia amphitrydis,JSL I 3721-DS1,35,Methyl Salicylate Permount,Ok,,1,,,TRUE
+M8B,Stephanomia amphitrydis,JSL I 3721-DS1,35,Methyl Salicylate Permount,Ok,,,,,FALSE
+J11,Stephanomia amphitrydis,JSL I 2667-DS8,35,Methyl Salicylate Permount,Ok,,1,,,TRUE
+P8,Sulculeolaria quadrivalvis,BWP 556-2,35,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+P7,Apolemia lanosa,D668-SS1,36,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+K9,Diphyes dispar,BW1-2 17Sept2014,36,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+X6,Diphyes dispar,D667-BW4-3,36,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+R3,Forskalia formosa,D666-D11,36,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+F6,Frillagalma vityazi,D665-D4,36,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+D3,Lensia multicristata,WF 9/21/2014,36,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+Q4,Marrus sp.,D666-SS11,36,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+J9,Nanomia bijuga,D663-SS8,36,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+Z5,Nanomia bijuga,"Sep 21, 2014",36,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+H4,Cardianecta parchelion,JSL I 2633-DS1,37,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+Z4,Cardianecta parchelion,JSL I 2633-DS1,37,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+M5,Cordagalma abyssorum,T678-D3,37,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+J5,Cordagalma bimaculatum,D785-D4,37,Glutaraldehyde Citrisolv Permount,Ok,,,,,FALSE
+R4,Cordagalma bimaculatum,T1043-D1,37,Glutaraldehyde Citrisolv Permount,Bad,,1,1,,TRUE
+A5,Cordagalma isocarrei,V3642-D1,37,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+F10,Cordagalma ordinatum,GOC D728-BW7-3,37,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+G8,Cordagalma ordinatum,Oceanus 368-25-19A BWP,37,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+H8,Cordagalma ordinatum,Oceanus 368-22-16 BWP,37,Methyl Salicylate Canada Balsam,Bad,,1,,,TRUE
+I8,Cordagalma ordinatum,VFSM - Totton spec. C00,37,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+O4,Cordagalma ordinatum,BWP 370-6-6,37,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+K11,Cordagalma ordinatum,BWP 816-6,37,Methyl Salicylate Canada Balsam,Ok,,,,,FALSE
+E4,Erenna cornuta,T1155-SS1 (2/3),37,Glutaraldehyde Citrisolv Permount,Ok,,1,1,,TRUE
+I4,Erenna cornuta,T1155-SS1 (2/3),37,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+M1,Erenna cornuta,T1155-SS1 (2/3),37,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+G4,Erenna laciniata,JSL II 1688-SS3,37,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+O11,Erenna laciniata,V2570-DS2,37,Glutaraldehyde Citrisolv Permount,Ok,,1,,,TRUE
+Q10,Erenna richardi,V2243-D? 1003m,37,Methyl Salicylate Permount,Ok,,1,,,TRUE
+W2,Erenna richardi,JSL II D1456-DS1,37,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+L5,Erenna sirena,D860-D6,37,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+C7,Lychnagalma utricularia,JSL II 990-SS1,38,Methyl Salicylate Permount,Bubbly,1,1,,,TRUE
+Y4,Nectadamas richardi,Discovery St. 10111#6,38,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+N4,Nectopyramis thetis,Discovery St. 11064#3,38,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+S1,Thermopalia tarxaca,Alvin 878-1,38,Ethanol Glutaraldehyde Citrisolv Permount,Bad,,,,,FALSE
+F4,Apolemia uvaria,NorthBergen 12-01-97,39,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+L10,Halistemma rubrum,VF 16-04-2003,39,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+X8,Sphaeronectes koellikeri,BWP 657-8,39,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+I9,Agalma elegans,RI3-7-18,40,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+V2,Physalia physalis,WH 20130706 Corm#3,40,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+L1,Physophora hydrostatica,ENS43,41,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+H6,Agalma elegans,VF2016-5,42,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+L8,Bargmannia elongata,D960-SS3,42,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+M7,Chelophyes appendiculata,VF2016-82,42,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+X5,Chuniphyes moserae,D959-SS3,42,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+E6,Frillagalma vityazi,D964-D8,42,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+W5,Gymnopraia lapislazula,D965-D4,42,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+C5,Halistemma transliratum (nectalia),KOK17_A1 Trawl032317_2,42,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+V5,Lilyopsis fluoracantha,D963-D8,42,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+E7,Lychnagalma utricularia,D962-D4,42,Methyl Salicylate Permount,Bubbly,1,1,,,TRUE
+Y8,Marrus claudanielis,D959-SS2,42,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+B5,Nanomia 9coils,KOK17_S BW18-3,42,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+A6,Nanomia bijuga,VF2016-6,42,Xylene Canada Balsam,Ok,,1,,,TRUE
+O9,Physophora hydrostatica,EN543-T1,42,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+T8,Praya dubia,D962-T1,42,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+D5,Praya reticulata,KOK17_D Trawl022117,42,Glutaraldehyde Citrisolv Permount,Ok,1,,1,,TRUE
+U5,Resomia dunni,D963-D4,42,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+S5,Resomia ornicephala,D965-D7,42,Glutaraldehyde Citrisolv Permount,Ok,1,1,,,TRUE
+T5,Resomia persica,D965-D6,42,Glutaraldehyde Citrisolv Permount,Ok,,1,,,TRUE
+G5,Stephanophyes superba,KOK17_D BW6-1,42,Glutaraldehyde Citrisolv Permount,Ok,1,1,1,,TRUE
+H5,Stephanophyes superba,KOK17_P BW13-2,42,Glutaraldehyde Citrisolv Permount,Bad,,,1,,TRUE
+F5,Sulculeolaria biloba,KOK17_J BW8-4,42,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+E5,Sulculeolaria chuni,KOK17_C BW6-5,42,Glutaraldehyde Citrisolv Permount,Ok,,,1,,TRUE
+I5,Sulculeolaria quadrivalvis,KOK17_W BW16-4,42,Glutaraldehyde Citrisolv Permount,BLANK,,,,,FALSE
+B11,Apolemia lanosa,D1024-D1,43,Methyl Salicylate Canada Balsam,,,1,,,TRUE
+X10,Chuniphyes multidentata,D1023-SS12,43,Methyl Salicylate Permount,Ok,,1,,,TRUE
+Y10,Chuniphyes multidentata,D1025-SS9,43,Methyl Salicylate Permount,Ok,,1,,,TRUE
+Z10,Forskalia formosa,D1021-BW20,43,Methyl Salicylate Permount,Ok,,,,,FALSE
+U10,Gymnopraia lapislazula,D1020-SS1,43,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+V10,Gymnopraia lapislazula,D1022-SS3,43,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+W10,Gymnopraia lapislazula,D1022-SS5,43,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+F11,Marrus sp.,D1019-D5,43,Methyl Salicylate Permount,Ok,,,,,FALSE
+A11,Nanomia bijuga,D1023-SS2,43,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+P11,Pagesus sp.,D1019-D5,43,Glutaraldehyde Citrisolv Permount,Ok,,,,,FALSE
+R10,Resomia ornicephala,D1025-D10,43,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+S10,Resomia ornicephala,D1025-SS5,43,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+T10,Resomia ornicephala,D1025-SS6,43,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+Q11,Marrus claudanielis,T1037-D1,44,Methyl Salicylate Permount,Ok,,1,,,TRUE
+R11,Erenna richardi,JSL II 1456-D1,44,Methyl Salicylate Permount,Ok,,,,,FALSE
+S11,Erenna richardi,T751-DS03,44,Methyl Salicylate Permount,Ok,,,,,FALSE
+T11,Praya dubia,JSL II 990-CGP2,44,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+U11,Praya dubia,JSL II 1678-DS7,44,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+V11,Desmophyes haematogaster,T749-SS6,44,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+W11,Sphaeronectes koellikeri,BWP 458-STP2,44,Methyl Salicylate Canada Balsam,Missing,,,,,FALSE
+X11,Resomia ornicephala,T1157-SS10,44,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+Y11,Resomia ornicephala,T847-SS11,44,Methyl Salicylate Permount,Immature,,1,,,TRUE
+Z11,Sphaeronectes koellikeri,BWP0528005,44,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+A12,Lilyopsis fluoracantha,M122-SS1,44,Methyl Salicylate Permount,Ok,,1,,,TRUE
+B12,Physophora gilmeri,KM2018-Trawl1,44,Methyl Salicylate Permount,Ok,,1,,,TRUE
+I10,Gymnopraia lapislazula,V4098-D4,?,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+B1,Hippopodius hippopus,VF#6,?,Citrisolv Permount,Ok,1,1,1,,TRUE
+J10,Lilyopsis fluoracantha,V4098-SS4,?,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+D1,Maresearia praeclara,Discovery St. 8562#12,?,Citrisolv Permount,Bad,,,,,FALSE
+K10,Sphaeronectes koellikeri,V4098-SS5,?,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+N11,Sphaeronectes koellikeri,Manko_VIF18.95,?,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+N9,Physophora hydrostatica,D551-D11,33 phyloref!,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+J7,Physalia physalis,YPM35011,B8_3R_5D,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+X9,Physalia physalis,YPM35012,B8_3R_5D,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+I7,Physalia physalis,TX026,BrownTX,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+A13,Bathyphysa conifera,JSL I 2657-DS1,None,None,NOslide,,,1,,TRUE
+C13,Erenna richardi,JSL II 1456 DS1,None,None,NOslide,,,1,,TRUE
+D13,Halistemma rubrum,D335-D5,None,None,NOslide,,,1,,TRUE
+M10,Halistemma rubrum,D720-D1,phyloref,Methyl Salicylate Permount,Ok,1,1,,,TRUE
+E11,Erenna laciniata,D1024-D4,Wf18_58,Methyl Salicylate Permount,Ok,1,,,,TRUE
+D11,Chelophyes appendiculata,D1019-BW01,YPM102970,Methyl Salicylate Canada Balsam,Ok,,1,,,TRUE
+C11,Marrus claudanielis,D1019-D9,YPM102971,Methyl Salicylate Permount,Ok,1,1,,,TRUE

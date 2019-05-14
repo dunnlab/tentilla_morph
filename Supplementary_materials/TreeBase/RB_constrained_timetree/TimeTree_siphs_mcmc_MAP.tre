@@ -1,0 +1,72 @@
+#NEXUS
+
+	Begin taxa;
+	Dimensions ntax=61;
+	Taxlabels
+		Abylopsis_tetragona
+		Agalma_clausi
+		Agalma_elegans
+		Agalma_okenii
+		Apolemia_lanosa
+		Apolemia_rubriversa
+		Athorybia_rosacea
+		Bargmannia_amoena
+		Bargmannia_elongata
+		Chelophyes_appendiculata
+		Chuniphyes_moserae
+		Chuniphyes_multidentata
+		Clytia_hemisphaerica
+		Cordagalma_ordinatum
+		Craseoa_lathetica
+		Crystallophyes_amygdalina
+		Desmophyes_haematogaster
+		Diphyes_dispar
+		Ectopleura_dumortieri
+		Erenna_laciniata
+		Erenna_richardi
+		Erenna_sirena
+		Forskalia_asymmetrica
+		Forskalia_edwardsii
+		Forskalia_formosa
+		Forskalia_tholoides
+		Frillagalma_vityazi
+		Gymnopraia_lapislazula
+		Halistemma_rubrum
+		Hippopodius_hippopus
+		Hydra_circumcincta
+		Kephyes_ovata
+		Lensia_conoidea
+		Lilyopsis_fluoracantha
+		Lychnagalma_utricularia
+		Marrus_claudanielis
+		Muggiaea_atlantica
+		Nanomia_bijuga
+		Nectadamas_diomedeae
+		Nectopyramis_natans
+		Physalia_physalis
+		Physonect_sp
+		Physophora_gilmeri
+		Physophora_hydrostatica
+		Porpita_porpita
+		Praya_dubia
+		Resomia_ornicephala
+		Rhizophysa_eysenhardtii
+		Rhizophysa_filiformis
+		Rosacea_flaccida
+		Sphaeronectes_christiansonae
+		Sphaeronectes_koellikeri
+		Staurocladia_wellingtoni
+		Stephalia_dilata
+		Stephanomia_amphytridis
+		Sulculeolaria_quadrivalvis
+		Thermopalia_sp
+		Tottonophyes_enigmatica
+		Velella_velella
+		Vogtia_glabra
+		Vogtia_pentacantha
+		;
+End;
+
+Begin trees;
+tree TREE1 = [&R](((((((((((((((Lensia_conoidea[&index=46]:0.303550,Sulculeolaria_quadrivalvis[&index=45]:0.303550)[&index=62,posterior=1.000000,age_95%_HPD={0.270957,0.347233}]:0.125077,Muggiaea_atlantica[&index=47]:0.428627)[&index=63,posterior=1.000000,age_95%_HPD={0.388813,0.465234}]:0.073450,Chelophyes_appendiculata[&index=44]:0.502077)[&index=64,posterior=1.000000,age_95%_HPD={0.464556,0.537631}]:0.063253,(Abylopsis_tetragona[&index=42]:0.413478,Diphyes_dispar[&index=43]:0.413478)[&index=65,posterior=1.000000,age_95%_HPD={0.368896,0.473875}]:0.151852)[&index=66,posterior=1.000000,age_95%_HPD={0.530972,0.603199}]:0.098858,(Sphaeronectes_christiansonae[&index=41]:0.052277,Sphaeronectes_koellikeri[&index=40]:0.052277)[&index=67,posterior=1.000000,age_95%_HPD={0.029184,0.071637}]:0.611911)[&index=68,posterior=1.000000,age_95%_HPD={0.633457,0.699096}]:0.066389,(((Chuniphyes_moserae[&index=50]:0.242742,Chuniphyes_multidentata[&index=51]:0.242742)[&index=69,posterior=1.000000,age_95%_HPD={0.202191,0.283849}]:0.172728,Kephyes_ovata[&index=49]:0.415470)[&index=70,posterior=1.000000,age_95%_HPD={0.366124,0.465571}]:0.170904,Crystallophyes_amygdalina[&index=48]:0.586374)[&index=71,posterior=1.000000,age_95%_HPD={0.53881,0.631883}]:0.144202)[&index=72,posterior=1.000000,age_95%_HPD={0.699614,0.762914}]:0.030810,Tottonophyes_enigmatica[&index=39]:0.761386)[&index=73,posterior=1.000000,age_95%_HPD={0.730458,0.795008}]:0.042828,(((((Hippopodius_hippopus[&index=58]:0.271871,Vogtia_pentacantha[&index=57]:0.271871)[&index=74,posterior=1.000000,age_95%_HPD={0.227508,0.315139}]:0.113312,Vogtia_glabra[&index=56]:0.385183)[&index=75,posterior=1.000000,age_95%_HPD={0.346144,0.429449}]:0.270332,Gymnopraia_lapislazula[&index=55]:0.655515)[&index=76,posterior=1.000000,age_95%_HPD={0.609742,0.694077}]:0.042010,Rosacea_flaccida[&index=54]:0.697525)[&index=77,posterior=1.000000,age_95%_HPD={0.652373,0.73615}]:0.044807,(Desmophyes_haematogaster[&index=52]:0.323454,Lilyopsis_fluoracantha[&index=53]:0.323454)[&index=78,posterior=1.000000,age_95%_HPD={0.272225,0.373523}]:0.418878)[&index=79,posterior=1.000000,age_95%_HPD={0.708122,0.784062}]:0.061883)[&index=80,posterior=1.000000,age_95%_HPD={0.770597,0.830632}]:0.021675,Craseoa_lathetica[&index=38]:0.825889)[&index=81,posterior=1.000000,age_95%_HPD={0.794168,0.857662}]:0.028184,((Nectadamas_diomedeae[&index=60]:0.281031,Nectopyramis_natans[&index=61]:0.281031)[&index=82,posterior=1.000000,age_95%_HPD={0.224303,0.329264}]:0.171094,Praya_dubia[&index=59]:0.452125)[&index=83,posterior=1.000000,age_95%_HPD={0.378128,0.517556}]:0.401947)[&index=84,posterior=1.000000,age_95%_HPD={0.818754,0.883549}]:0.020831,(((((((((Agalma_okenii[&index=26]:0.075323,Athorybia_rosacea[&index=25]:0.075323)[&index=85,posterior=1.000000,age_95%_HPD={0.055491,0.095955}]:0.022176,Agalma_elegans[&index=24]:0.097500)[&index=86,posterior=1.000000,age_95%_HPD={0.076292,0.118116}]:0.014808,Agalma_clausi[&index=27]:0.112307)[&index=87,posterior=1.000000,age_95%_HPD={0.089114,0.136687}]:0.067075,Halistemma_rubrum[&index=23]:0.179383)[&index=88,posterior=1.000000,age_95%_HPD={0.143896,0.214021}]:0.133033,Nanomia_bijuga[&index=22]:0.312416)[&index=89,posterior=1.000000,age_95%_HPD={0.257523,0.365434}]:0.184848,((Physophora_gilmeri[&index=29]:0.275750,Physophora_hydrostatica[&index=30]:0.275750)[&index=90,posterior=1.000000,age_95%_HPD={0.225574,0.339549}]:0.050970,Lychnagalma_utricularia[&index=28]:0.326720)[&index=91,posterior=1.000000,age_95%_HPD={0.271887,0.381591}]:0.170545)[&index=92,posterior=1.000000,age_95%_HPD={0.441594,0.558556}]:0.049013,((((Forskalia_edwardsii[&index=32]:0.103065,Forskalia_tholoides[&index=33]:0.103065)[&index=93,posterior=1.000000,age_95%_HPD={0.079956,0.130011}]:0.067212,Forskalia_formosa[&index=34]:0.170276)[&index=94,posterior=1.000000,age_95%_HPD={0.14113,0.203422}]:0.071351,Forskalia_asymmetrica[&index=31]:0.241628)[&index=95,posterior=1.000000,age_95%_HPD={0.202614,0.280223}]:0.204464,Cordagalma_ordinatum[&index=35]:0.446092)[&index=96,posterior=1.000000,age_95%_HPD={0.400238,0.493962}]:0.100186)[&index=97,posterior=1.000000,age_95%_HPD={0.507452,0.597718}]:0.007801,(Frillagalma_vityazi[&index=36]:0.484913,Resomia_ornicephala[&index=37]:0.484913)[&index=98,posterior=1.000000,age_95%_HPD={0.429571,0.53891}]:0.069166)[&index=99,posterior=1.000000,age_95%_HPD={0.513991,0.59932}]:0.159966,((((Erenna_richardi[&index=16]:0.033472,Erenna_sirena[&index=15]:0.033472)[&index=100,posterior=1.000000,age_95%_HPD={0.018897,0.050147}]:0.014764,Erenna_laciniata[&index=14]:0.048236)[&index=101,posterior=1.000000,age_95%_HPD={0.029937,0.066898}]:0.088412,Stephanomia_amphytridis[&index=17]:0.136648)[&index=102,posterior=1.000000,age_95%_HPD={0.101393,0.177289}]:0.119175,((Marrus_claudanielis[&index=21]:0.119899,Physonect_sp[&index=20]:0.119899)[&index=103,posterior=1.000000,age_95%_HPD={0.088168,0.153072}]:0.076593,(Stephalia_dilata[&index=18]:0.063481,Thermopalia_sp[&index=19]:0.063481)[&index=104,posterior=1.000000,age_95%_HPD={0.038764,0.096046}]:0.133012)[&index=105,posterior=1.000000,age_95%_HPD={0.158451,0.23898}]:0.059330)[&index=106,posterior=1.000000,age_95%_HPD={0.204796,0.305585}]:0.458222)[&index=107,posterior=1.000000,age_95%_HPD={0.655514,0.770082}]:0.160859)[&index=108,posterior=1.000000,age_95%_HPD={0.836674,0.904831}]:0.007175,(Bargmannia_amoena[&index=12]:0.143318,Bargmannia_elongata[&index=13]:0.143318)[&index=109,posterior=1.000000,age_95%_HPD={0.099958,0.187042}]:0.738760)[&index=110,posterior=1.000000,age_95%_HPD={0.843873,0.912856}]:0.017328,(Apolemia_lanosa[&index=10]:0.072665,Apolemia_rubriversa[&index=11]:0.072665)[&index=111,posterior=1.000000,age_95%_HPD={0.042241,0.102293}]:0.826741)[&index=112,posterior=1.000000,age_95%_HPD={0.863613,0.934491}]:0.079891,((Rhizophysa_eysenhardtii[&index=9]:0.247419,Rhizophysa_filiformis[&index=8]:0.247419)[&index=113,posterior=1.000000,age_95%_HPD={0.189604,0.305318}]:0.271084,Physalia_physalis[&index=7]:0.518503)[&index=114,posterior=1.000000,age_95%_HPD={0.449205,0.596834}]:0.460795)[&index=115,posterior=1.000000,age_95%_HPD={0.948564,1}]:0.020704,(((Clytia_hemisphaerica[&index=2]:0.682772,Hydra_circumcincta[&index=3]:0.682772)[&index=116,posterior=1.000000,age_95%_HPD={0.621748,0.741109}]:0.132465,Ectopleura_dumortieri[&index=1]:0.815237)[&index=117,posterior=1.000000,age_95%_HPD={0.75859,0.868878}]:0.062908,((Porpita_porpita[&index=4]:0.241116,Velella_velella[&index=5]:0.241116)[&index=118,posterior=1.000000,age_95%_HPD={0.198807,0.285079}]:0.380380,Staurocladia_wellingtoni[&index=6]:0.621496)[&index=119,posterior=1.000000,age_95%_HPD={0.557402,0.686964}]:0.256649)[&index=120,posterior=1.000000,age_95%_HPD={0.824274,0.926813}]:0.121856)[&index=121,posterior=1.000000,age_95%_HPD={1,1}]:0.000000;
+End;

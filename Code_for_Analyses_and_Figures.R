@@ -829,6 +829,30 @@ for(c in 2:ncol(dprunedmatrix_logs)){
 OUwie_matrix[,3:5] <- apply(OUwie_matrix[,3:5], 2, round3)
 write.csv(OUwie_matrix, "OU_diet_test.csv")
 
+#OUwie model adequacy
+#Model adequacy
+worthy_models = OUwie_matrix
+MAD = as.data.frame(matrix(ncol = 6, nrow = nrow(worthy_models)))
+names(MAD) = c("msig", "cvar", "svar", "sasr", "shgt", "dcfd")
+rownames(MAD) = worthy_models$Character
+for(m in 1:nrow(worthy_models)){
+  C = dprunedmatrix_logs[,which(names(dprunedmatrix_logs) == worthy_models$Character[m])]
+  names(C) = dprunedmatrix_logs$Species
+  C = C[!is.na(C)]
+  Ctree = drop.tip(regimetree, which(!(regimetree$tip.label %in% names(C))))
+  C = C[match(Ctree$tip.label, names(C))]
+  class(Ctree)="phylo"
+  FC <- fitContinuous(Ctree,C,model=worthy_models$Best_model[m])
+  UTC <- make_unit_tree(FC)
+  picstat_data <- calculate_pic_stat(UTC)
+  sim <- simulate_char_unit(UTC)
+  picstat_sim <- calculate_pic_stat(sim)
+  compare_pic_stat(picstat_data, picstat_sim) %>% .$p.values -> MAD[m,]
+}
+phy_models = data.frame(worthy_models,MAD)
+phy_models[,6:11] = apply(phy_models[,6:11], 2,round3)
+#write.csv(phy_models, "OUwie_model_adequacy.csv")
+
 ## DAPC ##
 #General prediction of feeding guild (transforming NAs to zeroes)
 ldamtrix = sharedmean_logs
