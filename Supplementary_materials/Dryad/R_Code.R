@@ -31,12 +31,12 @@ library(gridExtra)
 library(colorRamps)
 
 # Set paths to input data
-setwd("~/tentilla_morph")
+#setwd("~/tentilla_morph")
 
 #Load raw data
-read.csv("byslide.csv") -> numbers
+read.csv("raw_morphology_data.csv") -> numbers
 numbers$Species = as.character(numbers$Species)
-categorical <- read.csv("Homolog_Categorical.csv")[,-2]
+categorical <- read.csv("raw_categorical_data.csv")[,-2]
 rownames(categorical) = categorical$Species
 
 #Correct species spellings
@@ -144,7 +144,7 @@ hcolors<-c(rep("#000000FF",10), hcolors)
 heatmap(heatdata, scale = "column", cexCol = 0.2, col=hcolors, keep.dendro = T)
 
 #Load phylogenetic tree
-consensus = read.nexus("TimeTree_CT_truerho.tre") %>% drop.tip(56:61)
+consensus = read.nexus("../TreeBase/RB_constrained_timetree/TimeTree_siphs_mcmc_MAP.tre") %>% drop.tip(56:61)
 consensus$tip.label = str_replace_all(consensus$tip.label,"_"," ")
 #Switch Nanomia bijuga for Nanaomia sp
 consensus$tip.label[which(consensus$tip.label == "Nanomia bijuga")] <- "Nanomia sp"
@@ -526,7 +526,7 @@ for(i in 2:length(traitlist)){
 
 ## Retrieve diet data ##
 #Retrieve diet info from literature BINARY
-GC = read.csv("Cmerged.csv", header = T, sep=',')[,c(2,4,5,6)] %>% .[which(grepl("diet",.$character) & .$state==1),]
+GC = read.csv("literature_diet_data.tsv", header = T, sep='\t')
 GC$character = factor(GC$character, levels=unique(GC$character))
 GC$species = as.character(GC$species)
 #Fix typos#
@@ -571,7 +571,7 @@ diet = rbind(diet, cladeB, krilleaters, gelateaters)
 #Decapod diet column actually encompasses decapods, krill, and mysids (large crustaceans/shrimp like animals)
 
 # Retrive ROV annotation data
-VARS <- read.csv("Choy2017.tsv", sep="\t")
+VARS <- read.csv("raw_ROV_data.csv")
 VARS_curated = VARS[which(VARS$Pred_lowest_tax %in% ultram$tip.label | VARS$Pred_lowest_tax=="Nanomia bijuga"),]
 VARS_cast = acast(VARS_curated, Pred_lowest_tax~Prey_order, fun.aggregate = length)
 
@@ -582,7 +582,7 @@ dprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(d
 dprunedTree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(diet))))
 
 ## Retrieve prey selectivity ##
-selectivity = read.csv("PurcellSiphonophoresDiet.csv", header=T, sep=",")[,c(1,31:39)]
+selectivity = read.csv("Purcell1981_selectivity.csv", header=T, sep=",")[,c(1,31:39)]
 selectivity$Species <- as.character(selectivity$Species)
 selectivity$Species[which(selectivity$Species == "Nanomia bijuga")] <- "Nanomia sp"
 selectivity$Species[which(selectivity$Species == "Rhizophysa eyesenhardti")] <- "Rhizophysa eysenhardtii"
@@ -597,8 +597,7 @@ selectivity = selectivity[which(rownames(selectivity) %in% sharedmeans$Species),
 Sprunedtree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(selectivity))))
 
 #Retrieve copepod prey length from literature
-quantDiet = read.csv("Qmerged.csv", header = T, sep=',')[,c(2,4,6)]
-preylength = quantDiet[which(grepl("prey",quantDiet$character)),] %>% .[,c(1,3)]
+preylength = read.csv("Purcell1984_preylength.csv", header = T, sep=',')[,c(2,4,6)]
 names(preylength) = c("Species","Copepod prey length (mm)")
 PL_pruned_matrix = sharedmean_logs[which(sharedmean_logs$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmean_logs$Species),2])
 PL_pruned_SEs = sharedvar_logs[which(sharedvar_logs$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmean_logs$Species),2])
@@ -1018,17 +1017,12 @@ cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
 preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.9, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
 
 ## SIMPLE ANALYSES OF KINEMATIC DATA ##
-
-kine = read.csv("Kinematics.tsv", sep='\t', header=T) #%>% .[which(apply(., 1, function(x) sum(is.na(x)))<ncol(.)-2),-2]
+kine = read.csv("raw_kinematic_data.csv", sep=',', header=T)
 kineWNA = kine[which(kine$Species %in% ultram$tip.label),]
 rownames(kineWNA)=kineWNA$Specimen
 rownames(kine)=kine$Specimen
-#kineWNA = kineWNA[,-1]
-#kine=kine[,-1]
 kinetree = drop.tip(ultram, which(!(ultram$tip.label %in% kine$Species)))
 kinetree$edge.length = 200*kinetree$edge.length
-#kine_clean = kineWNA[,which(colSums(kineWNA)>1)]
-#names(kine) = c("ADS", "MDS", "HeDS","HeMDS", "HSDS", "HFL", "HaDS")
 kine_byspp = aggregate(. ~ kine$Species, data = kine[,c(-1,-2)], mean.na, na.action = na.pass)
 names(kine_byspp)[1] <- "Species"
 kinemorph <- castmeans[which(castmeans$Species %in% kine_byspp$Species),] %>% cbind(kine_byspp[which(kine_byspp$Species %in% castmeans$Species),])
