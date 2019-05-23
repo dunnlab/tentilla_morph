@@ -880,14 +880,46 @@ preDIET <- predict(DAPClogs, predictionset[,-1])
 cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
 preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
 
-#Particular diet items that have enough variability (Copepods, fish, large crustaceans)
-prunediets = diet[which(rownames(diet) %in% ldamtrix$Species),]
+#Remove NAs from characters and species
+rowNAs = c(0,apply(sharedmean_logs[,-1], 1, function(x) sum(is.nan(x))))
+colNAs = c(0,apply(sharedmean_logs[,-1], 2, function(x) sum(is.nan(x))))
+ldamtrix = sharedmean_logs[,which(colNAs<6)]
+ldamtrix = ldamtrix[which(!is.nan(rowSums(ldamtrix[,-1]))),]
+ldamtrix = ldamtrix[which(rowNAs<1),]
+ldamtrix$Species = as.character(ldamtrix$Species)
+ldamtrix = ldamtrix[which(ldamtrix$Species %in% names(hypdiet)),]
+LDAtree = drop.tip(ultram, which(!(ultram$tip.label %in% ldamtrix$Species)))
+ldamtrix = ldamtrix[match(LDAtree$tip.label, ldamtrix$Species),]
+baselda=ldamtrix
 
+#Feeding guilds with NAs removed
+prunediets = hypdiet[which(names(hypdiet) %in% ldamtrix$Species)]
+ldamtrix = cbind(baselda, prunediets[match(baselda$Species, names(prunediets))])
+names(ldamtrix)[ncol(ldamtrix)]<-"Diet"
+#ldamtrix[,c(-1,-ncol(ldamtrix))] <- apply(ldamtrix[,c(-1,-ncol(ldamtrix))],2,exp)
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$Diet, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$Diet, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),] #Remove taxa with many unmeasured NAs that create zero-biases
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+#Particular diet items that have enough variability (Copepods, fish, large crustaceans)
 #Copepods
-ldamtrix = sharedmean_logs
-ldamtrix[is.na(ldamtrix)]<-0
+ldamtrix = baselda
 ldamtrix$Species = as.character(ldamtrix$Species)
 ldamtrix = ldamtrix[which(ldamtrix$Species %in% rownames(diet)),]
+prunediets = diet[which(rownames(diet) %in% ldamtrix$Species),]
 ldamtrix = cbind(ldamtrix, prunediets[match(ldamtrix$Species, rownames(prunediets)), "Copepod diet"])
 names(ldamtrix)[ncol(ldamtrix)]<-"CopepodDiet"
 xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$CopepodDiet, n.pca.max = 300, training.set = 0.9,
@@ -918,13 +950,15 @@ predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia ta
 predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
 preDIET <- predict(DAPClogs, predictionset[,-1])
 cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
-preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="col", cexCol=0.5, col=c("white", "white", gray.colors(10)[10:1],"black", "black"),Colv=NA)
 
 #Fish
+#ldamtrix = baselda
 ldamtrix = sharedmean_logs
 ldamtrix[is.na(ldamtrix)]<-0
 ldamtrix$Species = as.character(ldamtrix$Species)
 ldamtrix = ldamtrix[which(ldamtrix$Species %in% rownames(diet)),]
+prunediets = diet[which(rownames(diet) %in% ldamtrix$Species),]
 ldamtrix = cbind(ldamtrix, prunediets[match(ldamtrix$Species, rownames(prunediets)), "Fish diet"])
 names(ldamtrix)[ncol(ldamtrix)]<-"FishDiet"
 xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$FishDiet, n.pca.max = 300, training.set = 0.9,
@@ -936,7 +970,8 @@ contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
 scatter(DAPClogs, clabel = 0.5)
 assignplot(DAPClogs)
 compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
-FishGLM <- glm(FishDiet~Heteroneme.volume..um3.+total_haploneme_volume+Pedicle.width..um., data = ldamtrix)
+#FishGLM <- glm(FishDiet~Heteroneme.volume..um3.+total_haploneme_volume+Pedicle.width..um., data = ldamtrix)
+FishGLM <- glm(FishDiet~cnidomic_index+Pedicle.width..um., data = ldamtrix)
 summary(FishGLM)
 1-(FishGLM$deviance/FishGLM$null.deviance)
 
@@ -954,13 +989,13 @@ predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia ta
 predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
 preDIET <- predict(DAPClogs, predictionset[,-1])
 cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
-preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="col", cexCol=0.5, col=c(gray.colors(10)[10:1]),Colv=NA)
 
 #Large crustaceans
-ldamtrix = sharedmean_logs
-ldamtrix[is.na(ldamtrix)]<-0
+ldamtrix = baselda
 ldamtrix$Species = as.character(ldamtrix$Species)
 ldamtrix = ldamtrix[which(ldamtrix$Species %in% rownames(diet)),]
+prunediets = diet[which(rownames(diet) %in% ldamtrix$Species),]
 ldamtrix = cbind(ldamtrix, prunediets[match(ldamtrix$Species, rownames(prunediets)), "Decapod diet"])
 names(ldamtrix)[ncol(ldamtrix)]<-"DecapodDiet"
 xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$DecapodDiet, n.pca.max = 300, training.set = 0.9,
@@ -990,14 +1025,13 @@ predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia ta
 predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
 preDIET <- predict(DAPClogs, predictionset[,-1])
 cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
-preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="col", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
 
 #Soft bodied vs hard bodied prey
 prunediets = softORhard
-ldamtrix = sharedmean_logs
-ldamtrix[is.na(ldamtrix)]<-0
+ldamtrix = baselda
 ldamtrix$Species = as.character(ldamtrix$Species)
-ldamtrix = cbind(ldamatrix, prunediets[match(baselda$Species, rownames(prunediets)), 1])
+ldamtrix = cbind(ldamtrix, prunediets[match(baselda$Species, rownames(prunediets)), 1])
 names(ldamtrix)[ncol(ldamtrix)]<-"SoftHard"
 xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$SoftHard, n.pca.max = 300, training.set = 0.9,
                  result = "groupMean", center = TRUE, scale = TRUE,
