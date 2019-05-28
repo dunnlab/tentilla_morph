@@ -1,0 +1,11 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Athorybia_rosacea,0,0.5,0
+1000,Lensia_conoidea,Athorybia_rosacea,0,0.671231,0.0819528
+2000,Lensia_conoidea,Athorybia_rosacea,0,0.195914,0.367515
+2000,Sphaeronectes_koellikeri,NA,0.48879,1.19573,1.16507
+2000,Erenna_sirena,Marrus_claudanielis,0.34995,3.70743,-2.34094
+3000,Lensia_conoidea,Athorybia_rosacea,0,0.100832,0.701779
+3000,Resomia_ornicephala,NA,0.449203,1.31336,-0.935381
+3000,Erenna_sirena,Marrus_claudanielis,0.211333,1.35367,0.700218
+4000,Lensia_conoidea,Athorybia_rosacea,0,0.229221,-0.227266
+4000,Erenna_sirena,Marrus_claudanielis,0.300431,0.870677,0.260887

@@ -1,0 +1,58 @@
+Count	Pred_lowest_tax	Pred_order	Siph_suborder	Prey	Prey_order
+1	Nanomia bijuga	Siphonophorae	Physonectae	Chaetognatha	Chaetognatha
+3	Apolemia	Siphonophorae	Physonectae	Medusae	Medusae
+1	Siphonophorae	Siphonophorae		Siphonophorae	Siphonophorae
+1	Physonectae	Siphonophorae	Physonectae	Bathochordaeus sp. a	Appendicularia
+2	Bargmannia	Siphonophorae	Physonectae	Cephalopoda	Cephalopod
+1	Physonectae	Siphonophorae	Physonectae	Galiteuthis	Cephalopod
+1	Physonectae	Siphonophorae	Physonectae	Copepoda	Crustacean	Copepoda
+1	Praya dubia	Siphonophorae	Calycophorae	Copepoda	Crustacean	Copepoda
+1	Bargmannia	Siphonophorae	Physonectae	Crustacea	Crustacean
+3	Lychnagalma utricularia	Siphonophorae	Physonectae	Crustacea	Crustacean
+1	Nanomia bijuga	Siphonophorae	Physonectae	Crustacea	Crustacean
+1	Siphonophorae	Siphonophorae		Decapoda	Crustacean	Decapod
+3	Nanomia bijuga	Siphonophorae	Physonectae	Euphausia	Crustacean	Euphausiacea
+3	Apolemia	Siphonophorae	Physonectae	Euphausiacea	Crustacean	Euphausiacea
+3	Forskalia	Siphonophorae	Physonectae	Euphausiacea	Crustacean	Euphausiacea
+64	Nanomia bijuga	Siphonophorae	Physonectae	Euphausiacea	Crustacean	Euphausiacea
+1	Physonectae	Siphonophorae	Physonectae	Euphausiacea	Crustacean	Euphausiacea
+2	Praya dubia	Siphonophorae	Calycophorae	Euphausiacea	Crustacean	Euphausiacea
+3	Siphonophorae	Siphonophorae		Euphausiacea	Crustacean	Euphausiacea
+5	Nanomia bijuga	Siphonophorae	Physonectae	Euphausiidae	Crustacean	Euphausiacea
+1	Forskalia	Siphonophorae	Physonectae	Sergestes	Crustacean	Decapod
+5	Lychnagalma utricularia	Siphonophorae	Physonectae	Sergestes	Crustacean	Decapod
+1	Nanomia bijuga	Siphonophorae	Physonectae	Sergestes	Crustacean	Decapod
+1	Apolemia	Siphonophorae	Physonectae	Ctenophora	Ctenophore
+1	Praya dubia	Siphonophorae	Calycophorae	Ctenophora	Ctenophore
+2	Siphonophorae	Siphonophorae		Ctenophora	Ctenophore
+1	Calycophorae	Siphonophorae	Calycophorae	Cydippida	Ctenophore
+1	Physonectae	Siphonophorae	Physonectae	Cydippida	Ctenophore
+1	Praya dubia	Siphonophorae	Calycophorae	Cydippida	Ctenophore
+1	Siphonophorae	Siphonophorae		Cydippida	Ctenophore
+1	Apolemia	Siphonophorae	Physonectae	Actinopteri	Fish
+1	Bathyphysa conifera	Siphonophorae	Cystonecta	Actinopteri	Fish
+4	Physonectae	Siphonophorae	Physonectae	Actinopteri	Fish
+1	Stephanomia amphytridis	Siphonophorae	Physonectae	Actinopteri	Fish
+1	Apolemia	Siphonophorae	Physonectae	Cyclothone	Fish
+1	Physonectae	Siphonophorae	Physonectae	Stenobrachius leucopsarus	Fish
+1	Bathyphysa conifera	Siphonophorae	Cystonecta	Tarletonbeania	Fish
+3	Apolemia	Siphonophorae	Physonectae	Aegina	Hydrozoa	Narcomedusae
+1	Desmophyes annectens	Siphonophorae	Calycophorae	Aegina	Hydrozoa	Narcomedusae
+1	Nanomia bijuga	Siphonophorae	Physonectae	Aegina	Hydrozoa	Narcomedusae
+2	Physonectae	Siphonophorae	Physonectae	Aegina	Hydrozoa	Narcomedusae
+1	Apolemia	Siphonophorae	Physonectae	Crossota	Hydrozoa
+2	Apolemia	Siphonophorae	Physonectae	Haliscera conica	Hydrozoa
+1	Praya dubia	Siphonophorae	Calycophorae	Hydromedusae	Hydrozoa
+1	Siphonophorae	Siphonophorae		Leptomedusae	Hydrozoa
+1	Siphonophorae	Siphonophorae		Narcomedusae	Hydrozoa	Narcomedusae
+1	Apolemia	Siphonophorae	Physonectae	Ptychogena lactea	Hydrozoa
+1	Apolemia	Siphonophorae	Physonectae	Solmissus	Hydrozoa
+1	Praya dubia	Siphonophorae	Calycophorae	Solmissus	Hydrozoa
+1	Praya dubia	Siphonophorae	Calycophorae	Trachymedusae	Hydrozoa	Trachymedusae
+2	Apolemia	Siphonophorae	Physonectae	Atolla vanhoeffeni	Scyphozoa
+1	Praya dubia	Siphonophorae	Calycophorae	Forskalia	Siphonophorae	Physonectae
+2	Praya dubia	Siphonophorae	Calycophorae	Nanomia bijuga	Siphonophorae	Physonectae
+1	Siphonophorae	Siphonophorae		Oikopleura	Tunicate
+1	Apolemia	Siphonophorae	Physonectae	Salpida	Tunicate
+1	Physonectae	Siphonophorae	Physonectae	Salpida	Tunicate
+1	Siphonophorae	Siphonophorae		Salpida	Tunicate

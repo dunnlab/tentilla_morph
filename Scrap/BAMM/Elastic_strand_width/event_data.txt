@@ -1,0 +1,12 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Agalma_clausi,0,0.5,0
+1000,Lensia_conoidea,Agalma_clausi,0,1.4454,0.332286
+2000,Lensia_conoidea,Agalma_clausi,0,1.16508,0.156725
+3000,Lensia_conoidea,Agalma_clausi,0,1.02165,0.842847
+3000,Diphyes_dispar,NA,0.923058,6.4073,1.85551
+3000,Sphaeronectes_koellikeri,NA,1.16908,0.681337,-0.252818
+3000,Craseoa_lathetica,NA,0.92854,5.93066,-0.589799
+3000,Halistemma_rubrum,NA,1.13284,2.16482,0.200791
+3000,Stephanomia_amphytridis,NA,1.23854,3.55716,1.31648
+4000,Lensia_conoidea,Agalma_clausi,0,0.834588,1.22226
+4000,Sphaeronectes_koellikeri,NA,0.973441,2.15088,-1.22961

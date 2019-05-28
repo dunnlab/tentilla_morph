@@ -1,0 +1,17 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Rhizophysa_filiformis,0,0.5,0
+1000,Lensia_conoidea,Rhizophysa_filiformis,0,0.569222,-0.182228
+1000,Diphyes_dispar,NA,1.17034,2.95529,-1.57273
+1000,Desmophyes_haematogaster,NA,1.1563,0.478946,0.693883
+1000,Vogtia_glabra,NA,1.0335,0.222837,-1.41707
+2000,Lensia_conoidea,Rhizophysa_filiformis,0,0.459109,-0.159077
+2000,Diphyes_dispar,NA,1.18145,0.194858,0.0540122
+2000,Erenna_richardi,Marrus_claudanielis,0.729766,1.8,0.426622
+2000,Rhizophysa_filiformis,Physalia_physalis,0.143654,3.55106,1.11122
+3000,Lensia_conoidea,Rhizophysa_filiformis,0,0.680047,-1.38831
+3000,Gymnopraia_lapislazula,NA,1.28479,1.45191,0.402058
+3000,Erenna_richardi,Marrus_claudanielis,0.716587,1.76244,-0.0682238
+3000,Rhizophysa_filiformis,Physalia_physalis,0.106041,1.4466,0.546897
+4000,Lensia_conoidea,Rhizophysa_filiformis,0,0.907716,-1.41719
+4000,Erenna_richardi,Marrus_claudanielis,0.715787,3.43674,-0.944595
+4000,Rhizophysa_filiformis,Physalia_physalis,0.155218,0.804732,0.582786

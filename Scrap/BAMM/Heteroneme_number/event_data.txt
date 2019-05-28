@@ -1,0 +1,14 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Bargmannia_amoena,0,0.5,0
+1000,Lensia_conoidea,Bargmannia_amoena,0,2.66831,1.0708
+2000,Lensia_conoidea,Bargmannia_amoena,0,1.81928,-0.599217
+2000,Frillagalma_vityazi,NA,0.731441,34.5581,-0.714353
+2000,Erenna_richardi,Marrus_claudanielis,0.234068,7.1546,1.70627
+2000,Athorybia_rosacea,Erenna_richardi,0.122347,10.9131,0.518428
+3000,Lensia_conoidea,Bargmannia_amoena,0,1.06097,-0.210326
+3000,Athorybia_rosacea,Erenna_richardi,0.140319,14.7895,0.164823
+4000,Lensia_conoidea,Bargmannia_amoena,0,2.72276,-0.714629
+4000,Gymnopraia_lapislazula,NA,0.360524,16.3405,-0.105359
+4000,Halistemma_rubrum,NA,0.709028,25.4858,0.889176
+4000,Lychnagalma_utricularia,NA,0.768228,39.7945,0.221042
+4000,Erenna_richardi,Marrus_claudanielis,0.161211,98.8261,-2.00439

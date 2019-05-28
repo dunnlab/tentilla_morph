@@ -1,0 +1,8 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Apolemia_lanosa,0,0.5,0
+1000,Lensia_conoidea,Apolemia_lanosa,0,0.252795,0.0112751
+1000,Agalma_clausi,Halistemma_rubrum,0.951957,0.949572,0.195321
+2000,Lensia_conoidea,Apolemia_lanosa,0,0.498165,0.0216357
+2000,Sulculeolaria_quadrivalvis,NA,1.35506,1.48085,0.945213
+3000,Lensia_conoidea,Apolemia_lanosa,0,0.293718,0.310752
+4000,Lensia_conoidea,Apolemia_lanosa,0,0.208837,0.0637621

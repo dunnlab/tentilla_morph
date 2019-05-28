@@ -1,0 +1,12 @@
+generation,leftchild,rightchild,abstime,betainit,betashift
+0,Lensia_conoidea,Apolemia_lanosa,0,0.5,0
+1000,Lensia_conoidea,Apolemia_lanosa,0,1.25627,-1.38082
+2000,Lensia_conoidea,Apolemia_lanosa,0,0.568447,-0.370319
+2000,Agalma_okenii,Agalma_clausi,0.754693,1.36598,0.0870886
+3000,Lensia_conoidea,Apolemia_lanosa,0,1.00499,-1.85316
+3000,Gymnopraia_lapislazula,NA,0.803956,1.46368,0.207107
+3000,Agalma_okenii,Agalma_clausi,0.730439,2.17825,-0.51278
+3000,Agalma_okenii,Erenna_richardi,0.177854,1.00495,-1.94654
+4000,Lensia_conoidea,Apolemia_lanosa,0,0.951228,-0.630094
+4000,Hippopodius_hippopus,Vogtia_glabra,0.446431,0.175993,-2.69036
+4000,Halistemma_rubrum,NA,0.802777,3.99938,0.462322
