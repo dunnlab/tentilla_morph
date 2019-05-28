@@ -1,9 +1,0 @@
-generation,leftchild,rightchild,abstime,betainit,betashift
-0,Lensia_conoidea,Rhizophysa_filiformis,0,0.5,0
-1000,Lensia_conoidea,Rhizophysa_filiformis,0,8.03747,0.199444
-1000,Erenna_richardi,Stephanomia_amphytridis,0.822892,42.1888,-1.19745
-2000,Lensia_conoidea,Rhizophysa_filiformis,0,3.24379,1.23579
-3000,Lensia_conoidea,Rhizophysa_filiformis,0,3.87081,-0.228074
-3000,Erenna_richardi,Marrus_claudanielis,0.688487,17.5471,-1.29757
-4000,Lensia_conoidea,Rhizophysa_filiformis,0,2.81157,0.334575
-4000,Erenna_richardi,Marrus_claudanielis,0.602898,7.15746,0.83347
