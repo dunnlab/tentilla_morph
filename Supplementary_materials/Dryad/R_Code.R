@@ -495,12 +495,24 @@ opposites[which(opposites$R2_regular<0),] %>% .[order(.$R2_regular-.$R2_phylo),]
 #phyreg_full[which(phyreg_full$R2_regular>0.5 & phyreg_full$R2_phylo>0 & phyreg_full$R2_phylo<0.3),] %>% .[order(.$R2_regular-.$R2_phylo),]
 
 ## PCA ##
+Q_sharedmean_logs = sharedmean_logs[,-1]
+#Q_sharedmean_logs = castmean_logs[,-1]
+#rownames(Q_sharedmean_logs) = castmean_logs$Species
+rownames(Q_sharedmean_logs) = sharedmean_logs$Species
+raw_matrix = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[which(!is.na(rowSums(.))),]
+raw_matrix_notf = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[,c(1:7,12:17)] %>% .[which(!is.na(rowSums(.))),]
+raw_matrix_NaZeroes = Q_sharedmean_logs[,c(1:2,4:20)]
+raw_matrix_NaZeroes[is.na(raw_matrix_NaZeroes)]<-0
+compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:31)]
 
 #Using simple characters
+#PCA(raw_matrix_NaZeroes) -> Pca_raw
 PCA(raw_matrix_notf) -> Pca_raw
 Pca_raw %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
 Pca_raw %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
 Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE) #For figure A
+Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE, axes=c(3,4)) 
+raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix_notf))))
 phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2") #For figure B
 multiPhylosignal(Pca_raw$ind$coord, raw_tree)
 physignal(Pca_raw$ind$coord, raw_tree)
@@ -513,6 +525,13 @@ Pca_compound %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB"
 phylomorphospace(tree=compound_tree, Pca_compound$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
 physignal(Pca_compound$ind$coord, compound_tree)
 multiPhylosignal(Pca_compound$ind$coord, compound_tree)
+
+#PhyloPCA on simple character
+PPCA_raw = phyl.pca(raw_tree, raw_matrix_notf)
+PPCA_compound = phyl.pca(compound_tree, compound_matrix)
+PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_raw)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
+PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_compound)$importance[2,2]*100,3),"%"), cex = .6, expand =0.4)
+phylomorphospace(raw_tree, PPCA_raw$S)
 
 ## BAMM ##
 
@@ -745,10 +764,38 @@ nodelabels(pie=(describe.simmap(feeding_sim, plot=F)$ace) ,piecol=colors,cex=0.3
 add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
 
 ##VCV analysis###
-regimematrix = dprunedmatrix_logs
+regimematrix = sharedmean_logs
 rownames(regimematrix) = regimematrix$Species
-regimematrix[is.na(regimematrix)]<-0
-evol.vcv(tree=feeding_sim[[89]], as.matrix(regimematrix[,2:22]))
+regimematrix[is.na(regimematrix)] <- 0
+simple.vcv <- evol.vcv(tree=ultram, as.matrix(regimematrix[,2:22]))
+simple.vcv.corrs <- cov2cor(simple.vcv$R.single)
+corrplot(simple.vcv.corrs)
+
+dietregimematrix = dprunedmatrix_logs
+rownames(dietregimematrix) = dietregimematrix$Species
+dietregimematrix[is.na(dietregimematrix)] <- 0
+diet.simple.vcv <- evol.vcv(tree=regimetree, as.matrix(dietregimematrix[,2:22]))
+diet.simple.vcv.corrs <- cov2cor(diet.simple.vcv$R.single)
+corrplot(diet.simple.vcv.corrs)
+diet.complex.vcv <- evol.vcv(tree=feeding_sim[[89]], as.matrix(dietregimematrix[,2:22]))
+
+#Loop for evol.vcvlite character pairs
+VCVlist <- list()
+it = 0
+for(i in 2:ncol(dietregimematrix)){
+  for(j in 2:ncol(dietregimematrix)){
+    IJmatrix = dietregimematrix[which(rowSums(dietregimematrix[,c(i,j)])!=0),]
+    #IJmatrix[,-1] = sapply(IJmatrix[,-1], jitter)
+    IJtree = drop.tip(feeding_sim[[89]], which(!(feeding_sim[[89]]$tip.label %in% IJmatrix$Species)))
+    kappa(t(as.matrix(IJmatrix[,c(i,j)])) %*% as.matrix(IJmatrix[,c(i,j)]))
+    if(i != j & min(cor(IJmatrix[,c(i,j)]))<0.95){
+      it <- it+1
+      tryCatch(evcvIJ <- evolvcv.lite(IJtree, IJmatrix[,c(i,j)])), error=function(e))
+      VCVlist[[it]] <- evcvIJ
+      names(VCVlist)[it] <- paste(names(IJmatrix)[i], names(IJmatrix)[j], collapse = " ~ ")
+    }
+  }
+}
 
 #PGLS of characters vs Purcell Selectivity
 pGLSp_sel = as.data.frame(matrix(nrow=ncol(Sprunedmatrix_logs[,-1]), ncol=ncol(selectivity)))
