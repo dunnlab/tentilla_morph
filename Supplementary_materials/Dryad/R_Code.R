@@ -1,6 +1,7 @@
 ## LOAD PACKAGES ##
 #General
 library(tidyverse)
+library(magrittr)
 library(stringr)
 library(readr)
 library(reshape2)
@@ -1114,10 +1115,11 @@ simple.vcv.corrs <- cov2cor(simple.vcv$R.single)
 corrplot(simple.vcv.corrs)
 
 #For the taxa with diet data
+par(ask=F)
 dietregimematrix = dprunedmatrix_logs
 rownames(dietregimematrix) = dietregimematrix$Species
 #Nas to zeroes
-dietregimematrix[is.na(dietregimematrix)] <- 0
+#dietregimematrix[is.na(dietregimematrix)] <- 0
 diet.simple.vcv <- evol.vcv(tree=regimetree, as.matrix(dietregimematrix[,2:22]))
 diet.simple.vcv.corrs <- cov2cor(diet.simple.vcv$R.single)
 corrplot(diet.simple.vcv.corrs)
@@ -1138,7 +1140,7 @@ for(i in 2:22){
   for(j in 2:22){
     IJmatrix = dietregimematrix[which(rowSums(dietregimematrix[,c(i,j)])!=0),]
     #IJmatrix[,-1] = sapply(IJmatrix[,-1], jitter)
-    IJtree = drop.tip(feeding_sim[[89]], which(!(feeding_sim[[89]]$tip.label %in% IJmatrix$Species)))
+    IJtree = drop.tip(feeding_sim[[91]], which(!(feeding_sim[[89]]$tip.label %in% IJmatrix$Species)))
     kappa(t(as.matrix(IJmatrix[,c(i,j)])) %*% as.matrix(IJmatrix[,c(i,j)]))
     it <- it+1
     if(i != j ){
