@@ -756,6 +756,7 @@ nodelabels(text=regimetree$node.label,frame="none",adj=c(1.6,-0.45), cex=0.6);ti
 RTorder = regimetree$tip.label
 
 ##SIMMAP feeding guilds ##
+set.seed(1111111)
 make.simmap(regimetree, hypdiet, nsim = 100) -> feeding_sim
 plotTree(regimetree, lwd = 4)
 feeding_sim %>% plotSimmap(lwd = 4, add = T)
@@ -763,6 +764,7 @@ colors = c( "black","green3","blue","cyan","red")
 names(colors) = c("Fish","Large crustacean","Mixed","Small crustacean","Gelatinous")
 nodelabels(pie=(describe.simmap(feeding_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
 add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+par(ask=F)
 
 #PGLS of characters vs Purcell Selectivity
 pGLSp_sel = as.data.frame(matrix(nrow=ncol(Sprunedmatrix_logs[,-1]), ncol=ncol(selectivity)))
@@ -1138,10 +1140,10 @@ VCVlist <- list()
 it = 0
 for(i in 2:22){
   for(j in 2:22){
-    IJmatrix = dietregimematrix[which(rowSums(dietregimematrix[,c(i,j)])!=0),]
+    IJmatrix = dietregimematrix[which(!is.na(rowSums(dietregimematrix[,c(i,j)]))),]
     #IJmatrix[,-1] = sapply(IJmatrix[,-1], jitter)
-    IJtree = drop.tip(feeding_sim[[91]], which(!(feeding_sim[[89]]$tip.label %in% IJmatrix$Species)))
-    kappa(t(as.matrix(IJmatrix[,c(i,j)])) %*% as.matrix(IJmatrix[,c(i,j)]))
+    IJtree = drop.tip.simmap(feeding_sim[[16]], feeding_sim[[16]]$tip.label[which(!(feeding_sim[[16]]$tip.label %in% IJmatrix$Species))])
+    IJmatrix = IJmatrix[match(IJtree$tip.label, rownames(IJmatrix)),]
     it <- it+1
     if(i != j ){
       evcvIJ <- try(evolvcv.lite(IJtree, IJmatrix[,c(i,j)]), silent=T)
@@ -1198,6 +1200,9 @@ Fishjoin = Fishjoin[match(sort(rownames(Fishjoin)), rownames(Fishjoin)), match(s
 corrplot(Fishjoin %>% as.matrix())
 #difference with whole diet tree simple VCV
 subtractFish <- Fishjoin - Simplejoin
+subtractFish[is.na(subtractFish)] <- 0
+(subtractFish/max(abs(subtractFish),na.rm = T)) %>% as.matrix() %>% corrplot()
+subtractFish <- Fishjoin - LargeCrustaceanjoin
 subtractFish[is.na(subtractFish)] <- 0
 (subtractFish/max(abs(subtractFish),na.rm = T)) %>% as.matrix() %>% corrplot()
 
@@ -1257,6 +1262,9 @@ corrplot(Mixedjoin %>% as.matrix())
 subtractMixed <- Mixedjoin - Simplejoin
 subtractMixed[is.na(subtractMixed)] <- 0
 (subtractMixed/max(abs(subtractMixed),na.rm = T)) %>% as.matrix() %>% corrplot()
+subtractMixed <- Mixedjoin - LargeCrustaceanjoin
+subtractMixed[is.na(subtractMixed)] <- 0
+(subtractMixed/max(abs(subtractMixed),na.rm = T)) %>% as.matrix() %>% corrplot()
 
 ##SMALL CRUSTACEAN SPECIFIC VCV##
 bestmodel_SmallCrustacean <- bestmodel_descriptors %>% lapply(function(x){x$R[5] %>% unlist() %>% matrix(nrow=2,ncol=2) %>% cov2cor() %>% as.data.frame()})
@@ -1274,6 +1282,9 @@ SmallCrustaceanjoin = SmallCrustaceanjoin[match(sort(rownames(SmallCrustaceanjoi
 corrplot(SmallCrustaceanjoin %>% as.matrix())
 #difference with whole diet tree simple VCV
 subtractSmallCrustacean <- SmallCrustaceanjoin - Simplejoin
+subtractSmallCrustacean[is.na(subtractSmallCrustacean)] <- 0
+(subtractSmallCrustacean/max(abs(subtractSmallCrustacean),na.rm = T)) %>% as.matrix() %>% corrplot()
+subtractSmallCrustacean <- SmallCrustaceanjoin - LargeCrustaceanjoin
 subtractSmallCrustacean[is.na(subtractSmallCrustacean)] <- 0
 (subtractSmallCrustacean/max(abs(subtractSmallCrustacean),na.rm = T)) %>% as.matrix() %>% corrplot()
 
