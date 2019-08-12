@@ -1120,8 +1120,6 @@ corrplot(simple.vcv.corrs)
 par(ask=F)
 dietregimematrix = dprunedmatrix_logs
 rownames(dietregimematrix) = dietregimematrix$Species
-fmode<-setNames(hypdiet,names(hypdiet))
-fmode
 #Nas to zeroes
 #dietregimematrix[is.na(dietregimematrix)] <- 0
 diet.simple.vcv <- evol.vcv(tree=regimetree, as.matrix(dietregimematrix[,2:22]))
@@ -1158,6 +1156,21 @@ for(i in 2:ncol(dietregimematrix)){
     }
   }
 }
+
+ntaxamatrix = matrix(ncol=ncol(dietregimematrix)-1,nrow=ncol(dietregimematrix)-1) %>% as.data.frame()
+names(ntaxamatrix) <- names(dietregimematrix)[-1]
+rownames(ntaxamatrix) <- names(dietregimematrix)[-1]
+
+#Get the number of taxa per character pair
+for(i in 2:ncol(dietregimematrix)){
+  for(j in 2:ncol(dietregimematrix)){
+    which(!is.na(rowSums(dietregimematrix[,c(i,j)]))) %>% length() -> ntaxamatrix[i-1,j-1] #%>% print()
+  }
+}
+ntaxamelt <- cbind(rep(rownames(ntaxamatrix),ncol(ntaxamatrix)), melt(ntaxamatrix, id.var = NULL))
+names(ntaxamelt) <- c("Character_1","Character_2","Ntaxa")
+ggplot(ntaxamelt, aes(Character_1, Character_2)) + geom_tile(aes(fill = Ntaxa), colour = "black") + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
 
 VCVshortlist <- VCVlist[which(lapply(VCVlist, class)=="evolvcv.lite")]
 bestmodel_number = lapply(VCVshortlist, function(y){lapply(y,function(x){x$AIC}) %>% unlist() %>% .[which(. == min(.))] %>% names()})
