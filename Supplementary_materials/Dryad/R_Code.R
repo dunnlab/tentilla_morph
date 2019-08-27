@@ -140,8 +140,14 @@ names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
 heatdata = as.matrix(castmean_logs[,-1])
 rownames(heatdata) = castmean_logs$Species
 heatdata[is.nan(heatdata)]<- -1
-hcolors = grDevices::terrain.colors(20)
-hcolors<-c(rep("#000000FF",10), hcolors)
+#hcolors = grDevices::terrain.colors(20)
+library(colorspace)
+sequential_hcl()
+hcolors <- colorRampPalette(c("#e0ecf4","#9ebcda","#8856a7"), bias=1)
+hcolors <- colorRampPalette(c("#ffeda0","#feb24c","#f03b20"), bias=1)
+hcolors <- colorRampPalette(c("yellow","purple"), bias=1)
+#hcolors <- sequential_hcl(17, h = 245, c = c(40, 75, 0), l = c(30, 95), power = 1)
+hcolors <- c(rep("#000000FF",10), hcolors(30))
 heatmap(heatdata, scale = "column", cexCol = 0.2, col=hcolors, keep.dendro = T)
 
 #Load phylogenetic tree
