@@ -157,7 +157,7 @@ DAPC discriminant analyses:
 
 \newpage
 
-Ordinary and phylogenetic logistinc regression of morphological characters and the presence/absence of prey types:
+Ordinary and phylogenetic logistic regression of morphological characters and the presence/absence of prey types:
 
 ![\label{GLMs} Logistic regressions between continuous morphological characters and prey type presences. Ntaxa = number of taxa used in the analyses after removing taxa with missing diet data and inapplicable character states. phyloGLM = Phylogenetic generalized logistic regression model. GLM = Generalized logistic regression model. P = p-value. b = slope. Only cases with significant GLM fits were retained. Cells colored blue indicate phyloGLM p-value < 0.05. Cells colored green indicate GLM p-value < 0.05](Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png){height=300px}
 
