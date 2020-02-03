@@ -318,145 +318,6 @@ names(elon_data) = c("Heteroneme elongation (log um)", "Haploneme elongation (lo
 elon_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(hap_el))))
 phylomorphospace(elon_tree, elon_data, label="horizontal")
 
-## SIMMAPS used to make categorical evolution figure ##
-par(ask=F)
-tentilla = sharedcategorical$Tentilla
-names(tentilla) = rownames(sharedcategorical)
-prox_het = sharedcategorical$Proximal.heteronemes
-names(prox_het) = rownames(sharedcategorical)
-desmo = sharedcategorical$Desmonemes
-names(desmo) = rownames(sharedcategorical)
-rhopalo = sharedcategorical$Rhopalonemes
-names(rhopalo) = rownames(sharedcategorical)
-dyn_cnido = sharedcategorical$Dynamic.cnidoband
-names(dyn_cnido) = rownames(sharedcategorical)
-elastic = sharedcategorical$Elastic.strand
-names(elastic) = rownames(sharedcategorical)
-distal_desmo = sharedcategorical$Distal.cnidoband.desmonemes
-names(distal_desmo) = rownames(sharedcategorical)
-coiled = sharedcategorical$Coiled.tentilla
-names(coiled) = rownames(sharedcategorical)
-heterotype = sharedcategorical$Heteroneme.type
-heterotype=as.character(heterotype)
-names(heterotype) = rownames(sharedcategorical)
-haplotype = sharedcategorical$Haploneme.type
-haplotype=as.character(haplotype)
-names(haplotype) = rownames(sharedcategorical)
-
-Simmap_list = list()
-###SIMMAP Tentilla:
-make.simmap(ultram_cat, tentilla, nsim = 100) -> tentilla_sim
-Simmap_list[[1]] <- tentilla_sim
-plotTree(ultram_cat, lwd = 4)
-tentilla_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Present", "Absent")
-nodelabels(pie=(describe.simmap(tentilla_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(tentilla_sim)
-
-###SIMMAP Proximal Heteronemes:
-make.simmap(ultram_cat, prox_het, nsim = 100) -> prox_het_sim
-Simmap_list[[2]] <- prox_het_sim
-plotTree(ultram_cat, lwd = 4)
-prox_het_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Present", "Absent")
-nodelabels(pie=(describe.simmap(prox_het_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(prox_het_sim)
-
-###SIMMAP Desmonemes:
-make.simmap(ultram_cat, desmo, nsim = 100) -> desmo_sim
-Simmap_list[[3]] <- desmo_sim
-plotTree(ultram_cat, lwd = 4)
-desmo_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Absent", "Present")
-nodelabels(pie=(describe.simmap(desmo_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(desmo_sim)
-
-###SIMMAP Rhopalonemes:
-make.simmap(ultram_cat, rhopalo, nsim = 100) -> rhopalo_sim
-Simmap_list[[4]] <- rhopalo_sim
-plotTree(ultram_cat, lwd = 4)
-rhopalo_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Absent", "Present")
-nodelabels(pie=(describe.simmap(rhopalo_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(rhopalo_sim)
-
-###SIMMAP Dynamic Cnidoband:
-make.simmap(ultram_cat, dyn_cnido, nsim = 100) -> dyn_cnido_sim
-Simmap_list[[5]] <- dyn_cnido_sim
-plotTree(ultram_cat, lwd = 4)
-dyn_cnido_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Absent", "Present")
-nodelabels(pie=(describe.simmap(dyn_cnido_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(dyn_cnido_sim)
-
-###SIMMAP Elastic Strand:
-make.simmap(ultram_cat, elastic, nsim = 100) -> elastic_sim
-Simmap_list[[6]] <- elastic_sim
-plotTree(ultram_cat, lwd = 4)
-elastic_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Absent", "Present")
-nodelabels(pie=(describe.simmap(elastic_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(elastic_sim)
-
-###SIMMAP Distal CB Desmonemes:
-make.simmap(ultram_cat, distal_desmo, nsim = 100) -> distal_desmo_sim
-Simmap_list[[7]] <- distal_desmo_sim
-plotTree(ultram_cat, lwd = 4)
-distal_desmo_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Absent", "Present")
-nodelabels(pie=(describe.simmap(distal_desmo_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(distal_desmo_sim)
-
-###SIMMAP Tentilla Coiledness:
-make.simmap(ultram_cat, coiled, nsim = 100) -> coiled_sim
-Simmap_list[[8]] <- coiled_sim
-plotTree(ultram_cat, lwd = 4)
-coiled_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Absent", "Present")
-nodelabels(pie=(describe.simmap(coiled_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(coiled_sim)
-
-###SIMMAP Heteroneme type:
-heterotype = heterotype[heterotype!=""]
-HTtree = drop.tip(ultram_cat, which(!(ultram_cat$tip.label %in% names(heterotype))))
-make.simmap(HTtree, heterotype, nsim = 100) -> heterotype_sim
-Simmap_list[[9]] <- heterotype_sim
-plotTree(HTtree, lwd = 4)
-heterotype_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red", "green")
-names(colors) = c("Eurytele", "Microbasic mastigophore", "Stenotele")
-nodelabels(pie=(describe.simmap(heterotype_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-
-###SIMMAP Haploneme type:
-haplotype = haplotype[haplotype!=""]
-HTtree = drop.tip(ultram_cat, which(!(ultram_cat$tip.label %in% names(haplotype))))
-make.simmap(HTtree, haplotype, nsim = 100) -> haplotype_sim
-Simmap_list[[10]] <- haplotype_sim
-plotTree(HTtree, lwd = 4)
-haplotype_sim %>% plotSimmap(lwd = 4, add = T)
-colors = c("black", "red")
-names(colors) = c("Isorhizas", "Anisorhizas")
-nodelabels(pie=(describe.simmap(haplotype_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
-add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
-densityMap(haplotype_sim)
-
 ## Character correlations ##
 C = sharedmatrix[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
 Cspecies = C$Species %>% as.character()
@@ -500,70 +361,6 @@ opposites = phyreg_full[which(phyreg_full[,3]*phyreg_full[,4] < 0),]
 opposites[which(opposites$R2_phylo<0),] %>% .[order(.$R2_regular-.$R2_phylo),]
 opposites[which(opposites$R2_regular<0),] %>% .[order(.$R2_regular-.$R2_phylo),]
 #phyreg_full[which(phyreg_full$R2_regular>0.5 & phyreg_full$R2_phylo>0 & phyreg_full$R2_phylo<0.3),] %>% .[order(.$R2_regular-.$R2_phylo),]
-
-## PCA ##
-Q_sharedmean_logs = sharedmean_logs[,-1]
-#Q_sharedmean_logs = castmean_logs[,-1]
-#rownames(Q_sharedmean_logs) = castmean_logs$Species
-rownames(Q_sharedmean_logs) = sharedmean_logs$Species
-raw_matrix = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[which(!is.na(rowSums(.))),]
-raw_matrix_notf = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[,c(1:7,12:17)] %>% .[which(!is.na(rowSums(.))),]
-raw_matrix_NaZeroes = Q_sharedmean_logs[,c(1:2,4:20)]
-raw_matrix_NaZeroes[is.na(raw_matrix_NaZeroes)]<-0
-compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:31)]
-
-#Using simple characters
-#PCA(raw_matrix_NaZeroes) -> Pca_raw
-PCA(raw_matrix_notf) -> Pca_raw
-Pca_raw %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
-Pca_raw %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
-Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE) #For figure A
-Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE, axes=c(3,4)) 
-raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix_notf))))
-phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2") #For figure B
-multiPhylosignal(Pca_raw$ind$coord, raw_tree)
-physignal(Pca_raw$ind$coord, raw_tree)
-
-#Using Morphometric characters
-PCA(compound_matrix) -> Pca_compound
-Pca_compound %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
-Pca_compound %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
-Pca_compound %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
-phylomorphospace(tree=compound_tree, Pca_compound$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
-physignal(Pca_compound$ind$coord, compound_tree)
-multiPhylosignal(Pca_compound$ind$coord, compound_tree)
-
-#PhyloPCA on simple character
-PPCA_raw = phyl.pca(raw_tree, raw_matrix_notf)
-PPCA_compound = phyl.pca(compound_tree, compound_matrix)
-PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_raw)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
-PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_compound)$importance[2,2]*100,3),"%"), cex = .6, expand =0.4)
-phylomorphospace(raw_tree, PPCA_raw$S)
-
-## BAMM ##
-
-traitlist = list()
-for(i in 2:ncol(sharedmean_logs)){
-  traitlist[[i]] <- sharedmean_logs[,c(1,i)]
-  names(traitlist)[i] = names(sharedmean_logs)[i]
-}
-
-traitlist <- lapply(traitlist, function(x){x<-x[which(!is.nan(x[,2])),]})
-
-for(i in 2:length(traitlist)){
-  treei = drop.tip(ultram, which(!(ultram$tip.label %in% traitlist[[i]]$Species)))
-  treei$tip.label = str_replace_all(treei$tip.label, " ", "_")
-  write.tree(treei, file = paste("BAMM/",names(traitlist[[i]])[2], "_tree.tre", sep=""))
-}
-
-for(i in 2:length(traitlist)){
-  traitlist[[i]]$Species = str_replace_all(traitlist[[i]]$Species, " ", "_")
-  write.table(traitlist[[i]],file = paste("BAMM/",names(traitlist[[i]])[2], ".txt", sep=""), sep="\t", col.names = F, row.names = F, quote = F)
-}
-
-#See BAMM/BAMMsetpriors.R
-#See BAMM/BAMMplots.R
-#See BAMM/BAMMconfiguration.txt
 
 ## Retrieve diet data ##
 #Retrieve diet info from literature BINARY
@@ -915,13 +712,6 @@ top_guilds = contributions_guilds[which(contributions_guilds>summary(contributio
 top_guilds <-  as.matrix(top_guilds)
 colnames(top_guilds)<-"Variable contribution"
 summary(DAPClogs_guilds)$assign.prop
-predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
-predictionset[is.na(predictionset)]<-0
-rownames(predictionset)<-predictionset$Species
-predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),] #Remove taxa with many unmeasured NAs that create zero-biases
-predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
-preDIET <- predict(DAPClogs_guilds, predictionset[,-1])
-preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.5, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
 
 #Particular diet items that have enough variability (Copepods, fish, large crustaceans)
 #Copepods
@@ -941,13 +731,6 @@ contributions_cope = contributions_cope[order(contributions_cope,decreasing = T)
 top_cope = contributions_cope[which(contributions_cope>summary(contributions_cope)[5])]
 top_cope <-  as.matrix(top_cope)
 colnames(top_cope)<-"Variable contribution"
-predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
-predictionset[is.na(predictionset)]<-0
-rownames(predictionset)<-predictionset$Species
-predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),] #Remove taxa with many unmeasured NAs that create zero-biases
-predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
-preDIET <- predict(DAPClogs_Cope, predictionset[,-1])
-preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="col", cexCol=0.5, col=c("white", "white", gray.colors(10)[10:1],"black", "black"),Colv=NA)
 
 #Copepod GLM
 top_cope %>% rownames() %>% paste(collapse = " + ")
@@ -983,13 +766,6 @@ contributions_fish = contributions_fish[order(contributions_fish,decreasing = T)
 top_fish = contributions_fish[which(contributions_fish>summary(contributions_fish)[5])]
 top_fish <-  as.matrix(top_fish)
 colnames(top_fish)<-"Variable contribution"
-predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
-predictionset[is.na(predictionset)]<-0
-rownames(predictionset)<-predictionset$Species
-predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),] #Remove taxa with many unmeasured NAs that create zero-biases
-predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
-preDIET <- predict(DAPClogs_Fish, predictionset[,-1])
-preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="col", cexCol=0.5, col=c("white", "white", gray.colors(10)[10:1],"black", "black"),Colv=NA)
 
 #Fish GLM
 top_fish %>% rownames() %>% paste(collapse = " + ")
@@ -1025,13 +801,6 @@ contributions_shrimp = contributions_shrimp[order(contributions_shrimp,decreasin
 top_shrimp = contributions_shrimp[which(contributions_shrimp>summary(contributions_shrimp)[5])]
 top_shrimp <-  as.matrix(top_shrimp)
 colnames(top_shrimp)<-"Variable contribution"
-predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
-predictionset[is.na(predictionset)]<-0
-rownames(predictionset)<-predictionset$Species
-predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),] #Remove taxa with many unmeasured NAs that create zero-biases
-predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
-preDIET <- predict(DAPClogs_Shrimp, predictionset[,-1])
-preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="col", cexCol=0.5, col=c("white", "white", gray.colors(10)[10:1],"black", "black"),Colv=NA)
 
 #Shrimp GLM
 top_shrimp %>% rownames() %>% paste(collapse = " + ")
@@ -1075,33 +844,6 @@ predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia ta
 predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
 preDIET <- predict(DAPClogs_SoftHard, predictionset[,-1])
 preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="col", cexCol=0.5, col=c("white", "white", gray.colors(10)[10:1],"black", "black"),Colv=NA)
-
-## SIMPLE ANALYSES OF KINEMATIC DATA ##
-kine = read.csv("raw_kinematic_data.csv", sep=',', header=T)
-kineWNA = kine[which(kine$Species %in% ultram$tip.label),]
-rownames(kineWNA)=kineWNA$Specimen
-rownames(kine)=kine$Specimen
-kinetree = drop.tip(ultram, which(!(ultram$tip.label %in% kine$Species)))
-kinetree$edge.length = 200*kinetree$edge.length
-kine_byspp = aggregate(. ~ kine$Species, data = kine[,c(-1,-2)], mean.na, na.action = na.pass)
-names(kine_byspp)[1] <- "Species"
-chart.Correlation(R = kine_byspp[,-1], col=as.character(kine_byspp$Species, na.action = "na.omit"), labels = names(kine_byspp[,-1]))
-kinemorph <- castmeans[which(castmeans$Species %in% kine_byspp$Species),] %>% cbind(kine_byspp[which(kine_byspp$Species %in% castmeans$Species),]) %>% .[,-33]
-plot(kinemorph$Cnidoband.free.length..um., kinemorph$Average.CB.discharge.speed..mm.s.)
-calys = kinemorph$Species[c(5,9,12,15,16,17,18)]
-euphys = kinemorph$Species[which(!(kinemorph$Species %in% calys))]
-relspeed = data.frame(kinemorph$Species, c(kinemorph$Average.CB.discharge.speed..mm.s./kinemorph$Cnidoband.free.length..um.))
-names(relspeed) = c("Species", "Speed/Length")
-relspeed <- relspeed[which(!(is.na(relspeed$`Speed/Length`))),]
-t.test(relspeed[which(relspeed$Species %in% calys),2], relspeed[which(relspeed$Species %in% euphys),2])
-t.test(kine$Average.CB.discharge.speed..mm.s.[which(kine$Species %in% calys)], kine$Average.CB.discharge.speed..mm.s.[which(kine$Species %in% euphys)])
-t.test(castnumbers$Cnidoband.free.length..um.[which(castnumbers$Species %in% calys)], castnumbers$Cnidoband.free.length..um.[which(castnumbers$Species %in% euphys)])
-lm(kinemorph$Average.CB.discharge.speed..mm.s.~ kinemorph$Cnidoband.free.length..um.) %>% summary()
-lm(kinemorph$Heteroneme.discharge.speed.MAX..mm.s.~ kinemorph$Heteroneme.volume..um3.) %>% summary()
-t.test(kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
-t.test(kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
-t.test(kine$Haploneme.discharge.speed.AVG..mm.s., kine$Heteroneme.discharge.speed.AVG..mm.s.)
-cor(kinemorph[,-1], use="pairwise.complete.obs") %>% .[c(1:31),c(32:41)] %>% corrplot(diag=F, tl.cex = 0.4, tl.col="black")
 
 ##VCV analysis###
 

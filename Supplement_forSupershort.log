@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  29 JAN 2020 13:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  3 FEB 2020 12:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -965,348 +965,295 @@ LaTeX Font Info:    Try loading font information for T1+lmss on input line 87.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/A
-ppendix2.png, id=20, 687.56876pt x 715.67375pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/Appendix2.png Graphic file (type png)
 
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/Appendix2.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/Appendix2.png used on input line 104.
-(pdftex.def)             Requested size: 361.62947pt x 376.4114pt.
+LaTeX Warning: Reference `figure4' on page 1 undefined on input line 102.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/M
-Lunconstrained.png, id=22, 1235.61626pt x 722.7pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/MLunconstrained.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/MLunconstrained.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/MLunconstrained.png used on input line 112.
-(pdftex.def)             Requested size: 386.12914pt x 225.84319pt.
-
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/c
-onstrain.png, id=23, 900.36375pt x 743.77875pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/constrain.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/constrain.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/constrain.png used on input line 120.
-(pdftex.def)             Requested size: 364.52168pt x 301.1266pt.
-
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/M
-Lconstrained.png, id=24, 1219.55624pt x 731.73375pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/MLconstrained.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/MLconstrained.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/MLconstrained.png used on input line 126.
-(pdftex.def)             Requested size: 376.40233pt x 225.8414pt.
-
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/B
-AYESunconstrained.png, id=25, 1083.04625pt x 696.6025pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/BAYESunconstrained.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/BAYESunconstrained.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/BAYESunconstrained.png used on input line 132.
-(pdftex.def)             Requested size: 351.12651pt x 225.84041pt.
-
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/B
-ayesConstrained.png, id=26, 1084.05pt x 702.625pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/BayesConstrained.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/BayesConstrained.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/BayesConstrained.png used on input line 138.
-(pdftex.def)             Requested size: 348.44142pt x 225.84166pt.
-
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/U
-nconstrained timetree.png, id=27, 822.07124pt x 667.49374pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/Unconstrained timetree.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/Unconstrained timetree.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/Unconstrained timetree.png used on input line 144.
-(pdftex.def)             Requested size: 370.86942pt x 301.1333pt.
-
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/c
-onstrainedTimetree.png, id=28, 847.165pt x 667.49374pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/constrainedTimetree.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/constrainedTimetree.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/constrainedTimetree.png used on input line 150.
-(pdftex.def)             Requested size: 469.75555pt x 370.1273pt.
 [1
 
-{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./P
-ost-submission modifications/Supplementary_materials/Online_appendices/PNGs/App
-endix2.png>] [3 <./Post-submission modifications/Supplementary_materials/Online
-_appendices/PNGs/MLunconstrained.png> <./Post-submission modifications/Suppleme
-ntary_materials/Online_appendices/PNGs/constrain.png>] [4 <./Post-submission mo
-difications/Supplementary_materials/Online_appendices/PNGs/MLconstrained.png> <
-./Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/
-BAYESunconstrained.png>] [5 <./Post-submission modifications/Supplementary_mate
-rials/Online_appendices/PNGs/BayesConstrained.png> <./Post-submission modificat
-ions/Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png>
-] [6 <./Post-submission modifications/Supplementary_materials/Online_appendices
-/PNGs/constrainedTimetree.png>]
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/m
-odelSupport.png, id=77, 748.7975pt x 669.50125pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/modelSupport.png Graphic file (type png)
+{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+<Supplementary_materials/Online_appendices/PNGs/Appendix2.png, id=35, 687.56876
+pt x 715.67375pt>
+File: Supplementary_materials/Online_appendices/PNGs/Appendix2.png Graphic file
+ (type png)
+<use Supplementary_materials/Online_appendices/PNGs/Appendix2.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/Appendi
+x2.png used on input line 118.
+(pdftex.def)             Requested size: 361.62947pt x 376.4114pt.
 
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/modelSupport.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/modelSupport.png used on input line 158.
+<Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png, id=37, 123
+5.61626pt x 722.7pt>
+File: Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png Graphi
+c file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/MLuncon
+strained.png used on input line 126.
+(pdftex.def)             Requested size: 386.12914pt x 225.84319pt.
+
+<Supplementary_materials/Online_appendices/PNGs/constrain.png, id=38, 900.36375
+pt x 743.77875pt>
+File: Supplementary_materials/Online_appendices/PNGs/constrain.png Graphic file
+ (type png)
+<use Supplementary_materials/Online_appendices/PNGs/constrain.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/constra
+in.png used on input line 134.
+(pdftex.def)             Requested size: 364.52168pt x 301.1266pt.
+
+<Supplementary_materials/Online_appendices/PNGs/MLconstrained.png, id=39, 1219.
+55624pt x 731.73375pt>
+File: Supplementary_materials/Online_appendices/PNGs/MLconstrained.png Graphic 
+file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/MLconstrained.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/MLconst
+rained.png used on input line 140.
+(pdftex.def)             Requested size: 376.40233pt x 225.8414pt.
+
+<Supplementary_materials/Online_appendices/PNGs/BAYESunconstrained.png, id=40, 
+1083.04625pt x 696.6025pt>
+File: Supplementary_materials/Online_appendices/PNGs/BAYESunconstrained.png Gra
+phic file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/BAYESunconstrained.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/BAYESun
+constrained.png used on input line 146.
+(pdftex.def)             Requested size: 351.12651pt x 225.84041pt.
+
+<Supplementary_materials/Online_appendices/PNGs/BayesConstrained.png, id=41, 10
+84.05pt x 702.625pt>
+File: Supplementary_materials/Online_appendices/PNGs/BayesConstrained.png Graph
+ic file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/BayesConstrained.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/BayesCo
+nstrained.png used on input line 152.
+(pdftex.def)             Requested size: 348.44142pt x 225.84166pt.
+
+<Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png, id=
+42, 822.07124pt x 667.49374pt>
+File: Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png
+ Graphic file (type png)
+
+<use Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/Unconst
+rained timetree.png used on input line 158.
+(pdftex.def)             Requested size: 370.86942pt x 301.1333pt.
+
+<Supplementary_materials/Online_appendices/PNGs/constrainedTimetree.png, id=43,
+ 847.165pt x 667.49374pt>
+File: Supplementary_materials/Online_appendices/PNGs/constrainedTimetree.png Gr
+aphic file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/constrainedTimetree.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/constra
+inedTimetree.png used on input line 164.
+(pdftex.def)             Requested size: 469.75555pt x 370.1273pt.
+[3] [4 <./Supplementary_materials/Online_appendices/PNGs/Appendix2.png>] [5 <./
+Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png> <./Suppleme
+ntary_materials/Online_appendices/PNGs/constrain.png>] [6 <./Supplementary_mate
+rials/Online_appendices/PNGs/MLconstrained.png> <./Supplementary_materials/Onli
+ne_appendices/PNGs/BAYESunconstrained.png>] [7 <./Supplementary_materials/Onlin
+e_appendices/PNGs/BayesConstrained.png> <./Supplementary_materials/Online_appen
+dices/PNGs/Unconstrained timetree.png>] [8 <./Supplementary_materials/Online_ap
+pendices/PNGs/constrainedTimetree.png>]
+<Supplementary_materials/Online_appendices/PNGs/modelSupport.png, id=86, 748.79
+75pt x 669.50125pt>
+File: Supplementary_materials/Online_appendices/PNGs/modelSupport.png Graphic f
+ile (type png)
+<use Supplementary_materials/Online_appendices/PNGs/modelSupport.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/modelSu
+pport.png used on input line 172.
 (pdftex.def)             Requested size: 469.75685pt x 420.01048pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/m
-odelAdequacy.png, id=78, 604.2575pt x 697.60625pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/modelAdequacy.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/modelAdequacy.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/modelAdequacy.png used on input line 164.
+<Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png, id=87, 604.2
+575pt x 697.60625pt>
+File: Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png Graphic 
+file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/modelAd
+equacy.png used on input line 178.
 (pdftex.def)             Requested size: 469.75153pt x 542.3211pt.
 
-LaTeX Warning: Float too large for page by 5.72441pt on input line 166.
+LaTeX Warning: Float too large for page by 5.72441pt on input line 180.
 
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/O
-Uwie_modelsupport.png, id=79, 764.8575pt x 697.60625pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/OUwie_modelsupport.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/OUwie_modelsupport.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/OUwie_modelsupport.png used on input line 170.
+<Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png, id=88, 
+764.8575pt x 697.60625pt>
+File: Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png Gra
+phic file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/OUwie_m
+odelsupport.png used on input line 184.
 (pdftex.def)             Requested size: 469.76018pt x 428.45581pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/D
-APC_guilds.png, id=80, 639.38875pt x 639.38875pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/DAPC_guilds.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/DAPC_guilds.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/DAPC_guilds.png used on input line 178.
+<Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png, id=89, 639.388
+75pt x 639.38875pt>
+File: Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png Graphic fi
+le (type png)
+<use Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_gu
+ilds.png used on input line 192.
 (pdftex.def)             Requested size: 376.4068pt x 376.4068pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/D
-APC_copepod.png, id=81, 617.30624pt x 693.59125pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/DAPC_copepod.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/DAPC_copepod.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/DAPC_copepod.png used on input line 184.
+<Supplementary_materials/Online_appendices/PNGs/DAPC_copepod.png, id=90, 617.30
+624pt x 693.59125pt>
+File: Supplementary_materials/Online_appendices/PNGs/DAPC_copepod.png Graphic f
+ile (type png)
+<use Supplementary_materials/Online_appendices/PNGs/DAPC_copepod.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_co
+pepod.png used on input line 198.
 (pdftex.def)             Requested size: 469.76987pt x 527.82274pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/D
-APC_fish.png, id=82, 598.235pt x 738.76pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/DAPC_fish.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/DAPC_fish.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/DAPC_fish.png used on input line 190.
+<Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png, id=91, 598.235pt
+ x 738.76pt>
+File: Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png Graphic file
+ (type png)
+<use Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_fi
+sh.png used on input line 204.
 (pdftex.def)             Requested size: 469.76157pt x 580.10823pt.
 
-LaTeX Warning: Float too large for page by 14.51154pt on input line 192.
+LaTeX Warning: Float too large for page by 14.51154pt on input line 206.
 
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/D
-APC_crustacean.png, id=83, 640.3925pt x 746.79pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/DAPC_crustacean.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/DAPC_crustacean.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/DAPC_crustacean.png used on input line 196.
+<Supplementary_materials/Online_appendices/PNGs/DAPC_crustacean.png, id=92, 640
+.3925pt x 746.79pt>
+File: Supplementary_materials/Online_appendices/PNGs/DAPC_crustacean.png Graphi
+c file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/DAPC_crustacean.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_cr
+ustacean.png used on input line 210.
 (pdftex.def)             Requested size: 469.75941pt x 547.80722pt.
-[7] [8 <./Post-submission modifications/Supplementary_materials/Online_appendic
-es/PNGs/modelSupport.png>] [9 <./Post-submission modifications/Supplementary_ma
-terials/Online_appendices/PNGs/modelAdequacy.png>] [10 <./Post-submission modif
-ications/Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png>
-] [11 <./Post-submission modifications/Supplementary_materials/Online_appendice
-s/PNGs/DAPC_guilds.png>] [12 <./Post-submission modifications/Supplementary_mat
-erials/Online_appendices/PNGs/DAPC_copepod.png>] [13 <./Post-submission modific
-ations/Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png>] [14 <./Po
-st-submission modifications/Supplementary_materials/Online_appendices/PNGs/DAPC
-_crustacean.png>]
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/P
-hyloGLM.png, id=132, 1110.1475pt x 665.48625pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/PhyloGLM.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/PhyloGLM.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/PhyloGLM.png used on input line 206.
+[9] [10 <./Supplementary_materials/Online_appendices/PNGs/modelSupport.png>] [1
+1 <./Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png>] [12 <./
+Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png>] [13 <./
+Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png>] [14 <./Supplem
+entary_materials/Online_appendices/PNGs/DAPC_copepod.png>] [15 <./Supplementary
+_materials/Online_appendices/PNGs/DAPC_fish.png>] [16 <./Supplementary_material
+s/Online_appendices/PNGs/DAPC_crustacean.png>]
+<Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png, id=140, 1110.1475
+pt x 665.48625pt>
+File: Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png Graphic file 
+(type png)
+<use Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/PhyloGL
+M.png used on input line 220.
 (pdftex.def)             Requested size: 376.7337pt x 225.83583pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/g
-uild_SIM.png, id=133, 962.59625pt x 771.88374pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/guild_SIM.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/guild_SIM.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/guild_SIM.png used on input line 212.
+<Supplementary_materials/Online_appendices/PNGs/guild_SIM.png, id=141, 962.5962
+5pt x 771.88374pt>
+File: Supplementary_materials/Online_appendices/PNGs/guild_SIM.png Graphic file
+ (type png)
+<use Supplementary_materials/Online_appendices/PNGs/guild_SIM.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/guild_S
+IM.png used on input line 226.
 (pdftex.def)             Requested size: 469.75217pt x 376.68343pt.
-[15 <./Post-submission modifications/Supplementary_materials/Online_appendices/
-PNGs/PhyloGLM.png>] [16 <./Post-submission modifications/Supplementary_material
-s/Online_appendices/PNGs/guild_SIM.png>]
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CV_Nazero.png, id=146, 762.85pt x 669.50125pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCV_Nazero.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCV_Nazero.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCV_Nazero.png used on input line 222.
+[17 <./Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png>] [18 <./Sup
+plementary_materials/Online_appendices/PNGs/guild_SIM.png>]
+<Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png, id=154, 762.85p
+t x 669.50125pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png Graphic fil
+e (type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_Naz
+ero.png used on input line 236.
 (pdftex.def)             Requested size: 469.74944pt x 412.26694pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CV_NAremove.png, id=147, 742.775pt x 660.4675pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCV_NAremove.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCV_NAremove.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCV_NAremove.png used on input line 228.
+<Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png, id=155, 742.7
+75pt x 660.4675pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png Graphic f
+ile (type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_NAr
+emove.png used on input line 242.
 (pdftex.def)             Requested size: 469.76413pt x 417.70918pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CV_dietaxa.png, id=148, 719.68875pt x 656.4525pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCV_dietaxa.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCV_dietaxa.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCV_dietaxa.png used on input line 234.
+<Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png, id=156, 719.68
+875pt x 656.4525pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png Graphic fi
+le (type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_die
+taxa.png used on input line 248.
 (pdftex.def)             Requested size: 469.76883pt x 428.49207pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CVbestModels.png, id=149, 1017.8025pt x 795.97375pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCVbestModels.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCVbestModels.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCVbestModels.png used on input line 240.
+<Supplementary_materials/Online_appendices/PNGs/VCVbestModels.png, id=157, 1017
+.8025pt x 795.97375pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCVbestModels.png Graphic 
+file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCVbestModels.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCVbest
+Models.png used on input line 254.
 (pdftex.def)             Requested size: 469.76341pt x 367.37907pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CV_ntaxa.png, id=150, 843.15pt x 789.95125pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCV_ntaxa.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCV_ntaxa.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCV_ntaxa.png used on input line 246.
+<Supplementary_materials/Online_appendices/PNGs/VCV_ntaxa.png, id=158, 843.15pt
+ x 789.95125pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCV_ntaxa.png Graphic file
+ (type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCV_ntaxa.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_nta
+xa.png used on input line 260.
 (pdftex.def)             Requested size: 469.75494pt x 440.11565pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CV_regimes.png, id=151, 519.9425pt x 691.58376pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCV_regimes.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCV_regimes.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCV_regimes.png used on input line 252.
+<Supplementary_materials/Online_appendices/PNGs/VCV_regimes.png, id=159, 519.94
+25pt x 691.58376pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCV_regimes.png Graphic fi
+le (type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCV_regimes.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_reg
+imes.png used on input line 266.
 (pdftex.def)             Requested size: 339.59296pt x 451.69797pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CVdiffs.png, id=152, 496.85625pt x 675.52374pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCVdiffs.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCVdiffs.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCVdiffs.png used on input line 258.
+<Supplementary_materials/Online_appendices/PNGs/VCVdiffs.png, id=160, 496.85625
+pt x 675.52374pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCVdiffs.png Graphic file 
+(type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCVdiffs.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCVdiff
+s.png used on input line 272.
 (pdftex.def)             Requested size: 332.23236pt x 451.7018pt.
 
-<Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/V
-CVdiffs_anc.png, id=153, 704.6325pt x 681.54625pt>
-File: Post-submission modifications/Supplementary_materials/Online_appendices/P
-NGs/VCVdiffs_anc.png Graphic file (type png)
-
-<use Post-submission modifications/Supplementary_materials/Online_appendices/PN
-Gs/VCVdiffs_anc.png>
-Package pdftex.def Info: Post-submission modifications/Supplementary_materials/
-Online_appendices/PNGs/VCVdiffs_anc.png used on input line 264.
+<Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png, id=161, 704.6
+325pt x 681.54625pt>
+File: Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png Graphic f
+ile (type png)
+<use Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCVdiff
+s_anc.png used on input line 278.
 (pdftex.def)             Requested size: 469.75745pt x 454.36652pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 277.
-[17] [18 <./Post-submission modifications/Supplementary_materials/Online_append
-ices/PNGs/VCV_Nazero.png>] [19 <./Post-submission modifications/Supplementary_m
-aterials/Online_appendices/PNGs/VCV_NAremove.png>] [20 <./Post-submission modif
-ications/Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png>] [21 <
-./Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/
-VCVbestModels.png>] [22 <./Post-submission modifications/Supplementary_material
-s/Online_appendices/PNGs/VCV_ntaxa.png>] [23 <./Post-submission modifications/S
-upplementary_materials/Online_appendices/PNGs/VCV_regimes.png>] [24 <./Post-sub
-mission modifications/Supplementary_materials/Online_appendices/PNGs/VCVdiffs.p
-ng>] [25 <./Post-submission modifications/Supplementary_materials/Online_append
-ices/PNGs/VCVdiffs_anc.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 277.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 315.
+[19] [20 <./Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png>] [21
+ <./Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png>] [22 <./Su
+pplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png>] [23 <./Supplemen
+tary_materials/Online_appendices/PNGs/VCVbestModels.png>] [24 <./Supplementary_
+materials/Online_appendices/PNGs/VCV_ntaxa.png>] [25 <./Supplementary_materials
+/Online_appendices/PNGs/VCV_regimes.png>] [26 <./Supplementary_materials/Online
+_appendices/PNGs/VCVdiffs.png>] [27 <./Supplementary_materials/Online_appendice
+s/PNGs/VCVdiffs_anc.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 315.
 (./Supplement_forSupershort.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 277.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 277.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 315.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 315.
 Package rerunfilecheck Info: File `Supplement_forSupershort.out' has not change
 d.
 (rerunfilecheck)             Checksum: E556CF01F4A03B7CB701738B2D58AE6F;628.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 277.
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 315.
  ) 
 Here is how much of TeX's memory you used:
- 12744 strings out of 492995
- 191885 string characters out of 6132703
- 293616 words of memory out of 5000000
- 16052 multiletter control sequences out of 15000+600000
- 32356 words of font info for 52 fonts, out of 8000000 for 9000
+ 12787 strings out of 492995
+ 189444 string characters out of 6132703
+ 295618 words of memory out of 5000000
+ 16055 multiletter control sequences out of 15000+600000
+ 36985 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,5n,38p,1149b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 32i,5n,38p,1276b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
 texlive/2017/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/20
 17/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/public/lm/lmss8.pfb>
-Output written on Supplement_forSupershort.pdf (25 pages, 11785237 bytes).
+Output written on Supplement_forSupershort.pdf (27 pages, 11800843 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
- 61 named destinations out of 1000 (max. 500000)
+ 261 PDF objects out of 1000 (max. 8388607)
+ 176 compressed objects within 2 object streams
+ 71 named destinations out of 1000 (max. 500000)
  6302 words of extra memory for PDF output out of 10000 (max. 10000000)
 
