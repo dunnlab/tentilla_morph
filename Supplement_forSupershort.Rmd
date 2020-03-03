@@ -156,5 +156,7 @@ Variance-Covariance Matrix analyses of phenotypic intergation and evolutionary m
 
 ![\label{VCV_diffs_anc} Scaled differences between the regime-specific covariance matrices in \@ref{VCV_regimes} and the covariance matrices in their preceding regime, the large-crustacean specialist regime.](Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png)
 
+\newpage
+
 ## References {-}
 
