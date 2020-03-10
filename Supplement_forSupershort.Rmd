@@ -112,10 +112,6 @@ The constrained tree inferences utilized the following constrain topology:
 
 \newpage
 
-![\label{ModelSupport} Model support (delta AICc), phylogenetic signal (Blomberg’s K), and phylogenetic signal permutation test p-value for each continuous character. Ntaxa = Number of taxa used in the analyses after removing those where the character sate is inapplicable or the data is missing.](Supplementary_materials/Online_appendices/PNGs/modelSupport.png){height=600px}
-
-![\label{ModelAdequacy} Model adequacy scores for the best model supported for each morphological character. Cvar = coefficient of variation of the absolute value of the contrasts. Svar = Slope of a linear model fitted to the absolute value of the contrasts against their expected variances. Sasr = slope of the contrasts against the ancestral state inferred at each corresponding node. Shgt = slope of the contrasts against node depth. Dcfd = Kolmolgorov-Smirnov D-statistic comparing contrasts to a normal distribution with SD equal to the root of the mean of squared contrasts. ](Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png)
-
 ![\label{ModelSupportOUwie} Model support (delta AICc) for each morphological character analyzed on the feeding guild reconstruction regime tree. OU1 = Single-optimum Ornstein-Uhlenbeck. OUm = Multi-optima Ornstein-Uhlenbeck. Model adequacy scores calculated for the best supported model only. Msig = mean of squared contrasts. Cvar = coefficient of variation of the absolute value of the contrasts. Svar = Slope of a linear model fitted to the absolute value of the contrasts against their expected variances. Sasr = slope of the contrasts against the ancestral state inferred at each corresponding node. Shgt = slope of the contrasts against node depth. Dcfd = Kolmolgorov-Smirnov D-statistic comparing contrasts to a normal distribution with SD equal to the root of the mean of squared contrasts.](Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png)
 
 DAPC discriminant analyses:
