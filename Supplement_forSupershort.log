@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  3 MAR 2020 14:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  11 MAR 2020 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -964,11 +964,7 @@ e
 LaTeX Font Info:    Try loading font information for T1+lmss on input line 87.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-
-LaTeX Warning: Reference `figure4' on page 1 undefined on input line 102.
-
-[1
+) [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 <Supplementary_materials/Online_appendices/PNGs/Appendix2.png, id=35, 687.56876
@@ -977,7 +973,7 @@ File: Supplementary_materials/Online_appendices/PNGs/Appendix2.png Graphic file
  (type png)
 <use Supplementary_materials/Online_appendices/PNGs/Appendix2.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/Appendi
-x2.png used on input line 118.
+x2.png used on input line 114.
 (pdftex.def)             Requested size: 361.62947pt x 376.4114pt.
 
 <Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png, id=37, 123
@@ -986,7 +982,7 @@ File: Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png Graphi
 c file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/MLuncon
-strained.png used on input line 126.
+strained.png used on input line 122.
 (pdftex.def)             Requested size: 386.12914pt x 225.84319pt.
 
 <Supplementary_materials/Online_appendices/PNGs/constrain.png, id=38, 900.36375
@@ -995,7 +991,7 @@ File: Supplementary_materials/Online_appendices/PNGs/constrain.png Graphic file
  (type png)
 <use Supplementary_materials/Online_appendices/PNGs/constrain.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/constra
-in.png used on input line 134.
+in.png used on input line 130.
 (pdftex.def)             Requested size: 364.52168pt x 301.1266pt.
 
 <Supplementary_materials/Online_appendices/PNGs/MLconstrained.png, id=39, 1219.
@@ -1004,7 +1000,7 @@ File: Supplementary_materials/Online_appendices/PNGs/MLconstrained.png Graphic
 file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/MLconstrained.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/MLconst
-rained.png used on input line 140.
+rained.png used on input line 136.
 (pdftex.def)             Requested size: 376.40233pt x 225.8414pt.
 
 <Supplementary_materials/Online_appendices/PNGs/BAYESunconstrained.png, id=40, 
@@ -1013,7 +1009,7 @@ File: Supplementary_materials/Online_appendices/PNGs/BAYESunconstrained.png Gra
 phic file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/BAYESunconstrained.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/BAYESun
-constrained.png used on input line 146.
+constrained.png used on input line 142.
 (pdftex.def)             Requested size: 351.12651pt x 225.84041pt.
 
 <Supplementary_materials/Online_appendices/PNGs/BayesConstrained.png, id=41, 10
@@ -1022,7 +1018,7 @@ File: Supplementary_materials/Online_appendices/PNGs/BayesConstrained.png Graph
 ic file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/BayesConstrained.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/BayesCo
-nstrained.png used on input line 152.
+nstrained.png used on input line 148.
 (pdftex.def)             Requested size: 348.44142pt x 225.84166pt.
 
 <Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png, id=
@@ -1032,7 +1028,7 @@ File: Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png
 
 <use Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/Unconst
-rained timetree.png used on input line 158.
+rained timetree.png used on input line 154.
 (pdftex.def)             Requested size: 370.86942pt x 301.1333pt.
 
 <Supplementary_materials/Online_appendices/PNGs/constrainedTimetree.png, id=43,
@@ -1041,7 +1037,7 @@ File: Supplementary_materials/Online_appendices/PNGs/constrainedTimetree.png Gr
 aphic file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/constrainedTimetree.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/constra
-inedTimetree.png used on input line 164.
+inedTimetree.png used on input line 160.
 (pdftex.def)             Requested size: 469.75555pt x 370.1273pt.
 [3] [4 <./Supplementary_materials/Online_appendices/PNGs/Appendix2.png>] [5 <./
 Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png> <./Suppleme
@@ -1057,7 +1053,7 @@ File: Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png Gra
 phic file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/OUwie_m
-odelsupport.png used on input line 172.
+odelsupport.png used on input line 168.
 (pdftex.def)             Requested size: 469.76018pt x 428.45581pt.
 
 <Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png, id=87, 639.388
@@ -1066,7 +1062,7 @@ File: Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png Graphic fi
 le (type png)
 <use Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_gu
-ilds.png used on input line 180.
+ilds.png used on input line 176.
 (pdftex.def)             Requested size: 376.4068pt x 376.4068pt.
 
 <Supplementary_materials/Online_appendices/PNGs/DAPC_copepod.png, id=88, 617.30
@@ -1075,7 +1071,7 @@ File: Supplementary_materials/Online_appendices/PNGs/DAPC_copepod.png Graphic f
 ile (type png)
 <use Supplementary_materials/Online_appendices/PNGs/DAPC_copepod.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_co
-pepod.png used on input line 186.
+pepod.png used on input line 182.
 (pdftex.def)             Requested size: 469.76987pt x 527.82274pt.
 
 <Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png, id=89, 598.235pt
@@ -1084,10 +1080,10 @@ File: Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png Graphic file
  (type png)
 <use Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_fi
-sh.png used on input line 192.
+sh.png used on input line 188.
 (pdftex.def)             Requested size: 469.76157pt x 580.10823pt.
 
-LaTeX Warning: Float too large for page by 14.51154pt on input line 194.
+LaTeX Warning: Float too large for page by 14.51154pt on input line 190.
 
 
 <Supplementary_materials/Online_appendices/PNGs/DAPC_crustacean.png, id=90, 640
@@ -1096,7 +1092,7 @@ File: Supplementary_materials/Online_appendices/PNGs/DAPC_crustacean.png Graphi
 c file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/DAPC_crustacean.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/DAPC_cr
-ustacean.png used on input line 198.
+ustacean.png used on input line 194.
 (pdftex.def)             Requested size: 469.75941pt x 547.80722pt.
 [9] [10 <./Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.pn
 g>] [11 <./Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png>] [12
@@ -1109,7 +1105,7 @@ File: Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png Graphic file
 (type png)
 <use Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/PhyloGL
-M.png used on input line 208.
+M.png used on input line 204.
 (pdftex.def)             Requested size: 376.7337pt x 225.83583pt.
 
 <Supplementary_materials/Online_appendices/PNGs/guild_SIM.png, id=127, 962.5962
@@ -1118,7 +1114,7 @@ File: Supplementary_materials/Online_appendices/PNGs/guild_SIM.png Graphic file
  (type png)
 <use Supplementary_materials/Online_appendices/PNGs/guild_SIM.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/guild_S
-IM.png used on input line 214.
+IM.png used on input line 210.
 (pdftex.def)             Requested size: 469.75217pt x 376.68343pt.
 [15 <./Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png>] [16 <./Sup
 plementary_materials/Online_appendices/PNGs/guild_SIM.png>]
@@ -1128,7 +1124,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png Graphic fil
 e (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_Naz
-ero.png used on input line 224.
+ero.png used on input line 220.
 (pdftex.def)             Requested size: 469.74944pt x 412.26694pt.
 
 <Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png, id=141, 742.7
@@ -1137,7 +1133,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png Graphic f
 ile (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_NAr
-emove.png used on input line 230.
+emove.png used on input line 226.
 (pdftex.def)             Requested size: 469.76413pt x 417.70918pt.
 
 <Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png, id=142, 719.68
@@ -1146,7 +1142,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png Graphic fi
 le (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_die
-taxa.png used on input line 236.
+taxa.png used on input line 232.
 (pdftex.def)             Requested size: 469.76883pt x 428.49207pt.
 
 <Supplementary_materials/Online_appendices/PNGs/VCVbestModels.png, id=143, 1017
@@ -1155,7 +1151,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCVbestModels.png Graphic
 file (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCVbestModels.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCVbest
-Models.png used on input line 242.
+Models.png used on input line 238.
 (pdftex.def)             Requested size: 469.76341pt x 367.37907pt.
 
 <Supplementary_materials/Online_appendices/PNGs/VCV_ntaxa.png, id=144, 843.15pt
@@ -1164,7 +1160,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCV_ntaxa.png Graphic file
  (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCV_ntaxa.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_nta
-xa.png used on input line 248.
+xa.png used on input line 244.
 (pdftex.def)             Requested size: 469.75494pt x 440.11565pt.
 
 <Supplementary_materials/Online_appendices/PNGs/VCV_regimes.png, id=145, 519.94
@@ -1173,7 +1169,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCV_regimes.png Graphic fi
 le (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCV_regimes.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCV_reg
-imes.png used on input line 254.
+imes.png used on input line 250.
 (pdftex.def)             Requested size: 339.59296pt x 451.69797pt.
 
 <Supplementary_materials/Online_appendices/PNGs/VCVdiffs.png, id=146, 496.85625
@@ -1182,7 +1178,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCVdiffs.png Graphic file
 (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCVdiffs.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCVdiff
-s.png used on input line 260.
+s.png used on input line 256.
 (pdftex.def)             Requested size: 332.23236pt x 451.7018pt.
 
 <Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png, id=147, 704.6
@@ -1191,7 +1187,7 @@ File: Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png Graphic f
 ile (type png)
 <use Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png>
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/VCVdiff
-s_anc.png used on input line 266.
+s_anc.png used on input line 262.
 (pdftex.def)             Requested size: 469.75745pt x 454.36652pt.
 [17] [18 <./Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png>] [19
  <./Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png>] [20 <./Su
@@ -1201,34 +1197,31 @@ materials/Online_appendices/PNGs/VCV_ntaxa.png>] [23 <./Supplementary_materials
 /Online_appendices/PNGs/VCV_regimes.png>] [24 <./Supplementary_materials/Online
 _appendices/PNGs/VCVdiffs.png>] [25 <./Supplementary_materials/Online_appendice
 s/PNGs/VCVdiffs_anc.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 305.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 301.
 [26]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 305.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 301.
 (./Supplement_forSupershort.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 305.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 305.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 301.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 301.
 Package rerunfilecheck Info: File `Supplement_forSupershort.out' has not change
 d.
 (rerunfilecheck)             Checksum: E556CF01F4A03B7CB701738B2D58AE6F;628.
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 305.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 301.
  ) 
 Here is how much of TeX's memory you used:
- 12772 strings out of 492995
- 188816 string characters out of 6132703
+ 12777 strings out of 492995
+ 188856 string characters out of 6132703
  293741 words of memory out of 5000000
- 16045 multiletter control sequences out of 15000+600000
- 36894 words of font info for 67 fonts, out of 8000000 for 9000
+ 16042 multiletter control sequences out of 15000+600000
+ 34260 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,5n,38p,1276b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 32i,5n,38p,1502b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
 texlive/2017/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/20
 17/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/public/lm/lmss8.pfb>
-Output written on Supplement_forSupershort.pdf (26 pages, 11347405 bytes).
+Output written on Supplement_forSupershort.pdf (26 pages, 11347093 bytes).
 PDF statistics:
  251 PDF objects out of 1000 (max. 8388607)
  171 compressed objects within 2 object streams
