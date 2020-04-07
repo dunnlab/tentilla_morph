@@ -84,7 +84,7 @@ DAPC optimization: Some taxa have inapplicable states for certain absent charact
 
 ## Supplementary Materials {-}
 
-![\label{appendix2} Character definitions. ](Supplementary_materials/Online_appendices/PNGs/Appendix2.png){height=500px}
+![\label{appendix2} Character definitions. ](Supplementary_materials/Online_appendices/PNGs/character_def.png){height=500px}
 
 ![\label{MLIqtree} Maximum likelihood IQTree inference, unconstrained. Node labels are bootstrap support values.](Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png){height=300px}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  7 APR 2020 09:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  7 APR 2020 14:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -969,14 +969,14 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-<Supplementary_materials/Online_appendices/PNGs/Appendix2.png, id=35, 687.56876
-pt x 715.67375pt>
-File: Supplementary_materials/Online_appendices/PNGs/Appendix2.png Graphic file
- (type png)
-<use Supplementary_materials/Online_appendices/PNGs/Appendix2.png>
-Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/Appendi
-x2.png used on input line 113.
-(pdftex.def)             Requested size: 361.62947pt x 376.4114pt.
+<Supplementary_materials/Online_appendices/PNGs/character_def.png, id=35, 611.2
+8375pt x 521.95pt>
+File: Supplementary_materials/Online_appendices/PNGs/character_def.png Graphic 
+file (type png)
+<use Supplementary_materials/Online_appendices/PNGs/character_def.png>
+Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/charact
+er_def.png used on input line 113.
+(pdftex.def)             Requested size: 440.83286pt x 376.409pt.
 
 <Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png, id=37, 123
 5.61626pt x 722.7pt>
@@ -1041,14 +1041,14 @@ aphic file (type png)
 Package pdftex.def Info: Supplementary_materials/Online_appendices/PNGs/constra
 inedTimetree.png used on input line 155.
 (pdftex.def)             Requested size: 469.75555pt x 370.1273pt.
-[3] [4 <./Supplementary_materials/Online_appendices/PNGs/Appendix2.png>] [5 <./
-Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png> <./Suppleme
-ntary_materials/Online_appendices/PNGs/constrain.png>] [6 <./Supplementary_mate
-rials/Online_appendices/PNGs/MLconstrained.png> <./Supplementary_materials/Onli
-ne_appendices/PNGs/BAYESunconstrained.png>] [7 <./Supplementary_materials/Onlin
-e_appendices/PNGs/BayesConstrained.png> <./Supplementary_materials/Online_appen
-dices/PNGs/Unconstrained timetree.png>] [8 <./Supplementary_materials/Online_ap
-pendices/PNGs/constrainedTimetree.png>]
+[3] [4 <./Supplementary_materials/Online_appendices/PNGs/character_def.png>] [5
+ <./Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png> <./Supp
+lementary_materials/Online_appendices/PNGs/constrain.png>] [6 <./Supplementary_
+materials/Online_appendices/PNGs/MLconstrained.png> <./Supplementary_materials/
+Online_appendices/PNGs/BAYESunconstrained.png>] [7 <./Supplementary_materials/O
+nline_appendices/PNGs/BayesConstrained.png> <./Supplementary_materials/Online_a
+ppendices/PNGs/Unconstrained timetree.png>] [8 <./Supplementary_materials/Onlin
+e_appendices/PNGs/constrainedTimetree.png>]
 <Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png, id=86, 
 764.8575pt x 697.60625pt>
 File: Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png Gra
@@ -1214,8 +1214,8 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 292.
  ) 
 Here is how much of TeX's memory you used:
  12789 strings out of 492995
- 189081 string characters out of 6132703
- 299829 words of memory out of 5000000
+ 189097 string characters out of 6132703
+ 299826 words of memory out of 5000000
  16054 multiletter control sequences out of 15000+600000
  34169 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1225,7 +1225,7 @@ texlive/2017/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/20
 17/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/public/lm/lmss8.pfb>
-Output written on Supplement_forPNAS.pdf (24 pages, 11345941 bytes).
+Output written on Supplement_forPNAS.pdf (24 pages, 11016560 bytes).
 PDF statistics:
  241 PDF objects out of 1000 (max. 8388607)
  163 compressed objects within 2 object streams
