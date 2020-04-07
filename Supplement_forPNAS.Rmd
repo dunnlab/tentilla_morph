@@ -1,0 +1,144 @@
+---
+bibliography: manuscript.bib
+csl: pnas.csl
+site: "bookdown::bookdown_site"
+output:
+  bookdown::pdf_document2:
+    toc: FALSE
+indent: TRUE
+monofont: "Times New Roman"
+fontsize: 12pt
+language:
+  label:
+    fig: "**Figure S**"
+    tab: "**Table S**"
+header-includes:
+  - \usepackage[left]{lineno}
+  - \linenumbers
+  - \usepackage{setspace}
+  - \doublespacing
+  - \usepackage{placeins}
+---
+
+```{r setup, include=FALSE}
+	# Load packages
+	## General
+library(knitr)
+library(tidyverse)
+library(stringr)
+library(reshape2)
+	## Biological
+library(Rphylip)
+library(arbutus)
+library(vegan)
+library(ape)
+library(phangorn)
+library(phytools)
+library(OUwie)
+library(picante)
+library(geiger)
+library(phylobase)
+library(fields)
+library(phylosignal)
+library(geomorph)
+library(phylopath)
+library(phylolm)
+	## Graphics
+library(FactoMineR)
+library(factoextra)
+library(corrplot)
+library(BAMMtools)
+library(gridExtra)
+library(xtable)
+library(colorRamps)
+
+	# Configure knitr, see http://yihui.name/knitr/options
+	opts_knit$set(
+	  progress=TRUE,
+	  verbose=TRUE)
+	opts_chunk$set(
+	#  include=FALSE,
+	  cache=TRUE,
+	  echo=FALSE,
+	  message=FALSE
+	 )
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+# Supplementary Materials File {-}
+
+## Supplementary Methods {-}
+
+Phylogenetic inference: We aligned the sequences using MAFFT [@katoh2002mafft] (alignments available in Dryad). We inferred a Maximum Likelihood (ML) phylogeny (S2) from 16S and 18S ribosomal rRNA genes using IQTree [@nguyen2014iq] with 1000 bootstrap replicates (iqtree -s alignment.fa -nt AUTO -bb 1000). We used ModelFinder [@kalyaanamoorthy2017modelfinder] implemented in IQTree v1.5.5. to assess the relative model fit. ModelFinder selected GTR+R4 for having the lowest Bayesian Information Criterion score. Additionally, we inferred a Bayesian tree with each gene as an independent partition in RevBayes [@hohna2016revbayes] (S5), which was topologically congruent with the unconstrained ML tree. The *alpha* priors were selected to minimize prior load in site variation.
+
+Diet data curation: We removed the gelatinous prey observations for *Praya dubia* eating a ctenophore and a hydromedusa, and for *Nanomia* sp. eating *Aegina* since we believe these are rare events that have a much larger probability of being detected by ROV methods than their usual prey, and it is not clear whether the medusae were attempting to prey upon the siphonophores. Personal observations on feeding (from SHDH, Anela Choy, and Philip Pugh) were also included for *Resomia ornicephala*, *Lychnagalma utricularia*, *Bargmannia amoena*, *Erenna richardi*, *Erenna laciniata*, *Erenna sirena*, and *Apolemia rubriversa*. The feeding guilds declared in this study are: small-crustacean specialist (feeding mainly on copepods and ostracods), large crustacean specialist (feeding on large decapods, mysids, or krill), fish specialist (feeding mainly on actinopterygian larvae, juveniles, or adults), gelatinous specialist (feeding mainly on other siphonophores, medusae, ctenophores, salps, and/or doliolids), and generalist (feeding on a combination of the aforementioned taxa, without favoring any one prey group). These were selected to minimize the number of categories while keeping the most different types of prey separate.
+
+Data wrangling for comparative analyses: For comparative analyses, we removed species present in the tree but not represented in the morphology data, and *vice versa*. Although we measured specimens labeled as *Nanomia bijuga* and *Nanomia cara*, we are not confident in some of the species-level identifications, and some specimens were missing diagnostic zooids. Thus, we decided to collapse these into a single taxonomic concept (*Nanomia* sp.). All *Nanomia* sp. observations were matched to the phylogenetic position of *Nanomia bijuga* in the tree. We carried out all phylogenetic comparative statistical analyses in the programming environment R [@team2017r], using the Bayesian ultrametric species tree (S8), and incorporating intraspecific variation estimated from the specimen data as standard error whenever the analysis tool allowed it. R scripts and summarized species-collapsed data available in the Dryad repository. For each character (or character pair) analyzed, we removed species with missing data and reported the number of taxa included. We tested each character for normality using the Shapiro-Wilk test [@shapiro1965analysis], and log-transformed those that were non-normal.
+
+Data wrangling for the variance-covariance analyses: When fitting all variance-covariance terms simultaneously (S16-18), we selected the largest set of characters that would allow the analysis to run without computational singularities. This excluded many of the morphometric characters which are linearly dependent on other characters. Since the functions do not tolerate missing data, we ran the analyses in two ways: One including all taxa but transforming absent states to zeroes, and another removing the taxa with absent states. These analyses could only be carried out on the subset of taxa for which diet data is available, and only among character pairs that are not computationally singular for that taxonomic subset. Gelatinous specialist correlations could only be estimated for a small subset of characters present in *Apolemia* (S21F, S22E, S23D) and should be interpreted with care.
+
+Comparative tools used to test character associations: To test for correlated evolution among binary characters, we used Pagel’s test [@pagel1994detecting]. To characterize and evaluate the relationship between continuous characters, we used phylogenetic generalized least squares regressions (PGLS) [@grafen1989phylogenetic]. To compare the evolution of continuous characters with categorical aspects of the diet, we carried out a phylogenetic logistic regression (R nlme::gls using the 'corBrownian' function for the argument ‘correlation’).
+
+DAPC optimization: Some taxa have inapplicable states for certain absent characters (such as the length of a nematocyst subtype that is not present in a species), which are problematic for DAPC analyses. We tackled this by transforming the absent states to zeroes. This approach allows us to incorporate all the data, but creates an attraction bias between small character states (*e.g.* small tentilla) and absent states (*e.g.* no tentilla). Absent characters are likely to be very biologically relevant to prey capture and we believe they should be accounted for in a predictive approach. We limited the number of linear discriminant functions retained to the number of groupings in each case. We selected the number of principal components retained using the a-score optimization function (R adegenet::optim.a.score) [@jombart2010discriminant] with 100 iterations, which yielded more stable results than the cross validation function (R adegenet::xval). This optimization aims to find the compromise value with highest discrimination power with the least overfitting. The discriminant analysis for feeding guild (7 principal components, 4 discriminants) produced 100% discrimination, and the highest loading contributions were found for the characters (ordered from highest to lowest): Involucrum length, heteroneme volume, heteroneme number, total heteroneme volume, tentacle width, heteroneme length, total nematocyst volume, and heteroneme width (S10). 
+
+## Supplementary Materials {-}
+
+![\label{appendix2} Character definitions. ](Supplementary_materials/Online_appendices/PNGs/Appendix2.png){height=500px}
+
+![\label{MLIqtree} Maximum likelihood IQTree inference, unconstrained. Node labels are bootstrap support values.](Supplementary_materials/Online_appendices/PNGs/MLunconstrained.png){height=300px}
+
+![\label{Transcriptome_constraint} Topology used to constrain analyses (minimal topological statements based on the incongruences between the unconstrained tree and Munro et al. (2018). ](Supplementary_materials/Online_appendices/PNGs/constrain.png){height=400px}
+
+![\label{ML_constrained} Constrained IQTree ML inference. Node labels are bootstrap support values.](Supplementary_materials/Online_appendices/PNGs/MLconstrained.png){height=300px}
+
+![\label{Bayes_unconstrained} Unconstrained Bayesian topology inference in RevBayes (node labels are Bayesian posteriors).](Supplementary_materials/Online_appendices/PNGs/BAYESunconstrained.png){height=300px}
+
+![\label{Bayes_constrained} Clade constrained Bayesian inference in RevBayes (node labels are Bayesian posteriors).](Supplementary_materials/Online_appendices/PNGs/BayesConstrained.png){height=300px}
+
+![\label{unconstrained_timetree} Unconstrained ultrametric Bayesian time tree branch length and topology inference in RevBayes (node labels are Bayesian posteriors). Arbitrary rooting.).](Supplementary_materials/Online_appendices/PNGs/Unconstrained timetree.png){height=400px}
+
+![\label{constrained_timetree} Ultrametric Bayesian time tree branch length inference in RevBayes (node labels are bayesian posteriors). Topology clamped to the Bayesian constrained topology inference in \@ref{Bayes_constrained}. Tree rooted using outgroup constraint.](Supplementary_materials/Online_appendices/PNGs/constrainedTimetree.png){height=500px}
+
+\newpage
+
+![\label{ModelSupportOUwie} Model support (delta AICc) for each morphological character analyzed on the feeding guild reconstruction regime tree. OU1 = Single-optimum Ornstein-Uhlenbeck. OUm = Multi-optima Ornstein-Uhlenbeck. Model adequacy scores calculated for the best supported model only. Msig = mean of squared contrasts. Cvar = coefficient of variation of the absolute value of the contrasts. Svar = Slope of a linear model fitted to the absolute value of the contrasts against their expected variances. Sasr = slope of the contrasts against the ancestral state inferred at each corresponding node. Shgt = slope of the contrasts against node depth. Dcfd = Kolmolgorov-Smirnov D-statistic comparing contrasts to a normal distribution with SD equal to the root of the mean of squared contrasts.](Supplementary_materials/Online_appendices/PNGs/OUwie_modelsupport.png)
+
+![\label{DAPCguilds} DAPC for Feeding guilds. Six PCs retained after a-score optimization (100 iterations). Four LDA functions used. Discriminant power on training set: 100%. Prediction posterior distribution heat map in main text Figure 6. Variable contribution (top quartile) calculated by the sum of the LDA variable loadings weighted by the eigenvalue of each LDA.](Supplementary_materials/Online_appendices/PNGs/DAPC_guilds.png){height=500px}
+
+![\label{DAPCcopepods} DAPC for copepod presence in the diet. Eight PCs retained after a-score optimization (100 iterations). One LDA functions used. Discriminant power on training set: 95.4%. Grayscale heat map shows the posterior probability distribution of the predictions. Variable contribution (top quartile) calculated by the sum of the LDA variable loadings weighted by the eigenvalue of each LDA.](Supplementary_materials/Online_appendices/PNGs/DAPC_copepod.png)
+
+![\label{DAPCfish} DAPC for fish presence in the diet. Three PCs retained after a-score optimization (100 iterations). One LDA function used. Discriminant power on training set: 68.1%. Grayscale heat map shows the posterior probability distribution of the predictions. Variable contribution (top quartile) calculated by the sum of the LDA variable loadings weighted by the eigenvalue of each LDA.](Supplementary_materials/Online_appendices/PNGs/DAPC_fish.png)
+
+![\label{DAPCcrustacean} DAPC for large crustacean presence in the diet. Four PCs retained after a-score optimization (100 iterations). One LDA function used. Discriminant power on training set: 81.8%. Grayscale heat map shows the posterior probability distribution of the predictions. Variable contribution (top quartile) calculated by the sum of the LDA variable loadings weighted by the eigenvalue of each LDA.](Supplementary_materials/Online_appendices/PNGs/DAPC_crustacean.png)
+
+\newpage
+
+![\label{GLMs} Logistic regressions between continuous morphological characters and prey type presences. Ntaxa = number of taxa used in the analyses after removing taxa with missing diet data and inapplicable character states. phyloGLM = Phylogenetic generalized logistic regression model. GLM = Generalized logistic regression model. P = p-value. b = slope. Only cases with significant GLM fits were retained. Cells colored blue indicate phyloGLM p-value < 0.05. Cells colored green indicate GLM p-value < 0.05](Supplementary_materials/Online_appendices/PNGs/PhyloGLM.png){height=300px}
+
+![\label{SIMMAPguilds} SIMMAP Feeding guilds.](Supplementary_materials/Online_appendices/PNGs/guild_SIM.png)
+
+\newpage
+
+![\label{VCV_NAZero} Rate covariance matrix for the whole tree using all taxa (45 species), transforming inapplicable states to zeroes. Covariances scaled to correlations. All characters estimated simultaneously under Brownian Motion.](Supplementary_materials/Online_appendices/PNGs/VCV_Nazero.png)
+
+![\label{VCV_NAremove} Rate covariance matrix for the whole tree using only taxa without inapplicable states (24 species). Covariances scaled to correlations. All characters estimated simultaneously under Brownian Motion.](Supplementary_materials/Online_appendices/PNGs/VCV_NAremove.png)
+
+![\label{VCV_dietaxa} Rate covariance matrix for the whole tree using only taxa with diet data (22 species), transforming inapplicable states to zeroes. Covariances scaled to correlations. All characters estimated simultaneously under Brownian Motion.](Supplementary_materials/Online_appendices/PNGs/VCV_dietaxa.png)
+
+![\label{VCV_bestmodels} Best models (lowest AIC) supported in a pairwise character rate covariance analysis comparing correlated Brownian Motion models across the five selective regimes. Selective regimes were mapped onto the tree using an ancestral state reconstruction of the feeding guilds. Blank cells represent computationally singular contrasts.](Supplementary_materials/Online_appendices/PNGs/VCVbestModels.png)
+
+![\label{VCV_ntaxa} Number of taxa used for each pairwise contrast in the VCV analyses, given the number of taxa without inapplicable states.](Supplementary_materials/Online_appendices/PNGs/VCV_ntaxa.png)
+
+![\label{VCV_regimes} Pairwise estimated rate covariance matrices across the five selective regimes, using only taxa with diet data. Covariances scaled to correlations. Selective regimes were mapped onto the tree (22 species with diet data) using a stochastic mapping of the feeding guilds. Tree is pruned to taxa with no inapplicable states for a given character pair. Not all regimes are represented in all contrasts. Question marks represent computationally singular contrasts.](Supplementary_materials/Online_appendices/PNGs/VCV_regimes.png){height=600px}
+
+![\label{VCV_diffs} Scaled differences between the regime-specific covariance matrices in S21 and the whole tree covariance matrix.](Supplementary_materials/Online_appendices/PNGs/VCVdiffs.png){height=600px}
+
+![\label{VCV_diffs_anc} Scaled differences between the regime-specific covariance matrices in S21 and the covariance matrices in their preceding regime, the large-crustacean specialist regime.](Supplementary_materials/Online_appendices/PNGs/VCVdiffs_anc.png)
+
+\newpage
+
+\FloatBarrier
+
+## References {-}
+
