@@ -1,0 +1,795 @@
+---
+bibliography: manuscript.bib
+csl: pnas.csl
+site: "bookdown::bookdown_site"
+output:
+  bookdown::pdf_document2:
+    toc: FALSE
+indent: TRUE
+monofont: "Times New Roman"
+fontsize: 12pt
+header-includes:
+  - \usepackage[left]{lineno}
+  - \linenumbers
+  - \usepackage{setspace}
+  - \doublespacing
+---
+
+```{r setup, include=FALSE}
+	# Load packages
+	## General
+library(knitr)
+library(tidyverse)
+library(stringr)
+library(reshape2)
+	## Biological
+library(Rphylip)
+library(arbutus)
+library(vegan)
+library(ape)
+library(phangorn)
+library(phytools)
+library(picante)
+library(geiger)
+library(phylobase)
+library(fields)
+library(phylosignal)
+library(geomorph)
+library(phylopath)
+library(phylolm)
+	## Graphics
+library(FactoMineR)
+library(factoextra)
+library(corrplot)
+library(BAMMtools)
+library(gridExtra)
+library(xtable)
+library(colorRamps)
+
+	# Configure knitr, see http://yihui.name/knitr/options
+	opts_knit$set(
+	  progress=TRUE,
+	  verbose=TRUE)
+	opts_chunk$set(
+	#  include=FALSE,
+	  cache=TRUE,
+	  echo=FALSE,
+	  message=FALSE
+	 )
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+# The Morphological Diversification of Siphonophore Tentilla {-}
+
+Alejandro Damian-Serrano^1^^,‡^, Steven H.D. Haddock^2^, Casey W. Dunn^1^
+
+^1^ Yale University, Department of Ecology and Evolutionary Biology, 165 Prospect St., New Haven, CT 06520, USA
+
+^2^ Monterey Bay Aquarium Research Institute, 7700 Sandholdt Rd., Moss Landing, CA 95039, USA
+
+\‡ Corresponding author: Alejandro Damian-Serrano, email: alejandro.damianserrano@yale.edu
+
+## Abstract {-}
+
+Siphonophore tentilla (tentacle side branches) are unique biological structures for prey capture, composed of a complex arrangement of cnidocytes (stinging cells) bearing different types of nematocysts (stinging capsules) and auxiliary structures. Tentilla present an extreme morphological diversity of form and function across species. While associations between tentilla form and diet have been reported, the evolutionary history giving rise to this morphological diversity is largely unexplored. Here we explore the evolutionary gains and losses of novel tentilla substructures on the most recent siphonophore phylogeny. Tentilla have a precisely coordinated high-speed strike mechanism of synchronous unwinding and nematocysts discharge. Here we characterize the kinematic diversity of this prey capture reaction using high-speed video and find relationships with morphological characters. Since tentillum discharge occurs in synchrony across a broad morphological diversity, we evaluate how phenotypic integration is maintaining character correlations across evolutionary time. Moreover, we analyze the dimensionality of the tentillum morphospace, identify instances of heterochrony and morphological convergence, and generate hypotheses on the diets of understudied siphonophore species. Our findings indicate that siphonophore tentilla are phenotypically integrated structures with a complex evolutionary history leading to a phylogenetically structured diversity of forms which are predictive of kinematic performance and feeding habits.
+
+## Keywords {-}
+
+Siphonophore, tentilla, nematocysts, character evolution
+
+## Introduction {-}
+
+Siphonophores have fascinated zoologists for centuries for their extremely subspecialized colonial organization and integration. However, far less attention has been devoted to their unique tentacular structures: the tentilla. Like many cnidarians, siphonophore tentacles bear side branches (tentilla) with nematocysts. But unlike other cnidarians, most siphonophore tentilla are dynamic structures that react to prey encounters by shooting the nematocyst battery to slap around the prey. This maximizes the surface area of contact between the nematocysts and the prey they fire upon. Siphonophore tentilla present an exuberant diversity of morphologies, sizes, and nematocyst complements (Figure 1).
+
+![\label{figure2} Tentillum diversity. The illustrations delineate the pedicle (green), involucrum (blue), cnidoband (orange), elastic strands (pink), terminal structures (yellow). Heteroneme nematocysts (stenoteles in C,E,F,G and mastigophores in H,I) are depicted in red for some species. A - *Erenna laciniata*, 10x. B - *Lychnagalma utricularia*, 10x. C - *Agalma elegans*, 10x. D - *Resomia ornicephala*, 10x. E - *Frillagalma vityazi*, 20x. F - *Bargmannia amoena*, 10x. G - *Cordagalma* sp., reproduced from Carré 1968. H - *Lilyopsis fluoracantha*, 20x. I - *Abylopsis tetragona*, 20x.](~/tentilla_morph/Figures_final/figure2.jpg)
+
+In [@damianserrano2020shaped], we collected the most extensive morphological dataset on siphonophore tentilla and nematocysts using state-of-the-art microscopy techniques, and expanded the taxon sampling of the phylogeny to disentangle the evolutionary history. The analyses we carried out led to novel insights into the evolution of predatory specialization. However, this work left behind many fascinating discoveries on the evolutionary history of tentilla morphology, including nematocyst novelties, phenotypic integration, convergent evolution, paedomorphosis, and predictions on diet using morphology. Here, we present these findings and shed light on the natural history of siphonophores.
+
+## Methods {-}
+
+We explore the evolutionary history and diversification of tentilla morphologies using phylogenetic comparative methods on the morphological dataset and phylogeny published in [@damianserrano2020shaped].  We fitted different models generating the observed data distribution given the phylogeny for each continuous character using the function fitContinuous in the R package *geiger* [@harmon2007geiger]. These models include a non-phylogenetic whie-noise model (WN), a neutral divergence Brownian Motion model (BM), an early-burst decreasing rate model (EB), and an Ornstein-Uhlenbeck model with stabilizing selection around a fitted optimum trait value. We then ranked the models in order of increasing parametric complexity (WN, BM, EB, OU), and compared the corrected Akaike Information Criterion (AICc) support scores [@sugiura1978further] to the lowest (best) score, using a cutoff of 2 units to determine significantly better support. When the best fitting model was not significantly better than a less complex alternative, we selected the least complex model (SM13). We calculated model adequacy scores using the R package *arbutus* [@pennell2015model] (SM14). We calculated phylogenetic signals in each of the measured characters using Blomberg’s K [@blomberg2003testing] (SM13). 
+
+In order to explore the correlational structure among continuous characters and among their evolutionary histories, we used principal component analysis (PCA) and phylogenetic PCA [@revell2012phytools]. Since the character dataset contains many gaps due to missing characters and inapplicable states, we carried out these analyses on a subset of species and characters that allowed for the most complete dataset. This was done by removing the terminal filament characters (which are only shared by a small subset of species), and then removing species which had inapplicable states for the remaining characters. In addition, we obtained the correlations between the phylogenetic independent contrasts [@felsenstein1985phylogenies] using the package rphylip [@revell2014rphylip]. 
+
+## Results {-}
+
+![\label{figure3} Heatmap summarizing the morphological diversity measured in Damian-Serrano *et al.* 2020 for 96 species of siphonophores clustered by similarity (raw data in Dryad repository). Missing values from absent characters presented as dark grey cells, missing values produced from technical difficulties presented as white cells. Values scaled by character.](~/tentilla_morph/Figures_final/figure3.jpg)
+
+*Evolutionary history of tentillum morphology* – [@damianserrano2020shaped] produced the most speciose siphonophore molecular phylogeny to date, while incorporating the most recent findings in siphonophore deep node relationships. This phylogeny revealed for the first time that the genus *Erenna* is the sister to *Stephanomia amphytridis*. *Erenna* and *Stephanomia* bear the largest tentilla among all siphonophores, thus their monophyly indicates that there was a single evolutionary transition to giant tentilla. Siphonophore tentilla range in size from ~30 µm in some *Cordagalma* specimens to 2-4 cm in *Erenna* species, and up to 8 cm in *Stephanomia amphytridis* [@pugh2014review]. Most siphonophore tentilla measure between 175 and 1007 µm (1st and 3rd quartiles), with a median of 373 µm. The extreme gain of tentillum size in this newly found clade may have important implications for access to large prey size classes.
+
+  Siphonophore tentilla are defined as lateral, monostichous evaginations of the tentacle gastrovascular lumen with epidermal nematocysts [@totton1965synopsis]. The buttons on *Physalia* tentacles were not traditionally regarded as tentilla, but [@bardi2007taxonomic] and our observations [@munro2018improved], confirm that the buttons contain evaginations of the gastrovascular lumen, thus satisfying all the criteria for the definition. In this light, and given that most Cystonectae bear conspicuous tentilla, we conclude (in agreement with [@munro2018improved]) that tentilla are likely ancestral to all siphonophores, and secondarily lost in *Apolemia* and *Bathyphysa conifera*.
+
+In order to gain a broad perspective on the evolutionary history of tentilla, we reconstructed the phylogenetic positions of the main categorical character shifts using stochastic character mapping (SM22-30) and summarized in \@ref(figure7). Some of these characters include the gain and loss of nematocyst types. Based on external information, we assume that haploneme nematocysts are ancestrally present in siphonophore tentacles since they are present in the tentacles of many other hydrozoans. Haplonemes first diverged into spherical isorhizas of 2 size classes in Cystonectae, and elongated anisorhizas of one size class in Codonophora. Haplonemes were likely lost in the tentacles of *Apolemia* but retained as spherical isorhizas in other *Apolemia* tissues [@siebert2013re]. Similarly, while heteronemes exist in other tissues of cystonects, they appear in the tentacles of codonophorans exclusively, as birhopaloids in *Apolemia*, stenoteles in eucladophoran physonects, and microbasic mastigophores in calycophorans. 
+  
+  The clades defined in [@damianserrano2020shaped] are characterized by unique evolutionary innovations in their tentilla. The clade Eucladophora (containing Pyrostephidae, Euphysonectae, and Calycophorae) encompasses all of the extant Siphonophore species (178 of 186) except Cystonects and *Apolemia*. Innovations that arose along the stem of this group include spatially segregated heteroneme and haploneme nematocysts, terminal filaments, and elastic strands (Fig. \@ref(figure7)). Pyrostephids evolved a unique bifurcation of the axial gastrovascular canal of the tentillum known as the "saccus" [@totton1965synopsis]. The stem to the clade Tendiculophora (clade containing Euphysonectae and Calycophorae) subsequently acquired further novelties such as the desmoneme and rhopaloneme (acrophore subtype ancestral) nematocysts on the terminal filament (Fig. \@ref(figure7)), which bears no other nematocyst type. These are arranged in sets of 2 parallel rhopalonemes for each single desmoneme [@skaer1988formation;@skaer1991remodelling]. The involucrum is an expansion of the epidermal layer that can cover part or all of the cnidoband (Fig. \@ref(figure2)). This structure, together with differentiated larval tentilla, appeared in the stem branch to Clade A physonects. Calycophorans evolved novelties such as larger desmonemes at the distal end of the cnidoband, pleated pedicles with a “hood” (here considered homologous to the involucrum) at the proximal end of the tentillum, anacrophore rhopalonemes, and microbasic mastigophore-type heteronemes. While calycophorans have diversified into most of the extant described siphonophore species (108 of 186), their tentilla have not undergone any major categorical gains or losses since their most recent common ancestor. Nonetheless, they have evolved a wide variation in nematocyst and cnidoband sizes.
+
+![\label{figure7} Siphonophore cladogram with the main categorical character gains (green) and losses (red) mapped. Some branch lengths were modified from the Bayesian chronogram to improve readability. The main visually distinguishable tentillum types are sketched next to the species that bear them, showing the location and arrangement of the main characters. In large, complex-shaped euphysonect tentilla, haplonemes were omitted for simplification. The rhizophysid *Bathyphysa conifera* branch was appended manually as a polytomy (dashed line).](~/tentilla_morph/Figures_final/figure7.jpg)
+  
+*Evolution of tentillum and nematocyst characters* – One-third of the characters measured in [@damianserrano2020shaped] support a non-phylogenetic generative model, indicating they are not phylogenetically conserved (SM\@ref(ModelSupport)). Most (74%) characters present a significant phylogenetic signal, yet only total nematocyst volume, haploneme length, and heteroneme-to-cnidoband length ratio had a phylogenetic signal with K larger than 1. Total nematocyst volume and cnidoband-to-heteroneme length ratio showed strongly conserved phylogenetic signals. The majority (67%) of characters support BM models, indicating a history of neutral constant divergence. No relationship between phylogenetic signal and BM model support was found. Haploneme nematocyst length is the only character with support for an EB model of decreasing rate of evolution with time. No character had support for a single-optimum OU model (when uninformed by feeding guild regime priors).
+
+![\label{figure8} A. Correlogram showing strength of ordinary (upper triangle) and phylogenetic (lower triangle) correlations between characters. Both size and color of the circles indicate the strength of the correlation (R^2^). B. Scatterplot of phylogenetic correlation against ordinary correlation showing a strong linear relationship (R^2^ = 0.92, 95% confidence between 0.90 and 0.93). Light red and blue boxes indicate congruent negative and positive correlations respectively. Darker red and blue boxes indicate strong (<-0.5 or >0.5) negative and positive correlation coefficients respectively.](~/tentilla_morph/Figures_final/figure8.jpg){height=600px}
+*Evolution of nematocyst shape* – The greatest evolutionary change in haploneme nematocyst shape occurred in a single shift towards elongation in the stem of Tendiculophora, which contains the majority of described siphonophore species other than Cystonects, *Apolemia*, and Pyrostephidae. There is one secondary return to more oval, less elongated haplonemes in *Erenna*, but it does not reach the sphericity present in Cystonectae or Pyrostephidae (Fig. \@ref(figure10)). Heteroneme evolution presents a less discrete evolutionary history, where Tendiculophora evolved more elongate heteronemes, but the difference between theirs and other siphonophores is much smaller than the variation in shape within Tendiculophora, bearing no phylogenetic signal. In this clade, the evolution of heteroneme shape has diverged in both directions, and there is no correlation with haploneme shape (Fig. \@ref(figure10)), which has remained fairly constant (elongation between 1.5 and 2.5).  
+
+![\label{figure10} Phylomorphospace showing haploneme and heteroneme elongation (log scaled). Orange area delimits rod-shaped haplonemes, the blue area covers oval and round-shaped haplonemes. Smaller dots and lines represent phylogenetic relationships and ancestral states of internal nodes under BM. Species nodes in red lack either haplonemes or heteronemes, and their values projected onto the axis of the nematocyst type they bear. Cystonects have no tentacle heteronemes and are projected onto the haploneme axis. Apolemiids have no tentacle haplonemes and are projected onto the heteroneme axis. ](~/tentilla_morph/Figures_final/figure10.jpg)
+
+*Phenotypic integration of the tentillum* – Of the phylogenetic correlations (SM\@ref(figure8)a, lower triangle), 81.3% were positive and 18.7% were negative, while of the ordinary correlations (SM\@ref(figure8)a, upper triangle) 74.6% were positive and 25.4% were negative. Half (49.9%) of phylogenetic correlations were >0.5, while only 3.6% are < -0.5. Similarly, of the across-species correlations, 49.1% were >0.5 and only 1.5% were < -0.5. We found that 13.9% of character pairs had opposing phylogenetic and ordinary correlation coefficients. Just 4% have negative phylogenetic and positive ordinary correlations (such as rhopaloneme elongation ~ heteroneme-to-cnidoband length ratio and haploneme elongation, or haploneme elongation ~ heteroneme number), and only 9.9% of character pairs had positive phylogenetic correlation yet negative ordinary correlation (such as heteroneme elongation ~ cnidoband convolution and involucrum length, or rhopaloneme elongation with cnidoband length). These disparities can be caused by Simpson’s paradox [@blyth1972simpson]: the reversal of the sign of a relationship when a third variable (or a phylogenetic topology [@uyeda2018rethinking]) is considered. However, no character pair had correlation coefficient differences larger than 0.64 between ordinary and phylogenetic correlations (heteroneme shaft extension ~ rhopaloneme elongation has a Pearson’s correlation of 0.10 and a phylogenetic correlation of  -0.54). Rhopaloneme elongation shows the most incongruencies between phylogenetic and ordinary correlations with other characters.
+
+![\label{figure9} Phylomorphospace of the simple continuous characters principal components, excluding ratios and composite characters. A. Variance explained by each variable in the PC1-PC2 plane. Axis labels include the phylogenetic signal (K) for each component and p-value. B. Phylogenetic relationships between the species points distributed in that same space.](~/tentilla_morph/Figures_final/figure9.jpg){height=600px}
+
+  In the non-phylogenetic PCA morphospace using only simple characters (SM\@ref(figure9)), PC1 (aligned with tentillum and tentacle size) explained 69.3% of the variation in the tentillum morphospace, whereas PC2 (aligned with heteroneme length, heteroneme number, and haploneme arrangement) explained 13.5%. In a phylogenetic PCA, 63% of the evolutionary variation in the morphospace is explained by PC1 (aligned with shifts in tentillum size), while 18% is explained by PC2 (aligned with shifts in heteroneme number and involucrum length). 
+
+The siphonophore tentillum morphospace has a fairly low extant dimensionality due to having an evolutionary history with many synchronous, correlated changes. This is consistent with strong phenotypic integration where genetic and developmental correlations are maintained by natural selection to preserve a complex function across the wide variety of morphologies present. Since most tentillum characters develop from a common bud (budding tentilla near the base of the tentacle), structural correlations are expected. Similarly, correlations between the features of different nematocyst subtypes within a species are also expected given their common evolutionary and developmental origin [@bode1988control;@david2008evolution]. However, we also found correlations between nematocyst and tentillum characters. Siphonophore tentacle nematocysts (in their cnidocytes) are not produced nor matured in the developing tentillum. These cnidocytes are produced by dividing cnidoblasts in the basigaster (basal swelling of the gastrozooid). Once the cnidocytes have assembled the nematocyst, they migrate outward along the tentacle [@carre1972study] and position themselves in the tentillum according to their type and size [@skaer1988formation]. Thus, the developmental programs that produce the observed nematocyst morphologies are spatially separated from those producing the tentillum morphologies. Therefore, we hypothesize the genetic correlations and phenotypic integration between tentillum and nematocyst characters are maintained through natural selection on separate regulatory networks, out of the necessity to work together and meet the spatial, mechanical, and functional constraints of their prey capture behavior.
+  
+*Functional morphology of tentillum and nematocyst discharge* –  Tentillum and nematocyst discharge high speed measurements are available in the Dryad repository. While the sample sizes of these measurements were insufficient to draw reliable statistical results at a phylogenetic level, we did observe patterns that may be relevant to their functional morphology. For example, cnidoband length is strongly correlated with discharge speed (p value = 0.0002). This is probably the sole driver of the considerable difference between euphysonect and calycophoran tentilla discharge speeds (average discharge speeds: 225.0mm/s and 41.8mm/s respectively; t-test p value = 0.011), since the euphysonects have larger tentilla than the calycophorans among the species recorded.
+
+  We also observed that calycophoran haploneme tubules fire faster than those of euphysonects (T-test p value = 0.001). Haploneme nematocysts discharge 2.8x faster than heteroneme nematocysts (T-test p value = 0.0012). Finally, we observed that the stenoteles of the Euphysonectae discharge a helical filament that “drills” itself through the medium it penetrates as it everts.
+
+*Generating dietary hypotheses using tentillum morphology* – For many siphonophore species, no feeding observations have yet been published. We generated hypotheses about the diets of these understudied siphonophores based on their known tentacle morphology and the associations between morphology and diet reported here for other species using the linear discriminant analysis of principal components (DAPC) fitted in [@damianserrano2020shaped]. This provides concrete predictions to be tested in future work and helps extrapolate our findings to many poorly known species that are extremely difficult to collect and observe.
+The discriminant analysis in [@damianserrano2020shaped] for feeding guild (7 principal components, 4 discriminants) produced 100% discrimination, and the highest loading contributions were found for the characters (ordered from highest to lowest): Involucrum length, heteroneme volume, heteroneme number, total heteroneme volume, tentacle width, heteroneme length, total nematocyst volume, and heteroneme width. We used the predictions from this discriminant function to generate hypotheses about the feeding guild of 45 species in the morphological dataset. This extrapolation predicts that two other *Apolemia* species are gelatinous prey specialists like *Apolemia rubriversa*, and predicts that *Erenna laciniata*is a fish specialist like *Erenna richardi*. When predicting soft- and hard-bodied prey specialization, the DAPC achieved 90.9% discrimination success, only marginally confounding hard-bodied specialists with generalists (SM\@ref(DAPCsofthard)). The main characters driving this discrimination are involucrum length, heteroneme number, heteroneme volume, tentacle width, total nematocyst volume, total haploneme volume, elastic strand width, and heteroneme length. We only selected prey types with sufficient variation in the data to carry out these analyses (copepods, fish, and large crustaceans). While the presence of fish or large crustaceans in the diet cannot be unambiguously discriminated using tentillum morphology (SM\@ref(DAPCfish),SM\@ref(DAPCcrustacean)), specialization on fish or large crustacean prey can be fully disentangled (SM\@ref(DPACguilds)).
+  
+  ![\label{figure6} Hypothetical feeding guilds for siphonophore species predicted by a 6 PCA DAPC. Cell darkness indicates the posterior probability of belonging to each guild. Training data set transformed so inapplicable states are computed as zeroes. Species ordered and colored according to their predicted feeding guild.](~/tentilla_morph/Figures_final/figure6.jpg)
+  
+## Discussion {-}
+
+*On the evolution of tentilla morphology* -- The evolutionary rate covariance results in [@damianserrano2020shaped] indicate that tentilla are not only phenotypically integrated but also show patterns of evolutionary modularity, where different sets of characters appear to evolve in stronger correlations among each other than with other characters [@wagner1996homologues]. This may be indicative of the underlying genetic and developmental dependencies among closely homologous nematocyst types (such as desmonemes and rhopalonemes) and structures. In addition, these evolutionary modules point to hypothetical functional modules. For example, the coiling degree of the cnidoband and the extent of the involucrum have correlated rates of evolution, while high-speed videos (pers. obs.) show that the involucrum helps direct the whiplash of the uncoiling cnidoband distally (towards the prey).
+The clade Tendiculophora contains far more species than its relatives Cystonectae, Apolemiidae, and Pyrostephidae. An increase in clade richness and ecological diversification can be triggered by a ‘key innovation’ [@simpson1955major]. The evolutionary innovation of the Tendiculophora tentilla with shooting cnidobands and modular regions may have facilitated further dietary diversification.
+
+Haploneme and heteroneme shape share 21% of their variance across extant values, and 53% of the variance in their shifts along the branches of the phylogeny. However, much of this correlation is due to the contrast between Pyrostephidae and their sister group Tendiculophora (Fig. \@ref(figure4)). We searched for rate regime shifts in the evolution of nematocyst shape characters using a Bayesian Analysis of Macroevolutionary Mixtures (BAMM) [@rabosky2014bamm] (SM32-35). BAMM located a regime shift in heteroneme shape evolution on the branches leading to *Agalma* and *Athorybia* (SM33). For the rates of haploneme shape evolution, BAMM identified two main independent regime shifts (Fig. \@ref(figure10)): one in the branch leading to Codonophora (anisorhizas diverging from cystonects’ spherical isorhizas), and one in the branch leading to Clade B physonects (SM35). Clade B includes *Erenna*, *Stephanomia*, *Marrus*, and rhodaliids. Most of these taxa have rod-shaped anisorhizas, but *Erenna* have oval ones. No significant regime shift patterns were identified in the evolution of desmoneme and rhopaloneme shape.
+
+*Heterochrony and convergence in the evolution of tentilla with diet* - In addition to identifying shifts in prey type, our work reveals the specific morphological changes in the prey capture apparatus associated with these changes. Copepod-specialized diets have evolved convergently in *Cordagalma* and some calycophorans. These evolutionary transitions happened together with transitions to smaller tentilla with fewer cnidoband nematocysts. Tentilla are expensive single-use structures [@Mackie:1987uy], therefore we would expect that specialization in small prey would beget reductions in the size of the prey capture apparatus to the minimum required for the ecological performance. *Cordagalma*’s tentilla strongly resemble the larval tentilla (only found in the first-budded feeding body of the colony) of their sister genus *Forskalia*. This indicates that the evolution of *Cordagalma* tentilla could be a case of paedomorphic heterochrony associated with predatory specialization on smaller prey.
+	
+Our work identifies a novel example of convergent evolution. The region of the tentillum morphospace (SM4) occupied by calycophorans was independently (and more recently) occupied by the physonect *Frillagalma vityazi*. Like calycophorans, *Frillagalma* tentilla have small C-shaped cnidobands with a few rows of anisorhizas. Unlike calycophorans, they lack paired elongate microbasic mastigophores. Instead, they bear exactly three oval stenoteles, and their cnidobands are followed by a branched vesicle, unique to this genus. Their tentillum morphology is very different from that of other related physonects, which tend to have long, coiled, cnidobands with many paired oval stenoteles. Most studies on calycophoran diets have reported their prey to be primarily composed of small crustaceans, such as copepods or ostracods [@purcell1981dietary;@purcell1984functions]. The diet of *Frillagalma vityazi* is unknown, but this morphological convergence suggests that they evolved to capture similar kinds of prey. The DAPCs in [@damianserrano2020shaped] predict that *Frillagalma* has a generalist niche with both soft and hard-bodied prey, including copepods.
+
+*Evolution of nematocyst shape* –  A remarkable feature of siphonophore haplonemes is that they are outliers to all other Medusozoa in their surface area to volume relationships, deviating significantly from sphericity [@thomason1988allometry]. This suggests a different mechanism for their discharge that could be more reliant on capsule tension than on osmotic potentials [@carre1980triggering], and strong selection for efficient nematocyst packing in the cnidoband [@thomason1988allometry;@skaer1988formation]. Our results show that Codonophora underwent a shift towards elongation and Cystonectae towards sphericity, assuming the common ancestor had an intermediate state. Since we know that the haplonemes of other hydrozoan outgroups are generally spheroid, it is more parsimonious to assume that cystonects retain this ancestral state. Later, we observe a return to more rounded (ancestral) haplonemes in *Erenna*, concurrent with a secondary gain of a piscivorous trophic niche, like that exhibited by cystonects. [@purcell1984functions] showed that haplonemes have a penetrating function as isorhizas in cystonects and an adhesive function as anisorhizas in Tendiculophora. The two clades that have converged to feed primarily on fish (Cystonectae and Clade B, which includes *Erenna*, *Stephanomia*, *Marrus*, and rhodaliids) have also converged morphologically toward more compact haplonemes, significantly distinct from their closest relatives. Isorhizas in cystonects are known to penetrate the skin of fish during prey capture, and to deliver the toxins that aid in paralysis and digestion [@hessinger1988nematocyst]. *Erenna*’s anisorhizas are also able to penetrate human skin and deliver a painful sting [@pugh2001review] (and pers. obs.), a common feature of piscivorous cnidarians like the Portuguese man-o-war or box jellies.
+
+  The implications of these results for the evolution of nematocyst function are that an innovation in the discharge mechanism of haplonemes may have occurred during the main shift to elongation. Elongate nematocysts can be tightly packed into cnidobands. We hypothesize this may be a Tendiculophora lineage-specific adaptation to packing more nematocysts into a limited tentillum space, as suggested by [@skaer1988formation]. [@thomason1988allometry] hypothesized that smaller, more spherical nematocysts, with a lower surface area to volume ratio, are more efficient in osmotic-driven discharge and thus have more power for skin penetration. The elongated haplonemes of crustacean-eating Tendiculophora have never been observed penetrating their crustacean prey [@purcell1984functions], and are hypothesized to entangle the prey through adhesion of the abundant spines to the exoskeletal surfaces and appendages. Entangling requires less acceleration and power during discharge than penetration, as it does not rely on point pressure. In fish-eating cystonects and *Erenna* species, the haplonemes are much less elongated and very effective at penetration, in congruence with the osmotic discharge hypothesis. Tendiculophora, composed of the clades Euphysonectae and Calycophorae, includes the majority of siphonophore species. Within these clades are the most abundant siphonophore species, and a greater morphological and ecological diversity is found. We hypothesize that this packing-efficient haploneme morphology may have been a key innovation leading to the diversification of this clade. However, other characters that shifted concurrently in the stem of this clade may have been responsible for their extant diversity.
+
+*Generating hypotheses on siphonophore feeding ecology* – One motivation for our research was to understand the links between predator capture tools and their diets so we can generate hypotheses about the diets of siphonophores based on morphological characteristics. Indeed, our discriminant analyses were able to distinguish between different siphonophore diets based on morphological characters alone. The models produced by these analyses generated testable predictions about the diets of many species for which we only have morphological data of their tentacles. While the limited dataset used here is informative for generating tentative hypotheses, the empirical dietary data are still scarce and insufficient to cast robust predictions. This reveals the need to extensively characterize siphonophore diets and feeding habits. In future work, we can test these ecological hypotheses and validate these models by directly characterizing the diets of some of those siphonophore species. Predicting diet using morphology is a powerful tool to reconstruct food web topologies from community composition alone. In many of the ecological models found in the literature, interactions among the oceanic zooplankton have been treated as a black box [@mitra2009closure]. The ability to predict such interactions, including those of siphonophores and their prey, will enhance the taxonomic resolution of nutrient-flow models constructed from plankton community composition data.
+## Acknowledgements {-}
+This work was supported by the Society of Systematic Biologists (Graduate Student Award to A.D.S.); the Yale Institute of Biospheric Studies (Doctoral Pilot Grant to A.D.S.); and the National Science Foundation (Waterman Award to C.W.D., and NSF-OCE 1829835 to C.W.D., S.H.D.H., and C. Anela Choy). A.D.S. was supported by a Fulbright Spain Graduate Studies Scholarship. 
+
+
+## Supplementary Materials {-}
+
+![\label{ModelSupport} Model support (delta AICc), phylogenetic signal (Blomberg’s K), and phylogenetic signal permutation test p-value for each continuous character. Ntaxa = Number of taxa used in the analyses after removing those where the character sate is inapplicable or the data is missing.](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/modelSupport.png){height=600px}
+
+![\label{ModelAdequacy} Model adequacy scores for the best model supported for each morphological character. Cvar = coefficient of variation of the absolute value of the contrasts. Svar = Slope of a linear model fitted to the absolute value of the contrasts against their expected variances. Sasr = slope of the contrasts against the ancestral state inferred at each corresponding node. Shgt = slope of the contrasts against node depth. Dcfd = Kolmolgorov-Smirnov D-statistic comparing contrasts to a normal distribution with SD equal to the root of the mean of squared contrasts. ](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png)
+
+## References {-}
+
+```{r code}
+# Set paths to input data
+setwd("~/tentilla_morph/Organismal_paper/")
+
+#Load raw data
+read.csv("~/tentilla_morph/Supplementary_materials/Dryad/raw_morphology_data.csv") -> numbers
+numbers$Species = as.character(numbers$Species)
+categorical <- read.csv("~/tentilla_morph/Supplementary_materials/Dryad/raw_categorical_data.csv")[,-2]
+rownames(categorical) = categorical$Species
+
+#Correct species spellings
+numbers$Species[which(numbers$Species == "Agalma okeni")] <- "Agalma okenii"
+numbers$Species[which(numbers$Species == "Forskalia edwardsi")] <- "Forskalia edwardsii"
+numbers$Species[which(numbers$Species == "Rhizophysa eysenhardti")] <- "Rhizophysa eysenhardtii"
+
+#Merge Nanomias
+numbers$Species[which(numbers$Species == "Nanomia cara")] <- "Nanomia sp"
+numbers$Species[which(numbers$Species == "Nanomia bijuga")] <- "Nanomia sp"
+
+#Polish fields
+castnumbers = numbers
+castnumbers[castnumbers=="needDIC"] <- NA
+castnumbers[castnumbers=="needConfocal"] <- NA
+castnumbers[castnumbers=="needMature"] <- NA
+castnumbers[castnumbers=="needReslide"] <- NA
+castnumbers[castnumbers==-1] <- NA
+castnumbers[,c(-1,-2,-3)] <- sapply(castnumbers[,c(-1,-2,-3)],as.character)
+castnumbers[,c(-1,-2,-3)] <- sapply(castnumbers[,c(-1,-2,-3)],as.numeric)
+
+#Define functions to deal with NAs and decimals
+mean.na <- function(a){mean(a, na.rm = TRUE)}
+var.na <- function(a){var(a, na.rm = TRUE)}
+round3 <- function(a){round(a, 3)}
+
+#Compute morphometric ratios
+coiledness = castnumbers$Cnidoband.free.length..um./castnumbers$Cnidoband.length..um.
+heteroneme_elongation = castnumbers$Heteroneme.free.length..um./castnumbers$Heteroneme.width..um.
+haploneme_elongation = castnumbers$Haploneme.free.length..um./castnumbers$Haploneme.width..um.
+desmoneme_elongation = castnumbers$Desmoneme.length..um./castnumbers$Desmoneme.width..um.
+rhopaloneme_elongation = castnumbers$Rhopaloneme.length..um./castnumbers$Rhopaloneme.width..um.
+heteroneme_shaft_extension = castnumbers$Heteroneme.free.length..um./castnumbers$Heteroneme.shaft.free.length..um.
+Heteroneme_to_CB = castnumbers$Heteroneme.free.length..um./(castnumbers$Cnidoband.free.length..um.+0.001)
+total_heteroneme_volume = castnumbers$Heteroneme.volume..um3.*castnumbers$Heteroneme.number
+total_haploneme_volume = (castnumbers$Cnidoband.free.length..um./castnumbers$Haploneme.width..um.)*((4*pi/3)*0.5*castnumbers$Haploneme.free.length..um.*((0.5*castnumbers$Haploneme.width..um.)^2))
+cnidomic_index = log(total_heteroneme_volume + total_haploneme_volume)
+cnidomic_index[which(is.na(cnidomic_index))] <- log(total_haploneme_volume[which(is.na(cnidomic_index))])
+cnidomic_index[which(is.na(cnidomic_index))] <- log(castnumbers[which(is.na(cnidomic_index)), "Heteroneme.volume..um3."])
+cnidomic_index[cnidomic_index==-Inf]<-NA
+
+#Define surface and volume functions
+surface_ellipsoid <- function(L, W){
+  a <- L/2
+  b <- W/2
+  c = b
+  S <- 4*pi*((((a*b)^1.6)+((a*c)^1.6)+((c*b)^1.6))/3)^(1/1.6)
+  return(S)
+}
+volume_ellipsoid <- function(L, W){
+  a <- L/2
+  b <- W/2
+  c = b
+  V <- (4/3)*pi*a*b*c
+  return(V)
+}
+
+SAV_haploneme = surface_ellipsoid(castnumbers$Haploneme.free.length..um., castnumbers$Haploneme.width..um.)/volume_ellipsoid(castnumbers$Haploneme.free.length..um., castnumbers$Haploneme.width..um.)
+names(SAV_haploneme) = castnumbers$Species
+SAV_heteroneme = surface_ellipsoid(castnumbers$Heteroneme.free.length..um., castnumbers$Heteroneme.width..um.)/volume_ellipsoid(castnumbers$Heteroneme.free.length..um., castnumbers$Heteroneme.width..um.)
+names(SAV_heteroneme) = castnumbers$Species
+
+#Combine all morphometric variables
+morphometrics = data.frame(castnumbers$slide_id, castnumbers$Species,coiledness, heteroneme_elongation, haploneme_elongation, desmoneme_elongation, rhopaloneme_elongation,heteroneme_shaft_extension, Heteroneme_to_CB, total_heteroneme_volume, total_haploneme_volume, cnidomic_index, SAV_haploneme)
+names(morphometrics)[1:2] = c("slide_id"," Species")
+
+#Combine morphometrics with regular characters
+castnumbers = data.frame(castnumbers,morphometrics[,c(-1,-2)])
+
+#Logtransform variables which are not normal
+castlogs = castnumbers
+non_normal = apply(castnumbers[,c(-1,-2,-3)], 2, shapiro.test) %>% lapply(function(x){x$p.value}) %>% unlist() 
+non_normal = which(as.vector(non_normal) < 0.05)+3
+castlogs[,non_normal] <- sapply(castnumbers[,non_normal], log)
+castlogs[castlogs==-Inf]<-NA
+
+#Means, varinces, standard errors
+castmeans <- aggregate(. ~  Species, data = castnumbers[,c(-1,-3)], mean.na, na.action = na.pass)
+castmean_logs <- aggregate(. ~  Species, data = castlogs[,c(-1,-3)], mean.na, na.action = na.pass)
+castvariances <- aggregate(. ~  Species, data = castnumbers[,c(-1,-3)], FUN = var.na, na.action = na.pass) #[,-2]
+castvariance_logs <- aggregate(. ~  Species, data = castlogs[,c(-1,-3)], FUN = var.na, na.action = na.pass)
+castvariances[is.na(castvariances)] <- 0
+castvariance_logs[is.na(castvariance_logs)] <- 0
+castN <- aggregate(. ~  Species, data = castnumbers[,c(-1,-3)], length, na.action = na.pass) 
+castN = data.frame(castN$Species, rowMeans(castN[,-1])) #[,-2]
+names(castN) = c("Species", "N_specimens")
+castSE <- cbind(castvariances$Species, sqrt(castvariances[,-1])/sqrt(castN$N_specimens))
+castSE_logs <- cbind(castvariance_logs$Species, sqrt(castvariance_logs[,-1])/sqrt(castN[,-1]))
+names(castSE)[1] <- "Species"
+names(castSE_logs)[1] <- "Species"
+
+#Make overview of data and heatmap
+Ses = castSE[,-1]
+Ses[Ses == 0] = NA
+morphdata = cbind(castN, castmeans[,-1], Ses)
+morphdata = morphdata[,c(1:3,33,4,34,5,35,6,36,7,37,8,38,9,39,10,40,11,41,12,42,13,43,14,44,15,45,16,46,17,47,18,48,19,49,20,50,21,51,22,52,23,53,24,54,25,55,26,56,27,57,28,58,29,59,30,60,31,61,32,62)]
+names(morphdata) = str_replace_all(names(morphdata),".1","_SE")
+#write.csv(morphdata, "characterdata.csv")
+
+heatdata = as.matrix(castmean_logs[,-1])
+rownames(heatdata) = castmean_logs$Species
+heatdata[is.nan(heatdata)]<- -1
+#hcolors = grDevices::terrain.colors(20)
+library(colorspace)
+hcolors <- colorRampPalette(c("#e0ecf4","#9ebcda","#8856a7"), bias=1)
+hcolors <- colorRampPalette(c("#ffeda0","#feb24c","#f03b20"), bias=1)
+hcolors <- colorRampPalette(c("yellow","purple"), bias=1)
+#hcolors <- sequential_hcl(17, h = 245, c = c(40, 75, 0), l = c(30, 95), power = 1)
+hcolors <- c(rep("#000000FF",10), hcolors(30))
+heatmap(heatdata, scale = "column", cexCol = 0.2, col=hcolors, keep.dendro = T)
+
+#Load phylogenetic tree
+consensus = read.nexus("~/tentilla_morph/Supplementary_materials/TreeBase/RB_constrained_timetree/TimeTree_siphs_mcmc_MAP.tre") %>% drop.tip(56:61)
+consensus$tip.label = str_replace_all(consensus$tip.label,"_"," ")
+#Switch Nanomia bijuga for Nanaomia sp
+consensus$tip.label[which(consensus$tip.label == "Nanomia bijuga")] <- "Nanomia sp"
+
+#Prune quant matrix to tree species
+matrix = castnumbers[which(!is.na(castnumbers$Species)),]
+matrix_logs = castlogs[which(!is.na(castlogs$Species)),]
+sharedspp = matrix$Species[which(matrix$Species %in% consensus$tip.label)]
+sharedmatrix = matrix[which(matrix$Species %in% sharedspp),]
+sharedlogs = matrix_logs[which(matrix$Species %in% sharedspp),]
+sharedmeans = castmeans[which(castmeans$Species %in% sharedspp),]
+sharedmean_logs = castmean_logs[which(castmean_logs$Species %in% sharedspp),]
+sharedvars = castvariances[which(castvariances$Species %in% sharedspp),]
+sharedvar_logs = castvariance_logs[which(castvariance_logs$Species %in% sharedspp),]
+
+#Prune categorical matrix to tree species
+cat_rowNAs = apply(categorical[,-1], 1, function(x) sum(is.na(x)))
+catmatrix = categorical[which(cat_rowNAs<1),] %>% .[,-1]
+sharedspp_cat = rownames(catmatrix)[which(rownames(catmatrix) %in% consensus$tip.label)]
+sharedcategorical = catmatrix[which(rownames(catmatrix) %in% sharedspp_cat),]
+
+#Prune tree to quant matrix species
+nodatatipnames = consensus$tip.label[which(!(consensus$tip.label %in% sharedmatrix$Species))]
+nodatatips = c(1:length(consensus$tip.label))[which(consensus$tip.label %in% nodatatipnames)]
+prunedtree = drop.tip(consensus, nodatatips)
+prunedtree$tip.label
+plot(prunedtree)
+#ultram = chronos(prunedtree)
+ultram = prunedtree
+plot(ultram)
+
+#Prune tree to categorical matrix species
+nodatatipnames_cat = consensus$tip.label[which(!(consensus$tip.label %in% sharedspp_cat))]
+nodatatips_cat = c(1:length(consensus$tip.label))[which(consensus$tip.label %in% nodatatipnames_cat)]
+cat_tree = drop.tip(consensus, nodatatips_cat)
+cat_tree$tip.label
+plot(cat_tree)
+#ultram_cat = chronos(cat_tree)
+ultram_cat = cat_tree
+plot(ultram_cat)
+sharedcategorical = sharedcategorical[match(ultram_cat$tip.label, rownames(sharedcategorical)),]
+cprunedmatrix = sharedcategorical[which(rownames(sharedcategorical)%in%rownames(sharedmatrix)),] %>% .[which(sapply(.,function(x) length(unique(x)))>1)]
+sharedbinary = sharedcategorical
+sharedbinary$Haploneme.type = as.character(sharedbinary$Haploneme.type)
+sharedbinary[sharedbinary=="Isorhizas"] = 0
+sharedbinary[sharedbinary=="Anisorhizas"] = 1
+sharedbinary$Haploneme.type = as.numeric(sharedbinary$Haploneme.type)
+sharedbinary$Heteroneme.type = as.character(sharedbinary$Heteroneme.type)
+sharedbinary[sharedbinary=="Stenotele"] = 0
+sharedbinary[sharedbinary=="Microbasic mastigophore"] = 1
+sharedbinary[sharedbinary=="Eurytele"] = NA
+sharedbinary$Heteroneme.type = as.numeric(sharedbinary$Heteroneme.type)
+
+#Purely numerical character sets without slide or species
+Q_sharedmatrix = sharedmatrix[,c(-1,-2,-3)]
+rownames(sharedmeans) = sharedmeans$Species
+Q_sharedmeans = sharedmeans[,-1]
+rownames(sharedvars) = sharedvars$Species
+Q_sharedvars = sharedvars[,-1]
+Q_sharedmean_logs = sharedmean_logs[,-1]
+rownames(Q_sharedmean_logs) = sharedmean_logs$Species
+
+### COMPARATIVE ANALYSES ###
+
+phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmean_logs[,-1])))
+#phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmeans[,-1])))
+names(phylosignals) = c("K", "P", "Ntaxa")
+for(i in 2:ncol(sharedmean_logs)){
+  CH_I=as.numeric(sharedmean_logs[,i])
+  #CH_I=as.numeric(sharedmeans[,i])
+  names(CH_I) = sharedmean_logs$Species
+  #names(CH_I) = sharedmeans$Species
+  SE_I = as.numeric(castSE[,i]) %>% log()
+  SE_I[which(SE_I==-Inf)] = 0
+  names(SE_I) = castSE$Species
+  CH_I= CH_I[!is.na(CH_I)]
+  SE_I= SE_I[!is.na(SE_I)]
+  SE_I = SE_I[which(names(SE_I)%in%names(CH_I))]
+  CH_I = CH_I[which(names(CH_I)%in%names(SE_I))]
+  treeI = drop.tip(ultram,which(!(ultram$tip.label %in% names(CH_I))))
+  class(treeI) = "phylo"
+  rownames(phylosignals)[i-1] <- names(sharedmean_logs)[i]
+  PSIG <- phylosig(treeI, CH_I, se = SE_I, test=T)
+  phylosignals[i-1,1] <- PSIG$K
+  phylosignals[i-1,2] <- PSIG$P
+  phylosignals[i-1,3] <- length(CH_I)
+  phylosignals$K = round(phylosignals$K,3)
+}
+#write.csv(phylosignals, "PhylosignalsWSE_log.csv")
+
+#Model support
+AICdf = as.data.frame(matrix(ncol=6,nrow=ncol(Q_sharedmean_logs)))
+colnames(AICdf) = c("Variable", "white_noise", "starBM", "BM", "EB", "OU")
+for(c in 1:ncol(Q_sharedmean_logs)){
+  startree <- rescale(ultram, "lambda", 0)
+  C = Q_sharedmean_logs[,c]
+  names(C) = rownames(Q_sharedmean_logs)
+  C = C[!is.na(C)]
+  Ctree = drop.tip(ultram, which(!(ultram$tip.label %in% names(C))))
+  startree = drop.tip(startree, which(!(startree$tip.label %in% names(C))))
+  Cse = castSE[,c+1] %>% log() %>% abs()
+  Cse[which(Cse == Inf)] <- 0
+  names(Cse) = castSE$Species
+  Cse = Cse[which(names(Cse) %in% names(C))]
+  model_matrix = matrix("NA", nrow = 5, ncol = 3)
+  colnames(model_matrix) = c("aicc","aicc_best","dAICc")
+  row.names(model_matrix) = c("white", "starBM", "BM", "EB", "OU")
+  for(j in 1:dim(model_matrix)[1]){
+    if(j==2){
+      temp_model = fitContinuous(startree, C, model="BM", SE = Cse)$opt
+    }
+    else{
+      temp_model = fitContinuous(Ctree, C, model=row.names(model_matrix)[j], SE = Cse)$opt
+    }
+    model_matrix = apply(model_matrix,2, as.numeric)
+    row.names(model_matrix) = c("white", "starBM", "BM", "EB", "OU")
+    model_matrix[j, "aicc"] <- temp_model$aicc
+  }
+  model_matrix[,"aicc_best"] <- min(model_matrix[,"aicc"])
+  model_matrix[,"dAICc"] <- model_matrix[, "aicc"] - model_matrix[j, "aicc_best"]
+  print(names(Q_sharedmean_logs)[c])
+  string_c <- c(names(Q_sharedmean_logs)[c], model_matrix[,3])
+  names(string_c) = colnames(AICdf)
+  AICdf[c,] <- string_c
+}
+AICdf[,2:6] = apply(AICdf[,2:6], 2, as.numeric) %>% apply(2, round3)
+#write.csv(AICdf, "log_model_support.csv")
+
+#Model adequacy
+worthy_models = AICdf[which(AICdf$white_noise != 0 & AICdf$starBM != 0),]
+MAD = as.data.frame(matrix(ncol = 6, nrow = nrow(worthy_models)))
+names(MAD) = c("msig", "cvar", "svar", "sasr", "shgt", "dcfd")
+rownames(MAD) = worthy_models$Variable
+for(m in 1:nrow(worthy_models)){
+  C = Q_sharedmean_logs[,which(names(Q_sharedmean_logs) == worthy_models$Variable[m])]
+  names(C) = rownames(Q_sharedmean_logs)
+  C = C[!is.na(C)]
+  Ctree = drop.tip(ultram, which(!(ultram$tip.label %in% names(C))))
+  C = C[match(Ctree$tip.label, names(C))]
+  class(Ctree)="phylo"
+  FC <- fitContinuous(Ctree,C,model=worthy_models$Best_model[m])
+  UTC <- make_unit_tree(FC)
+  picstat_data <- calculate_pic_stat(UTC)
+  sim <- simulate_char_unit(UTC)
+  picstat_sim <- calculate_pic_stat(sim)
+  compare_pic_stat(picstat_data, picstat_sim) %>% .$p.values -> MAD[m,]
+}
+phy_models = data.frame(worthy_models,MAD)
+phy_models[,7:12] = apply(phy_models[,7:12], 2,round3)
+#write.csv(phy_models, "model_adequacy.csv")
+
+#Nematocyst shape evolution - phylomorphospace figure
+het_el = sharedmean_logs$heteroneme_elongation
+names(het_el) = sharedmean_logs$Species
+hap_el = sharedmean_logs$haploneme_elongation
+names(hap_el) = sharedmean_logs$Species
+het_el = het_el[which(!is.na(het_el))]
+hap_el = hap_el[which(!is.na(hap_el))]
+hap_el = hap_el[which(names(hap_el) %in% names(het_el))]
+het_el = het_el[which(names(het_el) %in% names(hap_el))]
+het_el = het_el[match(names(hap_el), names(het_el))]
+elon_data = cbind(het_el, hap_el) %>% as.data.frame()
+names(elon_data) = c("Heteroneme elongation (log um)", "Haploneme elongation (log um)")
+elon_tree = drop.tip(ultram, which(!(ultram$tip.label %in% names(hap_el))))
+phylomorphospace(elon_tree, elon_data, label="horizontal")
+
+## SIMMAPS used to make categorical evolution figure ##
+par(ask=F)
+tentilla = sharedcategorical$Tentilla
+names(tentilla) = rownames(sharedcategorical)
+prox_het = sharedcategorical$Proximal.heteronemes
+names(prox_het) = rownames(sharedcategorical)
+desmo = sharedcategorical$Desmonemes
+names(desmo) = rownames(sharedcategorical)
+rhopalo = sharedcategorical$Rhopalonemes
+names(rhopalo) = rownames(sharedcategorical)
+dyn_cnido = sharedcategorical$Dynamic.cnidoband
+names(dyn_cnido) = rownames(sharedcategorical)
+elastic = sharedcategorical$Elastic.strand
+names(elastic) = rownames(sharedcategorical)
+distal_desmo = sharedcategorical$Distal.cnidoband.desmonemes
+names(distal_desmo) = rownames(sharedcategorical)
+coiled = sharedcategorical$Coiled.tentilla
+names(coiled) = rownames(sharedcategorical)
+heterotype = sharedcategorical$Heteroneme.type
+heterotype=as.character(heterotype)
+names(heterotype) = rownames(sharedcategorical)
+haplotype = sharedcategorical$Haploneme.type
+haplotype=as.character(haplotype)
+names(haplotype) = rownames(sharedcategorical)
+
+Simmap_list = list()
+###SIMMAP Tentilla:
+make.simmap(ultram_cat, tentilla, nsim = 100) -> tentilla_sim
+Simmap_list[[1]] <- tentilla_sim
+plotTree(ultram_cat, lwd = 4)
+tentilla_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Present", "Absent")
+nodelabels(pie=(describe.simmap(tentilla_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(tentilla_sim)
+
+###SIMMAP Proximal Heteronemes:
+make.simmap(ultram_cat, prox_het, nsim = 100) -> prox_het_sim
+Simmap_list[[2]] <- prox_het_sim
+plotTree(ultram_cat, lwd = 4)
+prox_het_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Present", "Absent")
+nodelabels(pie=(describe.simmap(prox_het_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(prox_het_sim)
+
+###SIMMAP Desmonemes:
+make.simmap(ultram_cat, desmo, nsim = 100) -> desmo_sim
+Simmap_list[[3]] <- desmo_sim
+plotTree(ultram_cat, lwd = 4)
+desmo_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Absent", "Present")
+nodelabels(pie=(describe.simmap(desmo_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(desmo_sim)
+
+###SIMMAP Rhopalonemes:
+make.simmap(ultram_cat, rhopalo, nsim = 100) -> rhopalo_sim
+Simmap_list[[4]] <- rhopalo_sim
+plotTree(ultram_cat, lwd = 4)
+rhopalo_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Absent", "Present")
+nodelabels(pie=(describe.simmap(rhopalo_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(rhopalo_sim)
+
+###SIMMAP Dynamic Cnidoband:
+make.simmap(ultram_cat, dyn_cnido, nsim = 100) -> dyn_cnido_sim
+Simmap_list[[5]] <- dyn_cnido_sim
+plotTree(ultram_cat, lwd = 4)
+dyn_cnido_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Absent", "Present")
+nodelabels(pie=(describe.simmap(dyn_cnido_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(dyn_cnido_sim)
+
+###SIMMAP Elastic Strand:
+make.simmap(ultram_cat, elastic, nsim = 100) -> elastic_sim
+Simmap_list[[6]] <- elastic_sim
+plotTree(ultram_cat, lwd = 4)
+elastic_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Absent", "Present")
+nodelabels(pie=(describe.simmap(elastic_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(elastic_sim)
+
+###SIMMAP Distal CB Desmonemes:
+make.simmap(ultram_cat, distal_desmo, nsim = 100) -> distal_desmo_sim
+Simmap_list[[7]] <- distal_desmo_sim
+plotTree(ultram_cat, lwd = 4)
+distal_desmo_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Absent", "Present")
+nodelabels(pie=(describe.simmap(distal_desmo_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(distal_desmo_sim)
+
+###SIMMAP Tentilla Coiledness:
+make.simmap(ultram_cat, coiled, nsim = 100) -> coiled_sim
+Simmap_list[[8]] <- coiled_sim
+plotTree(ultram_cat, lwd = 4)
+coiled_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Absent", "Present")
+nodelabels(pie=(describe.simmap(coiled_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(coiled_sim)
+
+###SIMMAP Heteroneme type:
+heterotype = heterotype[heterotype!=""]
+HTtree = drop.tip(ultram_cat, which(!(ultram_cat$tip.label %in% names(heterotype))))
+make.simmap(HTtree, heterotype, nsim = 100) -> heterotype_sim
+Simmap_list[[9]] <- heterotype_sim
+plotTree(HTtree, lwd = 4)
+heterotype_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red", "green")
+names(colors) = c("Eurytele", "Microbasic mastigophore", "Stenotele")
+nodelabels(pie=(describe.simmap(heterotype_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+
+###SIMMAP Haploneme type:
+haplotype = haplotype[haplotype!=""]
+HTtree = drop.tip(ultram_cat, which(!(ultram_cat$tip.label %in% names(haplotype))))
+make.simmap(HTtree, haplotype, nsim = 100) -> haplotype_sim
+Simmap_list[[10]] <- haplotype_sim
+plotTree(HTtree, lwd = 4)
+haplotype_sim %>% plotSimmap(lwd = 4, add = T)
+colors = c("black", "red")
+names(colors) = c("Isorhizas", "Anisorhizas")
+nodelabels(pie=(describe.simmap(haplotype_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
+add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
+densityMap(haplotype_sim)
+
+## Character correlations ##
+C = sharedmatrix[,c(-1,-3)] %>% .[which(!is.na(rowSums(.[,-1]))),]
+Cspecies = C$Species %>% as.character()
+C = as.matrix(C[,-1])
+rownames(C) = Cspecies
+Ctree = drop.tip(ultram,which(!(ultram$tip.label %in% rownames(C))))
+class(Ctree) = "phylo"
+PICi = Rcontrast(tree=Ctree, X=C, path="phylip-3.695/exe", cleanup=TRUE)
+
+#Correlation visualizations R2
+phy_corr = PICi$VarA.Correlations
+intra_corr = PICi$VarE.Correlations
+phy_corr[upper.tri(phy_corr)] <- NA
+combicorr = phy_corr
+combicorr[upper.tri(combicorr)] = intra_corr[upper.tri(intra_corr)]
+rownames(combicorr) = colnames(C)
+colnames(combicorr) = colnames(C)
+corrplot(combicorr, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs intraspecific correlations
+PICOLS = combicorr
+PICOLS[upper.tri(PICOLS)]=cor(C)[upper.tri(cor(C))]
+corrplot(PICOLS, diag=F, tl.cex = 0.4, tl.col="black") #phylo correlations vs regular correlations for figure
+
+#Scatterplot phylo vs regular correlations
+cbind(as.vector(phy_corr), as.vector(cor(C))) %>% as.data.frame()->phyreg
+names(phyreg)<-c("Phylo", "Reg")
+ggplot(phyreg, aes(x=Reg, y=Phylo, color=(Phylo+Reg)/2)) + geom_point() + geom_hline(yintercept = 0)  + geom_vline(xintercept = 0) + theme_bw()
+abline(h=0)
+abline(v=0)
+
+## PCA ##
+Q_sharedmean_logs = sharedmean_logs[,-1]
+#Q_sharedmean_logs = castmean_logs[,-1]
+#rownames(Q_sharedmean_logs) = castmean_logs$Species
+rownames(Q_sharedmean_logs) = sharedmean_logs$Species
+raw_matrix = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[which(!is.na(rowSums(.))),]
+raw_matrix_notf = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[,c(1:7,12:17)] %>% .[which(!is.na(rowSums(.))),]
+raw_matrix_NaZeroes = Q_sharedmean_logs[,c(1:2,4:20)]
+raw_matrix_NaZeroes[is.na(raw_matrix_NaZeroes)]<-0
+compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:31)]
+
+#Using simple characters
+PCA(raw_matrix_NaZeroes) -> Pca_raw
+PCA(raw_matrix_notf) -> Pca_raw
+Pca_raw %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
+Pca_raw %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
+Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE) #For figure A
+Pca_raw %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE, axes=c(3,4)) 
+raw_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(raw_matrix_notf))))
+phylomorphospace(tree=raw_tree, Pca_raw$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2") #For figure B
+multiPhylosignal(Pca_raw$ind$coord, raw_tree)
+physignal(Pca_raw$ind$coord, raw_tree)
+
+#Using Morphometric characters
+PCA(compound_matrix) -> Pca_compound
+Pca_compound %>% fviz_contrib(choice="var", axes=1, sort.val="desc")
+Pca_compound %>% fviz_contrib(choice="var", axes=2, sort.val="desc")
+Pca_compound %>% fviz_pca_biplot( col.var="contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE)
+compound_tree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(compound_matrix))))
+phylomorphospace(tree=compound_tree, Pca_compound$ind$coord[,1:2], label = "horizontal", xlab = "PC1", ylab = "PC2")
+physignal(Pca_compound$ind$coord, compound_tree)
+multiPhylosignal(Pca_compound$ind$coord, compound_tree)
+
+#PhyloPCA on simple character
+PPCA_raw = phyl.pca(raw_tree, raw_matrix_notf)
+PPCA_compound = phyl.pca(compound_tree, compound_matrix)
+PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_raw)$importance[2,2]*100,3),"%"), cex = .6, expand =1)
+PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_compound)$importance[2,2]*100,3),"%"), cex = .6, expand =0.4)
+phylomorphospace(raw_tree, PPCA_raw$S)
+
+## BAMM ##
+
+traitlist = list()
+for(i in 2:ncol(sharedmean_logs)){
+  traitlist[[i]] <- sharedmean_logs[,c(1,i)]
+  names(traitlist)[i] = names(sharedmean_logs)[i]
+}
+
+traitlist <- lapply(traitlist, function(x){x<-x[which(!is.nan(x[,2])),]})
+
+for(i in 2:length(traitlist)){
+  treei = drop.tip(ultram, which(!(ultram$tip.label %in% traitlist[[i]]$Species)))
+  treei$tip.label = str_replace_all(treei$tip.label, " ", "_")
+  write.tree(treei, file = paste("BAMM/",names(traitlist[[i]])[2], "_tree.tre", sep=""))
+}
+
+for(i in 2:length(traitlist)){
+  traitlist[[i]]$Species = str_replace_all(traitlist[[i]]$Species, " ", "_")
+  write.table(traitlist[[i]],file = paste("BAMM/",names(traitlist[[i]])[2], ".txt", sep=""), sep="\t", col.names = F, row.names = F, quote = F)
+}
+
+#See BAMM/BAMMsetpriors.R
+#See BAMM/BAMMplots.R
+#See BAMM/BAMMconfiguration.txt
+
+## Retrieve diet data ##
+#Retrieve diet info from literature BINARY
+GC = read.csv("Cmerged.csv", header = T, sep=',')[,c(2,4,5,6)] %>% .[which(grepl("diet",.$character) & .$state==1),]
+GC$character = factor(GC$character, levels=unique(GC$character))
+GC$species = as.character(GC$species)
+#Fix typos#
+GC$species[which(GC$species == "Nanomia bijuga")] <- "Nanomia sp"
+GC$species[which(GC$species == "Rhizophysa eyesenhardti")] <- "Rhizophysa eysenhardtii"
+GC$species[which(GC$species == "Agalma okeni")] <- "Agalma okenii"
+write.csv(GC, "gutcontentliteraturereview.csv")
+
+#Prune to tree species#
+GC = GC[which(GC$species %in% ultram$tip.label),]
+GC = split(GC,GC$character)
+nrowGC = purrr::map(GC,nrow) %>% as.numeric()
+GC = GC[which(nrowGC>2)]
+GC = purrr::map(GC,unique)
+diet= matrix(ncol=length(GC),nrow=length(unique(sharedmeans$Species))) %>% as.data.frame()
+names(diet) = names(GC)
+rownames(diet) = unique(sharedmeans$Species)
+for(E in GC){
+  print(E$species)
+  for(S in E$species){
+    diet[which(rownames(diet) == S),as.character(unique(E$character))] = 1
+  }
+}
+diet[is.na(diet)] <- 0
+diet = diet[which(rowSums(diet)>0),which(colSums(diet)<nrow(diet))]
+
+#Add personal observations of the authors
+cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0,0),3),nrow=10, ncol = 3) %>% t() %>% as.data.frame()
+rownames(cladeB) = c("Erenna richardi", "Erenna sirena", "Stephanomia amphytridis")
+krilleaters = matrix(rep(c(0,0,0,1,0,0,1,0,0,0),4),nrow=10, ncol = 4) %>% t() %>% as.data.frame()
+rownames(krilleaters) = c("Praya dubia", "Resomia ornicephala", "Lychnagalma utricularia", "Bargmannia amoena")
+Gelatinous_diet = rep(0,nrow(diet))
+diet = cbind(diet, Gelatinous_diet)
+names(diet)[ncol(diet)] = "Gelatinous diet"
+gelateaters = matrix(rep(c(0,0,0,0,0,0,0,0,0,1),1),nrow=10, ncol = 1) %>% t() %>% as.data.frame()
+names(gelateaters) = names(diet)
+rownames(gelateaters) = c("Apolemia rubriversa")
+names(gelateaters)=names(diet)
+names(krilleaters)=names(diet)
+names(cladeB)=names(diet)
+diet = rbind(diet, cladeB, krilleaters, gelateaters)
+#Decapod diet column actually encompasses decapods, krill, and mysids (large crustaceans/shrimp like animals)
+
+# Retrive ROV annotation data
+VARS <- read.csv("Choy2017.tsv", sep="\t")
+VARS_curated = VARS[which(VARS$Pred_lowest_tax %in% ultram$tip.label | VARS$Pred_lowest_tax=="Nanomia bijuga"),]
+VARS_cast = acast(VARS_curated, Pred_lowest_tax~Prey_order, fun.aggregate = length)
+
+#Prune morphological matrix to species in diet
+dprunedmatrix = sharedmeans[which(sharedmeans$Species%in%rownames(diet)),]
+dprunedmatrix_logs = sharedmean_logs[which(sharedmean_logs$Species%in%rownames(diet)),]
+#Prune tree to diet species
+dprunedTree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(diet))))
+
+#Soft bodied vs hard bodied prey
+prunediets = softORhard
+ldamtrix = baselda
+ldamtrix$Species = as.character(ldamtrix$Species)
+ldamtrix = cbind(ldamtrix, prunediets[match(baselda$Species, rownames(prunediets)), 1])
+names(ldamtrix)[ncol(ldamtrix)]<-"SoftHard"
+xval <- xvalDapc(ldamtrix[,c(-1,-ncol(ldamtrix))], ldamtrix$SoftHard, n.pca.max = 300, training.set = 0.9,
+                 result = "groupMean", center = TRUE, scale = TRUE,
+                 n.pca = NULL, n.rep = 30, xval.plot = TRUE)
+dapc(ldamtrix[,c(-1,-ncol(ldamtrix))], grp=ldamtrix$SoftHard, n.pca = xval$DAPC$n.pca, n.da = xval$DAPC$n.da) -> DAPClogs
+summary.dapc(DAPClogs)
+contrib <- loadingplot(DAPClogs$var.contr, axis=1, lab.jitter=1)
+scatter(DAPClogs, clabel = 0.5)
+assignplot(DAPClogs)
+compoplot(DAPClogs, posi="bottomright", lab="",ncol=1, xlab="individuals", cex.leg = 0.1, col.pal = "funky")
+predictionset <- castmean_logs[,which(names(castmean_logs) %in% names(ldamtrix))]
+predictionset[is.na(predictionset)]<-0
+rownames(predictionset)<-predictionset$Species
+predictionset=predictionset[which(!(predictionset$Species %in% c("Thermopalia taraxaca", "Nectadamas richardi", "Halistemma cupulifera", "Cardianecta parchelion"))),]  #Remove taxa with many unmeasured NAs that create zero-biases
+predictionset=predictionset[which(!(predictionset$Species %in% ldamtrix$Species)),]
+preDIET <- predict(DAPClogs, predictionset[,-1])
+cbind(predictionset$Species, as.character(preDIET$assign)) %>% View()
+preDIET$posterior %>% round(5) %>%  as.matrix() %>% heatmap(scale="row", cexCol=0.9, col=c("white","white",gray.colors(10)[10:1],"black"),Colv=NA)
+
+## SIMPLE ANALYSES OF KINEMATIC DATA ##
+
+kine = read.csv("Kinematics.tsv", sep='\t', header=T) #%>% .[which(apply(., 1, function(x) sum(is.na(x)))<ncol(.)-2),-2]
+kineWNA = kine[which(kine$Species %in% ultram$tip.label),]
+rownames(kineWNA)=kineWNA$Specimen
+rownames(kine)=kine$Specimen
+#kineWNA = kineWNA[,-1]
+#kine=kine[,-1]
+kinetree = drop.tip(ultram, which(!(ultram$tip.label %in% kine$Species)))
+kinetree$edge.length = 200*kinetree$edge.length
+#kine_clean = kineWNA[,which(colSums(kineWNA)>1)]
+#names(kine) = c("ADS", "MDS", "HeDS","HeMDS", "HSDS", "HFL", "HaDS")
+kine_byspp = aggregate(. ~ kine$Species, data = kine[,c(-1,-2)], mean.na, na.action = na.pass)
+names(kine_byspp)[1] <- "Species"
+kinemorph <- castmeans[which(castmeans$Species %in% kine_byspp$Species),] %>% cbind(kine_byspp[which(kine_byspp$Species %in% castmeans$Species),])
+plot(kinemorph$Cnidoband.free.length..um., kinemorph$Average.CB.discharge.speed..mm.s.)
+calys = kinemorph$Species[c(5,9,12,15,16,17,18)]
+euphys = kinemorph$Species[which(!(kinemorph$Species %in% calys))]
+relspeed = data.frame(kinemorph$Species, c(kinemorph$Average.CB.discharge.speed..mm.s./kinemorph$Cnidoband.free.length..um.))
+names(relspeed) = c("Species", "Speed/Length")
+relspeed <- relspeed[which(!(is.na(relspeed$`Speed/Length`))),]
+t.test(relspeed[which(relspeed$Species %in% calys),2], relspeed[which(relspeed$Species %in% euphys),2])
+t.test(kine$Average.CB.discharge.speed..mm.s.[which(kine$Species %in% calys)], kine$Average.CB.discharge.speed..mm.s.[which(kine$Species %in% euphys)])
+t.test(castnumbers$Cnidoband.free.length..um.[which(castnumbers$Species %in% calys)], castnumbers$Cnidoband.free.length..um.[which(castnumbers$Species %in% euphys)])
+lm(kinemorph$Average.CB.discharge.speed..mm.s.~ kinemorph$Cnidoband.free.length..um.) %>% summary()
+lm(kinemorph$Heteroneme.discharge.speed.MAX..mm.s.~ kinemorph$Heteroneme.volume..um3.) %>% summary()
+t.test(kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
+t.test(kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
+t.test(kine$Haploneme.discharge.speed.AVG..mm.s., kine$Heteroneme.discharge.speed.AVG..mm.s.)
+cor(kinemorph[,c(-1,-32)], use="pairwise.complete.obs") %>% .[c(1:30),c(31:41)] %>% corrplot(diag=F, tl.cex = 0.4, tl.col="black")
+
+```
+
+
