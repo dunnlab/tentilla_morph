@@ -123,6 +123,10 @@ In order to gain a broad perspective on the evolutionary history of tentilla, we
   In the non-phylogenetic PCA morphospace using only simple characters (SM\@ref(figure9)), PC1 (aligned with tentillum and tentacle size) explained 69.3% of the variation in the tentillum morphospace, whereas PC2 (aligned with heteroneme length, heteroneme number, and haploneme arrangement) explained 13.5%. In a phylogenetic PCA, 63% of the evolutionary variation in the morphospace is explained by PC1 (aligned with shifts in tentillum size), while 18% is explained by PC2 (aligned with shifts in heteroneme number and involucrum length). 
 
 The siphonophore tentillum morphospace has a fairly low extant dimensionality due to having an evolutionary history with many synchronous, correlated changes. This is consistent with strong phenotypic integration where genetic and developmental correlations are maintained by natural selection to preserve a complex function across the wide variety of morphologies present. Since most tentillum characters develop from a common bud (budding tentilla near the base of the tentacle), structural correlations are expected. Similarly, correlations between the features of different nematocyst subtypes within a species are also expected given their common evolutionary and developmental origin [@bode1988control;@david2008evolution]. However, we also found correlations between nematocyst and tentillum characters. Siphonophore tentacle nematocysts (in their cnidocytes) are not produced nor matured in the developing tentillum. These cnidocytes are produced by dividing cnidoblasts in the basigaster (basal swelling of the gastrozooid). Once the cnidocytes have assembled the nematocyst, they migrate outward along the tentacle [@carre1972study] and position themselves in the tentillum according to their type and size [@skaer1988formation]. Thus, the developmental programs that produce the observed nematocyst morphologies are spatially separated from those producing the tentillum morphologies. Therefore, we hypothesize the genetic correlations and phenotypic integration between tentillum and nematocyst characters are maintained through natural selection on separate regulatory networks, out of the necessity to work together and meet the spatial, mechanical, and functional constraints of their prey capture behavior.
+
+![\label{morphodiet}Phylomorphospace of continuous morphological characters with inapplicable states transformed to zeroes, overlapped with polygons conservatively defining the space occupied by each feeding guild. ](~/tentilla_morph/Organismal_paper/figures/morphospace_diet.png){height=600px}
+
+In order to examine the occupation structure of the morphospace across all siphonophore species in the dataset, we cast a PCA on the data transforming inapplicable states (due to absence of character) to zeroes. This allows us to accommodate species with many missing characters (such as cystonects), and to account for common absences as morphological similarities. In this ordination, PC1 explains 49.99% of variation (aligned with characters of the involucrum, terminal filament, and elastic strands) and PC2 explains 25.65% of variation (aligned with heteroneme number and haploneme length). When superimposing feeding guilds onto the morphospace (Fig. \@ref(morphodiet)), we find that the morphospaces of each feeding guild are barely overlapping in PC1 and PC2. A phylogenetic MANOVA showed that feeding guilds explain 22.09% of the variance in those dimensions, an outcome significantly distinct from the expectation under neutral evolution (p-value = 0.0196). In addition, a morphological disparity analysis accounting for phylogenetic structure shows that the morphospace of fish specialists is significantly broader than that of generalists and other specialists. This is due to the large morphological disparities between cystonects and piscivorous euphysonects. The superimposition of feeding guilds on the morphospace predicts the diet of *Erenna laciniata* to be piscivorous, *Lensia conoidea* and *Gymnopraia lapislazula* to be small crustacean eaters, *Lilyopsis fluoracantha* and *Physophora hydrostatica* to be generalists, and *Marrus claudanielis*, *Physophora gilmeri*, and *Halistemma rubrum* to be large crustacean specialists.
   
 *Functional morphology of tentillum and nematocyst discharge* –  Tentillum and nematocyst discharge high speed measurements are available in the Dryad repository. While the sample sizes of these measurements were insufficient to draw reliable statistical results at a phylogenetic level, we did observe patterns that may be relevant to their functional morphology. For example, cnidoband length is strongly correlated with discharge speed (p value = 0.0002). This is probably the sole driver of the considerable difference between euphysonect and calycophoran tentilla discharge speeds (average discharge speeds: 225.0mm/s and 41.8mm/s respectively; t-test p value = 0.011), since the euphysonects have larger tentilla than the calycophorans among the species recorded.
 
@@ -348,23 +352,20 @@ rownames(Q_sharedmean_logs) = sharedmean_logs$Species
 GC = read.csv("~/tentilla_morph/Supplementary_materials/Dryad/literature_diet_data.tsv", header = T, sep='\t')
 GC$Prey.type = factor(GC$Prey.type, levels=unique(GC$Prey.type))
 GC$Siphonophore.species = as.character(GC$Siphonophore.species)
-#Fix typos#
+          #Fix typos#
 GC$Siphonophore.species[which(GC$Siphonophore.species == "Nanomia bijuga")] <- "Nanomia sp"
 GC$Siphonophore.species[which(GC$Siphonophore.species == "Rhizophysa eyesenhardti")] <- "Rhizophysa eysenhardtii"
 GC$Siphonophore.species[which(GC$Siphonophore.species == "Agalma okeni")] <- "Agalma okenii"
 GC = GC[,1:2]
 names(GC)<-c("species", "character")
 #write.csv(GC, "gutcontentliteraturereview.csv")
-
-#Prune to tree species#
-GC = GC[which(GC$species %in% ultram$tip.label),]
 GC = split(GC,GC$character)
 nrowGC = purrr::map(GC,nrow) %>% as.numeric()
 GC = GC[which(nrowGC>2)]
 GC = purrr::map(GC,unique)
-diet= matrix(ncol=length(GC),nrow=length(unique(sharedmeans$Species))) %>% as.data.frame()
+diet= matrix(ncol=length(GC),nrow=length(unique(castlogs$Species))) %>% as.data.frame()
 names(diet) = names(GC)
-rownames(diet) = unique(sharedmeans$Species)
+rownames(diet) = unique(castlogs$Species)
 for(E in GC){
   print(E$species)
   for(S in E$species){
@@ -375,14 +376,11 @@ diet[is.na(diet)] <- 0
 diet = diet[which(rowSums(diet)>0),which(colSums(diet)<nrow(diet))]
 
 #Add personal observations of the authors
-cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0,0),3),nrow=10, ncol = 3) %>% t() %>% as.data.frame()
+cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0,0,0),3),nrow=11, ncol = 3) %>% t() %>% as.data.frame()
 rownames(cladeB) = c("Erenna richardi", "Erenna sirena", "Stephanomia amphytridis")
-krilleaters = matrix(rep(c(0,0,0,1,0,0,1,0,0,0),4),nrow=10, ncol = 4) %>% t() %>% as.data.frame()
+krilleaters = matrix(rep(c(0,0,0,1,0,0,1,0,0,0,0),4),nrow=11, ncol = 4) %>% t() %>% as.data.frame()
 rownames(krilleaters) = c("Praya dubia", "Resomia ornicephala", "Lychnagalma utricularia", "Bargmannia amoena")
-Gelatinous_diet = rep(0,nrow(diet))
-diet = cbind(diet, Gelatinous_diet)
-names(diet)[ncol(diet)] = "Gelatinous diet"
-gelateaters = matrix(rep(c(0,0,0,0,0,0,0,0,0,1),1),nrow=10, ncol = 1) %>% t() %>% as.data.frame()
+gelateaters = matrix(rep(c(0,0,0,0,0,0,0,0,0,1,0),1),nrow=11, ncol = 1) %>% t() %>% as.data.frame()
 names(gelateaters) = names(diet)
 rownames(gelateaters) = c("Apolemia rubriversa")
 names(gelateaters)=names(diet)
@@ -429,8 +427,20 @@ raw_matrix_notf = Q_sharedmean_logs[,c(1:2,4:20)] %>% .[,c(1:7,12:17)] %>% .[whi
 raw_matrix_NaZeroes = Q_sharedmean_logs[,c(1:2,4:20)]
 raw_matrix_NaZeroes[is.na(raw_matrix_NaZeroes)]<-0
 compound_matrix = Q_sharedmean_logs[which(!is.na(rowSums(Q_sharedmean_logs))),c(3,21:31)]
-fullraw_nozeroes <- aggregate(. ~ Species, data=castlogs[,c(-1,-3)], FUN = mean)
+
+temp <- castlogs[,c(-1,-3)]
+temp[is.na(temp)] <- 0
+fullraw_nozeroes <- aggregate(. ~ Species, data=temp, FUN = mean)
 rownames(fullraw_nozeroes) <- fullraw_nozeroes$Species
+
+
+hypdiet = c("Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Large crustacean", "Mixed", "Mixed", "Mixed", "Large crustacean", "Large crustacean", "Mixed", "Small crustacean", "Large crustacean", "Fish", "Fish", "Fish", "Large crustacean", "Gelatinous", "Fish", "Fish", "Fish")
+names(hypdiet) = dprunedTree$tip.label
+
+#hypdiet but for all species not only those in tree
+hypdiet_full = c("Mixed","Mixed","Gelatinous","Gelatinous","Mixed","Large crustacean","Small crustacean","Small crustacean","Small crustacean","Small crustacean","Fish","Fish","Mixed","Small crustacean","Large crustacean","Small crustacean","Large crustacean","Fish","Large crustacean","Large crustacean","Large crustacean","Fish","Fish","Small crustacean","Small crustacean","Fish","Small crustacean","Small crustacean")
+dpruned_full = fullraw_nozeroes[which(fullraw_nozeroes$Species%in%rownames(diet)),]
+dpruned_full <- data.frame(dpruned_full, "Diet" = hypdiet_full)
 ```
 
 ```{r analyses, eval = FALSE, echo = FALSE}
@@ -766,18 +776,19 @@ for(i in 2:length(traitlist)){
 ```{r newanalyses, echo=F, eval=F}
 ### Morphospace analyses ###
 hypfood <- data.frame(hypdiet, hypdiet, stringsAsFactors = F)
-morphood <- raw_matrix_NaZeroes[which(rownames(raw_matrix_NaZeroes) %in% rownames(hypfood)),]
+#morphood <- raw_matrix_NaZeroes[which(rownames(raw_matrix_NaZeroes) %in% rownames(hypfood)),]
 #morphood <- raw_matrix_notf[which(rownames(raw_matrix_notf) %in% rownames(hypfood)),]
-hypfood <- hypfood[match(rownames(morphood), rownames(hypfood)),]
-morphospace_data <- cbind(morphood, hypfood[,1])
-#morphospace_data = cbind(raw_matrix_NaZeroes, hypfood[match(rownames(raw_matrix_NaZeroes), rownames(hypfood)),1])
+#hypfood <- hypfood[match(rownames(morphood), rownames(hypfood)),]
+#morphospace_data <- cbind(morphood, hypfood[,1])
+morphospace_data = cbind(raw_matrix_NaZeroes, hypfood[match(rownames(raw_matrix_NaZeroes), rownames(hypfood)),1])
 names(morphospace_data)[ncol(morphospace_data)] <- "Diet"
 morphospace_data$Diet <- as.character(morphospace_data$Diet) %>% str_replace_all(" ", "_")
 
 #Test for morphospatial overlap between feeding guilds
 pca_morph <- prcomp(morphospace_data[,-ncol(morphospace_data)])
 autoplot(pca_morph, data = morphospace_data, frame = TRUE, label=T, colour="Diet", loadings = TRUE, loadings.colour = 'black', loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")+theme_bw()
-autoplot(ppp, data = morphospace_data, frame = TRUE, label=T, colour="Diet")+theme_bw()
+autoplot(pca_morph, data = morphospace_data, frame = TRUE, label=T, colour="Diet")+theme_bw()
+phylomorphospace(drop.tip(ultram, which(!(ultram$tip.label %in% rownames(morphospace_data)))), pca_morph$x[,1:2], label="horizontal")
 
 #MANOVA for diet
 LMdata <- cbind(pca_morph$x, morphospace_data$Diet) %>% as.data.frame(stringsAsFactors = F)

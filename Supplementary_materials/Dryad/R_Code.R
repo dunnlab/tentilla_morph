@@ -545,7 +545,7 @@ fitPagel(treeIJ, CH_I, CH_J) %>% .$P
 
 regimetree = dprunedTree
 hypdiet = c("Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Large crustacean", "Mixed", "Mixed", "Mixed", "Large crustacean", "Large crustacean", "Mixed", "Small crustacean", "Large crustacean", "Fish", "Fish", "Fish", "Large crustacean", "Gelatinous", "Fish", "Fish", "Fish")
-names(hypdiet) = regimetree$tip.label
+names(hypdiet) = regimetree$tip.label #Important thing here is that Forskalia tholoides was used as a proxy for Forskalia sp. in Purcell 1981b
 DietAnc = ace(hypdiet, regimetree, type = "discrete")$lik.anc
 HypDietAnc = 1:nrow(DietAnc)
 for(row in 1:nrow(DietAnc)){
