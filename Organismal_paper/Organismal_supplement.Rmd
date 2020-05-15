@@ -8,11 +8,16 @@ output:
 indent: TRUE
 monofont: "Times New Roman"
 fontsize: 12pt
+language:
+  label:
+    fig: "**Figure S**"
+    tab: "**Table S**"
 header-includes:
   - \usepackage[left]{lineno}
   - \linenumbers
   - \usepackage{setspace}
   - \doublespacing
+  - \usepackage{placeins}
 ---
 
 ```{r setup, include=FALSE, echo=FALSE, eval=FALSE}
@@ -35,7 +40,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-#Supplementary Materials## Supplementary Materials {-}
+# Supplementary Materials {-}
+\FloatBarrier
+
 
 ![\label{SIMMAPtentilla} SIMMAP Tentilla presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/tentillaPresenceSIM.png)
 
