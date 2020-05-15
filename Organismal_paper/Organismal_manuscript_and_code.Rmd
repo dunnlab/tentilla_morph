@@ -38,6 +38,7 @@ library(geomorph)
 library(phylopath)
 library(phylolm)
 library(convevol)
+library(surface)
 	## Graphics
 library(FactoMineR)
 library(factoextra)
@@ -75,7 +76,7 @@ Alejandro Damian-Serrano^1^^,‡^, Steven H.D. Haddock^2^, Casey W. Dunn^1^
 
 ## Abstract {-}
 
-Siphonophore tentilla (tentacle side branches) are unique biological structures for prey capture, composed of a complex arrangement of cnidocytes (stinging cells) bearing different types of nematocysts (stinging capsules) and auxiliary structures. Tentilla present an extreme morphological diversity of form and function across species. While associations between tentilla form and diet have been reported, the evolutionary history giving rise to this morphological diversity is largely unexplored. Here we explore the evolutionary gains and losses of novel tentilla substructures on the most recent siphonophore phylogeny. Tentilla have a precisely coordinated high-speed strike mechanism of synchronous unwinding and nematocysts discharge. Here we characterize the kinematic diversity of this prey capture reaction using high-speed video and find relationships with morphological characters. Since tentillum discharge occurs in synchrony across a broad morphological diversity, we evaluate how phenotypic integration is maintaining character correlations across evolutionary time. Moreover, we analyze the dimensionality of the tentillum morphospace, identify instances of heterochrony and morphological convergence, and generate hypotheses on the diets of understudied siphonophore species. Our findings indicate that siphonophore tentilla are phenotypically integrated structures with a complex evolutionary history leading to a phylogenetically structured diversity of forms which are predictive of kinematic performance and feeding habits.
+Siphonophore tentilla (tentacle side branches) are unique biological structures for prey capture, composed of a complex arrangement of cnidocytes (stinging cells) bearing different types of nematocysts (stinging capsules) and auxiliary structures. Tentilla present an exuberant morphological diversity of form and function across species. While associations between tentilla form and diet have been reported, the evolutionary history giving rise to this morphological diversity is largely unexplored. Here we explore the evolutionary gains and losses of novel tentillum substructures and nematocyst types on the most recent siphonophore phylogeny. Tentilla have a precisely coordinated high-speed strike mechanism of synchronous unwinding and nematocysts discharge. Here we characterize the kinematic diversity of this prey capture reaction using high-speed video and find relationships with morphological characters. Since tentillum discharge occurs in synchrony across a broad morphological diversity, we evaluate how phenotypic integration is maintaining character correlations across evolutionary time. Moreover, we analyze the dimensionality of the tentillum morphospace, identify instances of heterochrony and morphological convergence, and generate hypotheses on the diets of understudied siphonophore species. Our findings indicate that siphonophore tentilla are phenotypically integrated structures with a complex evolutionary history leading to a phylogenetically structured diversity of forms which are predictive of kinematic performance and feeding habits.
 
 ## Keywords {-}
 
@@ -83,85 +84,91 @@ Siphonophore, tentilla, nematocysts, character evolution
 
 ## Introduction {-}
 
-Siphonophores have fascinated zoologists for centuries for their extremely subspecialized colonial organization and integration. However, far less attention has been devoted to their unique tentacular structures: the tentilla. Like many cnidarians, siphonophore tentacles bear side branches (tentilla) with nematocysts. But unlike other cnidarians, most siphonophore tentilla are dynamic structures that react to prey encounters by shooting the nematocyst battery to slap around the prey. This maximizes the surface area of contact between the nematocysts and the prey they fire upon. Siphonophore tentilla present an exuberant diversity of morphologies, sizes, and nematocyst complements (Figure 1).
+SSiphonophores have fascinated zoologists for centuries for their extremely subspecialized colonial organization and integration. Today we hold more knowledge than ever on the morphological diversity of this group due to the extensive work of siphonophore taxonomists in the past few decades (cite Phil, Steve, etc), which has been elegantly synthesized in detailed synopsis [@totton1954synopsis, @mapstone2014global]. In addition, recent advances in phylogenetic analyses of siphonophores [@munro2018improved;@damian2019evolution] have provided a macroevolutionary context to interpret this diversity. With these assets in hand, we can now begin to study siphonophores from an orthogonal perspective, focusing on the diversity and evolutionary history of specific structures. Here we focus on one of such structures: the tentilla. Like many cnidarians, siphonophore tentacles bear side branches (tentilla) with nematocysts. But unlike other cnidarians, most siphonophore tentilla are dynamic structures that react to prey encounters by shooting the nematocyst battery to slap around the prey. This maximizes the surface area of contact between the nematocysts and the prey they fire upon. In addition, siphonophore tentilla present a remarkable diversity of morphologies, sizes, and nematocyst complements (Fig, /@ref(figure2)). Our overarching aim is to organize all this phenotypic diversity in a phylogenetic context, and identify the evolutionary processes that generated it.
 
 ![\label{figure2} Tentillum diversity. The illustrations delineate the pedicle (green), involucrum (blue), cnidoband (orange), elastic strands (pink), terminal structures (yellow). Heteroneme nematocysts (stenoteles in C,E,F,G and mastigophores in H,I) are depicted in red for some species. A - *Erenna laciniata*, 10x. B - *Lychnagalma utricularia*, 10x. C - *Agalma elegans*, 10x. D - *Resomia ornicephala*, 10x. E - *Frillagalma vityazi*, 20x. F - *Bargmannia amoena*, 10x. G - *Cordagalma* sp., reproduced from Carré 1968. H - *Lilyopsis fluoracantha*, 20x. I - *Abylopsis tetragona*, 20x.](~/tentilla_morph/Figures_final/figure2.jpg)
 
-In [@damian2019evolution], we collected the most extensive morphological dataset on siphonophore tentilla and nematocysts using state-of-the-art microscopy techniques, and expanded the taxon sampling of the phylogeny to disentangle the evolutionary history. The analyses we carried out led to novel insights into the evolution of predatory specialization. However, this work left behind many fascinating discoveries on the evolutionary history of tentilla morphology, including nematocyst novelties, phenotypic integration, convergent evolution, paedomorphosis, and predictions on diet using morphology. Here, we present these findings and shed light on the natural history of siphonophores.
+In [@damian2019evolution], we collected the most extensive morphological dataset on siphonophore tentilla and nematocysts using state-of-the-art microscopy techniques, and expanded the taxon sampling of the phylogeny to disentangle the evolutionary history. The analyses we carried out led to novel, generalizable insights into the evolution of predatory specialization. The work we present here is complementary to [@damian2019evolution], showcasing a far more detailed account on the evolutionary history of tentilla morphology.
+
+Nematocysts are unique biological weapons for defense and prey capture exclusive to the phylum Cnidaria. Mariscal ([@mariscal1974nematocyst]) reported that hydrozoans have the largest diversity of nematocyst types among cnidarians. Among them, siphonophores present the greatest variety of types [@mapstone2014global], and vary widely across taxa in which and how many types they carry on their tentacles. While recent descriptive studies have expanded and confirmed our understanding of this diversity, the evolutionary history of nematocyst type gain and loss in siphonophores remains unexplored. Thus, here we reconstruct the evolution of shifts, gains, and losses of nematocyst types, subtypes, and other major categorical traits that led to the extant diversity we see in siphonophore tentilla. In [@damian2019evolution], we found strong associations between piscivory and haploneme shape. These associations could have been produced by convergent changes in the adaptive optima of these characters. Here we set out to test this hypothesis using comparative model fitting methods. Analyzing the diversity of morphological states from a phylogenetic perspective allows us to identify the specific evolutionary processes that gave rise to it. Here we fit and compare a variety of macroevolutionary models to siphonophore tentilla morphology measurement data to identify instances of neutral divergence, stabilizing selection, changes in the speed of evolution, convergent evolution, and paedomorphosis (larval characters present in mature colonies).
+
+In [@damian2019evolution] we fitted discriminant analyses to identify characters that are predictive of feeding guild. These discriminant analyses can be used to generate hypotheses on the diets of ecologically understudied siphonophore species for which we have morphology data. Here we present a Bayesian prediction for the feeding guild of 45 species using the morphological dataset in [@damian2019evolution]. As mentioned above, tentilla are far from being ornamental shapes and are in fact violently reactive weapons for prey capture [@Mackie:1987uy;@damian2019evolution]. While we now have detailed characterizations of tentilla morphologies across many species, the diversity of dynamic performances and their relationships to the undischarged morphologies have not been examined to date. To address this gap, we set out to record high-speed video of the *in vivo* discharge dynamics of several siphonophore species at sea, and compare the kinematic attributes to their morphological characters.
 
 ## Methods {-}
 
-We explore the evolutionary history and diversification of tentilla morphologies using phylogenetic comparative methods on the morphological dataset and phylogeny published in [@damian2019evolution].  We fitted different models generating the observed data distribution given the phylogeny for each continuous character using the function fitContinuous in the R package *geiger* [@harmon2007geiger]. These models include a non-phylogenetic whie-noise model (WN), a neutral divergence Brownian Motion model (BM), an early-burst decreasing rate model (EB), and an Ornstein-Uhlenbeck model with stabilizing selection around a fitted optimum trait value. We then ranked the models in order of increasing parametric complexity (WN, BM, EB, OU), and compared the corrected Akaike Information Criterion (AICc) support scores [@sugiura1978further] to the lowest (best) score, using a cutoff of 2 units to determine significantly better support. When the best fitting model was not significantly better than a less complex alternative, we selected the least complex model (SM13). We calculated model adequacy scores using the R package *arbutus* [@pennell2015model] (SM14). We calculated phylogenetic signals in each of the measured characters using Blomberg’s K [@blomberg2003testing] (SM13). 
+All character data and the phylogeny analyzed here were published in [@damian2019evolution]. We log transformed all the continuous characters that did not pass Shapiro-Wilks normality tests, and used the ultrametric constrained Bayesian time tree in all comparative analyses. When missing data was incorporated as inapplicable states, we removed those species with characters that could not be measured due to technical limitations. We used the feeding guild categories detailed in [@damian2019evolution] with one modification: including all *Forskalia* spp. as generalists not only a single *Forskalia* species on the tree after a reinterpretation of the data in [@purcell1981dietary]. In order to characterize the evolutionary history of tentilla morphology, we fitted different models generating the observed data distribution given the phylogeny for each continuous character using the function fitContinuous in the R package *geiger* [@harmon2007geiger]. These models include a non-phylogenetic white-noise model (WN), a neutral divergence Brownian Motion model (BM), an early-burst decreasing rate model (EB), and an Ornstein-Uhlenbeck (OU) model with stabilizing selection around a fitted optimum trait value. In the same way as [@damian2019evolution] we then ordered the models by increasing parametric complexity (WN, BM, EB, OU), and compared their corrected Akaike Information Criterion (AICc) scores [@sugiura1978further]. We used the lowest (best) score using a delta cutoff of 2 units to determine significance relative to the next simplest model (SM10). We calculated model adequacy scores using the R package *arbutus* [@pennell2015model] (SM11). We calculated phylogenetic signals in each of the measured characters using Blomberg’s K [@blomberg2003testing] (SM10). To reconstruct the ancestral character states of nematocyst types and other categorical traits, we use stochastic character mapping (SIMMAP) using the package *phytools* [@revell2012phytools].
 
-In order to explore the correlational structure among continuous characters and among their evolutionary histories, we used principal component analysis (PCA) and phylogenetic PCA [@revell2012phytools]. Since the character dataset contains many gaps due to missing characters and inapplicable states, we carried out these analyses on a subset of species and characters that allowed for the most complete dataset. This was done by removing the terminal filament characters (which are only shared by a small subset of species), and then removing species which had inapplicable states for the remaining characters. In addition, we obtained the correlations between the phylogenetic independent contrasts [@felsenstein1985phylogenies] using the package rphylip [@revell2014rphylip]. 
+In order to examine the phenotypic integration in the tentillum, we explored the correlational structure among continuous characters and among their evolutionary histories using principal component analysis (PCA) and phylogenetic PCA [@revell2012phytools]. Since the character dataset contains many gaps due to missing characters and inapplicable states, we carried out these analyses on a subset of species and characters that allowed for the most complete dataset. This was done by removing the terminal filament characters (which are only shared by a small subset of species), and then removing species which had inapplicable states for the remaining characters (apolemiids and cystonects). In addition, we obtained the correlations between the phylogenetic independent contrasts [@felsenstein1985phylogenies] using the package *rphylip* [@revell2014rphylip]. We identified four hypothetical modules among the tentillum characters: (1) The tentillum scaffold module -- cnidoband length & width, nematocyst row number, pedicle & elastic strand width, tentacle width; (2) the heteroneme module -- heteroneme length & width, shafts length & width; (3) the haploneme module -- length and width; and (4) the terminal filament module -- desmoneme & rhopaloneme length & width. To test an quantify phenotypic integration between these multivariate modules, we used the phylogenetic phenotypic integration test in the package *geomorph* [@adams2016geomorph]. 
+
+When looking at the morphospace of species in different feeding guilds, we also used PCA on the complete tentacular character dataset transforming inapplicable states of absent characters to zeros to account for similarity based on character presence/absence. Using these principal components, we examined the occupation of the morphospace across species in different feeding guilds using a phylogenetic MANOVA with the package *geiger* [@harmon2008geiger] to assess the variation explained, and a morphological disparity test with the package *geomorph* [@adams2016geomorph] to assess differences in the extent occupied by each guild. 
+
+In order to detect and evaluate instances of convergent evolution, we used the package SURFACE [@ingram2013surface]. This tool identifies OU regimes and their optima given a tree and character data, and then evaluates where the same regime has appeared independently in different lineages. We applied these analyses to the haploneme nematocyst length and width characters as well as to the most complete dataset without inapplicable character states.
+
+In order to generate hypotheses on the diets of siphonophores using tentilla morphology, we used the discriminant analyses of principal components (DAPC) trained in [@damian2019evolution] using the package *adegenet* [@jombart2008adegenet] to predict the feeding guilds of species in the dataset for which there are no published feeding observations.
+
+In order to observe the discharge behavior of different tentilla, we recorded high speed footage (1000-3000 fps) of tentillum and nematocyst discharge by live siphonophore specimens (26 species) using a Phantom Miro 320S camera mounted on a stereoscopic microscope. We mechanically elicited tentillum and nematocyst discharge using a fine metallic pin. We used the Phantom PCC software to analyze the footage. For the 10 species recorded, we measured total cnidoband discharge time (ms), heteroneme filament length (μm), and discharge speeds (mm/s) for cnidoband, heteronemes, haplonemes, and heteroneme shafts when possible (data available in the Dryad repository).
+
 
 ## Results {-}
 
-![\label{figure3} Heatmap summarizing the morphological diversity measured in Damian-Serrano *et al.* 2020 for 96 species of siphonophores clustered by similarity (raw data in Dryad repository). Missing values from absent characters presented as dark grey cells, missing values produced from technical difficulties presented as white cells. Values scaled by character.](~/tentilla_morph/Figures_final/figure3.jpg)
+![\label{figure3} Heatmap summarizing the morphological diversity measured in Damian-Serrano *et al.* 2020 for 96 species of siphonophores clustered by similarity (raw data published in Damian-Serrano 2020). Missing values from absent characters presented as dark grey cells, missing values produced from technical difficulties presented as white cells. Values scaled by character. ](~/tentilla_morph/Figures_final/figure3.jpg)
 
-*Evolutionary history of tentillum morphology* – [@damian2019evolution] produced the most speciose siphonophore molecular phylogeny to date, while incorporating the most recent findings in siphonophore deep node relationships. This phylogeny revealed for the first time that the genus *Erenna* is the sister to *Stephanomia amphytridis*. *Erenna* and *Stephanomia* bear the largest tentilla among all siphonophores, thus their monophyly indicates that there was a single evolutionary transition to giant tentilla. Siphonophore tentilla range in size from ~30 µm in some *Cordagalma* specimens to 2-4 cm in *Erenna* species, and up to 8 cm in *Stephanomia amphytridis* [@pugh2014review]. Most siphonophore tentilla measure between 175 and 1007 µm (1st and 3rd quartiles), with a median of 373 µm. The extreme gain of tentillum size in this newly found clade may have important implications for access to large prey size classes.
+*Evolutionary history of tentillum morphology* – In [@damian2019evolution], we produced the most speciose siphonophore molecular phylogeny to date, while incorporating the most recent findings in siphonophore deep node relationships. This phylogeny revealed for the first time that the genus *Erenna* is the sister to *Stephanomia amphytridis*. *Erenna* and *Stephanomia* bear the largest tentilla among all siphonophores, thus their monophyly indicates that there was a single evolutionary transition to giant tentilla. Siphonophore tentilla range in size from ~30 µm in some *Cordagalma* specimens to 2-4 cm in *Erenna* species, and up to 8 cm in *Stephanomia amphytridis* [@pugh2014review]. Most siphonophore tentilla measure between 175 and 1007 µm (1st and 3rd quartiles), with a median of 373 µm. The extreme gain of tentillum size in this newly found clade may have important implications for access to large prey size classes such as adult deep-sea fishes.
 
-  Siphonophore tentilla are defined as lateral, monostichous evaginations of the tentacle gastrovascular lumen with epidermal nematocysts [@totton1965synopsis]. The buttons on *Physalia* tentacles were not traditionally regarded as tentilla, but [@bardi2007taxonomic] and our observations [@munro2018improved], confirm that the buttons contain evaginations of the gastrovascular lumen, thus satisfying all the criteria for the definition. In this light, and given that most Cystonectae bear conspicuous tentilla, we conclude (in agreement with [@munro2018improved]) that tentilla are likely ancestral to all siphonophores, and secondarily lost in *Apolemia* and *Bathyphysa conifera*.
+  Siphonophore tentilla are defined as lateral, monostichous evaginations of the tentacle gastrovascular lumen with epidermal nematocysts [@totton1965synopsis]. The buttons on *Physalia* tentacles were not traditionally regarded as tentilla, but [@bardi2007taxonomic] and our observations [@munro2018improved], confirm that the buttons contain evaginations of the gastrovascular lumen, thus satisfying all the criteria for the definition. In this light, and given that most Cystonectae bear conspicuous tentilla, we conclude (in agreement with [@munro2018improved] and [@damian2019evolution]) that tentilla are likely ancestral to all siphonophores, and secondarily lost twice, once in *Apolemia* and again in *Bathyphysa conifera*.
 
-In order to gain a broad perspective on the evolutionary history of tentilla, we reconstructed the phylogenetic positions of the main categorical character shifts using stochastic character mapping (SM22-30) and summarized in \@ref(figure7). Some of these characters include the gain and loss of nematocyst types. Based on external information, we assume that haploneme nematocysts are ancestrally present in siphonophore tentacles since they are present in the tentacles of many other hydrozoans. Haplonemes first diverged into spherical isorhizas of 2 size classes in Cystonectae, and elongated anisorhizas of one size class in Codonophora. Haplonemes were likely lost in the tentacles of *Apolemia* but retained as spherical isorhizas in other *Apolemia* tissues [@siebert2013re]. Similarly, while heteronemes exist in other tissues of cystonects, they appear in the tentacles of codonophorans exclusively, as birhopaloids in *Apolemia*, stenoteles in eucladophoran physonects, and microbasic mastigophores in calycophorans. 
+  In order to gain a broad perspective on the evolutionary history of tentilla, we reconstructed the phylogenetic positions of the main categorical character shifts using stochastic character mapping (SM1-9) and summarized in (Fig. \@ref(figure7)). Some of these characters include the gain and loss of nematocyst types. Based on external information, we assume that haploneme nematocysts are ancestrally present in siphonophore tentacles since they are present in the tentacles of many other hydrozoans [@mariscal1974nematocysts]. Haplonemes first diverged into spherical isorhizas of 2 size classes in Cystonectae, and elongated anisorhizas of one size class in Codonophora. Haplonemes were likely lost in the tentacles of *Apolemia* but retained as spherical isorhizas in other *Apolemia* tissues [@siebert2013re]. Similarly, while heteronemes exist in other tissues of cystonects, they appear in the tentacles of codonophorans exclusively, as birhopaloids in *Apolemia*, stenoteles in eucladophoran physonects, and microbasic mastigophores in calycophorans.  
   
-  The clades defined in [@damian2019evolution] are characterized by unique evolutionary innovations in their tentilla. The clade Eucladophora (containing Pyrostephidae, Euphysonectae, and Calycophorae) encompasses all of the extant Siphonophore species (178 of 186) except Cystonects and *Apolemia*. Innovations that arose along the stem of this group include spatially segregated heteroneme and haploneme nematocysts, terminal filaments, and elastic strands (Fig. \@ref(figure7)). Pyrostephids evolved a unique bifurcation of the axial gastrovascular canal of the tentillum known as the "saccus" [@totton1965synopsis]. The stem to the clade Tendiculophora (clade containing Euphysonectae and Calycophorae) subsequently acquired further novelties such as the desmoneme and rhopaloneme (acrophore subtype ancestral) nematocysts on the terminal filament (Fig. \@ref(figure7)), which bears no other nematocyst type. These are arranged in sets of 2 parallel rhopalonemes for each single desmoneme [@skaer1988formation;@skaer1991remodelling]. The involucrum is an expansion of the epidermal layer that can cover part or all of the cnidoband (Fig. \@ref(figure2)). This structure, together with differentiated larval tentilla, appeared in the stem branch to Clade A physonects. Calycophorans evolved novelties such as larger desmonemes at the distal end of the cnidoband, pleated pedicles with a “hood” (here considered homologous to the involucrum) at the proximal end of the tentillum, anacrophore rhopalonemes, and microbasic mastigophore-type heteronemes. While calycophorans have diversified into most of the extant described siphonophore species (108 of 186), their tentilla have not undergone any major categorical gains or losses since their most recent common ancestor. Nonetheless, they have evolved a wide variation in nematocyst and cnidoband sizes.
+  The clades defined in [@damian2019evolution] are characterized by unique evolutionary innovations in their tentilla. The clade Eucladophora (containing Pyrostephidae, Euphysonectae, and Calycophorae) encompasses all of the extant Siphonophore species (178 of 186) except Cystonects and *Apolemia*. Innovations that arose along the stem of this group include spatially segregated heteroneme and haploneme nematocysts, terminal filaments, and elastic strands (Fig. \@ref(figure7)). Pyrostephids evolved a unique bifurcation of the axial gastrovascular canal of the tentillum known as the "saccus" [@totton1965synopsis]. The stem to the clade Tendiculophora (clade containing Euphysonectae and Calycophorae) subsequently acquired further novelties such as the desmoneme and rhopaloneme (acrophore subtype ancestral) nematocysts on the terminal filament (Fig. \@ref(figure7)), which bears no other nematocyst type. These are arranged in sets of 2 parallel rhopalonemes for each single desmoneme [@skaer1988formation;@skaer1991remodelling]. The involucrum is an expansion of the epidermal layer that can cover part or all of the cnidoband (Fig. \@ref(figure2)). This structure, together with differentiated larval tentilla, appeared in the stem branch to Clade A physonects. Calycophorans evolved novelties such as larger desmonemes at the distal end of the cnidoband, pleated pedicles with a “hood” (here considered homologous to the involucrum) at the proximal end of the tentillum, anacrophore rhopalonemes, and microbasic mastigophore-type heteronemes. While calycophorans have diversified into most of the extant described siphonophore species (108 of 186), their tentilla have not undergone any major categorical gains or losses since their most recent common ancestor. Nonetheless, they have evolved a wide variation in nematocyst and cnidoband sizes. Ancestrally (and retained in most prayomorphs and hippopodids), the calycophoran tentillum is recurved where the proximal and distal ends of the cnidoband are close together. Diphyomorph tentilla are slightly different in shape, with straighter cnidobands.
 
-![\label{figure7} Siphonophore cladogram with the main categorical character gains (green) and losses (red) mapped. Some branch lengths were modified from the Bayesian chronogram to improve readability. The main visually distinguishable tentillum types are sketched next to the species that bear them, showing the location and arrangement of the main characters. In large, complex-shaped euphysonect tentilla, haplonemes were omitted for simplification. The rhizophysid *Bathyphysa conifera* branch was appended manually as a polytomy (dashed line).](~/tentilla_morph/Figures_final/figure7.jpg)
+![\label{figure7} Siphonophore cladogram with the main categorical character gains (green) and losses (red) mapped. Some branch lengths were modified from the Bayesian chronogram to improve readability. The main visually distinguishable tentillum types are sketched next to the species that bear them, showing the location and arrangement of the main characters. In large, complex-shaped euphysonect tentilla, haplonemes were omitted for simplification. The hypothesized phylogenetic placement of the rhizophysid *Bathyphysa conifera* branch was appended manually as a polytomy (dashed line).](~/tentilla_morph/Figures_final/figure7.jpg)
   
-*Evolution of tentillum and nematocyst characters* – One-third of the characters measured in [@damian2019evolution] support a non-phylogenetic generative model, indicating they are not phylogenetically conserved (SM\@ref(ModelSupport)). Most (74%) characters present a significant phylogenetic signal, yet only total nematocyst volume, haploneme length, and heteroneme-to-cnidoband length ratio had a phylogenetic signal with K larger than 1. Total nematocyst volume and cnidoband-to-heteroneme length ratio showed strongly conserved phylogenetic signals. The majority (67%) of characters support BM models, indicating a history of neutral constant divergence. No relationship between phylogenetic signal and BM model support was found. Haploneme nematocyst length is the only character with support for an EB model of decreasing rate of evolution with time. No character had support for a single-optimum OU model (when uninformed by feeding guild regime priors).
+*Evolution of tentillum and nematocyst characters* – One-third of the characters measured in [@damian2019evolution] support a non-phylogenetic generative model, indicating they are not phylogenetically conserved (SM10). Most (74%) characters present a significant phylogenetic signal, yet only total nematocyst volume, haploneme length, and heteroneme-to-cnidoband length ratio had a phylogenetic signal with K larger than 1. Total nematocyst volume and cnidoband-to-heteroneme length ratio showed strongly conserved phylogenetic signals. The majority (67%) of characters support BM models, indicating a history of neutral constant divergence. We did not find any relationship between phylogenetic signal and BM model support. Haploneme nematocyst length was the only character with support for an EB model of decreasing rate of evolution with time. No character had support for a single-optimum OU model (when notinformed by feeding guild regime priors).
 
 ![\label{figure8} A. Correlogram showing strength of ordinary (upper triangle) and phylogenetic (lower triangle) correlations between characters. Both size and color of the circles indicate the strength of the correlation (R^2^). B. Scatterplot of phylogenetic correlation against ordinary correlation showing a strong linear relationship (R^2^ = 0.92, 95% confidence between 0.90 and 0.93). Light red and blue boxes indicate congruent negative and positive correlations respectively. Darker red and blue boxes indicate strong (<-0.5 or >0.5) negative and positive correlation coefficients respectively.](~/tentilla_morph/Figures_final/figure8.jpg){height=600px}
-*Evolution of nematocyst shape* – The greatest evolutionary change in haploneme nematocyst shape occurred in a single shift towards elongation in the stem of Tendiculophora, which contains the majority of described siphonophore species other than Cystonects, *Apolemia*, and Pyrostephidae. There is one secondary return to more oval, less elongated haplonemes in *Erenna*, but it does not reach the sphericity present in Cystonectae or Pyrostephidae (Fig. \@ref(figure10)). Heteroneme evolution presents a less discrete evolutionary history, where Tendiculophora evolved more elongate heteronemes, but the difference between theirs and other siphonophores is much smaller than the variation in shape within Tendiculophora, bearing no phylogenetic signal. In this clade, the evolution of heteroneme shape has diverged in both directions, and there is no correlation with haploneme shape (Fig. \@ref(figure10)), which has remained fairly constant (elongation between 1.5 and 2.5).  
 
-![\label{figure10} Phylomorphospace showing haploneme and heteroneme elongation (log scaled). Orange area delimits rod-shaped haplonemes, the blue area covers oval and round-shaped haplonemes. Smaller dots and lines represent phylogenetic relationships and ancestral states of internal nodes under BM. Species nodes in red lack either haplonemes or heteronemes, and their values are projected onto the axis of the nematocyst type they bear. Cystonects have no tentacle heteronemes and are projected onto the haploneme axis. Apolemiids have no tentacle haplonemes and are projected onto the heteroneme axis. ](~/tentilla_morph/Figures_final/figure10.jpg)
+*Evolution of nematocyst shape* – The greatest evolutionary change in haploneme nematocyst shape occurred in a single shift towards elongation in the stem of Tendiculophora, which contains the majority of described siphonophore species other than Cystonects, *Apolemia*, and Pyrostephidae. There is one secondary return to more oval, less elongated haplonemes in *Erenna*, but it does not reach the sphericity present in Cystonectae or Pyrostephidae (Fig. \@ref(figure10)). Heteroneme evolution presents a less discrete evolutionary history, where Tendiculophora evolved more elongate heteronemes, but the difference between theirs and other siphonophores is much smaller than the variation in shape within Tendiculophora, bearing no phylogenetic signal. In this clade, the evolution of heteroneme shape has diverged in both directions, and there is no correlation with haploneme shape (Fig. \@ref(figure10)), which has remained fairly constant (elongation between 1.5 and 2.5). Haploneme and heteroneme shape share 21% of their variance across extant values, and 53% of the variance in their shifts along the branches of the phylogeny. However, much of this correlation is due to the sharp contrast between Pyrostephidae and their sister group Tendiculophora. We searched for regime shifts in the evolution of haploneme nematocyst shape characters using a SURFACE [@ingram2013surface].  SURFACE identified seven distinct OU regimes in the evolutionary history of haploneme length and width (Fig. \@ref(surface)A). The different regimes are located (1) in cystonects, (2) in pyrostephids, (7) in apolemiids, (9) in *Erenna*, (6) in *Stephanomia*, (3) in most of Tendiculophora, (5) in *Cordagalma ordinatum*, (4) in most diphyomorphs, and (8) in *Abylopsis tetragona* and *Diphyes dispar*.
 
-*Phenotypic integration of the tentillum* – Of the phylogenetic correlations (SM\@ref(figure8)a, lower triangle), 81.3% were positive and 18.7% were negative, while of the ordinary correlations (SM\@ref(figure8)a, upper triangle) 74.6% were positive and 25.4% were negative. Half (49.9%) of phylogenetic correlations were >0.5, while only 3.6% are < -0.5. Similarly, of the across-species correlations, 49.1% were >0.5 and only 1.5% were < -0.5. We found that 13.9% of character pairs had opposing phylogenetic and ordinary correlation coefficients. Just 4% have negative phylogenetic and positive ordinary correlations (such as rhopaloneme elongation ~ heteroneme-to-cnidoband length ratio and haploneme elongation, or haploneme elongation ~ heteroneme number), and only 9.9% of character pairs had positive phylogenetic correlation yet negative ordinary correlation (such as heteroneme elongation ~ cnidoband convolution and involucrum length, or rhopaloneme elongation with cnidoband length). These disparities can be caused by Simpson’s paradox [@blyth1972simpson]: the reversal of the sign of a relationship when a third variable (or a phylogenetic topology [@uyeda2018rethinking]) is considered. However, no character pair had correlation coefficient differences larger than 0.64 between ordinary and phylogenetic correlations (heteroneme shaft extension ~ rhopaloneme elongation has a Pearson’s correlation of 0.10 and a phylogenetic correlation of  -0.54). Rhopaloneme elongation shows the most incongruencies between phylogenetic and ordinary correlations with other characters.
+![\label{figure10} Phylomorphospace showing haploneme and heteroneme elongation (log scaled). Orange area delimits rod-shaped haplonemes, the blue area covers oval and round-shaped haplonemes. Smaller dots and lines represent phylogenetic relationships and ancestral states of internal nodes under BM. Species nodes in red lack either haplonemes or heteronemes, and their values are projected onto the axis of the nematocyst type they bear. Cystonects have no tentacle heteronemes and are projected onto the haploneme axis. Apolemiids have no tentacle haplonemes and are projected onto the heteroneme axis. ](~/tentilla_morph/Figures_final/figure10-01-01.jpg)
+
+*Phenotypic integration of the tentillum* – Phenotypically integrated structures maintain evolutionary correlations between its constituent characters. Of the phylogenetic correlations (Fig. \@ref(figure8)a, lower triangle), 81.3% were positive and 18.7% were negative, while of the ordinary correlations (Fig. \@ref(figure8)a, upper triangle) 74.6% were positive and 25.4% were negative. Half (49.9%) of phylogenetic correlations were >0.5, while only 3.6% are < -0.5. Similarly, among the correlations across extant species, 49.1% were >0.5 and only 1.5% were < -0.5. In addition, we found that 13.9% of character pairs had opposing phylogenetic and ordinary correlation coefficients. Just 4% have negative phylogenetic and positive ordinary correlations (such as rhopaloneme elongation ~ heteroneme-to-cnidoband length ratio and haploneme elongation, or haploneme elongation ~ heteroneme number), and only 9.9% of character pairs had positive phylogenetic correlation yet negative ordinary correlation (such as heteroneme elongation ~ cnidoband convolution and involucrum length, or rhopaloneme elongation with cnidoband length). These disparities could be explained by Simpson’s paradox [@blyth1972simpson]: the reversal of the sign of a relationship when a third variable (or a phylogenetic topology [@uyeda2018rethinking]) is considered. However, no character pair had correlation coefficient differences larger than 0.64 between ordinary and phylogenetic correlations (heteroneme shaft extension ~ rhopaloneme elongation has a Pearson’s correlation of 0.10 and a phylogenetic correlation of  -0.54). Rhopaloneme elongation shows the most incongruencies between phylogenetic and ordinary correlations with other characters. The phenotypic integration test showed significant integration signal between all modules, tentillum and haploneme modules sharing the greatest regression coefficient (SM12).
 
 ![\label{figure9} Phylomorphospace of the simple continuous characters principal components, excluding ratios and composite characters. A. Variance explained by each variable in the PC1-PC2 plane. Axis labels include the phylogenetic signal (K) for each component and p-value. B. Phylogenetic relationships between the species points distributed in that same space.](~/tentilla_morph/Figures_final/figure9.jpg){height=600px}
 
-  In the non-phylogenetic PCA morphospace using only simple characters (SM\@ref(figure9)), PC1 (aligned with tentillum and tentacle size) explained 69.3% of the variation in the tentillum morphospace, whereas PC2 (aligned with heteroneme length, heteroneme number, and haploneme arrangement) explained 13.5%. In a phylogenetic PCA, 63% of the evolutionary variation in the morphospace is explained by PC1 (aligned with shifts in tentillum size), while 18% is explained by PC2 (aligned with shifts in heteroneme number and involucrum length). 
+  In the non-phylogenetic PCA morphospace using only simple characters (Fig. \@ref(figure9)), PC1 (aligned with tentillum and tentacle size) explained 69.3% of the variation in the tentillum morphospace, whereas PC2 (aligned with heteroneme length, heteroneme number, and haploneme arrangement) explained 13.5%. In a phylogenetic PCA, 63% of the evolutionary variation in the morphospace is explained by PC1 (aligned with shifts in tentillum size), while 18% is explained by PC2 (aligned with shifts in heteroneme number and involucrum length). 
 
-The siphonophore tentillum morphospace has a fairly low extant dimensionality due to having an evolutionary history with many synchronous, correlated changes. This is consistent with strong phenotypic integration where genetic and developmental correlations are maintained by natural selection to preserve a complex function across the wide variety of morphologies present. Since most tentillum characters develop from a common bud (budding tentilla near the base of the tentacle), structural correlations are expected. Similarly, correlations between the features of different nematocyst subtypes within a species are also expected given their common evolutionary and developmental origin [@bode1988control;@david2008evolution]. However, we also found correlations between nematocyst and tentillum characters. Siphonophore tentacle nematocysts (in their cnidocytes) are not produced nor matured in the developing tentillum. These cnidocytes are produced by dividing cnidoblasts in the basigaster (basal swelling of the gastrozooid). Once the cnidocytes have assembled the nematocyst, they migrate outward along the tentacle [@carre1972study] and position themselves in the tentillum according to their type and size [@skaer1988formation]. Thus, the developmental programs that produce the observed nematocyst morphologies are spatially separated from those producing the tentillum morphologies. Therefore, we hypothesize the genetic correlations and phenotypic integration between tentillum and nematocyst characters are maintained through natural selection on separate regulatory networks, out of the necessity to work together and meet the spatial, mechanical, and functional constraints of their prey capture behavior.
+![\label{morphodiet}Phylomorphospace showing PC1 and PC2 from a PCA of continuous morphological characters with inapplicable states transformed to zeroes, overlapped with polygons conservatively defining the space occupied by each feeding guild. Lines between species coordinates show the phylogenetic relationships between them. ](~/tentilla_morph/Organismal_paper/figures/morphospace_diets_full.png){height=600px}
 
-![\label{morphodiet}Phylomorphospace of continuous morphological characters with inapplicable states transformed to zeroes, overlapped with polygons conservatively defining the space occupied by each feeding guild. ](~/tentilla_morph/Organismal_paper/figures/morphospace_diet.png){height=600px}
+*Morphospace occupation* – In order to examine the occupation structure of the morphospace across all siphonophore species in the dataset, we cast a PCA on the data after transforming inapplicable states (due to absence of character) to zeroes. This allows us to accommodate species with many missing characters (such as cystonects or apolemiids), and to account for common absences as morphological similarities. In this ordination, PC1 explains 47.45% of variation (aligned with cnidoband size) and PC2 explains 16.73% of variation (aligned with heteroneme volume and involucrum). When superimposing feeding guilds onto the morphospace (Fig. \@ref(morphodiet)), we find that the morphospaces of each feeding guild are only slightly overlapping in PC1 and PC2. A phylogenetic MANOVA showed that feeding guilds explain 27.63% of variance across extant species (p value < 0.000001), and 20.97% of the variance in the tree species accounting for phylogeny, an outcome significantly distinct from the expectation under neutral evolution (p-value = 0.0196). In addition, a morphological disparity analysis accounting for phylogenetic structure shows that the morphospace of fish specialists is significantly broader than that of generalists and other specialists. This is due to the large morphological disparities between cystonects and piscivorous euphysonects. There are no significant differences among the morphospace disparities of the other feeding guilds.
 
-In order to examine the occupation structure of the morphospace across all siphonophore species in the dataset, we cast a PCA on the data transforming inapplicable states (due to absence of character) to zeroes. This allows us to accommodate species with many missing characters (such as cystonects), and to account for common absences as morphological similarities. In this ordination, PC1 explains 49.99% of variation (aligned with characters of the involucrum, terminal filament, and elastic strands) and PC2 explains 25.65% of variation (aligned with heteroneme number and haploneme length). When superimposing feeding guilds onto the morphospace (Fig. \@ref(morphodiet)), we find that the morphospaces of each feeding guild are barely overlapping in PC1 and PC2. A phylogenetic MANOVA showed that feeding guilds explain 22.09% of the variance in those dimensions, an outcome significantly distinct from the expectation under neutral evolution (p-value = 0.0196). In addition, a morphological disparity analysis accounting for phylogenetic structure shows that the morphospace of fish specialists is significantly broader than that of generalists and other specialists. This is due to the large morphological disparities between cystonects and piscivorous euphysonects. The superimposition of feeding guilds on the morphospace predicts the diet of *Erenna laciniata* to be piscivorous, *Lensia conoidea* and *Gymnopraia lapislazula* to be small crustacean eaters, *Lilyopsis fluoracantha* and *Physophora hydrostatica* to be generalists, and *Marrus claudanielis*, *Physophora gilmeri*, and *Halistemma rubrum* to be large crustacean specialists.
+![\label{surface} SURFACE plots showing convergent evolutionary regimes modelled under OU for (A) haploneme nematocyst length & width, and (B) for PC1 & 2 of all continuous characters with the exception of terminal filament nematocysts, and removing taxa with inapplicable character states. Node numbers on the tree label different regimes, regimes of the same color are identified as convergent. Small circles on the scatterplots indicate species values, large circles indicate the average position of the OU optima (*theta*) for a given combination of convergent regimes.](~/tentilla_morph/Organismal_paper/figures/SURFACE-01.jpg){height=700px}
+
+*Convergent evolution* – Convergence is a widespread evolutionary phenomenon where distantly related clades independently evolve similar phenotypes. Using the package SURFACE [@ingram2013surface], we identified convergence in haploneme nematocyst shape and in morphospace position. In [@damian2019evolution], we identified haploneme nematocyst shape as one of the traits associated with the convergent evolution of piscivory. Here we find that indeed wider haploneme nematocysts have convergently evolved in the piscivore cytonects and *Erenna* spp. (Fig. \@ref(surface)A). Extremely narrow haplonemes have also evolved convergently in *Cordagalma ordinatum* and copepod specialist calycophorans such as *Sphaeronectes koellikeri*. When integrating many traits into a couple principal components, we find two distinct convergences between euphysonects and calycophorans with a reduced prey capture apparatus. Those convergences are between *Frillagalma vityazi* and calycophorans, and once again between *Cordagalma ordinatum* and *Spaheronectes koellikeri* (Fig. \@ref(surface)B).
   
-*Functional morphology of tentillum and nematocyst discharge* –  Tentillum and nematocyst discharge high speed measurements are available in the Dryad repository. While the sample sizes of these measurements were insufficient to draw reliable statistical results at a phylogenetic level, we did observe patterns that may be relevant to their functional morphology. For example, cnidoband length is strongly correlated with discharge speed (p value = 0.0002). This is probably the sole driver of the considerable difference between euphysonect and calycophoran tentilla discharge speeds (average discharge speeds: 225.0mm/s and 41.8mm/s respectively; t-test p value = 0.011), since the euphysonects have larger tentilla than the calycophorans among the species recorded.
+*Functional morphology of tentillum and nematocyst discharge* –  Tentillum and nematocyst discharge high speed measurements are available in the Dryad repository. While the sample sizes of these measurements were insufficient to draw reliable statistical results at a phylogenetic level, we did observe patterns that may be relevant to their functional morphology. For example, cnidoband length is strongly correlated with discharge speed (p value = 0.0002). This is probably the sole driver of the considerable difference between euphysonect and calycophoran tentilla discharge speeds (average discharge speeds: 225.0mm/s and 41.8mm/s respectively; t-test p value = 0.011), since the euphysonects have larger tentilla than the calycophorans among the species recorded. In addition, we observed that calycophoran haploneme tubules fire faster than those of euphysonects (T-test p value = 0.001). Haploneme nematocysts discharge 2.8x faster than heteroneme nematocysts (T-test p value = 0.0012). Finally, we observed that the stenoteles of the Euphysonectae discharge a helical filament that “drills” itself through the medium it penetrates as it everts.
 
-  We also observed that calycophoran haploneme tubules fire faster than those of euphysonects (T-test p value = 0.001). Haploneme nematocysts discharge 2.8x faster than heteroneme nematocysts (T-test p value = 0.0012). Finally, we observed that the stenoteles of the Euphysonectae discharge a helical filament that “drills” itself through the medium it penetrates as it everts.
-
-*Generating dietary hypotheses using tentillum morphology* – For many siphonophore species, no feeding observations have yet been published. We generated hypotheses about the diets of these understudied siphonophores based on their known tentacle morphology and the associations between morphology and diet reported here for other species using the linear discriminant analysis of principal components (DAPC) fitted in [@damian2019evolution]. This provides concrete predictions to be tested in future work and helps extrapolate our findings to many poorly known species that are extremely difficult to collect and observe.
-The discriminant analysis in [@damian2019evolution] for feeding guild (7 principal components, 4 discriminants) produced 100% discrimination, and the highest loading contributions were found for the characters (ordered from highest to lowest): Involucrum length, heteroneme volume, heteroneme number, total heteroneme volume, tentacle width, heteroneme length, total nematocyst volume, and heteroneme width. We used the predictions from this discriminant function to generate hypotheses about the feeding guild of 45 species in the morphological dataset. This extrapolation predicts that two other *Apolemia* species are gelatinous prey specialists like *Apolemia rubriversa*, and predicts that *Erenna laciniata*is a fish specialist like *Erenna richardi*. When predicting soft- and hard-bodied prey specialization, the DAPC achieved 90.9% discrimination success, only marginally confounding hard-bodied specialists with generalists (SM\@ref(DAPCsofthard)). The main characters driving this discrimination are involucrum length, heteroneme number, heteroneme volume, tentacle width, total nematocyst volume, total haploneme volume, elastic strand width, and heteroneme length. We only selected prey types with sufficient variation in the data to carry out these analyses (copepods, fish, and large crustaceans). While the presence of fish or large crustaceans in the diet cannot be unambiguously discriminated using tentillum morphology (SM\@ref(DAPCfish),SM\@ref(DAPCcrustacean)), specialization on fish or large crustacean prey can be fully disentangled (SM\@ref(DPACguilds)).
+*Generating dietary hypotheses using tentillum morphology* – For many siphonophore species, no feeding observations have yet been published. To help bridge this gap of knowledge, we generated hypotheses about the diets of these understudied siphonophores based on their known tentacle morphology using one the linear discriminant analyses of principal components (DAPC) fitted in [@damian2019evolution]. This provides concrete predictions to be tested in future work and helps extrapolate our findings to many poorly known species that are extremely difficult to collect and observe. The discriminant analysis for feeding guild (7 principal components, 4 discriminants) produced 100% discrimination, and the highest loading contributions were found for the characters (ordered from highest to lowest): Involucrum length, heteroneme volume, heteroneme number, total heteroneme volume, tentacle width, heteroneme length, total nematocyst volume, and heteroneme width. We used the predictions from this discriminant function to generate hypotheses about the feeding guild of 45 species in the morphological dataset. This extrapolation predicts that two other *Apolemia* species are gelatinous prey specialists like *Apolemia rubriversa*, and predicts that *Erenna laciniata*is a fish specialist like *Erenna richardi*. When predicting soft- and hard-bodied prey specialization, the DAPC achieved 90.9% discrimination success, only marginally confounding hard-bodied specialists with generalists (SM13). The main characters driving this discrimination are involucrum length, heteroneme number, heteroneme volume, tentacle width, total nematocyst volume, total haploneme volume, elastic strand width, and heteroneme length. 
   
   ![\label{figure6} Hypothetical feeding guilds for siphonophore species predicted by a 6 PCA DAPC. Cell darkness indicates the posterior probability of belonging to each guild. Training data set transformed so inapplicable states are computed as zeroes. Species ordered and colored according to their predicted feeding guild.](~/tentilla_morph/Figures_final/figure6.jpg)
   
 ## Discussion {-}
 
-*On the evolution of tentilla morphology* -- The evolutionary rate covariance results in [@damian2019evolution] indicate that tentilla are not only phenotypically integrated but also show patterns of evolutionary modularity, where different sets of characters appear to evolve in stronger correlations among each other than with other characters [@wagner1996homologues]. This may be indicative of the underlying genetic and developmental dependencies among closely homologous nematocyst types (such as desmonemes and rhopalonemes) and structures. In addition, these evolutionary modules point to hypothetical functional modules. For example, the coiling degree of the cnidoband and the extent of the involucrum have correlated rates of evolution, while high-speed videos (pers. obs.) show that the involucrum helps direct the whiplash of the uncoiling cnidoband distally (towards the prey).
-The clade Tendiculophora contains far more species than its relatives Cystonectae, Apolemiidae, and Pyrostephidae. An increase in clade richness and ecological diversification can be triggered by a ‘key innovation’ [@simpson1955major]. The evolutionary innovation of the Tendiculophora tentilla with shooting cnidobands and modular regions may have facilitated further dietary diversification.
+*On the evolution of tentilla morphology* -- *On the evolution of tentilla morphology* -- The evolutionary rate covariance results in [@damian2019evolution] indicate that tentilla are not only phenotypically integrated but also show patterns of evolutionary modularity, where different sets of characters appear to evolve in stronger correlations among each other than with other characters [@wagner1996homologues]. This may be indicative of the underlying genetic and developmental dependencies among closely homologous nematocyst types (such as desmonemes and rhopalonemes) and structures. The rate covariance results are congruent with the evolutionary correlations we found (Fig. /ref(figure8)). In addition, these evolutionary modules point to hypothetical functional modules. For example, the coiling degree of the cnidoband and the extent of the involucrum have correlated rates of evolution, while high-speed videos (pers. obs.) show that the involucrum helps direct the whiplash of the uncoiling cnidoband distally (towards the prey). The clade Tendiculophora contains far more species than its relatives Cystonectae, Apolemiidae, and Pyrostephidae. An increase in clade richness and ecological diversification can be triggered by a ‘key innovation’ [@simpson1955major]. The evolutionary innovation of the Tendiculophora tentilla with shooting cnidobands and modular regions may have facilitated further dietary diversification. A specific instance of this may have been the access to the abundant small crustacean prey such as copepods. The rapid darting escape response of copepods may preclude their capture in siphonophores without shooting cnidobands.
 
-Haploneme and heteroneme shape share 21% of their variance across extant values, and 53% of the variance in their shifts along the branches of the phylogeny. However, much of this correlation is due to the contrast between Pyrostephidae and their sister group Tendiculophora. We searched for rate regime shifts in the evolution of nematocyst shape characters using a Bayesian Analysis of Macroevolutionary Mixtures (BAMM) [@rabosky2014bamm] (SM32-35). BAMM located a regime shift in heteroneme shape evolution on the branches leading to *Agalma* and *Athorybia* (SM33). For the rates of haploneme shape evolution, BAMM identified two main independent regime shifts (Fig. \@ref(figure10)): one in the branch leading to Codonophora (anisorhizas diverging from cystonects’ spherical isorhizas), and one in the branch leading to Clade B physonects (SM35). Clade B includes *Erenna*, *Stephanomia*, *Marrus*, and rhodaliids. Most of these taxa have rod-shaped anisorhizas, but *Erenna* have oval ones. No significant regime shift patterns were identified in the evolution of desmoneme and rhopaloneme shape.
+The siphonophore tentillum morphospace has a fairly low extant dimensionality due to having an evolutionary history with many synchronous, correlated changes. This is consistent with strong phenotypic integration where genetic and developmental correlations are maintained by natural selection to preserve a complex function across the wide variety of morphologies present. Since most tentillum characters develop from a common bud (budding tentilla near the base of the tentacle), structural correlations are expected. Similarly, correlations between the features of different nematocyst subtypes within a species are also expected given their common evolutionary and developmental origin [@bode1988control;@david2008evolution]. However, we also found correlations between nematocyst and tentillum characters. Siphonophore tentacle nematocysts (in their cnidocytes) are not produced nor matured in the developing tentillum. These cnidocytes are produced by dividing cnidoblasts in the basigaster (basal swelling of the gastrozooid). Once the cnidocytes have assembled the nematocyst, they migrate outward along the tentacle [@carre1972study] and position themselves in the tentillum according to their type and size [@skaer1988formation]. Thus, the developmental programs that produce the observed nematocyst morphologies are spatially separated from those producing the tentillum morphologies. Therefore, we hypothesize the genetic correlations and phenotypic integration between tentillum and nematocyst characters are maintained through natural selection on separate regulatory networks, out of the necessity to work together and meet the spatial, mechanical, and functional constraints of their prey capture behavior.
 
-*Heterochrony and convergence in the evolution of tentilla with diet* - In addition to identifying shifts in prey type, our work reveals the specific morphological changes in the prey capture apparatus associated with these changes. Copepod-specialized diets have evolved convergently in *Cordagalma* and some calycophorans. These evolutionary transitions happened together with transitions to smaller tentilla with fewer cnidoband nematocysts. Tentilla are expensive single-use structures [@Mackie:1987uy], therefore we would expect that specialization in small prey would beget reductions in the size of the prey capture apparatus to the minimum required for the ecological performance. *Cordagalma*’s tentilla strongly resemble the larval tentilla (only found in the first-budded feeding body of the colony) of their sister genus *Forskalia*. This indicates that the evolution of *Cordagalma* tentilla could be a case of paedomorphic heterochrony associated with predatory specialization on smaller prey.
+*Heterochrony and convergence in the evolution of tentilla with diet* - In addition to identifying shifts in prey type, [@damian2019evolution]revealed the specific morphological changes in the prey capture apparatus associated with these changes. Copepod-specialized diets have evolved independently in *Cordagalma* and some calycophorans. These evolutionary transitions happened together with transitions to smaller tentilla with fewer and smaller cnidoband nematocysts. We found that these morphological transitions evolved convergently in these taxa. Tentilla are expensive single-use structures [@Mackie:1987uy], therefore we would expect that specialization in small prey would beget reductions in the size of the prey capture apparatus to the minimum required for the ecological performance. Such a reduction in size would require extremely fast rates of trait evolution in an ordinary scenario. However, *Cordagalma*’s tentilla strongly resemble the larval tentilla (only found in the first-budded feeding body of the colony) of their sister genus *Forskalia*. This indicates that the evolution of *Cordagalma* tentilla could be a case of paedomorphic heterochrony associated with predatory specialization on smaller prey. This developmental shift may have provided a shortcut for the evolution of a smaller prey capture apparatus.
 	
-Our work identifies a novel example of convergent evolution. The region of the tentillum morphospace (SM4) occupied by calycophorans was independently (and more recently) occupied by the physonect *Frillagalma vityazi*. Like calycophorans, *Frillagalma* tentilla have small C-shaped cnidobands with a few rows of anisorhizas. Unlike calycophorans, they lack paired elongate microbasic mastigophores. Instead, they bear exactly three oval stenoteles, and their cnidobands are followed by a branched vesicle, unique to this genus. Their tentillum morphology is very different from that of other related physonects, which tend to have long, coiled, cnidobands with many paired oval stenoteles. Most studies on calycophoran diets have reported their prey to be primarily composed of small crustaceans, such as copepods or ostracods [@purcell1981dietary;@purcell1984functions]. The diet of *Frillagalma vityazi* is unknown, but this morphological convergence suggests that they evolved to capture similar kinds of prey. The DAPCs in [@damian2019evolution] predict that *Frillagalma* has a generalist niche with both soft and hard-bodied prey, including copepods.
+Our work identifies yet another novel example of convergent evolution. The region of the tentillum morphospace (Fig. /@ref(figure9) & Fig. /ref(surface)B) occupied by calycophorans was independently (and more recently) occupied by the physonect *Frillagalma vityazi*. Like calycophorans, *Frillagalma* tentilla have small C-shaped cnidobands with a few rows of anisorhizas. Unlike calycophorans, they lack paired elongate microbasic mastigophores. Instead, they bear exactly three oval stenoteles, and their cnidobands are followed by a branched vesicle, unique to this genus. Their tentillum morphology is very different from that of other related physonects, which tend to have long, coiled, cnidobands with many paired oval stenoteles. Our SURFACE analysis clearly indicates a regime convergence in the cnidoband morphospace between *Frillagalma* and calycophorans (Fig. /@ref(surface)B). Most studies on calycophoran diets have reported their prey to be primarily composed of small crustaceans, such as copepods or ostracods [@purcell1981dietary;@purcell1984functions]. The diet of *Frillagalma vityazi* is unknown, but this morphological convergence suggests that they evolved to capture similar kinds of prey. The DAPCs in [@damian2019evolution] predict that *Frillagalma* has a generalist niche with both soft and hard-bodied prey, including copepods.
 
-*Evolution of nematocyst shape* –  A remarkable feature of siphonophore haplonemes is that they are outliers to all other Medusozoa in their surface area to volume relationships, deviating significantly from sphericity [@thomason1988allometry]. This suggests a different mechanism for their discharge that could be more reliant on capsule tension than on osmotic potentials [@carre1980triggering], and strong selection for efficient nematocyst packing in the cnidoband [@thomason1988allometry;@skaer1988formation]. Our results show that Codonophora underwent a shift towards elongation and Cystonectae towards sphericity, assuming the common ancestor had an intermediate state. Since we know that the haplonemes of other hydrozoan outgroups are generally spheroid, it is more parsimonious to assume that cystonects retain this ancestral state. Later, we observe a return to more rounded (ancestral) haplonemes in *Erenna*, concurrent with a secondary gain of a piscivorous trophic niche, like that exhibited by cystonects. [@purcell1984functions] showed that haplonemes have a penetrating function as isorhizas in cystonects and an adhesive function as anisorhizas in Tendiculophora. The two clades that have converged to feed primarily on fish (Cystonectae and Clade B, which includes *Erenna*, *Stephanomia*, *Marrus*, and rhodaliids) have also converged morphologically toward more compact haplonemes, significantly distinct from their closest relatives. Isorhizas in cystonects are known to penetrate the skin of fish during prey capture, and to deliver the toxins that aid in paralysis and digestion [@hessinger1988nematocyst]. *Erenna*’s anisorhizas are also able to penetrate human skin and deliver a painful sting [@pugh2001review] (and pers. obs.), a common feature of piscivorous cnidarians like the Portuguese man-o-war or box jellies.
+*Evolution of nematocyst shape* –  A remarkable feature of siphonophore haplonemes is that they are outliers to all other Medusozoa in their surface area to volume relationships, deviating significantly from sphericity [@thomason1988allometry]. This suggests a different mechanism for their discharge that could be more reliant on capsule tension than on osmotic potentials [@carre1980triggering], and strong selection for efficient nematocyst packing in the cnidoband [@thomason1988allometry;@skaer1988formation]. Our results show that Codonophora underwent a shift towards elongation and Cystonectae towards sphericity, assuming the common ancestor had an intermediate state. Since we know that the haplonemes of other hydrozoan outgroups are generally spheroid, it is more parsimonious to assume that cystonects are simply retaining this ancestral state. Later, we observe a return to more rounded (ancestral) haplonemes in *Erenna*, concurrent with a secondary gain of a piscivorous trophic niche, like that exhibited by cystonects. Our SURFACE analysis shows that this transition to roundness is convergent with the regime occupied by cystonects (Fig. /@ref(surface)A). Purcell [@purcell1984functions] showed that haplonemes have a penetrating function as isorhizas in cystonects and an adhesive function as anisorhizas in Tendiculophora. It is no coincidence that the two clades that have converged to feed primarily on fish have also converged morphologically toward more compact haplonemes. Isorhizas in cystonects are known to penetrate the skin of fish during prey capture, and to deliver the toxins that aid in paralysis and digestion [@hessinger1988nematocyst]. *Erenna*’s anisorhizas are also able to penetrate human skin and deliver a painful sting [@pugh2001review] (and pers. obs.), a common feature of piscivorous cnidarians like the Portuguese man-o-war or box jellies.
 
-  The implications of these results for the evolution of nematocyst function are that an innovation in the discharge mechanism of haplonemes may have occurred during the main shift to elongation. Elongate nematocysts can be tightly packed into cnidobands. We hypothesize this may be a Tendiculophora lineage-specific adaptation to packing more nematocysts into a limited tentillum space, as suggested by [@skaer1988formation]. [@thomason1988allometry] hypothesized that smaller, more spherical nematocysts, with a lower surface area to volume ratio, are more efficient in osmotic-driven discharge and thus have more power for skin penetration. The elongated haplonemes of crustacean-eating Tendiculophora have never been observed penetrating their crustacean prey [@purcell1984functions], and are hypothesized to entangle the prey through adhesion of the abundant spines to the exoskeletal surfaces and appendages. Entangling requires less acceleration and power during discharge than penetration, as it does not rely on point pressure. In fish-eating cystonects and *Erenna* species, the haplonemes are much less elongated and very effective at penetration, in congruence with the osmotic discharge hypothesis. Tendiculophora, composed of the clades Euphysonectae and Calycophorae, includes the majority of siphonophore species. Within these clades are the most abundant siphonophore species, and a greater morphological and ecological diversity is found. We hypothesize that this packing-efficient haploneme morphology may have been a key innovation leading to the diversification of this clade. However, other characters that shifted concurrently in the stem of this clade may have been responsible for their extant diversity.
+  The implications of these results for the evolution of nematocyst function are that an innovation in the discharge mechanism of haplonemes may have occurred during the main shift to elongation. Elongate nematocysts can be tightly packed into cnidobands. We hypothesize this may be a Tendiculophora lineage-specific adaptation to packing more nematocysts into a limited tentillum space, as suggested by [@skaer1988formation]. Thomason [@thomason1988allometry] hypothesized that smaller, more spherical nematocysts, with a lower surface area to volume ratio, are more efficient in osmotic-driven discharge and thus have more power for skin penetration. The elongated haplonemes of crustacean-eating Tendiculophora have never been observed penetrating their crustacean prey [@purcell1984functions], and are hypothesized to entangle the prey through adhesion of the abundant spines to the exoskeletal surfaces and appendages. Entangling requires less acceleration and power during discharge than penetration, as it does not rely on point pressure. In fish-eating cystonects and *Erenna* species, the haplonemes are much less elongated and very effective at penetration, in congruence with the osmotic discharge hypothesis. Tendiculophora, composed of the clades Euphysonectae and Calycophorae, includes the majority of siphonophore species. Within these clades are the most abundant siphonophore species, and a greater morphological and ecological diversity is found. We hypothesize that this packing-efficient haploneme morphology may have also been a key innovation leading to the diversification of this clade. However, other characters that shifted concurrently in the stem of this clade could have been equally responsible for their extant diversity.
 
-*Generating hypotheses on siphonophore feeding ecology* – One motivation for our research was to understand the links between predator capture tools and their diets so we can generate hypotheses about the diets of siphonophores based on morphological characteristics. Indeed, our discriminant analyses were able to distinguish between different siphonophore diets based on morphological characters alone. The models produced by these analyses generated testable predictions about the diets of many species for which we only have morphological data of their tentacles. While the limited dataset used here is informative for generating tentative hypotheses, the empirical dietary data are still scarce and insufficient to cast robust predictions. This reveals the need to extensively characterize siphonophore diets and feeding habits. In future work, we can test these ecological hypotheses and validate these models by directly characterizing the diets of some of those siphonophore species. Predicting diet using morphology is a powerful tool to reconstruct food web topologies from community composition alone. In many of the ecological models found in the literature, interactions among the oceanic zooplankton have been treated as a black box [@mitra2009closure]. The ability to predict such interactions, including those of siphonophores and their prey, will enhance the taxonomic resolution of nutrient-flow models constructed from plankton community composition data.
+*Generating hypotheses on siphonophore feeding ecology* – One motivation for our research is to understand the links between predator capture tools and their diets so we can generate hypotheses about the diets of siphonophores based on morphological characteristics. Indeed, our discriminant analyses were able to distinguish between different siphonophore diets based on morphological characters alone. The models produced by these analyses generated testable predictions about the diets of many species for which we only have morphological data of their tentacles. While the limited dataset used here is informative for generating tentative hypotheses, the empirical dietary data are still scarce and insufficient to cast robust predictions. This reveals the need to extensively characterize siphonophore diets and feeding habits. In future work, we will test these ecological hypotheses and validate these models by directly characterizing the diets of some of those siphonophore species. Predicting diet using morphology is a powerful tool to reconstruct food web topologies from community composition alone. In many of the ecological models found in the literature, interactions among the oceanic zooplankton have been treated as a black box [@mitra2009closure]. The ability to predict such interactions, including those of siphonophores and their prey, will enhance the taxonomic resolution of nutrient-flow models constructed from plankton community composition data.
+
 ## Acknowledgements {-}
 This work was supported by the Society of Systematic Biologists (Graduate Student Award to A.D.S.); the Yale Institute of Biospheric Studies (Doctoral Pilot Grant to A.D.S.); and the National Science Foundation (Waterman Award to C.W.D., and NSF-OCE 1829835 to C.W.D., S.H.D.H., and C. Anela Choy). A.D.S. was supported by a Fulbright Spain Graduate Studies Scholarship. 
-
-
-## Supplementary Materials {-}
-
-![\label{ModelSupport} Model support (delta AICc), phylogenetic signal (Blomberg’s K), and phylogenetic signal permutation test p-value for each continuous character. Ntaxa = Number of taxa used in the analyses after removing those where the character sate is inapplicable or the data is missing.](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/modelSupport.png){height=600px}
-
-![\label{ModelAdequacy} Model adequacy scores for the best model supported for each morphological character. Cvar = coefficient of variation of the absolute value of the contrasts. Svar = Slope of a linear model fitted to the absolute value of the contrasts against their expected variances. Sasr = slope of the contrasts against the ancestral state inferred at each corresponding node. Shgt = slope of the contrasts against node depth. Dcfd = Kolmolgorov-Smirnov D-statistic comparing contrasts to a normal distribution with SD equal to the root of the mean of squared contrasts. ](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png)
 
 ## References {-}
 
@@ -438,9 +445,12 @@ hypdiet = c("Small crustacean", "Small crustacean", "Small crustacean", "Small c
 names(hypdiet) = dprunedTree$tip.label
 
 #hypdiet but for all species not only those in tree
-hypdiet_full = c("Mixed","Mixed","Gelatinous","Gelatinous","Mixed","Large crustacean","Small crustacean","Small crustacean","Small crustacean","Small crustacean","Fish","Fish","Mixed","Small crustacean","Large crustacean","Small crustacean","Large crustacean","Fish","Large crustacean","Large crustacean","Large crustacean","Fish","Fish","Small crustacean","Small crustacean","Fish","Small crustacean","Small crustacean")
-dpruned_full = fullraw_nozeroes[which(fullraw_nozeroes$Species%in%rownames(diet)),]
-dpruned_full <- data.frame(dpruned_full, "Diet" = hypdiet_full)
+## ALSO reconsidering Forskalia interpretation as small crustacean specialist, and assigning all Forskalia species
+hypdiet_full = c("Mixed","Mixed","Gelatinous","Gelatinous","Mixed","Large crustacean","Small crustacean","Small crustacean","Small crustacean","Small crustacean","Fish","Fish","Mixed","Small crustacean","Large crustacean","Small crustacean","Large crustacean","Fish","Large crustacean","Large crustacean","Large crustacean","Fish","Fish","Small crustacean","Small crustacean","Fish","Small crustacean","Small crustacean","Mixed", "Mixed", "Mixed")
+names(hypdiet_full) = c("Agalma elegans", "Agalma okenii", "Apolemia rubriversa", "Apolemia uvaria", "Athorybia rosacea", "Bargmannia amoena", "Bassia bassensis", "Chelophyes appendiculata", "Cordagalma ordinatum", "Diphyes dispar", "Erenna richardi", "Erenna sirena", "Forskalia tholoides", "Hippopodius hippopus", "Lychnagalma utricularia", "Marrus orthocanna", "Nanomia sp", "Physalia physalis", "Praya dubia", "Resomia ornicephala", "Resomia persica", "Rhizophysa eysenhardtii", "Rhizophysa filiformis", "Rosacea cymbiformis", "Sphaeronectes koellikeri", "Stephanomia amphytridis", "Stephanophyes superba", "Sulculeolaria quadrivalvis", "Forskalia formosa", "Forskalia asymmetrica", "Forskalia edwardsii")
+#dpruned_full = fullraw_nozeroes[which(fullraw_nozeroes$Species%in%names(hypdiet_full)),]
+#dpruned_full <- data.frame(dpruned_full, "Diet" = hypdiet_full)
+dpruned_full = data.frame(fullraw_nozeroes, "Diet" = hypdiet_full[match(rownames(fullraw_nozeroes), names(hypdiet_full))], stringsAsFactors = F)
 ```
 
 ```{r analyses, eval = FALSE, echo = FALSE}
@@ -747,110 +757,6 @@ PPCA_raw %>% biplot(main=paste(signif(summary(PPCA_raw)$importance[2,1]*100,3),"
 PPCA_compound %>% biplot(main=paste(signif(summary(PPCA_compound)$importance[2,1]*100,3),"%"), ylab=paste(signif(summary(PPCA_compound)$importance[2,2]*100,3),"%"), cex = .6, expand =0.4)
 phylomorphospace(raw_tree, PPCA_raw$S, label = "horizontal")
 
-## BAMM ##
-
-traitlist = list()
-for(i in 2:ncol(sharedmean_logs)){
-  traitlist[[i]] <- sharedmean_logs[,c(1,i)]
-  names(traitlist)[i] = names(sharedmean_logs)[i]
-}
-
-traitlist <- lapply(traitlist, function(x){x<-x[which(!is.nan(x[,2])),]})
-
-for(i in 2:length(traitlist)){
-  treei = drop.tip(ultram, which(!(ultram$tip.label %in% traitlist[[i]]$Species)))
-  treei$tip.label = str_replace_all(treei$tip.label, " ", "_")
-  write.tree(treei, file = paste("BAMM/",names(traitlist[[i]])[2], "_tree.tre", sep=""))
-}
-
-for(i in 2:length(traitlist)){
-  traitlist[[i]]$Species = str_replace_all(traitlist[[i]]$Species, " ", "_")
-  write.table(traitlist[[i]],file = paste("BAMM/",names(traitlist[[i]])[2], ".txt", sep=""), sep="\t", col.names = F, row.names = F, quote = F)
-}
-
-#See BAMM/BAMMsetpriors.R
-#See BAMM/BAMMplots.R
-#See BAMM/BAMMconfiguration.txt
-```
-
-```{r newanalyses, echo=F, eval=F}
-### Morphospace analyses ###
-hypfood <- data.frame(hypdiet, hypdiet, stringsAsFactors = F)
-#morphood <- raw_matrix_NaZeroes[which(rownames(raw_matrix_NaZeroes) %in% rownames(hypfood)),]
-#morphood <- raw_matrix_notf[which(rownames(raw_matrix_notf) %in% rownames(hypfood)),]
-#hypfood <- hypfood[match(rownames(morphood), rownames(hypfood)),]
-#morphospace_data <- cbind(morphood, hypfood[,1])
-morphospace_data = cbind(raw_matrix_NaZeroes, hypfood[match(rownames(raw_matrix_NaZeroes), rownames(hypfood)),1])
-names(morphospace_data)[ncol(morphospace_data)] <- "Diet"
-morphospace_data$Diet <- as.character(morphospace_data$Diet) %>% str_replace_all(" ", "_")
-
-#Test for morphospatial overlap between feeding guilds
-pca_morph <- prcomp(morphospace_data[,-ncol(morphospace_data)])
-autoplot(pca_morph, data = morphospace_data, frame = TRUE, label=T, colour="Diet", loadings = TRUE, loadings.colour = 'black', loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")+theme_bw()
-autoplot(pca_morph, data = morphospace_data, frame = TRUE, label=T, colour="Diet")+theme_bw()
-phylomorphospace(drop.tip(ultram, which(!(ultram$tip.label %in% rownames(morphospace_data)))), pca_morph$x[,1:2], label="horizontal")
-
-#MANOVA for diet
-LMdata <- cbind(pca_morph$x, morphospace_data$Diet) %>% as.data.frame(stringsAsFactors = F)
-LMdata[,-ncol(LMdata)] <- apply(LMdata[,-ncol(LMdata)], 2, as.numeric)
-names(LMdata)[ncol(LMdata)] <- "Diet"
-MAN1 <- manova(cbind(PC1, PC2) ~ Diet, data = LMdata)
-MAN1 %>% summary.manova() %>% .$SS %>% .$Diet -> MSS1
-var_exp = (MSS1[1,2]+MSS1[2,1])/sum(MSS1)
-library(geiger)
-LMtree <- drop.tip(ultram, which(!(ultram$tip.label %in% rownames(LMdata))))
-dat <- LMdata[,1:2]
-D <- LMdata$Diet %>% as.factor()
-names(D) <- rownames(LMdata)
-PMAN <- aov.phylo(dat ~ D, phy = LMtree, nsim=50, test="Wilks")
-PMAN  %>% summary.manova() %>% .$SS %>% .$group -> pMSS
-var_exp_phyl = (pMSS[1,2]+pMSS[2,1])/sum(pMSS)
-
-library(geomorph)
-morphol.disparity(dat ~ 1, groups = D)
-gdf <- geomorph.data.frame(shape = as.matrix(dat), phy = LMtree, grp = D)
-ANOVA <- procD.pgls(shape ~ grp, phy = phy, data = gdf)
-morphol.disparity(f1 = ANOVA, groups = ~grp, data = gdf, iter = 999)
-
-
-#Fish specialization convergence
-##
-pcanonaphenos = PCA(raw_matrix_NaZeroes)
-phenotree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(pcanonaphenos$ind$coord))))
-fishtips = c(rownames(pcanonaphenos$ind$coord)[startsWith(rownames(pcanonaphenos$ind$coord), "Erenna")], "Physalia physalis", rownames(pcanonaphenos$ind$coord)[startsWith(rownames(pcanonaphenos$ind$coord), "Rhizophy")])
-phylomorphospace(phenotree, pcanonaphenos$ind$coord, label = "horizontal")
-convnumsig(phenotree, pcanonaphenos$ind$coord[,1:2], plot=F, convtips = fishtips, nsim=30)
-convnum(phenotree, pcanonaphenos$ind$coord[,1:2], plot=T, convtips = fishtips)
-convrat(phenotree,pcanonaphenos$ind$coord[,1:2], convtips = fishtips)
-convratsig(phenotree,pcanonaphenos$ind$coord[,1:2], convtips = fishtips, nsim=5)
-
-#Frillagalma-Calycophoran convergence
-pcaphenos = PCA(raw_matrix_notf)
-phenotree_2 = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(pcaphenos$ind$coord))))
-frilltips1 = c("Frillagalma vityazi", extract.clade(phenotree_2, getMRCA(phenotree_2, c("Sphaeronectes koellikeri", "Praya dubia")))$tip.label, "Agalma elegans")
-phylomorphospace(phenotree_2, pcaphenos$ind$coord, label = "horizontal")
-convnumsig(phenotree_2, pcaphenos$ind$coord[,1:2], plot=F,convtips = frilltips1, nsim=30) %>% print()
-convnum(phenotree_2, pcaphenos$ind$coord[,1:2], plot=T,convtips = frilltips1)
-convrat(phenotree_2,pcaphenos$ind$coord, convtips = frilltips1)
-convratsig(phenotree_2,pcaphenos$ind$coord, convtips = frilltips1, nsim=1)
-
-#Lilyopsis pyrostephids
-convnum(phenotree_2, pcaphenos$ind$coord[,1:2], plot=T,convtips = c("Bargmannia amoena", "Bargmannia elongata", "Lilyopsis fluoracantha", "Vogtia glabra", "Abylopsis tetragona", "Praya dubia", "Frillagalma vityazi"))
-
-#Heatmap of expected convergence
-coph <- cophenetic(phenotree_2)
-dis <- 1/vegdist(scale(pcaphenos$ind$coord[,1:2]), "euc") %>% as.matrix()
-diag(dis) <- NA
-(dis - mean(dis, na.rm=T))/mean(dis, na.rm=T) -> dis
-dis
-ggplot(melt(dis /coph), aes(Var1, Var2)) + 
-  geom_tile(aes(fill = value), colour = "black") + 
-  scale_fill_distiller(palette = "RdBu", direction=1) + 
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 30, hjust = 1))
-
-RR = RRphylo(tree=phenotree, y = pcanonaphenos$ind$coord[,1:2])
-
 ## SIMPLE ANALYSES OF KINEMATIC DATA ##
 
 kine = read.csv("~/tentilla_morph/Scrap/RCode_dependencies/Kinematics.tsv", sep='\t', header=T) #%>% .[which(apply(., 1, function(x) sum(is.na(x)))<ncol(.)-2),-2]
@@ -881,6 +787,214 @@ t.test(kine$Heteroneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)
 t.test(kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% calys)], kine$Haploneme.discharge.speed.AVG..mm.s.[which(kine$Species %in% euphys)])
 t.test(kine$Haploneme.discharge.speed.AVG..mm.s., kine$Heteroneme.discharge.speed.AVG..mm.s.)
 cor(kinemorph[,c(-1,-32)], use="pairwise.complete.obs") %>% .[c(1:30),c(31:41)] %>% corrplot(diag=F, tl.cex = 0.4, tl.col="black")
+```
+
+```{r newanalyses, echo=F, eval=F}
+### Morphospace analyses ###
+hypfood <- data.frame(hypdiet, hypdiet, stringsAsFactors = F)
+hypfood_full <- data.frame(hypdiet_full, hypdiet_full, stringsAsFactors = F)
+#morphood <- raw_matrix_NaZeroes[which(rownames(raw_matrix_NaZeroes) %in% rownames(hypfood)),]
+#morphood <- raw_matrix_notf[which(rownames(raw_matrix_notf) %in% rownames(hypfood)),]
+#hypfood <- hypfood[match(rownames(morphood), rownames(hypfood)),]
+#morphospace_data <- cbind(morphood, hypfood[,1])
+morphospace_data = cbind(raw_matrix_NaZeroes, hypfood_full[match(rownames(raw_matrix_NaZeroes), rownames(hypfood_full)),1])
+names(morphospace_data)[ncol(morphospace_data)] <- "Diet"
+morphospace_data$Diet <- as.character(morphospace_data$Diet) %>% str_replace_all(" ", "_")
+
+#Test for morphospatial overlap between feeding guilds
+pca_morph <- prcomp(morphospace_data[,-ncol(morphospace_data)])
+autoplot(pca_morph, data = morphospace_data, frame = TRUE, label=T, colour="Diet", loadings = TRUE, loadings.colour = 'black', loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")+theme_bw()
+autoplot(pca_morph, data = morphospace_data, frame = TRUE, label=T, colour="Diet")+theme_bw()
+phylomorphospace(drop.tip(ultram, which(!(ultram$tip.label %in% rownames(morphospace_data)))), pca_morph$x[,1:2], label="horizontal")
+
+#MANOVA for diet
+LMdata <- cbind(pca_morph$x, morphospace_data$Diet) %>% as.data.frame(stringsAsFactors = F)
+LMdata[,-ncol(LMdata)] <- apply(LMdata[,-ncol(LMdata)], 2, as.numeric)
+names(LMdata)[ncol(LMdata)] <- "Diet"
+MAN1 <- manova(cbind(PC1, PC2) ~ Diet, data = LMdata)
+MAN1 %>% summary.manova() %>% .$SS %>% .$Diet -> MSS1
+var_exp = (MSS1[1,2]+MSS1[2,1])/sum(MSS1)
+
+#phyl.MANOVA
+LMtree <- drop.tip(ultram, which(!(ultram$tip.label %in% rownames(LMdata))))
+dat <- LMdata[,1:2]
+D <- LMdata$Diet %>% as.factor()
+names(D) <- rownames(LMdata)
+PMAN <- aov.phylo(dat ~ D, phy = LMtree, nsim=50, test="Wilks")
+PMAN  %>% summary.manova() %>% .$SS %>% .$group -> pMSS
+var_exp_phyl = (pMSS[1,2]+pMSS[2,1])/sum(pMSS)
+
+#geomorph disparity
+Di <- D[!is.na(D)]
+dati <- dat[which(rownames(dat) %in% names(Di)),]
+tree_i <- drop.tip(ultram, which(!(ultram$tip.label %in% rownames(dati))))
+morphol.disparity(dati ~ 1, groups = Di)
+gdf <- geomorph.data.frame(shape = as.matrix(dati), phy = tree_i, grp = Di)
+ANOVA <- procD.pgls(shape ~ grp, phy = phy, data = gdf)
+morphol.disparity(f1 = ANOVA, groups = ~grp, data = gdf, iter = 999)
+
+###FULL PCA DIET ###
+dpruned_full <- dpruned_full[which(!(dpruned_full$Species %in% c("Nectadamas richardi", "Thermopalia taraxaca", "Halistemma foliacea", "Halistemma transliratum", "Halistemma cupulifera", "Resomia dunni", "Resomia persica", "Cardianecta parchelion", "Forskalia tholoides"))),]
+dpruned_full_raw <- dpruned_full[,c(1:21,33)]
+pca_fullmorph <- prcomp(dpruned_full_raw[,c(-1,-ncol(dpruned_full_raw))])
+autoplot(pca_fullmorph, data = dpruned_full_raw, frame = TRUE, label=T, colour="Diet", loadings = TRUE, loadings.colour = 'black', loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")+theme_bw()
+
+autoplot(pca_fullmorph, data = dpruned_full_raw, frame = TRUE, label=T, colour="Diet")+theme_bw()
+
+phylomorphospace(drop.tip(ultram, which(!(ultram$tip.label %in% rownames(dpruned_full_raw)))), pca_fullmorph$x[which(rownames(pca_fullmorph$x) %in% ultram$tip.label),1:2], label="horizontal")
+
+#full MANOVA
+full_LMdata <- cbind(pca_fullmorph$x, dpruned_full$Diet) %>% as.data.frame(stringsAsFactors = F)
+full_LMdata[,-ncol(full_LMdata)] <- apply(full_LMdata[,-ncol(full_LMdata)], 2, as.numeric)
+names(full_LMdata)[ncol(full_LMdata)] <- "Diet"
+full_MAN1 <- manova(cbind(PC1, PC2) ~ Diet, data = full_LMdata)
+full_MAN1 %>% summary.manova() %>% .$SS %>% .$Diet -> full_MSS1
+full_var_exp = (full_MSS1[1,2]+full_MSS1[2,1])/sum(full_MSS1)
+
+#phyl.MANOVA full
+full_LMtree <- drop.tip(ultram, which(!(ultram$tip.label %in% rownames(full_LMdata))))
+full_dat <- full_LMdata[,1:2]
+full_D <- full_LMdata$Diet %>% as.factor()
+names(full_D) <- rownames(full_LMdata)
+full_PMAN <- aov.phylo(full_dat ~ full_D, phy = full_LMtree, nsim=50, test="Wilks")
+full_PMAN  %>% summary.manova() %>% .$SS %>% .$group -> full_pMSS
+full_var_exp_phyl = (full_pMSS[1,2]+full_pMSS[2,1])/sum(full_pMSS)
+
+#geomorph disparity
+full_Di <- full_D[!is.na(full_D)]
+full_Di <- full_Di[which(names(full_Di) %in% rownames(full_dat) & names(full_Di) %in% ultram$tip.label)]
+full_dati <- full_dat[which(rownames(full_dat) %in% names(full_Di) & rownames(full_dat) %in% ultram$tip.label),]
+full_tree_i <- drop.tip(ultram, which(!(ultram$tip.label %in% rownames(full_dati))))
+morphol.disparity(full_dati ~ 1, groups = full_Di)
+full_gdf <- geomorph.data.frame(shape = as.matrix(full_dati), phy = full_tree_i, grp = full_Di)
+full_ANOVA <- procD.pgls(shape ~ grp, phy = phy, data = full_gdf)
+morphol.disparity(f1 = full_ANOVA, groups = ~grp, data = full_gdf, iter = 999)
+
+#### CONVERGENCE ###
+pcanonaphenos = PCA(raw_matrix_NaZeroes)
+phenotree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(pcanonaphenos$ind$coord))))
+phylomorphospace(phenotree, pcanonaphenos$ind$coord[which(rownames(pcanonaphenos$ind$coord) %in% ultram$tip.label),], label = "horizontal")
+
+#Fish specialization convergence
+fishtips = c(rownames(pcanonaphenos$ind$coord)[startsWith(rownames(pcanonaphenos$ind$coord), "Erenna")], "Physalia physalis", rownames(pcanonaphenos$ind$coord)[startsWith(rownames(pcanonaphenos$ind$coord), "Rhizophy")])
+
+phenotypes <- raw_matrix_NaZeroes[,6:7]
+convnumsig(phenotree, phenotypes, plot=F, convtips = fishtips, nsim=30) %>% print()
+convnum(phenotree, phenotypes, plot=T, convtips = fishtips)
+convrat(phenotree,phenotypes, convtips = fishtips)
+convratsig(phenotree,phenotypes, convtips = fishtips, nsim=5)
+
+#Frillagalma-Calycophoran convergence
+pcaphenos = PCA(raw_matrix_notf)
+phenotree_2 = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(pcaphenos$ind$coord))))
+frilltips1 = c("Frillagalma vityazi", extract.clade(phenotree_2, getMRCA(phenotree_2, c("Sphaeronectes koellikeri", "Praya dubia")))$tip.label, "Agalma elegans")
+phylomorphospace(phenotree_2, pcaphenos$ind$coord, label = "horizontal")
+convnumsig(phenotree_2, pcaphenos$ind$coord[,1:2], plot=F,convtips = frilltips1, nsim=30) %>% print()
+convnum(phenotree_2, pcaphenos$ind$coord[,1:2], plot=T,convtips = frilltips1)
+convrat(phenotree_2,pcaphenos$ind$coord, convtips = frilltips1)
+convratsig(phenotree_2,pcaphenos$ind$coord, convtips = frilltips1, nsim=1)
+
+#Lilyopsis pyrostephids
+convnum(phenotree_2, pcaphenos$ind$coord[,1:2], plot=T,convtips = c("Bargmannia amoena", "Bargmannia elongata", "Lilyopsis fluoracantha", "Vogtia glabra", "Abylopsis tetragona", "Praya dubia", "Frillagalma vityazi"))
+
+##SURFACE##
+
+surfaceALL <- function(data){
+  Tree <- nameNodes(drop.tip(ultram, which(!(ultram$tip.label %in% rownames(data)))))
+  olist <- convertTreeData(Tree, data)
+  otree<-olist[[1]]
+  odata<-olist[[2]]
+  fwd<-surfaceForward(otree, odata, aic_threshold = 0, exclude = 0, verbose = FALSE, plotaic = FALSE)
+  k<-length(fwd)
+  fsum<-surfaceSummary(fwd)
+  bwd<-surfaceBackward(otree, odata, starting_model = fwd[[k]], aic_threshold = 0, only_best = TRUE, verbose = FALSE, plotaic = FALSE)
+  bsum<-surfaceSummary(bwd)
+  kk<-length(bwd)
+  print("N regimes BWD")
+  bsum$n_regimes %>% return()
+  par(mfrow=c(1,2))
+  surfaceTreePlot(Tree, bwd[[kk]], labelshifts = T) %>% return()
+  surfaceTraitPlot(data, bwd[[kk]], whattraits = c(1,2)) %>% return()
+  newsim<-surfaceSimulate(Tree, type="hansen-fit", hansenfit=fwd[[k]]$fit, shifts=fwd[[k]]$savedshifts, sample_optima=TRUE)
+  newout<-runSurface(Tree, newsim$dat, only_best = TRUE)
+  newsum<-surfaceSummary(newout$bwd)
+  newkk<-length(newout$bwd)
+  print("N regimes SIM")
+  newsum$n_regimes %>% return()
+}
+
+raw_matrix_NaZeroes[,6:7]
+pcaphenos$ind$coord[,1:2] %>% as.data.frame()
+PCA(raw_matrix_NaZeroes)$ind$coord[,1:2] %>% as.data.frame()
+
+surfaceALL(raw_matrix_NaZeroes[,6:7]) #haploneme shape
+surfaceALL(pcaphenos$ind$coord[,1:3] %>% as.data.frame()) #trait values PCA 1 2 without TF, excluding some species
+surfaceALL(PCA(raw_matrix_NaZeroes)$ind$coord[,1:2] %>% as.data.frame()) #ALL TRAITS PC1 and 2, all SPP in tree, NA to zeroes ALL TRAITS PC1 and 2, all SPP in MORPH dataset, NA to zeroes
+surfaceALL(raw_matrix_NaZeroes[,8:11]) #desmonemes rhopalonemes?
+
+#Phenotypic integration test
+
+M1_het <- sharedmean_logs[c(2:6)]
+rownames(M1_het) <- sharedmean_logs$Species
+M1_het <- M1_het[which(!is.na(rowSums(M1_het))),]
+
+M2_hap <- sharedmean_logs[c(8:9)]
+rownames(M2_hap) <- sharedmean_logs$Species
+M2_hap <- M2_hap[which(!is.na(rowSums(M2_hap))),]
+
+M3_tf <- sharedmean_logs[c(10:13)]
+rownames(M3_tf) <- sharedmean_logs$Species
+M3_tf <- M3_tf[which(!is.na(rowSums(M3_tf))),]
+
+M4_tent <- sharedmean_logs[c(14:21)]
+rownames(M4_tent) <- sharedmean_logs$Species
+M4_tent <- M4_tent[which(!is.na(rowSums(M4_tent))),]
+
+phint <- function(MA,MB,Tr){
+  a <- MA[which(rownames(MA) %in% rownames(MB)),]
+  b <- MB[which(rownames(MB) %in% rownames(a)),]
+  t <- drop.tip(Tr, which(!(Tr$tip.label %in% rownames(a) & Tr$tip.label %in% rownames(b))))
+  phylo.integration(A = as.matrix(a), A2 = as.matrix(b), phy = t) %>% return()
+  }
+
+table.phint <- function(modules, tree){
+  I <- length(modules)
+  R <- data.frame(matrix(ncol=I, nrow=I))
+  rownames(R) = names(modules)
+  names(R) = names(modules)
+  P <- data.frame(matrix(ncol=I, nrow=I))
+  rownames(P) = names(modules)
+  names(P) = names(modules)
+  for(i in 1:I){
+    for(j in 1:I){
+      if(i != j){
+        ph_ij <- phint(modules[[i]], modules[[j]], Tr = tree)
+        R[i,j] <- ph_ij$r.pls
+        P[i,j] <- ph_ij$P.value
+      }
+      print(R);print(P)
+    }
+    print(R); print(P)
+  }
+  Rm <- melt(cbind(names(modules),R))
+  names(Rm) <- c("M1", "M2", "rPLS")
+  Pm <- melt(cbind(names(modules),P))
+  names(Pm) <- c("M1", "M2", "P.value")
+  return(full_join(Rm,Pm))
+}
+
+MODS <- list(M1_het, M2_hap, M3_tf, M4_tent)
+names(MODS) <- c("Heteronemes", "Haplonemes", "Terminal filament", "Tentillum")
+MODSphint <- table.phint(MODS, tree = ultram)
+
+ordering <- c("Tentillum","Heteronemes","Haplonemes", "Terminal filament")
+ggplot(MODSphint, aes(factor(M1, levels = ordering), factor(M2, levels = ordering))) + 
+  geom_tile(aes(fill = rPLS), colour = "black") + 
+  scale_fill_distiller(palette = "Blues", direction=1) + 
+  geom_text(aes(label = P.value %>% round(3))) +
+  labs(y= "", x = "") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
 
 ```
 

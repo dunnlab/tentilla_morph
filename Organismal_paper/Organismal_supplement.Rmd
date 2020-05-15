@@ -1,0 +1,64 @@
+---
+bibliography: manuscript.bib
+csl: pnas.csl
+site: "bookdown::bookdown_site"
+output:
+  bookdown::pdf_document2:
+    toc: FALSE
+indent: TRUE
+monofont: "Times New Roman"
+fontsize: 12pt
+header-includes:
+  - \usepackage[left]{lineno}
+  - \linenumbers
+  - \usepackage{setspace}
+  - \doublespacing
+---
+
+```{r setup, include=FALSE, echo=FALSE, eval=FALSE}
+	# Load packages
+	## General
+library(knitr)
+library(tidyverse)
+
+	# Configure knitr, see http://yihui.name/knitr/options
+	opts_knit$set(
+	  progress=TRUE,
+	  verbose=TRUE)
+	opts_chunk$set(
+	#  include=FALSE,
+	  cache=TRUE,
+	  echo=FALSE,
+	  message=FALSE
+	 )
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+#Supplementary Materials## Supplementary Materials {-}
+
+![\label{SIMMAPtentilla} SIMMAP Tentilla presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/tentillaPresenceSIM.png)
+
+![\label{SIMMAPproxhet} SIMMAP Cnidoband proximal heteroneme presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/proxhet_presence.png)
+
+![\label{SIMMAPdesmorhopalo} SIMMAP Desmoneme+Rhopaloneme presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/desmorhopalo_SIM.png)
+
+![\label{SIMMAPdischarge} SIMMAP Actively discharging cnidobands presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/discharge_SIM.png)
+
+![\label{SIMMAP_ES} SIMMAP Elastic strands presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/Elasticstrands_SIM.png)
+
+![\label{SIMMAP_distalDesmo} SIMMAP Cnidoband distal desmonemes presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/distalDesmo_SIM.png)
+
+![\label{SIMMAP_Coiled} SIMMAP Coiled cnidoaband phenotype presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/Coiled_Sim.png)
+
+![\label{SIMMAP_HetType} SIMMAP Heteroneme type.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/hettype_SIM.png)
+
+![\label{SIMMAP_HapType} SIMMAP Haploneme type.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/haptype_SIM.png)
+
+![\label{ModelSupport} Model support (delta AICc), phylogenetic signal (Blomberg’s K), and phylogenetic signal permutation test p-value for each continuous character. Ntaxa = Number of taxa used in the analyses after removing those where the character sate is inapplicable or the data is missing.](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/modelSupport.png){height=600px}
+
+![\label{ModelAdequacy} Model adequacy scores for the best model supported for each morphological character. Cvar = coefficient of variation of the absolute value of the contrasts. Svar = Slope of a linear model fitted to the absolute value of the contrasts against their expected variances. Sasr = slope of the contrasts against the ancestral state inferred at each corresponding node. Shgt = slope of the contrasts against node depth. Dcfd = Kolmolgorov-Smirnov D-statistic comparing contrasts to a normal distribution with SD equal to the root of the mean of squared contrasts. ](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/modelAdequacy.png)
+
+![\label{ph.int} Heatmap showing the phenotypic integration between character modules accounting for phylogeny. Text in cells shows p-values. Color indicates the partial least squares (PLS) multivariate correlation coefficients. ](~/tentilla_morph/Figures_final/phint.png)
+
+![\label{DAPCsofthard} DAPC for soft-bodied vs. hard bodied prey specialization. Six PCs retained after a-score optimization (100 iterations). Two LDA functions used. Discriminant power on training set: 90.9%. Grayscale heat map shows the posterior probability distribution of the predictions. Variable contribution (top quartile) calculated by the sum of the LDA variable loadings weighted by the eigenvalue of each LDA.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/DAPC_softhard.png)
