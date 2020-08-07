@@ -1,0 +1,19 @@
+# REVIEW To-Do List:
+
+## Reviewer 1:
+
+-Clarify that tentilla are part of gastrozooid zooid, but are still modular in evolution. Make claim that gastrozooids themselves are more modular than typical solitary animals.
+
+## Reviewer 2:
+
+-A little more extensive discussion of the contradiction to the orthodoxy that specialization on a narrow range of prey as an evolutionary dead-end.
+
+-Lines 170-177: Character-state reconstruction failed to clarify whether generalist or specialist feeding was the ancestral character state.
+
+-Clarify how the conclusions of this paper (that there is no clear directionality from generalist to specialist) are not simply terminological.
+
+-Change or clarify the use of "genetic correlation" in reference to trait correlations.
+
+-Ascertainment bias in the diet: Clarify how prey availability was disentangled, how many samples, over what temporal and spatial scales the dietary data was obtained. How did sampling method bias affect the data and the conclusions drawn from it.
+
+-Expand discussion on the generality of results and expectations for other colonial animals, and for predators vs. other consumers (i.e. salps).
