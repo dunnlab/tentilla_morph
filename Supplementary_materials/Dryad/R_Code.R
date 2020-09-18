@@ -437,7 +437,7 @@ selectivity = selectivity[which(rownames(selectivity) %in% sharedmeans$Species),
 Sprunedtree = drop.tip(ultram, which(!(ultram$tip.label %in% rownames(selectivity))))
 
 #Retrieve copepod prey length from literature
-preylength = read.csv("Purcell1984_preylength.csv", header = T, sep=',')[,c(2,4,6)]
+preylength = read.csv("Purcell1984_preylength.csv", header = T, sep=',')[,c(2,6)]
 names(preylength) = c("Species","Copepod prey length (mm)")
 PL_pruned_matrix = sharedmean_logs[which(sharedmean_logs$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmean_logs$Species),2])
 PL_pruned_SEs = sharedvar_logs[which(sharedvar_logs$Species %in% preylength$Species),] %>% data.frame(preylength[which(preylength$Species %in% sharedmean_logs$Species),2])
