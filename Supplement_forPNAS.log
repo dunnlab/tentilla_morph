@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  7 APR 2020 14:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.21)  30 SEP 2020 10:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1219,13 +1219,13 @@ Here is how much of TeX's memory you used:
  16054 multiletter control sequences out of 15000+600000
  34169 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,5n,38p,1496b,362s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 32i,5n,38p,1505b,362s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
 texlive/2017/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/20
 17/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/public/lm/lmss8.pfb>
-Output written on Supplement_forPNAS.pdf (24 pages, 11016560 bytes).
+Output written on Supplement_forPNAS.pdf (24 pages, 11017057 bytes).
 PDF statistics:
  241 PDF objects out of 1000 (max. 8388607)
  163 compressed objects within 2 object streams
