@@ -1,6 +1,6 @@
 ---
 bibliography: org_manuscript.bib
-csl: pnas.csl
+csl: zoologica-scripta.csl
 site: "bookdown::bookdown_site"
 output:
   bookdown::pdf_document2:
@@ -75,13 +75,17 @@ Alejandro Damian-Serrano^1^^,‡^, Steven H.D. Haddock^2^, Casey W. Dunn^1^
 
 \‡ Corresponding author: Alejandro Damian-Serrano, email: alejandro.damianserrano@yale.edu
 
+## Keywords {-}
+
+Siphonophora, tentilla, nematocysts, character evolution
+
+\newpage
+
 ## Abstract {-}
 
 Siphonophores are free-living predatory colonial hydrozoan cnidarians found in every ocean of the world. Siphonophore tentilla (tentacle side branches) are unique biological structures for prey capture, composed of a complex arrangement of cnidocytes (stinging cells) bearing different types of nematocysts (stinging capsules) and auxiliary structures. Tentilla present an extensive morphological and functional diversity across species. While associations between tentilla form and diet have been reported, the evolutionary history giving rise to this morphological diversity is largely unexplored. Here we examine the evolutionary gains and losses of novel tentillum substructures and nematocyst types on the most recent siphonophore phylogeny. Tentilla have a precisely coordinated high-speed strike mechanism of synchronous unwinding and nematocysts discharge. Here we characterize the kinematic diversity of this prey capture reaction using high-speed video and find relationships with morphological characters. Since tentillum discharge occurs in synchrony across a broad morphological diversity, we evaluate how phenotypic integration is maintaining character correlations across evolutionary time. We found that the tentillum morphospace has low dimensionality, we identified instances of heterochrony and morphological convergence, and generated hypotheses on the diets of understudied siphonophore species. Our findings indicate that siphonophore tentilla are phenotypically integrated structures with a complex evolutionary history leading to a phylogenetically structured diversity of forms which are predictive of kinematic performance and feeding habits.
 
-## Keywords {-}
-
-Siphonophore, tentilla, nematocysts, character evolution
+\newpage
 
 ## Introduction {-}
 
@@ -103,7 +107,7 @@ In [@damian2019evolution] we fit discriminant analyses to identify characters th
 
 ## Methods {-}
 
-All character data and the phylogeny analyzed here were published in [@damian2019evolution]. We log transformed all the continuous characters that did not pass Shapiro-Wilks normality tests, and used the ultrametric constrained Bayesian time tree in all comparative analyses. Inapplicable characters were recorded as NA states, and species with states that could not be measured due to technical limitations were removed before the analyses. We used the feeding guild categories detailed in [@damian2019evolution] with one modification: including all *Forskalia* spp. as generalists instead of as a single *Forskalia* species on the tree after a reinterpretation of the data in [@purcell1981dietary]. In order to characterize the evolutionary history of tentilla morphology, we fitted different models generating the observed data distribution given the phylogeny for each continuous character using the function fitContinuous in the R package *geiger* [@harmon2007geiger]. These models include a non-phylogenetic white-noise model (WN), a neutral divergence Brownian Motion model (BM), an early-burst decreasing rate model (EB), and an Ornstein-Uhlenbeck (OU) model with stabilizing selection around a fitted optimum trait value. In the same way as [@damian2019evolution] we then ordered the models by increasing parametric complexity (WN, BM, EB, OU), and compared their corrected Akaike Information Criterion (AICc) scores [@sugiura1978further]. We used the lowest (best) score using a delta cutoff of 2 units to determine significance relative to the next simplest model (SM10). We calculated model adequacy scores using the R package *arbutus* [@pennell2015model] (SM11), and calculated phylogenetic signals in each of the measured characters using Blomberg’s K [@blomberg2003testing] (SM10). To reconstruct the ancestral character states of nematocyst types and other categorical traits, we used stochastic character mapping (SIMMAP) using the package *phytools* [@revell2012phytools].
+All character data and the phylogeny analyzed here were published in [@damian2019evolution]. Details on the specimen collection, microscopy, and measurements can be found in the aforementioned publication. However, we included here the character definitions (SM14) and specimen list (SM15) in the Supporting Information. We log transformed all the continuous characters that did not pass Shapiro-Wilks normality tests, and used the ultrametric constrained Bayesian time tree in all comparative analyses. Inapplicable characters were recorded as NA states, and species with states that could not be measured due to technical limitations were removed before the analyses. We used the feeding guild categories detailed in [@damian2019evolution] with one modification: including all *Forskalia* spp. as generalists instead of as a single *Forskalia* species on the tree after a reinterpretation of the data in [@purcell1981dietary]. In order to characterize the evolutionary history of tentilla morphology, we fitted different models generating the observed data distribution given the phylogeny for each continuous character using the function fitContinuous in the R package *geiger* [@harmon2007geiger]. These models include a non-phylogenetic white-noise model (WN), a neutral divergence Brownian Motion model (BM), an early-burst decreasing rate model (EB), and an Ornstein-Uhlenbeck (OU) model with stabilizing selection around a fitted optimum trait value. In the same way as [@damian2019evolution] we then ordered the models by increasing parametric complexity (WN, BM, EB, OU), and compared their corrected Akaike Information Criterion (AICc) scores [@sugiura1978further]. We used the lowest (best) score using a delta cutoff of 2 units to determine significance relative to the next simplest model (SM10). We calculated model adequacy scores using the R package *arbutus* [@pennell2015model] (SM11), and calculated phylogenetic signals in each of the measured characters using Blomberg’s K [@blomberg2003testing] (SM10). To reconstruct the ancestral character states of nematocyst types and other categorical traits, we used stochastic character mapping (SIMMAP) using the package *phytools* [@revell2012phytools].
 
 In order to examine the phenotypic integration in the tentillum, we explored the correlational structure among continuous characters and among their evolutionary histories using principal component analysis (PCA) and phylogenetic PCA [@revell2012phytools]. Since the character dataset contains gaps due to missing data and inapplicable character states, we carried out these analyses on a subset of species and characters that allowed for the most complete dataset. This was done by removing the terminal filament characters (which are only shared by a small subset of species), and then removing species which had inapplicable states for the remaining characters (apolemiids and cystonects). In addition, we obtained the correlations between the phylogenetic independent contrasts [@felsenstein1985phylogenies] using the package *rphylip* [@revell2014rphylip] accounting for intraspecific variation. Using these contrasts, we identified multivariate correlational modules among characters. To test and quantify phenotypic integration between these multivariate modules, we used the phylogenetic phenotypic integration test in the package *geomorph* [@adams2016geomorph]. 
 
@@ -185,6 +189,8 @@ Our work identifies yet another novel example of convergent evolution. The regio
 
 ## Acknowledgements {-}
 This work was supported by the Society of Systematic Biologists (Graduate Student Award to A.D.S.); the Yale Institute of Biospheric Studies (Doctoral Pilot Grant to A.D.S.); and the National Science Foundation (Waterman Award to C.W.D., NSF-OCE 1829835 to C.W.D., OCE-1829805 to S.H.D.H., and OCE-1829812 to C. Anela Choy). A.D.S. was supported by a Fulbright Spain Graduate Studies Scholarship.
+
+\newpage
 
 ## References {-}
 

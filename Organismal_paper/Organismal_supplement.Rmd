@@ -1,5 +1,5 @@
 ---
-bibliography: manuscript.bib
+bibliography: org_manuscript.bib
 csl: pnas.csl
 site: "bookdown::bookdown_site"
 output:
@@ -71,3 +71,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ![\label{DAPCsofthard} DAPC for soft-bodied vs. hard bodied prey specialization. Six PCs retained after a-score optimization (100 iterations). Two LDA functions used. Discriminant power on training set: 90.9%. Grayscale heat map shows the posterior probability distribution of the predictions. Variable contribution (top quartile) calculated by the sum of the LDA variable loadings weighted by the eigenvalue of each LDA.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/DAPC_softhard.png)
 
 ![\label{figure3} Heatmap summarizing the morphological diversity measured in Damian-Serrano *et al.* 2020 for 96 species of siphonophores clustered by similarity (raw data published in Damian-Serrano 2020). Missing values from absent characters presented as dark grey cells, missing values produced from technical difficulties presented as white cells. Values scaled by character.](~/tentilla_morph/Figures_final/figure3.jpg)
+
+![\label{appendix2} Character definitions. ](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/character_def.png){height=500px}
+
+![\label{specimens} Specimen catalog. ](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/slide_catalog_numbers.png){height=2000px}
+
