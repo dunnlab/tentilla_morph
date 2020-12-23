@@ -43,7 +43,6 @@ knitr::opts_chunk$set(echo = TRUE)
 # Supplementary Materials {-}
 \FloatBarrier
 
-
 ![\label{SIMMAPtentilla} SIMMAP Tentilla presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/tentillaPresenceSIM.png)
 
 ![\label{SIMMAPproxhet} SIMMAP Cnidoband proximal heteroneme presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/proxhet_presence.png)
@@ -74,5 +73,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![\label{appendix2} Character definitions. ](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/character_def.png){height=500px}
 
-![\label{specimens} Specimen catalog. ](~/tentilla_morph/Supplementary_materials/Online_appendices/PNGs/slide_catalog_numbers.png){height=2000px}
 
