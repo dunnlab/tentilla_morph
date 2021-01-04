@@ -130,14 +130,14 @@ To test whether measured morphological characters evolved in association with sh
 Table 1. Tests of correlated evolution between siphonophore morphological characters and aspects of the diet found correlated in the literature. We report the direction and significance of the evolutionary association, the number of taxa used for the analysis, and the literature source where the morphology-diet association was first reported.
 
 ```{r tab1, echo=FALSE, out.width='100%'}
-knitr::include_graphics('~/tentilla_morph/Final_tables/table1.png')
+knitr::include_graphics('~/tentilla_morph/Final_tables/table1-PNAS.png')
 ```
 \
 
 Table 2. Discriminant analysis of principal components for the presence of specific prey types using the morphological data. Top quartile variable (character) contributions to the linear discriminants are ordered from highest to lowest. Logistic regressions and GLMs were fitted to predict prey type presence and selectivity respectively. The sign of the slope of each predictor is reported, marked with an asterisk if significant (p-value < 0.05), and highlighted grey if it differs between prey presence in diet and prey selectivity. Pseudo-R^2^ (%) approximates the percent variance explained by the model.
 
 ```{r tab2, echo=FALSE, out.width='60%'}
-knitr::include_graphics('~/tentilla_morph/Final_tables/table2.png')
+knitr::include_graphics('~/tentilla_morph/Final_tables/table2-PNAS.png')
 ```
 
 *Evolution of relationships between characters with diet* – Phenotypic integration results in correlation patterns between morphological characters and their rates of evolution. To study these patterns, we fit a set of evolutionary variance-covariance matrices [@revell2009phylogenetic]. The quantitative characters we measured from tentilla and their nematocysts are highly correlated. The results indicate that the dimensionality (number of independent axes of variation) of tentillum morphology is low, that many traits are associated with size, but that nematocyst arrangement and shape are independent of it (S4). The variance-covariance matrices (S21-23) are congruent with the abundant positive correlations observed among simple measurement characters in S3. This analysis more clearly reveals the diagonal blocks that constitute the evolutionary modules, such as the heteroneme block, the terminal filament nematocyst block, and the cnidoband-pedicle-tentacle block. These results were not sensitive to the transformation of inapplicable states and taxon sampling. These results indicate that siphonophore tentilla and nematocysts are phenotypically integrated and co-evolve within discrete evolutionary modules.

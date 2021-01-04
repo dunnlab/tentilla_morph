@@ -924,7 +924,6 @@ VCVshortlist <- VCVlist[which(lapply(VCVlist, class)=="evolvcv.lite")]
 bestmodel_number = lapply(VCVshortlist, function(y){lapply(y,function(x){x$AIC}) %>% unlist() %>% .[which(. == min(.))] %>% names()})
 bestmodel_number <- bestmodel_number %>% unlist() %>% as.vector() %>% str_extract("[0-9]") %>% as.numeric()
 bestmodel_descriptors <- list()
-names(bestmodel_descriptors)=names(VCVshortlist)
 for(i in 1:length(bestmodel_number)){
   VCVshortlist[[i]][bestmodel_number[i]][[1]] -> bestmodel_descriptors[[i]]
 }
@@ -932,7 +931,6 @@ names(bestmodel_descriptors)=names(VCVshortlist)
 
 ##R.simple VCV##
 generalmodel_descriptors <- list()
-names(generalmodel_descriptors)=names(VCVshortlist)
 for(i in 1:length(VCVshortlist)){
   VCVshortlist[[i]][1][[1]] -> generalmodel_descriptors[[i]]
 }
@@ -950,6 +948,25 @@ Simplejoin <- Simplejoin[,-1]
 Simplejoin = Simplejoin[match(sort(rownames(Simplejoin)), rownames(Simplejoin)), match(sort(names(Simplejoin)), names(Simplejoin))]
 #Simplejoin[is.na(Simplejoin)] <- 0
 corrplot(Simplejoin %>% as.matrix())
+
+##LARGE CRUSTACEAN SPECIFIC VCV##
+bestmodel_LargeCrustacean <- bestmodel_descriptors %>% lapply(function(x){x$R["Large crustacean"] %>% unlist() %>% matrix(nrow=2,ncol=2) %>% cov2cor() %>% as.data.frame()})
+for(i in 1:length(bestmodel_LargeCrustacean)){
+  rownames(bestmodel_LargeCrustacean[[i]])<- names(bestmodel_LargeCrustacean)[i] %>% str_split(" ") %>% unlist()
+  names(bestmodel_LargeCrustacean[[i]])<- names(bestmodel_LargeCrustacean)[i] %>% str_split(" ") %>% unlist()
+  bestmodel_LargeCrustacean[[i]] %<>% mutate(parameter=rownames(.))
+}
+bestmodel_LargeCrustacean %>% reduce(full_join) -> LargeCrustaceanjoin
+LargeCrustaceanjoin <- aggregate(. ~ LargeCrustaceanjoin$parameter, data = LargeCrustaceanjoin[,-3], mean.na, na.action = na.pass)
+rownames(LargeCrustaceanjoin)<-LargeCrustaceanjoin$`LargeCrustaceanjoin$parameter`
+LargeCrustaceanjoin <- LargeCrustaceanjoin[,-1]
+LargeCrustaceanjoin = LargeCrustaceanjoin[match(sort(rownames(LargeCrustaceanjoin)), rownames(LargeCrustaceanjoin)), match(sort(names(LargeCrustaceanjoin)), names(LargeCrustaceanjoin))]
+#LargeCrustaceanjoin[is.na(LargeCrustaceanjoin)] <- 0
+corrplot(LargeCrustaceanjoin %>% as.matrix())
+#difference with whole diet tree simple VCV
+subtractLargeCrustacean <- LargeCrustaceanjoin - Simplejoin
+subtractLargeCrustacean[is.na(subtractLargeCrustacean)] <- 0
+(subtractLargeCrustacean/max(abs(subtractLargeCrustacean),na.rm = T)) %>% as.matrix() %>% corrplot()
 
 ##FISH SPECIFIC VCV##
 bestmodel_Fish <- bestmodel_descriptors %>% lapply(function(y){if(is.matrix(y$R["Fish"][[1]])){y$R["Fish"] %>% unlist() %>% matrix(nrow=2,ncol=2) %>% cov2cor() %>% as.data.frame()}})
@@ -971,7 +988,7 @@ subtractFish <- Fishjoin - Simplejoin[which(rownames(Simplejoin) %in% rownames(F
 subtractFish[is.na(subtractFish)] <- 0
 (subtractFish/max(abs(subtractFish),na.rm = T)) %>% as.matrix() %>% corrplot()
 #difference with preceding regime VCV
-subtractFish <- Fishjoin - LargeCrustaceanjoin[which(rownames(Simplejoin) %in% rownames(Fishjoin)),which(names(Simplejoin) %in% names(Fishjoin))]
+subtractFish <- Fishjoin - LargeCrustaceanjoin[which(rownames(LargeCrustaceanjoin) %in% rownames(Fishjoin)),which(names(LargeCrustaceanjoin) %in% names(Fishjoin))]
 subtractFish[is.na(subtractFish)] <- 0
 (subtractFish/max(abs(subtractFish),na.rm = T)) %>% as.matrix() %>% corrplot()
 
@@ -995,28 +1012,9 @@ subtractGelatinous <- Gelatinousjoin - Simplejoin[which(rownames(Simplejoin) %in
 subtractGelatinous[is.na(subtractGelatinous)] <- 0
 (subtractGelatinous/max(abs(subtractGelatinous),na.rm = T)) %>% as.matrix() %>% corrplot()
 #difference with preceding regime VCV
-subtractGelatinous <- Gelatinousjoin - LargeCrustaceanjoin[which(rownames(Simplejoin) %in% rownames(Gelatinousjoin)),which(names(Simplejoin) %in% names(Gelatinousjoin))]
+subtractGelatinous <- Gelatinousjoin - LargeCrustaceanjoin[which(rownames(LargeCrustaceanjoin) %in% rownames(Gelatinousjoin)),which(names(LargeCrustaceanjoin) %in% names(Gelatinousjoin))]
 subtractGelatinous[is.na(subtractGelatinous)] <- 0
 (subtractGelatinous/max(abs(subtractGelatinous),na.rm = T)) %>% as.matrix() %>% corrplot()
-
-##LARGE CRUSTACEAN SPECIFIC VCV##
-bestmodel_LargeCrustacean <- bestmodel_descriptors %>% lapply(function(x){x$R["Large crustacean"] %>% unlist() %>% matrix(nrow=2,ncol=2) %>% cov2cor() %>% as.data.frame()})
-for(i in 1:length(bestmodel_LargeCrustacean)){
-  rownames(bestmodel_LargeCrustacean[[i]])<- names(bestmodel_LargeCrustacean)[i] %>% str_split(" ") %>% unlist()
-  names(bestmodel_LargeCrustacean[[i]])<- names(bestmodel_LargeCrustacean)[i] %>% str_split(" ") %>% unlist()
-  bestmodel_LargeCrustacean[[i]] %<>% mutate(parameter=rownames(.))
-}
-bestmodel_LargeCrustacean %>% reduce(full_join) -> LargeCrustaceanjoin
-LargeCrustaceanjoin <- aggregate(. ~ LargeCrustaceanjoin$parameter, data = LargeCrustaceanjoin[,-3], mean.na, na.action = na.pass)
-rownames(LargeCrustaceanjoin)<-LargeCrustaceanjoin$`LargeCrustaceanjoin$parameter`
-LargeCrustaceanjoin <- LargeCrustaceanjoin[,-1]
-LargeCrustaceanjoin = LargeCrustaceanjoin[match(sort(rownames(LargeCrustaceanjoin)), rownames(LargeCrustaceanjoin)), match(sort(names(LargeCrustaceanjoin)), names(LargeCrustaceanjoin))]
-#LargeCrustaceanjoin[is.na(LargeCrustaceanjoin)] <- 0
-corrplot(LargeCrustaceanjoin %>% as.matrix())
-#difference with whole diet tree simple VCV
-subtractLargeCrustacean <- LargeCrustaceanjoin - Simplejoin
-subtractLargeCrustacean[is.na(subtractLargeCrustacean)] <- 0
-(subtractLargeCrustacean/max(abs(subtractLargeCrustacean),na.rm = T)) %>% as.matrix() %>% corrplot()
 
 ##GENERALIST SPECIFIC VCV##
 bestmodel_Mixed <- bestmodel_descriptors %>% lapply(function(x){x$R["Mixed"] %>% unlist() %>% matrix(nrow=2,ncol=2) %>% cov2cor() %>% as.data.frame()})
@@ -1036,6 +1034,7 @@ corrplot(Mixedjoin %>% as.matrix())
 subtractMixed <- Mixedjoin - Simplejoin
 subtractMixed[is.na(subtractMixed)] <- 0
 (subtractMixed/max(abs(subtractMixed),na.rm = T)) %>% as.matrix() %>% corrplot()
+#difference with LC diet tree simple VCV
 subtractMixed <- Mixedjoin - LargeCrustaceanjoin
 subtractMixed[is.na(subtractMixed)] <- 0
 (subtractMixed/max(abs(subtractMixed),na.rm = T)) %>% as.matrix() %>% corrplot()
@@ -1059,6 +1058,7 @@ corrplot(SmallCrustaceanjoin %>% as.matrix())
 subtractSmallCrustacean <- SmallCrustaceanjoin - Simplejoin[which(rownames(Simplejoin) %in% rownames(SmallCrustaceanjoin)),which(names(Simplejoin) %in% names(SmallCrustaceanjoin))]
 subtractSmallCrustacean[is.na(subtractSmallCrustacean)] <- 0
 (subtractSmallCrustacean/max(abs(subtractSmallCrustacean),na.rm = T)) %>% as.matrix() %>% corrplot()
+#difference with LC
 subtractSmallCrustacean <- SmallCrustaceanjoin - LargeCrustaceanjoin[which(rownames(LargeCrustaceanjoin) %in% rownames(SmallCrustaceanjoin)),which(names(LargeCrustaceanjoin) %in% names(SmallCrustaceanjoin))]
 subtractSmallCrustacean[is.na(subtractSmallCrustacean)] <- 0
 (subtractSmallCrustacean/max(abs(subtractSmallCrustacean),na.rm = T)) %>% as.matrix() %>% corrplot()
