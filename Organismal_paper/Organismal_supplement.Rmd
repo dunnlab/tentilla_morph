@@ -43,7 +43,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Supplementary Materials {-}
 \FloatBarrier
 
-![\label{SIMMAPtentilla} SIMMAP Tentilla presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/tentillaPresenceSIM.png)
+![\label{SIMMAPtentilla} SIMMAP Tentilla presence/absence.](~/tentilla_morph/Organismal_paper/IOB-PostReview/raw_figures/SM1_SIMMAPtentilla-01.png)
 
 ![\label{SIMMAPproxhet} SIMMAP Cnidoband proximal heteroneme presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/proxhet_presence.png)
 
@@ -55,7 +55,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![\label{SIMMAP_distalDesmo} SIMMAP Cnidoband distal desmonemes presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/distalDesmo_SIM.png)
 
-![\label{SIMMAP_Coiled} SIMMAP Coiled cnidoaband phenotype presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/Coiled_Sim.png)
+![\label{SIMMAP_Coiled} SIMMAP Coiled cnidoband phenotype presence/absence.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/Coiled_Sim.png)
 
 ![\label{SIMMAP_HetType} SIMMAP Heteroneme type.](~/tentilla_morph/SysBio_Submission/Post-submission modifications/Supplementary_materials/Online_appendices/PNGs/hettype_SIM.png)
 

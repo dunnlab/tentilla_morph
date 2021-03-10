@@ -36,7 +36,7 @@ setwd("~/tentilla_morph/Organismal_paper/")
 #Load raw data
 read.csv("~/tentilla_morph/Supplementary_materials/Dryad/raw_morphology_data.csv") -> numbers
 numbers$Species = as.character(numbers$Species)
-categorical <- read.csv("~/tentilla_morph/Supplementary_materials/Dryad/raw_categorical_data.csv")[,-2]
+categorical <- read.csv("~/tentilla_morph/Organismal_paper/IOB-PostReview/raw_figures/CategoricalCharacters.csv")[,-2]
 rownames(categorical) = categorical$Species
 
 #Correct species spellings
@@ -225,7 +225,7 @@ names(GC)<-c("species", "character")
 #write.csv(GC, "gutcontentliteraturereview.csv")
 GC = split(GC,GC$character)
 nrowGC = purrr::map(GC,nrow) %>% as.numeric()
-GC = GC[which(nrowGC>2)]
+GC = GC[which(nrowGC>0)]
 GC = purrr::map(GC,unique)
 diet= matrix(ncol=length(GC),nrow=length(unique(castlogs$Species))) %>% as.data.frame()
 names(diet) = names(GC)
@@ -238,6 +238,7 @@ for(E in GC){
 }
 diet[is.na(diet)] <- 0
 diet = diet[which(rowSums(diet)>0),which(colSums(diet)<nrow(diet))]
+diet=diet[,-c(3,7,14:17)]
 
 #Add personal observations of the authors
 cladeB <- matrix(rep(c(0,1,0,0,0,0,0,0,0,0,0),3),nrow=11, ncol = 3) %>% t() %>% as.data.frame()
@@ -297,10 +298,6 @@ temp[is.na(temp)] <- 0
 fullraw_nozeroes <- aggregate(. ~ Species, data=temp, FUN = mean)
 rownames(fullraw_nozeroes) <- fullraw_nozeroes$Species
 
-
-hypdiet = c("Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Small crustacean", "Large crustacean", "Mixed", "Mixed", "Mixed", "Large crustacean", "Large crustacean", "Mixed", "Small crustacean", "Large crustacean", "Fish", "Fish", "Fish", "Large crustacean", "Gelatinous", "Fish", "Fish", "Fish")
-names(hypdiet) = dprunedTree$tip.label
-
 #hypdiet but for all species not only those in tree
 ## ALSO reconsidering Forskalia interpretation as small crustacean specialist, and assigning all Forskalia species
 hypdiet_full = c("Mixed","Mixed","Gelatinous","Gelatinous","Mixed","Large crustacean","Small crustacean","Small crustacean","Small crustacean","Small crustacean","Fish","Fish","Mixed","Small crustacean","Large crustacean","Small crustacean","Large crustacean","Fish","Large crustacean","Large crustacean","Large crustacean","Fish","Fish","Small crustacean","Small crustacean","Fish","Small crustacean","Small crustacean","Mixed", "Mixed", "Mixed")
@@ -308,9 +305,7 @@ names(hypdiet_full) = c("Agalma elegans", "Agalma okenii", "Apolemia rubriversa"
 #dpruned_full = fullraw_nozeroes[which(fullraw_nozeroes$Species%in%names(hypdiet_full)),]
 #dpruned_full <- data.frame(dpruned_full, "Diet" = hypdiet_full)
 dpruned_full = data.frame(fullraw_nozeroes, "Diet" = hypdiet_full[match(rownames(fullraw_nozeroes), names(hypdiet_full))], stringsAsFactors = F)
-```
 
-```{r analyses, eval = FALSE, echo = FALSE}
 ### COMPARATIVE ANALYSES ###
 
 phylosignals = as.data.frame(matrix(ncol=3, nrow=ncol(sharedmean_logs[,-1])))
@@ -447,7 +442,7 @@ Simmap_list[[1]] <- tentilla_sim
 plotTree(ultram_cat, lwd = 4)
 tentilla_sim %>% plotSimmap(lwd = 4, add = T)
 colors = c("black", "red")
-names(colors) = c("Present", "Absent")
+names(colors) = c("Absent", "Present")
 nodelabels(pie=(describe.simmap(tentilla_sim, plot=F)$ace) ,piecol=colors,cex=0.35)
 add.simmap.legend(colors = colors, x=0.6*par()$usr[1],y=0.3*par()$usr[4],prompt=FALSE)
 densityMap(tentilla_sim)
