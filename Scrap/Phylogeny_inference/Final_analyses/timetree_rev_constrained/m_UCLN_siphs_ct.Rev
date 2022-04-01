@@ -8,7 +8,7 @@
 
 
 ### get the number of branches in the tree
-n_branches <- 2 * n_taxa - 2
+n_branches <- 2 * n_taxa - 3
 
 ### the rate along each branch is assigned a lognormal prior
 ### the expectation of the lognormal is the ucln_mean, and will be given an exponential hyperprior
